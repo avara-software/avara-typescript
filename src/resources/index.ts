@@ -15,3 +15,9 @@ export {
   type OrgListResponsesCursorOrganizations,
 } from './orgs/orgs';
 export { Viewer } from './viewer/viewer';
+export {
+  Webhooks,
+  type StudyAccessRequestedWebhookEvent,
+  type ReportDeliveredWebhookEvent,
+  type UnwrapWebhookEvent,
+} from './webhooks';
