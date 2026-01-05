@@ -20,6 +20,7 @@ export {
   type StudyListResponse,
   type StudyCancelResponse,
   type StudyRerouteURLResponse,
+  type StudyRetrieveByUidResponse,
   type StudyUncancelResponse,
   type StudyViewerOnlyRerouteURLResponse,
   type StudyCreateParams,

@@ -43,6 +43,10 @@ export class Studies extends APIResource {
     return this._client.post('/v1/viewer/studies/reroute-url', { body, ...options });
   }
 
+  retrieveByUid(studyInstanceUid: string, options?: RequestOptions): APIPromise<StudyRetrieveByUidResponse> {
+    return this._client.get(path`/v1/viewer/studies/by-uid/${studyInstanceUid}`, options);
+  }
+
   uncancel(
     body: StudyUncancelParams | null | undefined = {},
     options?: RequestOptions,
@@ -383,6 +387,84 @@ export interface StudyRerouteURLResponse {
   url: string;
 }
 
+export interface StudyRetrieveByUidResponse {
+  cancelledAt: string | null;
+
+  createdAt: string | null;
+
+  isCancelled: boolean;
+
+  severity: 'normal' | 'high' | 'stat';
+
+  studyDescription: string;
+
+  studyId: string;
+
+  studyInstanceUid: string;
+
+  studyViewerStatus: 'incomplete' | 'complete';
+
+  updatedAt: string | null;
+
+  assignedTo?: StudyRetrieveByUidResponse.AssignedTo | null;
+
+  createdByApiKey?: StudyRetrieveByUidResponse.CreatedByAPIKey | null;
+
+  createdByUser?: StudyRetrieveByUidResponse.CreatedByUser | null;
+
+  metadata?: { [key: string]: string };
+
+  org?: StudyRetrieveByUidResponse.Org | null;
+}
+
+export namespace StudyRetrieveByUidResponse {
+  export interface AssignedTo {
+    email: string;
+
+    userId: string;
+
+    firstName?: string;
+
+    lastName?: string;
+
+    middleName?: string;
+
+    suffix1?: string;
+
+    suffix2?: string;
+  }
+
+  export interface CreatedByAPIKey {
+    apiKeyId: string;
+
+    description: string;
+
+    isViewerEnabled?: boolean;
+  }
+
+  export interface CreatedByUser {
+    email: string;
+
+    userId: string;
+
+    firstName?: string;
+
+    lastName?: string;
+
+    middleName?: string;
+
+    suffix1?: string;
+
+    suffix2?: string;
+  }
+
+  export interface Org {
+    orgId: string;
+
+    orgName: string;
+  }
+}
+
 export interface StudyUncancelResponse {
   success: boolean;
 
@@ -479,6 +561,7 @@ export declare namespace Studies {
     type StudyListResponse as StudyListResponse,
     type StudyCancelResponse as StudyCancelResponse,
     type StudyRerouteURLResponse as StudyRerouteURLResponse,
+    type StudyRetrieveByUidResponse as StudyRetrieveByUidResponse,
     type StudyUncancelResponse as StudyUncancelResponse,
     type StudyCreateParams as StudyCreateParams,
     type StudyUpdateParams as StudyUpdateParams,

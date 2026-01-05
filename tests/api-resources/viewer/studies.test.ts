@@ -156,6 +156,18 @@ describe('resource studies', () => {
   });
 
   // Prism tests are disabled
+  test.skip('retrieveByUid', async () => {
+    const responsePromise = client.viewer.studies.retrieveByUid('1.2.840.10008.5.1.4.1.1.2');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
   test.skip('uncancel', async () => {
     const responsePromise = client.viewer.studies.uncancel();
     const rawResponse = await responsePromise.asResponse();
