@@ -390,10 +390,6 @@ export interface StudyUncancelResponse {
 }
 
 export interface StudyCreateParams {
-  cancelledAt: string | null;
-
-  isCancelled: boolean;
-
   severity: 'normal' | 'high' | 'stat';
 
   studyDescription: string;
@@ -401,10 +397,6 @@ export interface StudyCreateParams {
   studyInstanceUid: string;
 
   assignedTo?: string;
-
-  createdByApiKeyId?: string | null;
-
-  createdByUserId?: string | null;
 
   metadata?: { [key: string]: string };
 

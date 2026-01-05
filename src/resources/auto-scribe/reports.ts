@@ -122,22 +122,24 @@ export interface ReportCancelAddendumResponse {
   message?: string;
 }
 
-export type ReportPdfResponse = ReportPdfResponse.UnionMember0 | ReportPdfResponse.UnionMember1;
+export type ReportPdfResponse =
+  | ReportPdfResponse.SingleReportPdfResponse
+  | ReportPdfResponse.ListReportsPdfResponse;
 
 export namespace ReportPdfResponse {
-  export interface UnionMember0 {
+  export interface SingleReportPdfResponse {
     presignedUrl: string;
 
     reportId: string;
 
-    snapshotMetadata: UnionMember0.SnapshotMetadata;
+    snapshotMetadata: SingleReportPdfResponse.SnapshotMetadata;
 
     studyId: string;
 
     studyInstanceUid: string;
   }
 
-  export namespace UnionMember0 {
+  export namespace SingleReportPdfResponse {
     export interface SnapshotMetadata {
       age?: string;
 
@@ -179,15 +181,15 @@ export namespace ReportPdfResponse {
     }
   }
 
-  export interface UnionMember1 {
-    reports: Array<UnionMember1.Report>;
+  export interface ListReportsPdfResponse {
+    reports: Array<ListReportsPdfResponse.Report>;
 
     studyId: string;
 
     studyInstanceUid: string;
   }
 
-  export namespace UnionMember1 {
+  export namespace ListReportsPdfResponse {
     export interface Report {
       presignedUrl: string;
 
@@ -244,13 +246,15 @@ export namespace ReportPdfResponse {
   }
 }
 
-export type ReportTextResponse = ReportTextResponse.UnionMember0 | ReportTextResponse.UnionMember1;
+export type ReportTextResponse =
+  | ReportTextResponse.SingleReportTextResponse
+  | ReportTextResponse.ListReportsTextResponse;
 
 export namespace ReportTextResponse {
-  export interface UnionMember0 {
+  export interface SingleReportTextResponse {
     reportId: string;
 
-    snapshotMetadata: UnionMember0.SnapshotMetadata;
+    snapshotMetadata: SingleReportTextResponse.SnapshotMetadata;
 
     studyId: string;
 
@@ -259,7 +263,7 @@ export namespace ReportTextResponse {
     plainText?: string;
   }
 
-  export namespace UnionMember0 {
+  export namespace SingleReportTextResponse {
     export interface SnapshotMetadata {
       age?: string;
 
@@ -301,15 +305,15 @@ export namespace ReportTextResponse {
     }
   }
 
-  export interface UnionMember1 {
-    reports: Array<UnionMember1.Report>;
+  export interface ListReportsTextResponse {
+    reports: Array<ListReportsTextResponse.Report>;
 
     studyId: string;
 
     studyInstanceUid: string;
   }
 
-  export namespace UnionMember1 {
+  export namespace ListReportsTextResponse {
     export interface Report {
       reportId: string;
 

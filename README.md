@@ -30,8 +30,6 @@ const client = new Avara({
 });
 
 const study = await client.viewer.studies.create({
-  cancelledAt: '2019-12-27T18:11:19.117Z',
-  isCancelled: true,
   severity: 'normal',
   studyDescription: 'REPLACE_ME',
   studyInstanceUid: 'REPLACE_ME',
@@ -53,8 +51,6 @@ const client = new Avara({
 });
 
 const params: Avara.Viewer.StudyCreateParams = {
-  cancelledAt: '2019-12-27T18:11:19.117Z',
-  isCancelled: true,
   severity: 'normal',
   studyDescription: 'REPLACE_ME',
   studyInstanceUid: 'REPLACE_ME',
@@ -73,13 +69,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 const study = await client.viewer.studies
-  .create({
-    cancelledAt: '2019-12-27T18:11:19.117Z',
-    isCancelled: true,
-    severity: 'normal',
-    studyDescription: 'REPLACE_ME',
-    studyInstanceUid: 'REPLACE_ME',
-  })
+  .create({ severity: 'normal', studyDescription: 'REPLACE_ME', studyInstanceUid: 'REPLACE_ME' })
   .catch(async (err) => {
     if (err instanceof Avara.APIError) {
       console.log(err.status); // 400
@@ -120,7 +110,7 @@ const client = new Avara({
 });
 
 // Or, configure per-request:
-await client.viewer.studies.create({ cancelledAt: '2019-12-27T18:11:19.117Z', isCancelled: true, severity: 'normal', studyDescription: 'REPLACE_ME', studyInstanceUid: 'REPLACE_ME' }, {
+await client.viewer.studies.create({ severity: 'normal', studyDescription: 'REPLACE_ME', studyInstanceUid: 'REPLACE_ME' }, {
   maxRetries: 5,
 });
 ```
@@ -137,7 +127,7 @@ const client = new Avara({
 });
 
 // Override per-request:
-await client.viewer.studies.create({ cancelledAt: '2019-12-27T18:11:19.117Z', isCancelled: true, severity: 'normal', studyDescription: 'REPLACE_ME', studyInstanceUid: 'REPLACE_ME' }, {
+await client.viewer.studies.create({ severity: 'normal', studyDescription: 'REPLACE_ME', studyInstanceUid: 'REPLACE_ME' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -161,25 +151,13 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 const client = new Avara();
 
 const response = await client.viewer.studies
-  .create({
-    cancelledAt: '2019-12-27T18:11:19.117Z',
-    isCancelled: true,
-    severity: 'normal',
-    studyDescription: 'REPLACE_ME',
-    studyInstanceUid: 'REPLACE_ME',
-  })
+  .create({ severity: 'normal', studyDescription: 'REPLACE_ME', studyInstanceUid: 'REPLACE_ME' })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
 const { data: study, response: raw } = await client.viewer.studies
-  .create({
-    cancelledAt: '2019-12-27T18:11:19.117Z',
-    isCancelled: true,
-    severity: 'normal',
-    studyDescription: 'REPLACE_ME',
-    studyInstanceUid: 'REPLACE_ME',
-  })
+  .create({ severity: 'normal', studyDescription: 'REPLACE_ME', studyInstanceUid: 'REPLACE_ME' })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(study.studyInstanceUid);

@@ -614,10 +614,6 @@ export interface StudyViewerOnlyRerouteURLResponse {
 }
 
 export interface StudyCreateParams {
-  cancelledAt: string | null;
-
-  isCancelled: boolean;
-
   reportMetadata: StudyCreateParams.ReportMetadata;
 
   severity: 'normal' | 'high' | 'stat';
@@ -627,10 +623,6 @@ export interface StudyCreateParams {
   studyInstanceUid: string;
 
   assignedTo?: string;
-
-  createdByApiKeyId?: string | null;
-
-  createdByUserId?: string | null;
 
   metadata?: { [key: string]: string };
 

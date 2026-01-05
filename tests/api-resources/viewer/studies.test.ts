@@ -11,8 +11,6 @@ describe('resource studies', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.viewer.studies.create({
-      cancelledAt: '2019-12-27T18:11:19.117Z',
-      isCancelled: true,
       severity: 'normal',
       studyDescription: 'x',
       studyInstanceUid: '.16...2511..',
@@ -29,14 +27,10 @@ describe('resource studies', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.viewer.studies.create({
-      cancelledAt: '2019-12-27T18:11:19.117Z',
-      isCancelled: true,
       severity: 'normal',
       studyDescription: 'x',
       studyInstanceUid: '.16...2511..',
       assignedTo: 'usr_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD',
-      createdByApiKeyId: 'x',
-      createdByUserId: 'usr_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD',
       metadata: { foo: 'string' },
       orgId: 'org_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD',
     });
@@ -44,7 +38,7 @@ describe('resource studies', () => {
 
   // Prism tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.viewer.studies.retrieve('stu_1234567890abcdef1234567890abcdef');
+    const responsePromise = client.viewer.studies.retrieve('stu_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -56,7 +50,7 @@ describe('resource studies', () => {
 
   // Prism tests are disabled
   test.skip('update', async () => {
-    const responsePromise = client.viewer.studies.update('stu_1234567890abcdef1234567890abcdef');
+    const responsePromise = client.viewer.studies.update('stu_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -71,7 +65,7 @@ describe('resource studies', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.viewer.studies.update(
-        'stu_1234567890abcdef1234567890abcdef',
+        'stu_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD',
         {
           assignedTo: 'usr_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD',
           metadata: { foo: 'string' },
