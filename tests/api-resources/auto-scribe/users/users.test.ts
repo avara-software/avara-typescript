@@ -50,7 +50,7 @@ describe('resource users', () => {
 
   // Prism tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.autoScribe.users.retrieve('usr_1234567890abcdef1234567890abcdef');
+    const responsePromise = client.autoScribe.users.retrieve('usr_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
