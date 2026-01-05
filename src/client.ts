@@ -14,6 +14,18 @@ import * as Opts from './internal/request-options';
 import * as qs from './internal/qs';
 import { VERSION } from './version';
 import * as Errors from './core/error';
+import * as Pagination from './core/pagination';
+import {
+  AbstractPage,
+  type CursorInvitationsParams,
+  CursorInvitationsResponse,
+  type CursorOrganizationsParams,
+  CursorOrganizationsResponse,
+  type CursorStudiesParams,
+  CursorStudiesResponse,
+  type CursorUsersParams,
+  CursorUsersResponse,
+} from './core/pagination';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
@@ -24,6 +36,7 @@ import {
   OrgDeactivateResponse,
   OrgListParams,
   OrgListResponse,
+  OrgListResponsesCursorOrganizations,
   OrgReactivateResponse,
   OrgRetrieveResponse,
   OrgUpdateParams,
@@ -480,6 +493,25 @@ export class Avara {
     return { response, options, controller, requestLogID, retryOfRequestLogID, startTime };
   }
 
+  getAPIList<Item, PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>>(
+    path: string,
+    Page: new (...args: any[]) => PageClass,
+    opts?: RequestOptions,
+  ): Pagination.PagePromise<PageClass, Item> {
+    return this.requestAPIList(Page, { method: 'get', path, ...opts });
+  }
+
+  requestAPIList<
+    Item = unknown,
+    PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>,
+  >(
+    Page: new (...args: ConstructorParameters<typeof Pagination.AbstractPage>) => PageClass,
+    options: FinalRequestOptions,
+  ): Pagination.PagePromise<PageClass, Item> {
+    const request = this.makeRequest(options, null, undefined);
+    return new Pagination.PagePromise<PageClass, Item>(this as any as Avara, request, Page);
+  }
+
   async fetchWithTimeout(
     url: RequestInfo,
     init: RequestInit | undefined,
@@ -724,6 +756,27 @@ Avara.Orgs = Orgs;
 export declare namespace Avara {
   export type RequestOptions = Opts.RequestOptions;
 
+  export import CursorUsers = Pagination.CursorUsers;
+  export { type CursorUsersParams as CursorUsersParams, type CursorUsersResponse as CursorUsersResponse };
+
+  export import CursorStudies = Pagination.CursorStudies;
+  export {
+    type CursorStudiesParams as CursorStudiesParams,
+    type CursorStudiesResponse as CursorStudiesResponse,
+  };
+
+  export import CursorInvitations = Pagination.CursorInvitations;
+  export {
+    type CursorInvitationsParams as CursorInvitationsParams,
+    type CursorInvitationsResponse as CursorInvitationsResponse,
+  };
+
+  export import CursorOrganizations = Pagination.CursorOrganizations;
+  export {
+    type CursorOrganizationsParams as CursorOrganizationsParams,
+    type CursorOrganizationsResponse as CursorOrganizationsResponse,
+  };
+
   export { Viewer as Viewer };
 
   export { AutoScribe as AutoScribe };
@@ -736,6 +789,7 @@ export declare namespace Avara {
     type OrgListResponse as OrgListResponse,
     type OrgDeactivateResponse as OrgDeactivateResponse,
     type OrgReactivateResponse as OrgReactivateResponse,
+    type OrgListResponsesCursorOrganizations as OrgListResponsesCursorOrganizations,
     type OrgCreateParams as OrgCreateParams,
     type OrgUpdateParams as OrgUpdateParams,
     type OrgListParams as OrgListParams,

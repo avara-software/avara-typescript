@@ -18,7 +18,7 @@ Methods:
 - <code title="post /v1/viewer/studies">client.viewer.studies.<a href="./src/resources/viewer/studies.ts">create</a>({ ...params }) -> StudyCreateResponse</code>
 - <code title="get /v1/viewer/studies/{studyId}">client.viewer.studies.<a href="./src/resources/viewer/studies.ts">retrieve</a>(studyID) -> StudyRetrieveResponse</code>
 - <code title="patch /v1/viewer/studies/{studyId}">client.viewer.studies.<a href="./src/resources/viewer/studies.ts">update</a>(studyID, { ...params }) -> StudyUpdateResponse</code>
-- <code title="get /v1/viewer/studies">client.viewer.studies.<a href="./src/resources/viewer/studies.ts">list</a>({ ...params }) -> StudyListResponse</code>
+- <code title="get /v1/viewer/studies">client.viewer.studies.<a href="./src/resources/viewer/studies.ts">list</a>({ ...params }) -> StudyListResponsesCursorStudies</code>
 - <code title="post /v1/viewer/studies/cancel">client.viewer.studies.<a href="./src/resources/viewer/studies.ts">cancel</a>({ ...params }) -> StudyCancelResponse</code>
 - <code title="post /v1/viewer/studies/reroute-url">client.viewer.studies.<a href="./src/resources/viewer/studies.ts">rerouteURL</a>({ ...params }) -> StudyRerouteURLResponse</code>
 - <code title="get /v1/viewer/studies/by-uid/{studyInstanceUid}">client.viewer.studies.<a href="./src/resources/viewer/studies.ts">retrieveByUid</a>(studyInstanceUid) -> StudyRetrieveByUidResponse</code>
@@ -40,7 +40,7 @@ Methods:
 - <code title="post /v1/viewer/users">client.viewer.users.<a href="./src/resources/viewer/users/users.ts">create</a>({ ...params }) -> UserCreateResponse</code>
 - <code title="get /v1/viewer/users/{userId}">client.viewer.users.<a href="./src/resources/viewer/users/users.ts">retrieve</a>(userID) -> UserRetrieveResponse</code>
 - <code title="patch /v1/viewer/users/{userId}">client.viewer.users.<a href="./src/resources/viewer/users/users.ts">update</a>(userID, { ...params }) -> UserUpdateResponse</code>
-- <code title="get /v1/viewer/users">client.viewer.users.<a href="./src/resources/viewer/users/users.ts">list</a>({ ...params }) -> UserListResponse</code>
+- <code title="get /v1/viewer/users">client.viewer.users.<a href="./src/resources/viewer/users/users.ts">list</a>({ ...params }) -> UserListResponsesCursorUsers</code>
 - <code title="post /v1/viewer/users/reactivate">client.viewer.users.<a href="./src/resources/viewer/users/users.ts">reactivate</a>({ ...params }) -> UserReactivateResponse</code>
 - <code title="post /v1/viewer/users/revoke-access">client.viewer.users.<a href="./src/resources/viewer/users/users.ts">revokeAccess</a>({ ...params }) -> UserRevokeAccessResponse</code>
 
@@ -57,7 +57,7 @@ Methods:
 
 - <code title="get /v1/viewer/users/invitations/{invitationId}">client.viewer.users.invitations.<a href="./src/resources/viewer/users/invitations.ts">retrieve</a>(invitationID) -> InvitationRetrieveResponse</code>
 - <code title="patch /v1/viewer/users/invitations/{invitationId}">client.viewer.users.invitations.<a href="./src/resources/viewer/users/invitations.ts">update</a>(invitationID, { ...params }) -> InvitationUpdateResponse</code>
-- <code title="get /v1/viewer/users/invitations">client.viewer.users.invitations.<a href="./src/resources/viewer/users/invitations.ts">list</a>({ ...params }) -> InvitationListResponse</code>
+- <code title="get /v1/viewer/users/invitations">client.viewer.users.invitations.<a href="./src/resources/viewer/users/invitations.ts">list</a>({ ...params }) -> InvitationListResponsesCursorInvitations</code>
 - <code title="post /v1/viewer/users/invitations/revoke">client.viewer.users.invitations.<a href="./src/resources/viewer/users/invitations.ts">revoke</a>({ ...params }) -> InvitationRevokeResponse</code>
 
 # AutoScribe
@@ -81,7 +81,7 @@ Methods:
 - <code title="post /v1/autoScribe/studies">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies.ts">create</a>({ ...params }) -> StudyCreateResponse</code>
 - <code title="get /v1/autoScribe/studies/{studyId}">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies.ts">retrieve</a>(studyID) -> StudyRetrieveResponse</code>
 - <code title="patch /v1/autoScribe/studies/{studyId}">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies.ts">update</a>(studyID, { ...params }) -> StudyUpdateResponse</code>
-- <code title="get /v1/autoScribe/studies">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies.ts">list</a>({ ...params }) -> StudyListResponse</code>
+- <code title="get /v1/autoScribe/studies">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies.ts">list</a>({ ...params }) -> StudyListResponsesCursorStudies</code>
 - <code title="post /v1/autoScribe/studies/cancel">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies.ts">cancel</a>({ ...params }) -> StudyCancelResponse</code>
 - <code title="post /v1/autoScribe/studies/reroute-url">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies.ts">rerouteURL</a>({ ...params }) -> StudyRerouteURLResponse</code>
 - <code title="get /v1/autoScribe/studies/by-uid/{studyInstanceUid}">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies.ts">retrieveByUid</a>(studyInstanceUid) -> StudyRetrieveByUidResponse</code>
@@ -104,7 +104,7 @@ Methods:
 - <code title="post /v1/autoScribe/users">client.autoScribe.users.<a href="./src/resources/auto-scribe/users/users.ts">create</a>({ ...params }) -> UserCreateResponse</code>
 - <code title="get /v1/autoScribe/users/{userId}">client.autoScribe.users.<a href="./src/resources/auto-scribe/users/users.ts">retrieve</a>(userID) -> UserRetrieveResponse</code>
 - <code title="patch /v1/autoScribe/users/{userId}">client.autoScribe.users.<a href="./src/resources/auto-scribe/users/users.ts">update</a>(userID, { ...params }) -> UserUpdateResponse</code>
-- <code title="get /v1/autoScribe/users">client.autoScribe.users.<a href="./src/resources/auto-scribe/users/users.ts">list</a>({ ...params }) -> UserListResponse</code>
+- <code title="get /v1/autoScribe/users">client.autoScribe.users.<a href="./src/resources/auto-scribe/users/users.ts">list</a>({ ...params }) -> UserListResponsesCursorUsers</code>
 - <code title="post /v1/autoScribe/users/reactivate">client.autoScribe.users.<a href="./src/resources/auto-scribe/users/users.ts">reactivate</a>({ ...params }) -> UserReactivateResponse</code>
 - <code title="post /v1/autoScribe/users/revoke-access">client.autoScribe.users.<a href="./src/resources/auto-scribe/users/users.ts">revokeAccess</a>({ ...params }) -> UserRevokeAccessResponse</code>
 
@@ -121,7 +121,7 @@ Methods:
 
 - <code title="get /v1/autoScribe/users/invitations/{invitationId}">client.autoScribe.users.invitations.<a href="./src/resources/auto-scribe/users/invitations.ts">retrieve</a>(invitationID) -> InvitationRetrieveResponse</code>
 - <code title="patch /v1/autoScribe/users/invitations/{invitationId}">client.autoScribe.users.invitations.<a href="./src/resources/auto-scribe/users/invitations.ts">update</a>(invitationID, { ...params }) -> InvitationUpdateResponse</code>
-- <code title="get /v1/autoScribe/users/invitations">client.autoScribe.users.invitations.<a href="./src/resources/auto-scribe/users/invitations.ts">list</a>({ ...params }) -> InvitationListResponse</code>
+- <code title="get /v1/autoScribe/users/invitations">client.autoScribe.users.invitations.<a href="./src/resources/auto-scribe/users/invitations.ts">list</a>({ ...params }) -> InvitationListResponsesCursorInvitations</code>
 - <code title="post /v1/autoScribe/users/invitations/revoke">client.autoScribe.users.invitations.<a href="./src/resources/auto-scribe/users/invitations.ts">revoke</a>({ ...params }) -> InvitationRevokeResponse</code>
 
 ## Reports
@@ -158,7 +158,7 @@ Methods:
 - <code title="post /v1/orgs">client.orgs.<a href="./src/resources/orgs/orgs.ts">create</a>({ ...params }) -> OrgCreateResponse</code>
 - <code title="get /v1/orgs/{orgId}">client.orgs.<a href="./src/resources/orgs/orgs.ts">retrieve</a>(orgID) -> OrgRetrieveResponse</code>
 - <code title="patch /v1/orgs/{orgId}">client.orgs.<a href="./src/resources/orgs/orgs.ts">update</a>(orgID, { ...params }) -> OrgUpdateResponse</code>
-- <code title="get /v1/orgs">client.orgs.<a href="./src/resources/orgs/orgs.ts">list</a>({ ...params }) -> OrgListResponse</code>
+- <code title="get /v1/orgs">client.orgs.<a href="./src/resources/orgs/orgs.ts">list</a>({ ...params }) -> OrgListResponsesCursorOrganizations</code>
 - <code title="post /v1/orgs/{orgId}/deactivate">client.orgs.<a href="./src/resources/orgs/orgs.ts">deactivate</a>(orgID) -> OrgDeactivateResponse</code>
 - <code title="post /v1/orgs/{orgId}/reactivate">client.orgs.<a href="./src/resources/orgs/orgs.ts">reactivate</a>(orgID) -> OrgReactivateResponse</code>
 

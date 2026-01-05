@@ -4,6 +4,7 @@ import { APIResource } from '../../core/resource';
 import * as UsersAPI from './users';
 import { UserCreateParams, UserCreateResponse, UserDeleteParams, UserDeleteResponse, Users } from './users';
 import { APIPromise } from '../../core/api-promise';
+import { CursorOrganizations, type CursorOrganizationsParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -26,8 +27,11 @@ export class Orgs extends APIResource {
     return this._client.patch(path`/v1/orgs/${orgID}`, { body, ...options });
   }
 
-  list(query: OrgListParams | null | undefined = {}, options?: RequestOptions): APIPromise<OrgListResponse> {
-    return this._client.get('/v1/orgs', { query, ...options });
+  list(
+    query: OrgListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<OrgListResponsesCursorOrganizations, OrgListResponse> {
+    return this._client.getAPIList('/v1/orgs', CursorOrganizations<OrgListResponse>, { query, ...options });
   }
 
   deactivate(orgID: string, options?: RequestOptions): APIPromise<OrgDeactivateResponse> {
@@ -38,6 +42,8 @@ export class Orgs extends APIResource {
     return this._client.post(path`/v1/orgs/${orgID}/reactivate`, options);
   }
 }
+
+export type OrgListResponsesCursorOrganizations = CursorOrganizations<OrgListResponse>;
 
 export interface OrgCreateResponse {
   createdAt: string | null;
@@ -100,33 +106,23 @@ export interface OrgUpdateResponse {
 }
 
 export interface OrgListResponse {
-  hasMore: boolean;
+  createdAt: string | null;
 
-  organizations: Array<OrgListResponse.Organization>;
+  isActive: boolean;
 
-  cursor?: string;
-}
+  orgId: string;
 
-export namespace OrgListResponse {
-  export interface Organization {
-    createdAt: string | null;
+  orgName: string;
 
-    isActive: boolean;
+  updatedAt: string | null;
 
-    orgId: string;
+  userCount: number;
 
-    orgName: string;
+  createdByApiKeyId?: string | null;
 
-    updatedAt: string | null;
+  createdByUserId?: string | null;
 
-    userCount: number;
-
-    createdByApiKeyId?: string | null;
-
-    createdByUserId?: string | null;
-
-    metadata?: { [key: string]: string };
-  }
+  metadata?: { [key: string]: string };
 }
 
 export interface OrgDeactivateResponse {
@@ -181,17 +177,7 @@ export interface OrgUpdateParams {
   orgName?: string;
 }
 
-export interface OrgListParams {
-  /**
-   * Base64 encoded cursor from previous response
-   */
-  cursor?: string;
-
-  /**
-   * Number of results to return (1-100)
-   */
-  limit?: number;
-}
+export interface OrgListParams extends CursorOrganizationsParams {}
 
 Orgs.Users = Users;
 
@@ -203,6 +189,7 @@ export declare namespace Orgs {
     type OrgListResponse as OrgListResponse,
     type OrgDeactivateResponse as OrgDeactivateResponse,
     type OrgReactivateResponse as OrgReactivateResponse,
+    type OrgListResponsesCursorOrganizations as OrgListResponsesCursorOrganizations,
     type OrgCreateParams as OrgCreateParams,
     type OrgUpdateParams as OrgUpdateParams,
     type OrgListParams as OrgListParams,

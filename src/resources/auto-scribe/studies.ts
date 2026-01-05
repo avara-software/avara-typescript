@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import { APIPromise } from '../../core/api-promise';
+import { CursorStudies, type CursorStudiesParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -25,8 +26,11 @@ export class Studies extends APIResource {
   list(
     query: StudyListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<StudyListResponse> {
-    return this._client.get('/v1/autoScribe/studies', { query, ...options });
+  ): PagePromise<StudyListResponsesCursorStudies, StudyListResponse> {
+    return this._client.getAPIList('/v1/autoScribe/studies', CursorStudies<StudyListResponse>, {
+      query,
+      ...options,
+    });
   }
 
   cancel(
@@ -58,6 +62,8 @@ export class Studies extends APIResource {
     return this._client.post('/v1/autoScribe/studies/viewer-only-reroute-url', { body, ...options });
   }
 }
+
+export type StudyListResponsesCursorStudies = CursorStudies<StudyListResponse>;
 
 export interface StudyCreateResponse {
   cancelledAt: string | null;
@@ -456,144 +462,134 @@ export namespace StudyUpdateResponse {
 }
 
 export interface StudyListResponse {
-  hasMore: boolean;
+  cancelledAt: string | null;
 
-  studies: Array<StudyListResponse.Study>;
+  createdAt: string | null;
 
-  cursor?: string;
+  isCancelled: boolean;
+
+  reportMetadata: StudyListResponse.ReportMetadata;
+
+  severity: 'normal' | 'high' | 'stat';
+
+  studyDescription: string;
+
+  studyId: string;
+
+  studyInstanceUid: string;
+
+  studyReportStatus: 'unassigned' | 'assigned' | 'in_progress' | 'completed' | 'addendum_active';
+
+  updatedAt: string | null;
+
+  assignedTo?: StudyListResponse.AssignedTo | null;
+
+  createdByApiKey?: StudyListResponse.CreatedByAPIKey | null;
+
+  createdByUser?: StudyListResponse.CreatedByUser | null;
+
+  metadata?: { [key: string]: string };
+
+  org?: StudyListResponse.Org | null;
+
+  priorReportTexts?: Array<string>;
+
+  priorStudyIds?: Array<string>;
+
+  reportIds?: Array<StudyListResponse.ReportID>;
 }
 
 export namespace StudyListResponse {
-  export interface Study {
-    cancelledAt: string | null;
+  export interface ReportMetadata {
+    age?: string;
 
-    createdAt: string | null;
+    dateOfBirth?: string;
 
-    isCancelled: boolean;
+    facilityName?: string;
 
-    reportMetadata: Study.ReportMetadata;
+    height?: ReportMetadata.Height;
 
-    severity: 'normal' | 'high' | 'stat';
+    mrn?: string;
 
-    studyDescription: string;
+    patientName?: string;
 
-    studyId: string;
+    referringPhysicianName?: string;
 
-    studyInstanceUid: string;
+    scanDate?: string;
 
-    studyReportStatus: 'unassigned' | 'assigned' | 'in_progress' | 'completed' | 'addendum_active';
+    scanTime?: string;
 
-    updatedAt: string | null;
+    scanType?: string;
 
-    assignedTo?: Study.AssignedTo | null;
+    sex?: 'male' | 'female' | 'other';
 
-    createdByApiKey?: Study.CreatedByAPIKey | null;
-
-    createdByUser?: Study.CreatedByUser | null;
-
-    metadata?: { [key: string]: string };
-
-    org?: Study.Org | null;
-
-    priorReportTexts?: Array<string>;
-
-    priorStudyIds?: Array<string>;
-
-    reportIds?: Array<Study.ReportID>;
+    weight?: ReportMetadata.Weight;
   }
 
-  export namespace Study {
-    export interface ReportMetadata {
-      age?: string;
+  export namespace ReportMetadata {
+    export interface Height {
+      unit: 'in' | 'cm';
 
-      dateOfBirth?: string;
-
-      facilityName?: string;
-
-      height?: ReportMetadata.Height;
-
-      mrn?: string;
-
-      patientName?: string;
-
-      referringPhysicianName?: string;
-
-      scanDate?: string;
-
-      scanTime?: string;
-
-      scanType?: string;
-
-      sex?: 'male' | 'female' | 'other';
-
-      weight?: ReportMetadata.Weight;
+      value: number;
     }
 
-    export namespace ReportMetadata {
-      export interface Height {
-        unit: 'in' | 'cm';
+    export interface Weight {
+      unit: 'lbs' | 'kg';
 
-        value: number;
-      }
-
-      export interface Weight {
-        unit: 'lbs' | 'kg';
-
-        value: number;
-      }
+      value: number;
     }
+  }
 
-    export interface AssignedTo {
-      email: string;
+  export interface AssignedTo {
+    email: string;
 
-      userId: string;
+    userId: string;
 
-      firstName?: string;
+    firstName?: string;
 
-      lastName?: string;
+    lastName?: string;
 
-      middleName?: string;
+    middleName?: string;
 
-      suffix1?: string;
+    suffix1?: string;
 
-      suffix2?: string;
-    }
+    suffix2?: string;
+  }
 
-    export interface CreatedByAPIKey {
-      apiKeyId: string;
+  export interface CreatedByAPIKey {
+    apiKeyId: string;
 
-      description: string;
+    description: string;
 
-      isViewerEnabled?: boolean;
-    }
+    isViewerEnabled?: boolean;
+  }
 
-    export interface CreatedByUser {
-      email: string;
+  export interface CreatedByUser {
+    email: string;
 
-      userId: string;
+    userId: string;
 
-      firstName?: string;
+    firstName?: string;
 
-      lastName?: string;
+    lastName?: string;
 
-      middleName?: string;
+    middleName?: string;
 
-      suffix1?: string;
+    suffix1?: string;
 
-      suffix2?: string;
-    }
+    suffix2?: string;
+  }
 
-    export interface Org {
-      orgId: string;
+  export interface Org {
+    orgId: string;
 
-      orgName: string;
-    }
+    orgName: string;
+  }
 
-    export interface ReportID {
-      reportId: string;
+  export interface ReportID {
+    reportId: string;
 
-      status: 'in_progress' | 'completed';
-    }
+    status: 'in_progress' | 'completed';
   }
 }
 
@@ -871,7 +867,7 @@ export namespace StudyUpdateParams {
   }
 }
 
-export interface StudyListParams {
+export interface StudyListParams extends CursorStudiesParams {
   /**
    * Filter by assigned user ID (null = explicitly unassigned). Format:
    * usr\_<32-hex-chars>
@@ -879,19 +875,9 @@ export interface StudyListParams {
   assignedTo?: string | null;
 
   /**
-   * Base64 encoded cursor from previous response
-   */
-  cursor?: string;
-
-  /**
    * Filter by cancellation status
    */
   isCancelled?: boolean | null;
-
-  /**
-   * Number of results to return (1-100)
-   */
-  limit?: number;
 
   /**
    * Filter by study severity
@@ -948,6 +934,7 @@ export declare namespace Studies {
     type StudyRetrieveByUidResponse as StudyRetrieveByUidResponse,
     type StudyUncancelResponse as StudyUncancelResponse,
     type StudyViewerOnlyRerouteURLResponse as StudyViewerOnlyRerouteURLResponse,
+    type StudyListResponsesCursorStudies as StudyListResponsesCursorStudies,
     type StudyCreateParams as StudyCreateParams,
     type StudyUpdateParams as StudyUpdateParams,
     type StudyListParams as StudyListParams,

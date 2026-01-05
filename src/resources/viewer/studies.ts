@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import { APIPromise } from '../../core/api-promise';
+import { CursorStudies, type CursorStudiesParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -25,8 +26,11 @@ export class Studies extends APIResource {
   list(
     query: StudyListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<StudyListResponse> {
-    return this._client.get('/v1/viewer/studies', { query, ...options });
+  ): PagePromise<StudyListResponsesCursorStudies, StudyListResponse> {
+    return this._client.getAPIList('/v1/viewer/studies', CursorStudies<StudyListResponse>, {
+      query,
+      ...options,
+    });
   }
 
   cancel(
@@ -54,6 +58,8 @@ export class Studies extends APIResource {
     return this._client.post('/v1/viewer/studies/uncancel', { body, ...options });
   }
 }
+
+export type StudyListResponsesCursorStudies = CursorStudies<StudyListResponse>;
 
 export interface StudyCreateResponse {
   cancelledAt: string | null;
@@ -290,90 +296,80 @@ export namespace StudyUpdateResponse {
 }
 
 export interface StudyListResponse {
-  hasMore: boolean;
+  cancelledAt: string | null;
 
-  studies: Array<StudyListResponse.Study>;
+  createdAt: string | null;
 
-  cursor?: string;
+  isCancelled: boolean;
+
+  severity: 'normal' | 'high' | 'stat';
+
+  studyDescription: string;
+
+  studyId: string;
+
+  studyInstanceUid: string;
+
+  studyViewerStatus: 'incomplete' | 'complete';
+
+  updatedAt: string | null;
+
+  assignedTo?: StudyListResponse.AssignedTo | null;
+
+  createdByApiKey?: StudyListResponse.CreatedByAPIKey | null;
+
+  createdByUser?: StudyListResponse.CreatedByUser | null;
+
+  metadata?: { [key: string]: string };
+
+  org?: StudyListResponse.Org | null;
 }
 
 export namespace StudyListResponse {
-  export interface Study {
-    cancelledAt: string | null;
+  export interface AssignedTo {
+    email: string;
 
-    createdAt: string | null;
+    userId: string;
 
-    isCancelled: boolean;
+    firstName?: string;
 
-    severity: 'normal' | 'high' | 'stat';
+    lastName?: string;
 
-    studyDescription: string;
+    middleName?: string;
 
-    studyId: string;
+    suffix1?: string;
 
-    studyInstanceUid: string;
-
-    studyViewerStatus: 'incomplete' | 'complete';
-
-    updatedAt: string | null;
-
-    assignedTo?: Study.AssignedTo | null;
-
-    createdByApiKey?: Study.CreatedByAPIKey | null;
-
-    createdByUser?: Study.CreatedByUser | null;
-
-    metadata?: { [key: string]: string };
-
-    org?: Study.Org | null;
+    suffix2?: string;
   }
 
-  export namespace Study {
-    export interface AssignedTo {
-      email: string;
+  export interface CreatedByAPIKey {
+    apiKeyId: string;
 
-      userId: string;
+    description: string;
 
-      firstName?: string;
+    isViewerEnabled?: boolean;
+  }
 
-      lastName?: string;
+  export interface CreatedByUser {
+    email: string;
 
-      middleName?: string;
+    userId: string;
 
-      suffix1?: string;
+    firstName?: string;
 
-      suffix2?: string;
-    }
+    lastName?: string;
 
-    export interface CreatedByAPIKey {
-      apiKeyId: string;
+    middleName?: string;
 
-      description: string;
+    suffix1?: string;
 
-      isViewerEnabled?: boolean;
-    }
+    suffix2?: string;
+  }
 
-    export interface CreatedByUser {
-      email: string;
+  export interface Org {
+    orgId: string;
 
-      userId: string;
-
-      firstName?: string;
-
-      lastName?: string;
-
-      middleName?: string;
-
-      suffix1?: string;
-
-      suffix2?: string;
-    }
-
-    export interface Org {
-      orgId: string;
-
-      orgName: string;
-    }
+    orgName: string;
   }
 }
 
@@ -497,7 +493,7 @@ export interface StudyUpdateParams {
   studyViewerStatus?: 'incomplete' | 'complete';
 }
 
-export interface StudyListParams {
+export interface StudyListParams extends CursorStudiesParams {
   /**
    * Filter by assigned user ID (null = explicitly unassigned). Format:
    * usr\_<32-hex-chars>
@@ -505,19 +501,9 @@ export interface StudyListParams {
   assignedTo?: string | null;
 
   /**
-   * Base64 encoded cursor from previous response
-   */
-  cursor?: string;
-
-  /**
    * Filter by cancellation status
    */
   isCancelled?: boolean | null;
-
-  /**
-   * Number of results to return (1-100)
-   */
-  limit?: number;
 
   /**
    * Filter by study severity
@@ -563,6 +549,7 @@ export declare namespace Studies {
     type StudyRerouteURLResponse as StudyRerouteURLResponse,
     type StudyRetrieveByUidResponse as StudyRetrieveByUidResponse,
     type StudyUncancelResponse as StudyUncancelResponse,
+    type StudyListResponsesCursorStudies as StudyListResponsesCursorStudies,
     type StudyCreateParams as StudyCreateParams,
     type StudyUpdateParams as StudyUpdateParams,
     type StudyListParams as StudyListParams,

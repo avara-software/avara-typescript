@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
+import { CursorInvitations, type CursorInvitationsParams, PagePromise } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -21,8 +22,12 @@ export class Invitations extends APIResource {
   list(
     query: InvitationListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<InvitationListResponse> {
-    return this._client.get('/v1/autoScribe/users/invitations', { query, ...options });
+  ): PagePromise<InvitationListResponsesCursorInvitations, InvitationListResponse> {
+    return this._client.getAPIList(
+      '/v1/autoScribe/users/invitations',
+      CursorInvitations<InvitationListResponse>,
+      { query, ...options },
+    );
   }
 
   revoke(
@@ -32,6 +37,8 @@ export class Invitations extends APIResource {
     return this._client.post('/v1/autoScribe/users/invitations/revoke', { body, ...options });
   }
 }
+
+export type InvitationListResponsesCursorInvitations = CursorInvitations<InvitationListResponse>;
 
 export interface InvitationRetrieveResponse {
   canCreateReports: boolean;
@@ -168,80 +175,70 @@ export interface InvitationUpdateResponse {
 }
 
 export interface InvitationListResponse {
-  hasMore: boolean;
+  canCreateReports: boolean;
 
-  invitations: Array<InvitationListResponse.Invitation>;
+  canManageStudies: boolean;
 
-  cursor?: string;
-}
+  clinicId: string;
 
-export namespace InvitationListResponse {
-  export interface Invitation {
-    canCreateReports: boolean;
+  clinicRole:
+    | 'Radiologist'
+    | 'Cardiologist'
+    | 'Neurologist'
+    | 'Urologist'
+    | 'Gynecologist'
+    | 'Endocrinologist'
+    | 'Doctor'
+    | 'Surgeon'
+    | 'Physician'
+    | 'Physician Assistant'
+    | 'Nurse Practitioner'
+    | 'Registered Nurse'
+    | 'Patient Care Coordinator'
+    | 'Front Desk Operator'
+    | 'Imaging Technologist'
+    | 'PACS Administrator'
+    | 'Software Engineer'
+    | 'Revenue Cycle Manager'
+    | 'Administrative Director'
+    | 'Administrative Assistant'
+    | 'Other';
 
-    canManageStudies: boolean;
+  createdAt: string | null;
 
-    clinicId: string;
+  email: string;
 
-    clinicRole:
-      | 'Radiologist'
-      | 'Cardiologist'
-      | 'Neurologist'
-      | 'Urologist'
-      | 'Gynecologist'
-      | 'Endocrinologist'
-      | 'Doctor'
-      | 'Surgeon'
-      | 'Physician'
-      | 'Physician Assistant'
-      | 'Nurse Practitioner'
-      | 'Registered Nurse'
-      | 'Patient Care Coordinator'
-      | 'Front Desk Operator'
-      | 'Imaging Technologist'
-      | 'PACS Administrator'
-      | 'Software Engineer'
-      | 'Revenue Cycle Manager'
-      | 'Administrative Director'
-      | 'Administrative Assistant'
-      | 'Other';
+  expiry: string | null;
 
-    createdAt: string | null;
+  firstName: string;
 
-    email: string;
+  hasDashboardAccess: boolean;
 
-    expiry: string | null;
+  invitationId: string;
 
-    firstName: string;
+  invitedSource: 'dashboard' | 'api';
 
-    hasDashboardAccess: boolean;
+  inviterId: string | null;
 
-    invitationId: string;
+  lastName: string;
 
-    invitedSource: 'dashboard' | 'api';
+  level: 'owner' | 'admin' | 'member';
 
-    inviterId: string | null;
+  status: 'sent' | 'accepted' | 'rejected' | 'revoked';
 
-    lastName: string;
+  updatedAt: string | null;
 
-    level: 'owner' | 'admin' | 'member';
+  userId: string | null;
 
-    status: 'sent' | 'accepted' | 'rejected' | 'revoked';
+  invitedByApiKeyId?: string | null;
 
-    updatedAt: string | null;
+  middleName?: string | null;
 
-    userId: string | null;
+  phoneNumber?: string | null;
 
-    invitedByApiKeyId?: string | null;
+  suffix1?: string | null;
 
-    middleName?: string | null;
-
-    phoneNumber?: string | null;
-
-    suffix1?: string | null;
-
-    suffix2?: string | null;
-  }
+  suffix2?: string | null;
 }
 
 export interface InvitationRevokeResponse {
@@ -296,12 +293,7 @@ export interface InvitationUpdateParams {
   suffix2?: string | null;
 }
 
-export interface InvitationListParams {
-  /**
-   * Base64 encoded cursor from previous response
-   */
-  cursor?: string;
-
+export interface InvitationListParams extends CursorInvitationsParams {
   /**
    * Filter invitations created on or before this date (YYYY-MM-DD)
    */
@@ -311,11 +303,6 @@ export interface InvitationListParams {
    * Filter by expiration status
    */
   expired?: 'all' | 'expired' | 'not-expired';
-
-  /**
-   * Number of results to return (1-100)
-   */
-  limit?: number;
 
   /**
    * Filter invitations created on or after this date (YYYY-MM-DD)
@@ -345,6 +332,7 @@ export declare namespace Invitations {
     type InvitationUpdateResponse as InvitationUpdateResponse,
     type InvitationListResponse as InvitationListResponse,
     type InvitationRevokeResponse as InvitationRevokeResponse,
+    type InvitationListResponsesCursorInvitations as InvitationListResponsesCursorInvitations,
     type InvitationUpdateParams as InvitationUpdateParams,
     type InvitationListParams as InvitationListParams,
     type InvitationRevokeParams as InvitationRevokeParams,
