@@ -11,6 +11,7 @@ export {
   type OrgCreateParams,
   type OrgUpdateParams,
   type OrgListParams,
+  type OrgListResponsesCursorOrganizations,
 } from './orgs';
 export {
   Users,

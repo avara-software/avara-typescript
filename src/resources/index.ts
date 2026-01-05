@@ -12,5 +12,6 @@ export {
   type OrgCreateParams,
   type OrgUpdateParams,
   type OrgListParams,
+  type OrgListResponsesCursorOrganizations,
 } from './orgs/orgs';
 export { Viewer } from './viewer/viewer';

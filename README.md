@@ -140,6 +140,37 @@ On timeout, an `APIConnectionTimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
 
+## Auto-pagination
+
+List methods in the Avara API are paginated.
+You can use the `for await … of` syntax to iterate through items across all pages:
+
+```ts
+async function fetchAllStudyListResponses(params) {
+  const allStudyListResponses = [];
+  // Automatically fetches more pages as needed.
+  for await (const studyListResponse of client.viewer.studies.list()) {
+    allStudyListResponses.push(studyListResponse);
+  }
+  return allStudyListResponses;
+}
+```
+
+Alternatively, you can request a single page at a time:
+
+```ts
+let page = await client.viewer.studies.list();
+for (const studyListResponse of page.studies) {
+  console.log(studyListResponse);
+}
+
+// Convenience methods are provided for manually paginating:
+while (page.hasNextPage()) {
+  page = await page.getNextPage();
+  // ...
+}
+```
+
 ## Advanced Usage
 
 ### Accessing raw Response data (e.g., headers)

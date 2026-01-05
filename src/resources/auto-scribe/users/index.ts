@@ -9,6 +9,7 @@ export {
   type InvitationUpdateParams,
   type InvitationListParams,
   type InvitationRevokeParams,
+  type InvitationListResponsesCursorInvitations,
 } from './invitations';
 export {
   Users,
@@ -23,4 +24,5 @@ export {
   type UserListParams,
   type UserReactivateParams,
   type UserRevokeAccessParams,
+  type UserListResponsesCursorUsers,
 } from './users';

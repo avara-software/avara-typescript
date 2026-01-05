@@ -5,6 +5,7 @@ import * as InvitationsAPI from './invitations';
 import {
   InvitationListParams,
   InvitationListResponse,
+  InvitationListResponsesCursorInvitations,
   InvitationRetrieveResponse,
   InvitationRevokeParams,
   InvitationRevokeResponse,
@@ -13,6 +14,7 @@ import {
   Invitations,
 } from './invitations';
 import { APIPromise } from '../../../core/api-promise';
+import { CursorUsers, type CursorUsersParams, PagePromise } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -38,8 +40,8 @@ export class Users extends APIResource {
   list(
     query: UserListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<UserListResponse> {
-    return this._client.get('/v1/viewer/users', { query, ...options });
+  ): PagePromise<UserListResponsesCursorUsers, UserListResponse> {
+    return this._client.getAPIList('/v1/viewer/users', CursorUsers<UserListResponse>, { query, ...options });
   }
 
   reactivate(body: UserReactivateParams, options?: RequestOptions): APIPromise<UserReactivateResponse> {
@@ -50,6 +52,8 @@ export class Users extends APIResource {
     return this._client.post('/v1/viewer/users/revoke-access', { body, ...options });
   }
 }
+
+export type UserListResponsesCursorUsers = CursorUsers<UserListResponse>;
 
 export interface UserCreateResponse {
   canManageStudies: boolean;
@@ -211,66 +215,56 @@ export interface UserUpdateResponse {
 }
 
 export interface UserListResponse {
-  hasMore: boolean;
+  canManageStudies: boolean;
 
-  users: Array<UserListResponse.User>;
+  clinicRole:
+    | 'Radiologist'
+    | 'Cardiologist'
+    | 'Neurologist'
+    | 'Urologist'
+    | 'Gynecologist'
+    | 'Endocrinologist'
+    | 'Doctor'
+    | 'Surgeon'
+    | 'Physician'
+    | 'Physician Assistant'
+    | 'Nurse Practitioner'
+    | 'Registered Nurse'
+    | 'Patient Care Coordinator'
+    | 'Front Desk Operator'
+    | 'Imaging Technologist'
+    | 'PACS Administrator'
+    | 'Software Engineer'
+    | 'Revenue Cycle Manager'
+    | 'Administrative Director'
+    | 'Administrative Assistant'
+    | 'Other';
 
-  cursor?: string;
-}
+  createdAt: string | null;
 
-export namespace UserListResponse {
-  export interface User {
-    canManageStudies: boolean;
+  email: string;
 
-    clinicRole:
-      | 'Radiologist'
-      | 'Cardiologist'
-      | 'Neurologist'
-      | 'Urologist'
-      | 'Gynecologist'
-      | 'Endocrinologist'
-      | 'Doctor'
-      | 'Surgeon'
-      | 'Physician'
-      | 'Physician Assistant'
-      | 'Nurse Practitioner'
-      | 'Registered Nurse'
-      | 'Patient Care Coordinator'
-      | 'Front Desk Operator'
-      | 'Imaging Technologist'
-      | 'PACS Administrator'
-      | 'Software Engineer'
-      | 'Revenue Cycle Manager'
-      | 'Administrative Director'
-      | 'Administrative Assistant'
-      | 'Other';
+  firstName: string;
 
-    createdAt: string | null;
+  hasDashboardAccess: boolean;
 
-    email: string;
+  invitedSource: 'dashboard' | 'api';
 
-    firstName: string;
+  lastLoginAt: string | null;
 
-    hasDashboardAccess: boolean;
+  lastName: string;
 
-    invitedSource: 'dashboard' | 'api';
+  level: 'owner' | 'admin' | 'member';
 
-    lastLoginAt: string | null;
+  userId: string;
 
-    lastName: string;
+  middleName?: string;
 
-    level: 'owner' | 'admin' | 'member';
+  phoneNumber?: string;
 
-    userId: string;
+  suffix1?: string;
 
-    middleName?: string;
-
-    phoneNumber?: string;
-
-    suffix1?: string;
-
-    suffix2?: string;
-  }
+  suffix2?: string;
 }
 
 export interface UserReactivateResponse {
@@ -374,12 +368,7 @@ export interface UserUpdateParams {
   suffix2?: string | null;
 }
 
-export interface UserListParams {
-  /**
-   * Base64 encoded cursor from previous response
-   */
-  cursor?: string;
-
+export interface UserListParams extends CursorUsersParams {
   /**
    * Filter by exact email match
    */
@@ -404,11 +393,6 @@ export interface UserListParams {
    * Filter by user level
    */
   level?: 'owner' | 'admin' | 'member';
-
-  /**
-   * Number of results to return (1-100)
-   */
-  limit?: number;
 }
 
 export interface UserReactivateParams {
@@ -429,6 +413,7 @@ export declare namespace Users {
     type UserListResponse as UserListResponse,
     type UserReactivateResponse as UserReactivateResponse,
     type UserRevokeAccessResponse as UserRevokeAccessResponse,
+    type UserListResponsesCursorUsers as UserListResponsesCursorUsers,
     type UserCreateParams as UserCreateParams,
     type UserUpdateParams as UserUpdateParams,
     type UserListParams as UserListParams,
@@ -442,6 +427,7 @@ export declare namespace Users {
     type InvitationUpdateResponse as InvitationUpdateResponse,
     type InvitationListResponse as InvitationListResponse,
     type InvitationRevokeResponse as InvitationRevokeResponse,
+    type InvitationListResponsesCursorInvitations as InvitationListResponsesCursorInvitations,
     type InvitationUpdateParams as InvitationUpdateParams,
     type InvitationListParams as InvitationListParams,
     type InvitationRevokeParams as InvitationRevokeParams,

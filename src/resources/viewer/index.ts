@@ -16,6 +16,7 @@ export {
   type StudyCancelParams,
   type StudyRerouteURLParams,
   type StudyUncancelParams,
+  type StudyListResponsesCursorStudies,
 } from './studies';
 export {
   Users,
@@ -30,5 +31,6 @@ export {
   type UserListParams,
   type UserReactivateParams,
   type UserRevokeAccessParams,
+  type UserListResponsesCursorUsers,
 } from './users/index';
 export { Viewer } from './viewer';
