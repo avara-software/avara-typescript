@@ -10,6 +10,7 @@ Types:
 - <code><a href="./src/resources/viewer/studies.ts">StudyListResponse</a></code>
 - <code><a href="./src/resources/viewer/studies.ts">StudyCancelResponse</a></code>
 - <code><a href="./src/resources/viewer/studies.ts">StudyRerouteURLResponse</a></code>
+- <code><a href="./src/resources/viewer/studies.ts">StudyRetrieveByUidResponse</a></code>
 - <code><a href="./src/resources/viewer/studies.ts">StudyUncancelResponse</a></code>
 
 Methods:
@@ -20,6 +21,7 @@ Methods:
 - <code title="get /v1/viewer/studies">client.viewer.studies.<a href="./src/resources/viewer/studies.ts">list</a>({ ...params }) -> StudyListResponse</code>
 - <code title="post /v1/viewer/studies/cancel">client.viewer.studies.<a href="./src/resources/viewer/studies.ts">cancel</a>({ ...params }) -> StudyCancelResponse</code>
 - <code title="post /v1/viewer/studies/reroute-url">client.viewer.studies.<a href="./src/resources/viewer/studies.ts">rerouteURL</a>({ ...params }) -> StudyRerouteURLResponse</code>
+- <code title="get /v1/viewer/studies/by-uid/{studyInstanceUid}">client.viewer.studies.<a href="./src/resources/viewer/studies.ts">retrieveByUid</a>(studyInstanceUid) -> StudyRetrieveByUidResponse</code>
 - <code title="post /v1/viewer/studies/uncancel">client.viewer.studies.<a href="./src/resources/viewer/studies.ts">uncancel</a>({ ...params }) -> StudyUncancelResponse</code>
 
 ## Users
@@ -70,6 +72,7 @@ Types:
 - <code><a href="./src/resources/auto-scribe/studies.ts">StudyListResponse</a></code>
 - <code><a href="./src/resources/auto-scribe/studies.ts">StudyCancelResponse</a></code>
 - <code><a href="./src/resources/auto-scribe/studies.ts">StudyRerouteURLResponse</a></code>
+- <code><a href="./src/resources/auto-scribe/studies.ts">StudyRetrieveByUidResponse</a></code>
 - <code><a href="./src/resources/auto-scribe/studies.ts">StudyUncancelResponse</a></code>
 - <code><a href="./src/resources/auto-scribe/studies.ts">StudyViewerOnlyRerouteURLResponse</a></code>
 
@@ -81,6 +84,7 @@ Methods:
 - <code title="get /v1/autoScribe/studies">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies.ts">list</a>({ ...params }) -> StudyListResponse</code>
 - <code title="post /v1/autoScribe/studies/cancel">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies.ts">cancel</a>({ ...params }) -> StudyCancelResponse</code>
 - <code title="post /v1/autoScribe/studies/reroute-url">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies.ts">rerouteURL</a>({ ...params }) -> StudyRerouteURLResponse</code>
+- <code title="get /v1/autoScribe/studies/by-uid/{studyInstanceUid}">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies.ts">retrieveByUid</a>(studyInstanceUid) -> StudyRetrieveByUidResponse</code>
 - <code title="post /v1/autoScribe/studies/uncancel">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies.ts">uncancel</a>({ ...params }) -> StudyUncancelResponse</code>
 - <code title="post /v1/autoScribe/studies/viewer-only-reroute-url">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies.ts">viewerOnlyRerouteURL</a>({ ...params }) -> StudyViewerOnlyRerouteURLResponse</code>
 

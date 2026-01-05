@@ -8,6 +8,7 @@ export {
   type StudyListResponse,
   type StudyCancelResponse,
   type StudyRerouteURLResponse,
+  type StudyRetrieveByUidResponse,
   type StudyUncancelResponse,
   type StudyCreateParams,
   type StudyUpdateParams,

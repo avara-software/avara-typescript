@@ -40,6 +40,10 @@ export class Studies extends APIResource {
     return this._client.post('/v1/autoScribe/studies/reroute-url', { body, ...options });
   }
 
+  retrieveByUid(studyInstanceUid: string, options?: RequestOptions): APIPromise<StudyRetrieveByUidResponse> {
+    return this._client.get(path`/v1/autoScribe/studies/by-uid/${studyInstanceUid}`, options);
+  }
+
   uncancel(
     body: StudyUncancelParams | null | undefined = {},
     options?: RequestOptions,
@@ -603,6 +607,138 @@ export interface StudyRerouteURLResponse {
   url: string;
 }
 
+export interface StudyRetrieveByUidResponse {
+  cancelledAt: string | null;
+
+  createdAt: string | null;
+
+  isCancelled: boolean;
+
+  reportMetadata: StudyRetrieveByUidResponse.ReportMetadata;
+
+  severity: 'normal' | 'high' | 'stat';
+
+  studyDescription: string;
+
+  studyId: string;
+
+  studyInstanceUid: string;
+
+  studyReportStatus: 'unassigned' | 'assigned' | 'in_progress' | 'completed' | 'addendum_active';
+
+  updatedAt: string | null;
+
+  assignedTo?: StudyRetrieveByUidResponse.AssignedTo | null;
+
+  createdByApiKey?: StudyRetrieveByUidResponse.CreatedByAPIKey | null;
+
+  createdByUser?: StudyRetrieveByUidResponse.CreatedByUser | null;
+
+  metadata?: { [key: string]: string };
+
+  org?: StudyRetrieveByUidResponse.Org | null;
+
+  priorReportTexts?: Array<string>;
+
+  priorStudyIds?: Array<string>;
+
+  reportIds?: Array<StudyRetrieveByUidResponse.ReportID>;
+}
+
+export namespace StudyRetrieveByUidResponse {
+  export interface ReportMetadata {
+    age?: string;
+
+    dateOfBirth?: string;
+
+    facilityName?: string;
+
+    height?: ReportMetadata.Height;
+
+    mrn?: string;
+
+    patientName?: string;
+
+    referringPhysicianName?: string;
+
+    scanDate?: string;
+
+    scanTime?: string;
+
+    scanType?: string;
+
+    sex?: 'male' | 'female' | 'other';
+
+    weight?: ReportMetadata.Weight;
+  }
+
+  export namespace ReportMetadata {
+    export interface Height {
+      unit: 'in' | 'cm';
+
+      value: number;
+    }
+
+    export interface Weight {
+      unit: 'lbs' | 'kg';
+
+      value: number;
+    }
+  }
+
+  export interface AssignedTo {
+    email: string;
+
+    userId: string;
+
+    firstName?: string;
+
+    lastName?: string;
+
+    middleName?: string;
+
+    suffix1?: string;
+
+    suffix2?: string;
+  }
+
+  export interface CreatedByAPIKey {
+    apiKeyId: string;
+
+    description: string;
+
+    isViewerEnabled?: boolean;
+  }
+
+  export interface CreatedByUser {
+    email: string;
+
+    userId: string;
+
+    firstName?: string;
+
+    lastName?: string;
+
+    middleName?: string;
+
+    suffix1?: string;
+
+    suffix2?: string;
+  }
+
+  export interface Org {
+    orgId: string;
+
+    orgName: string;
+  }
+
+  export interface ReportID {
+    reportId: string;
+
+    status: 'in_progress' | 'completed';
+  }
+}
+
 export interface StudyUncancelResponse {
   success: boolean;
 
@@ -809,6 +945,7 @@ export declare namespace Studies {
     type StudyListResponse as StudyListResponse,
     type StudyCancelResponse as StudyCancelResponse,
     type StudyRerouteURLResponse as StudyRerouteURLResponse,
+    type StudyRetrieveByUidResponse as StudyRetrieveByUidResponse,
     type StudyUncancelResponse as StudyUncancelResponse,
     type StudyViewerOnlyRerouteURLResponse as StudyViewerOnlyRerouteURLResponse,
     type StudyCreateParams as StudyCreateParams,
