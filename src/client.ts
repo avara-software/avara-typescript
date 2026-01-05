@@ -29,6 +29,12 @@ import {
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
+import {
+  ReportDeliveredWebhookEvent,
+  StudyAccessRequestedWebhookEvent,
+  UnwrapWebhookEvent,
+  Webhooks,
+} from './resources/webhooks';
 import { AutoScribe } from './resources/auto-scribe/auto-scribe';
 import {
   OrgCreateParams,
@@ -747,11 +753,13 @@ export class Avara {
   viewer: API.Viewer = new API.Viewer(this);
   autoScribe: API.AutoScribe = new API.AutoScribe(this);
   orgs: API.Orgs = new API.Orgs(this);
+  webhooks: API.Webhooks = new API.Webhooks(this);
 }
 
 Avara.Viewer = Viewer;
 Avara.AutoScribe = AutoScribe;
 Avara.Orgs = Orgs;
+Avara.Webhooks = Webhooks;
 
 export declare namespace Avara {
   export type RequestOptions = Opts.RequestOptions;
@@ -793,5 +801,12 @@ export declare namespace Avara {
     type OrgCreateParams as OrgCreateParams,
     type OrgUpdateParams as OrgUpdateParams,
     type OrgListParams as OrgListParams,
+  };
+
+  export {
+    Webhooks as Webhooks,
+    type StudyAccessRequestedWebhookEvent as StudyAccessRequestedWebhookEvent,
+    type ReportDeliveredWebhookEvent as ReportDeliveredWebhookEvent,
+    type UnwrapWebhookEvent as UnwrapWebhookEvent,
   };
 }

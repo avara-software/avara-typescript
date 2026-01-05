@@ -173,3 +173,15 @@ Methods:
 
 - <code title="post /v1/orgs/{orgId}/users">client.orgs.users.<a href="./src/resources/orgs/users.ts">create</a>(orgID, { ...params }) -> UserCreateResponse</code>
 - <code title="delete /v1/orgs/{orgId}/users">client.orgs.users.<a href="./src/resources/orgs/users.ts">delete</a>(orgID, { ...params }) -> UserDeleteResponse</code>
+
+# Webhooks
+
+Types:
+
+- <code><a href="./src/resources/webhooks.ts">StudyAccessRequestedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ReportDeliveredWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">UnwrapWebhookEvent</a></code>
+
+Methods:
+
+- <code>client.webhooks.<a href="./src/resources/webhooks.ts">unwrap</a>(body) -> void</code>
