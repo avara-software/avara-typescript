@@ -2,7 +2,7 @@
   "name": "avara",
   "version": "0.0.1",
   "description": "The official TypeScript library for the Avara API",
-  "author": "Avara <>",
+  "author": "Avara <richie@avarasoftware.com>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
