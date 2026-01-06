@@ -55,6 +55,9 @@ export class Users extends APIResource {
 
 export type UserListResponsesCursorUsers = CursorUsers<UserListResponse>;
 
+/**
+ * A user in the Viewer system with study management permissions
+ */
 export interface UserCreateResponse {
   canManageStudies: boolean;
 
@@ -108,6 +111,9 @@ export interface UserCreateResponse {
   suffix2?: string;
 }
 
+/**
+ * A user in the Viewer system with study management permissions
+ */
 export interface UserRetrieveResponse {
   canManageStudies: boolean;
 
@@ -161,6 +167,9 @@ export interface UserRetrieveResponse {
   suffix2?: string;
 }
 
+/**
+ * A user in the Viewer system with study management permissions
+ */
 export interface UserUpdateResponse {
   canManageStudies: boolean;
 
@@ -214,6 +223,9 @@ export interface UserUpdateResponse {
   suffix2?: string;
 }
 
+/**
+ * A user in the Viewer system with study management permissions
+ */
 export interface UserListResponse {
   canManageStudies: boolean;
 
@@ -267,12 +279,18 @@ export interface UserListResponse {
   suffix2?: string;
 }
 
+/**
+ * Response for reactivating a user in Viewer
+ */
 export interface UserReactivateResponse {
   success: boolean;
 
   message?: string;
 }
 
+/**
+ * Response for revoking user access in Viewer
+ */
 export interface UserRevokeAccessResponse {
   success: boolean;
 

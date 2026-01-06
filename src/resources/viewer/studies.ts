@@ -61,6 +61,9 @@ export class Studies extends APIResource {
 
 export type StudyListResponsesCursorStudies = CursorStudies<StudyListResponse>;
 
+/**
+ * A study entity in the Viewer system with viewing status
+ */
 export interface StudyCreateResponse {
   cancelledAt: string | null;
 
@@ -80,18 +83,33 @@ export interface StudyCreateResponse {
 
   updatedAt: string | null;
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   assignedTo?: StudyCreateResponse.AssignedTo | null;
 
+  /**
+   * A reference to an API key with basic identifying information
+   */
   createdByApiKey?: StudyCreateResponse.CreatedByAPIKey | null;
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   createdByUser?: StudyCreateResponse.CreatedByUser | null;
 
   metadata?: { [key: string]: string };
 
+  /**
+   * A reference to an organization with basic identifying information
+   */
   org?: StudyCreateResponse.Org | null;
 }
 
 export namespace StudyCreateResponse {
+  /**
+   * A reference to a user with basic identifying information
+   */
   export interface AssignedTo {
     email: string;
 
@@ -108,6 +126,9 @@ export namespace StudyCreateResponse {
     suffix2?: string;
   }
 
+  /**
+   * A reference to an API key with basic identifying information
+   */
   export interface CreatedByAPIKey {
     apiKeyId: string;
 
@@ -116,6 +137,9 @@ export namespace StudyCreateResponse {
     isViewerEnabled?: boolean;
   }
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   export interface CreatedByUser {
     email: string;
 
@@ -132,6 +156,9 @@ export namespace StudyCreateResponse {
     suffix2?: string;
   }
 
+  /**
+   * A reference to an organization with basic identifying information
+   */
   export interface Org {
     orgId: string;
 
@@ -139,6 +166,9 @@ export namespace StudyCreateResponse {
   }
 }
 
+/**
+ * A study entity in the Viewer system with viewing status
+ */
 export interface StudyRetrieveResponse {
   cancelledAt: string | null;
 
@@ -158,18 +188,33 @@ export interface StudyRetrieveResponse {
 
   updatedAt: string | null;
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   assignedTo?: StudyRetrieveResponse.AssignedTo | null;
 
+  /**
+   * A reference to an API key with basic identifying information
+   */
   createdByApiKey?: StudyRetrieveResponse.CreatedByAPIKey | null;
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   createdByUser?: StudyRetrieveResponse.CreatedByUser | null;
 
   metadata?: { [key: string]: string };
 
+  /**
+   * A reference to an organization with basic identifying information
+   */
   org?: StudyRetrieveResponse.Org | null;
 }
 
 export namespace StudyRetrieveResponse {
+  /**
+   * A reference to a user with basic identifying information
+   */
   export interface AssignedTo {
     email: string;
 
@@ -186,6 +231,9 @@ export namespace StudyRetrieveResponse {
     suffix2?: string;
   }
 
+  /**
+   * A reference to an API key with basic identifying information
+   */
   export interface CreatedByAPIKey {
     apiKeyId: string;
 
@@ -194,6 +242,9 @@ export namespace StudyRetrieveResponse {
     isViewerEnabled?: boolean;
   }
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   export interface CreatedByUser {
     email: string;
 
@@ -210,6 +261,9 @@ export namespace StudyRetrieveResponse {
     suffix2?: string;
   }
 
+  /**
+   * A reference to an organization with basic identifying information
+   */
   export interface Org {
     orgId: string;
 
@@ -217,6 +271,9 @@ export namespace StudyRetrieveResponse {
   }
 }
 
+/**
+ * A study entity in the Viewer system with viewing status
+ */
 export interface StudyUpdateResponse {
   cancelledAt: string | null;
 
@@ -236,18 +293,33 @@ export interface StudyUpdateResponse {
 
   updatedAt: string | null;
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   assignedTo?: StudyUpdateResponse.AssignedTo | null;
 
+  /**
+   * A reference to an API key with basic identifying information
+   */
   createdByApiKey?: StudyUpdateResponse.CreatedByAPIKey | null;
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   createdByUser?: StudyUpdateResponse.CreatedByUser | null;
 
   metadata?: { [key: string]: string };
 
+  /**
+   * A reference to an organization with basic identifying information
+   */
   org?: StudyUpdateResponse.Org | null;
 }
 
 export namespace StudyUpdateResponse {
+  /**
+   * A reference to a user with basic identifying information
+   */
   export interface AssignedTo {
     email: string;
 
@@ -264,6 +336,9 @@ export namespace StudyUpdateResponse {
     suffix2?: string;
   }
 
+  /**
+   * A reference to an API key with basic identifying information
+   */
   export interface CreatedByAPIKey {
     apiKeyId: string;
 
@@ -272,6 +347,9 @@ export namespace StudyUpdateResponse {
     isViewerEnabled?: boolean;
   }
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   export interface CreatedByUser {
     email: string;
 
@@ -288,6 +366,9 @@ export namespace StudyUpdateResponse {
     suffix2?: string;
   }
 
+  /**
+   * A reference to an organization with basic identifying information
+   */
   export interface Org {
     orgId: string;
 
@@ -295,6 +376,9 @@ export namespace StudyUpdateResponse {
   }
 }
 
+/**
+ * A study entity in the Viewer system with viewing status
+ */
 export interface StudyListResponse {
   cancelledAt: string | null;
 
@@ -314,18 +398,33 @@ export interface StudyListResponse {
 
   updatedAt: string | null;
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   assignedTo?: StudyListResponse.AssignedTo | null;
 
+  /**
+   * A reference to an API key with basic identifying information
+   */
   createdByApiKey?: StudyListResponse.CreatedByAPIKey | null;
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   createdByUser?: StudyListResponse.CreatedByUser | null;
 
   metadata?: { [key: string]: string };
 
+  /**
+   * A reference to an organization with basic identifying information
+   */
   org?: StudyListResponse.Org | null;
 }
 
 export namespace StudyListResponse {
+  /**
+   * A reference to a user with basic identifying information
+   */
   export interface AssignedTo {
     email: string;
 
@@ -342,6 +441,9 @@ export namespace StudyListResponse {
     suffix2?: string;
   }
 
+  /**
+   * A reference to an API key with basic identifying information
+   */
   export interface CreatedByAPIKey {
     apiKeyId: string;
 
@@ -350,6 +452,9 @@ export namespace StudyListResponse {
     isViewerEnabled?: boolean;
   }
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   export interface CreatedByUser {
     email: string;
 
@@ -366,6 +471,9 @@ export namespace StudyListResponse {
     suffix2?: string;
   }
 
+  /**
+   * A reference to an organization with basic identifying information
+   */
   export interface Org {
     orgId: string;
 
@@ -373,16 +481,25 @@ export namespace StudyListResponse {
   }
 }
 
+/**
+ * Response for cancelling a study in Viewer
+ */
 export interface StudyCancelResponse {
   success: boolean;
 
   message?: string;
 }
 
+/**
+ * Response containing the generated reroute URL for a study in Viewer
+ */
 export interface StudyRerouteURLResponse {
   url: string;
 }
 
+/**
+ * A study entity in the Viewer system with viewing status
+ */
 export interface StudyRetrieveByUidResponse {
   cancelledAt: string | null;
 
@@ -402,18 +519,33 @@ export interface StudyRetrieveByUidResponse {
 
   updatedAt: string | null;
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   assignedTo?: StudyRetrieveByUidResponse.AssignedTo | null;
 
+  /**
+   * A reference to an API key with basic identifying information
+   */
   createdByApiKey?: StudyRetrieveByUidResponse.CreatedByAPIKey | null;
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   createdByUser?: StudyRetrieveByUidResponse.CreatedByUser | null;
 
   metadata?: { [key: string]: string };
 
+  /**
+   * A reference to an organization with basic identifying information
+   */
   org?: StudyRetrieveByUidResponse.Org | null;
 }
 
 export namespace StudyRetrieveByUidResponse {
+  /**
+   * A reference to a user with basic identifying information
+   */
   export interface AssignedTo {
     email: string;
 
@@ -430,6 +562,9 @@ export namespace StudyRetrieveByUidResponse {
     suffix2?: string;
   }
 
+  /**
+   * A reference to an API key with basic identifying information
+   */
   export interface CreatedByAPIKey {
     apiKeyId: string;
 
@@ -438,6 +573,9 @@ export namespace StudyRetrieveByUidResponse {
     isViewerEnabled?: boolean;
   }
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   export interface CreatedByUser {
     email: string;
 
@@ -454,6 +592,9 @@ export namespace StudyRetrieveByUidResponse {
     suffix2?: string;
   }
 
+  /**
+   * A reference to an organization with basic identifying information
+   */
   export interface Org {
     orgId: string;
 
@@ -461,6 +602,9 @@ export namespace StudyRetrieveByUidResponse {
   }
 }
 
+/**
+ * Response for uncancelling a study in Viewer
+ */
 export interface StudyUncancelResponse {
   success: boolean;
 

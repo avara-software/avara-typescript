@@ -45,6 +45,9 @@ export class Orgs extends APIResource {
 
 export type OrgListResponsesCursorOrganizations = CursorOrganizations<OrgListResponse>;
 
+/**
+ * An organization entity that groups users and studies
+ */
 export interface OrgCreateResponse {
   createdAt: string | null;
 
@@ -65,6 +68,9 @@ export interface OrgCreateResponse {
   metadata?: { [key: string]: string };
 }
 
+/**
+ * An organization entity that groups users and studies
+ */
 export interface OrgRetrieveResponse {
   createdAt: string | null;
 
@@ -85,6 +91,9 @@ export interface OrgRetrieveResponse {
   metadata?: { [key: string]: string };
 }
 
+/**
+ * An organization entity that groups users and studies
+ */
 export interface OrgUpdateResponse {
   createdAt: string | null;
 
@@ -105,6 +114,9 @@ export interface OrgUpdateResponse {
   metadata?: { [key: string]: string };
 }
 
+/**
+ * An organization entity that groups users and studies
+ */
 export interface OrgListResponse {
   createdAt: string | null;
 
@@ -125,6 +137,9 @@ export interface OrgListResponse {
   metadata?: { [key: string]: string };
 }
 
+/**
+ * An organization entity that groups users and studies
+ */
 export interface OrgDeactivateResponse {
   createdAt: string | null;
 
@@ -145,6 +160,9 @@ export interface OrgDeactivateResponse {
   metadata?: { [key: string]: string };
 }
 
+/**
+ * An organization entity that groups users and studies
+ */
 export interface OrgReactivateResponse {
   createdAt: string | null;
 

@@ -58,6 +58,9 @@ export class Users extends APIResource {
 
 export type UserListResponsesCursorUsers = CursorUsers<UserListResponse>;
 
+/**
+ * A user in the AutoScribe system with report creation permissions
+ */
 export interface UserCreateResponse {
   canCreateReports: boolean;
 
@@ -115,6 +118,9 @@ export interface UserCreateResponse {
   suffix2?: string;
 }
 
+/**
+ * A user in the AutoScribe system with report creation permissions
+ */
 export interface UserRetrieveResponse {
   canCreateReports: boolean;
 
@@ -172,6 +178,9 @@ export interface UserRetrieveResponse {
   suffix2?: string;
 }
 
+/**
+ * A user in the AutoScribe system with report creation permissions
+ */
 export interface UserUpdateResponse {
   canCreateReports: boolean;
 
@@ -229,6 +238,9 @@ export interface UserUpdateResponse {
   suffix2?: string;
 }
 
+/**
+ * A user in the AutoScribe system with report creation permissions
+ */
 export interface UserListResponse {
   canCreateReports: boolean;
 
@@ -286,12 +298,18 @@ export interface UserListResponse {
   suffix2?: string;
 }
 
+/**
+ * Response for reactivating a user in AutoScribe
+ */
 export interface UserReactivateResponse {
   success: boolean;
 
   message?: string;
 }
 
+/**
+ * Response for revoking user access in AutoScribe
+ */
 export interface UserRevokeAccessResponse {
   success: boolean;
 

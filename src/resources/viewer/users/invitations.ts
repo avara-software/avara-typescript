@@ -40,6 +40,9 @@ export class Invitations extends APIResource {
 
 export type InvitationListResponsesCursorInvitations = CursorInvitations<InvitationListResponse>;
 
+/**
+ * A pending user invitation in the Viewer system
+ */
 export interface InvitationRetrieveResponse {
   canManageStudies: boolean;
 
@@ -105,6 +108,9 @@ export interface InvitationRetrieveResponse {
   suffix2?: string | null;
 }
 
+/**
+ * A pending user invitation in the Viewer system
+ */
 export interface InvitationUpdateResponse {
   canManageStudies: boolean;
 
@@ -170,6 +176,9 @@ export interface InvitationUpdateResponse {
   suffix2?: string | null;
 }
 
+/**
+ * A pending user invitation in the Viewer system
+ */
 export interface InvitationListResponse {
   canManageStudies: boolean;
 
@@ -235,6 +244,9 @@ export interface InvitationListResponse {
   suffix2?: string | null;
 }
 
+/**
+ * Response for revoking an invitation in Viewer
+ */
 export interface InvitationRevokeResponse {
   success: boolean;
 

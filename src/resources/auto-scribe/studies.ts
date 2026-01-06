@@ -65,6 +65,9 @@ export class Studies extends APIResource {
 
 export type StudyListResponsesCursorStudies = CursorStudies<StudyListResponse>;
 
+/**
+ * A study entity in the AutoScribe system with report workflow status
+ */
 export interface StudyCreateResponse {
   cancelledAt: string | null;
 
@@ -72,6 +75,9 @@ export interface StudyCreateResponse {
 
   isCancelled: boolean;
 
+  /**
+   * Metadata for a study report including patient demographics and scan information
+   */
   reportMetadata: StudyCreateResponse.ReportMetadata;
 
   severity: 'normal' | 'high' | 'stat';
@@ -86,14 +92,26 @@ export interface StudyCreateResponse {
 
   updatedAt: string | null;
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   assignedTo?: StudyCreateResponse.AssignedTo | null;
 
+  /**
+   * A reference to an API key with basic identifying information
+   */
   createdByApiKey?: StudyCreateResponse.CreatedByAPIKey | null;
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   createdByUser?: StudyCreateResponse.CreatedByUser | null;
 
   metadata?: { [key: string]: string };
 
+  /**
+   * A reference to an organization with basic identifying information
+   */
   org?: StudyCreateResponse.Org | null;
 
   priorReportTexts?: Array<string>;
@@ -104,6 +122,9 @@ export interface StudyCreateResponse {
 }
 
 export namespace StudyCreateResponse {
+  /**
+   * Metadata for a study report including patient demographics and scan information
+   */
   export interface ReportMetadata {
     age?: string;
 
@@ -144,6 +165,9 @@ export namespace StudyCreateResponse {
     }
   }
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   export interface AssignedTo {
     email: string;
 
@@ -160,6 +184,9 @@ export namespace StudyCreateResponse {
     suffix2?: string;
   }
 
+  /**
+   * A reference to an API key with basic identifying information
+   */
   export interface CreatedByAPIKey {
     apiKeyId: string;
 
@@ -168,6 +195,9 @@ export namespace StudyCreateResponse {
     isViewerEnabled?: boolean;
   }
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   export interface CreatedByUser {
     email: string;
 
@@ -184,12 +214,18 @@ export namespace StudyCreateResponse {
     suffix2?: string;
   }
 
+  /**
+   * A reference to an organization with basic identifying information
+   */
   export interface Org {
     orgId: string;
 
     orgName: string;
   }
 
+  /**
+   * A report ID paired with its current status
+   */
   export interface ReportID {
     reportId: string;
 
@@ -197,6 +233,9 @@ export namespace StudyCreateResponse {
   }
 }
 
+/**
+ * A study entity in the AutoScribe system with report workflow status
+ */
 export interface StudyRetrieveResponse {
   cancelledAt: string | null;
 
@@ -204,6 +243,9 @@ export interface StudyRetrieveResponse {
 
   isCancelled: boolean;
 
+  /**
+   * Metadata for a study report including patient demographics and scan information
+   */
   reportMetadata: StudyRetrieveResponse.ReportMetadata;
 
   severity: 'normal' | 'high' | 'stat';
@@ -218,14 +260,26 @@ export interface StudyRetrieveResponse {
 
   updatedAt: string | null;
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   assignedTo?: StudyRetrieveResponse.AssignedTo | null;
 
+  /**
+   * A reference to an API key with basic identifying information
+   */
   createdByApiKey?: StudyRetrieveResponse.CreatedByAPIKey | null;
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   createdByUser?: StudyRetrieveResponse.CreatedByUser | null;
 
   metadata?: { [key: string]: string };
 
+  /**
+   * A reference to an organization with basic identifying information
+   */
   org?: StudyRetrieveResponse.Org | null;
 
   priorReportTexts?: Array<string>;
@@ -236,6 +290,9 @@ export interface StudyRetrieveResponse {
 }
 
 export namespace StudyRetrieveResponse {
+  /**
+   * Metadata for a study report including patient demographics and scan information
+   */
   export interface ReportMetadata {
     age?: string;
 
@@ -276,6 +333,9 @@ export namespace StudyRetrieveResponse {
     }
   }
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   export interface AssignedTo {
     email: string;
 
@@ -292,6 +352,9 @@ export namespace StudyRetrieveResponse {
     suffix2?: string;
   }
 
+  /**
+   * A reference to an API key with basic identifying information
+   */
   export interface CreatedByAPIKey {
     apiKeyId: string;
 
@@ -300,6 +363,9 @@ export namespace StudyRetrieveResponse {
     isViewerEnabled?: boolean;
   }
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   export interface CreatedByUser {
     email: string;
 
@@ -316,12 +382,18 @@ export namespace StudyRetrieveResponse {
     suffix2?: string;
   }
 
+  /**
+   * A reference to an organization with basic identifying information
+   */
   export interface Org {
     orgId: string;
 
     orgName: string;
   }
 
+  /**
+   * A report ID paired with its current status
+   */
   export interface ReportID {
     reportId: string;
 
@@ -329,6 +401,9 @@ export namespace StudyRetrieveResponse {
   }
 }
 
+/**
+ * A study entity in the AutoScribe system with report workflow status
+ */
 export interface StudyUpdateResponse {
   cancelledAt: string | null;
 
@@ -336,6 +411,9 @@ export interface StudyUpdateResponse {
 
   isCancelled: boolean;
 
+  /**
+   * Metadata for a study report including patient demographics and scan information
+   */
   reportMetadata: StudyUpdateResponse.ReportMetadata;
 
   severity: 'normal' | 'high' | 'stat';
@@ -350,14 +428,26 @@ export interface StudyUpdateResponse {
 
   updatedAt: string | null;
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   assignedTo?: StudyUpdateResponse.AssignedTo | null;
 
+  /**
+   * A reference to an API key with basic identifying information
+   */
   createdByApiKey?: StudyUpdateResponse.CreatedByAPIKey | null;
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   createdByUser?: StudyUpdateResponse.CreatedByUser | null;
 
   metadata?: { [key: string]: string };
 
+  /**
+   * A reference to an organization with basic identifying information
+   */
   org?: StudyUpdateResponse.Org | null;
 
   priorReportTexts?: Array<string>;
@@ -368,6 +458,9 @@ export interface StudyUpdateResponse {
 }
 
 export namespace StudyUpdateResponse {
+  /**
+   * Metadata for a study report including patient demographics and scan information
+   */
   export interface ReportMetadata {
     age?: string;
 
@@ -408,6 +501,9 @@ export namespace StudyUpdateResponse {
     }
   }
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   export interface AssignedTo {
     email: string;
 
@@ -424,6 +520,9 @@ export namespace StudyUpdateResponse {
     suffix2?: string;
   }
 
+  /**
+   * A reference to an API key with basic identifying information
+   */
   export interface CreatedByAPIKey {
     apiKeyId: string;
 
@@ -432,6 +531,9 @@ export namespace StudyUpdateResponse {
     isViewerEnabled?: boolean;
   }
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   export interface CreatedByUser {
     email: string;
 
@@ -448,12 +550,18 @@ export namespace StudyUpdateResponse {
     suffix2?: string;
   }
 
+  /**
+   * A reference to an organization with basic identifying information
+   */
   export interface Org {
     orgId: string;
 
     orgName: string;
   }
 
+  /**
+   * A report ID paired with its current status
+   */
   export interface ReportID {
     reportId: string;
 
@@ -461,6 +569,9 @@ export namespace StudyUpdateResponse {
   }
 }
 
+/**
+ * A study entity in the AutoScribe system with report workflow status
+ */
 export interface StudyListResponse {
   cancelledAt: string | null;
 
@@ -468,6 +579,9 @@ export interface StudyListResponse {
 
   isCancelled: boolean;
 
+  /**
+   * Metadata for a study report including patient demographics and scan information
+   */
   reportMetadata: StudyListResponse.ReportMetadata;
 
   severity: 'normal' | 'high' | 'stat';
@@ -482,14 +596,26 @@ export interface StudyListResponse {
 
   updatedAt: string | null;
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   assignedTo?: StudyListResponse.AssignedTo | null;
 
+  /**
+   * A reference to an API key with basic identifying information
+   */
   createdByApiKey?: StudyListResponse.CreatedByAPIKey | null;
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   createdByUser?: StudyListResponse.CreatedByUser | null;
 
   metadata?: { [key: string]: string };
 
+  /**
+   * A reference to an organization with basic identifying information
+   */
   org?: StudyListResponse.Org | null;
 
   priorReportTexts?: Array<string>;
@@ -500,6 +626,9 @@ export interface StudyListResponse {
 }
 
 export namespace StudyListResponse {
+  /**
+   * Metadata for a study report including patient demographics and scan information
+   */
   export interface ReportMetadata {
     age?: string;
 
@@ -540,6 +669,9 @@ export namespace StudyListResponse {
     }
   }
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   export interface AssignedTo {
     email: string;
 
@@ -556,6 +688,9 @@ export namespace StudyListResponse {
     suffix2?: string;
   }
 
+  /**
+   * A reference to an API key with basic identifying information
+   */
   export interface CreatedByAPIKey {
     apiKeyId: string;
 
@@ -564,6 +699,9 @@ export namespace StudyListResponse {
     isViewerEnabled?: boolean;
   }
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   export interface CreatedByUser {
     email: string;
 
@@ -580,12 +718,18 @@ export namespace StudyListResponse {
     suffix2?: string;
   }
 
+  /**
+   * A reference to an organization with basic identifying information
+   */
   export interface Org {
     orgId: string;
 
     orgName: string;
   }
 
+  /**
+   * A report ID paired with its current status
+   */
   export interface ReportID {
     reportId: string;
 
@@ -593,16 +737,25 @@ export namespace StudyListResponse {
   }
 }
 
+/**
+ * Response for cancelling a study in AutoScribe
+ */
 export interface StudyCancelResponse {
   success: boolean;
 
   message?: string;
 }
 
+/**
+ * Response containing the generated reroute URL for a study in AutoScribe
+ */
 export interface StudyRerouteURLResponse {
   url: string;
 }
 
+/**
+ * A study entity in the AutoScribe system with report workflow status
+ */
 export interface StudyRetrieveByUidResponse {
   cancelledAt: string | null;
 
@@ -610,6 +763,9 @@ export interface StudyRetrieveByUidResponse {
 
   isCancelled: boolean;
 
+  /**
+   * Metadata for a study report including patient demographics and scan information
+   */
   reportMetadata: StudyRetrieveByUidResponse.ReportMetadata;
 
   severity: 'normal' | 'high' | 'stat';
@@ -624,14 +780,26 @@ export interface StudyRetrieveByUidResponse {
 
   updatedAt: string | null;
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   assignedTo?: StudyRetrieveByUidResponse.AssignedTo | null;
 
+  /**
+   * A reference to an API key with basic identifying information
+   */
   createdByApiKey?: StudyRetrieveByUidResponse.CreatedByAPIKey | null;
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   createdByUser?: StudyRetrieveByUidResponse.CreatedByUser | null;
 
   metadata?: { [key: string]: string };
 
+  /**
+   * A reference to an organization with basic identifying information
+   */
   org?: StudyRetrieveByUidResponse.Org | null;
 
   priorReportTexts?: Array<string>;
@@ -642,6 +810,9 @@ export interface StudyRetrieveByUidResponse {
 }
 
 export namespace StudyRetrieveByUidResponse {
+  /**
+   * Metadata for a study report including patient demographics and scan information
+   */
   export interface ReportMetadata {
     age?: string;
 
@@ -682,6 +853,9 @@ export namespace StudyRetrieveByUidResponse {
     }
   }
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   export interface AssignedTo {
     email: string;
 
@@ -698,6 +872,9 @@ export namespace StudyRetrieveByUidResponse {
     suffix2?: string;
   }
 
+  /**
+   * A reference to an API key with basic identifying information
+   */
   export interface CreatedByAPIKey {
     apiKeyId: string;
 
@@ -706,6 +883,9 @@ export namespace StudyRetrieveByUidResponse {
     isViewerEnabled?: boolean;
   }
 
+  /**
+   * A reference to a user with basic identifying information
+   */
   export interface CreatedByUser {
     email: string;
 
@@ -722,12 +902,18 @@ export namespace StudyRetrieveByUidResponse {
     suffix2?: string;
   }
 
+  /**
+   * A reference to an organization with basic identifying information
+   */
   export interface Org {
     orgId: string;
 
     orgName: string;
   }
 
+  /**
+   * A report ID paired with its current status
+   */
   export interface ReportID {
     reportId: string;
 
@@ -735,17 +921,27 @@ export namespace StudyRetrieveByUidResponse {
   }
 }
 
+/**
+ * Response for uncancelling a study in AutoScribe
+ */
 export interface StudyUncancelResponse {
   success: boolean;
 
   message?: string;
 }
 
+/**
+ * Response containing the generated viewer-only reroute URL for a study in
+ * AutoScribe
+ */
 export interface StudyViewerOnlyRerouteURLResponse {
   url: string;
 }
 
 export interface StudyCreateParams {
+  /**
+   * Metadata for a study report including patient demographics and scan information
+   */
   reportMetadata: StudyCreateParams.ReportMetadata;
 
   severity: 'normal' | 'high' | 'stat';
@@ -766,6 +962,9 @@ export interface StudyCreateParams {
 }
 
 export namespace StudyCreateParams {
+  /**
+   * Metadata for a study report including patient demographics and scan information
+   */
   export interface ReportMetadata {
     age?: string;
 

@@ -15,12 +15,18 @@ export class Users extends APIResource {
   }
 }
 
+/**
+ * Standard success response with optional message
+ */
 export interface UserCreateResponse {
   success: boolean;
 
   message?: string;
 }
 
+/**
+ * Standard success response with optional message
+ */
 export interface UserDeleteResponse {
   success: boolean;
 
