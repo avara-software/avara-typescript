@@ -103,6 +103,8 @@ export interface InvitationRetrieveResponse {
 
   middleName?: string | null;
 
+  npiNumber?: string;
+
   phoneNumber?: string | null;
 
   suffix1?: string | null;
@@ -172,6 +174,8 @@ export interface InvitationUpdateResponse {
   invitedByApiKeyId?: string | null;
 
   middleName?: string | null;
+
+  npiNumber?: string;
 
   phoneNumber?: string | null;
 
@@ -243,6 +247,8 @@ export interface InvitationListResponse {
 
   middleName?: string | null;
 
+  npiNumber?: string;
+
   phoneNumber?: string | null;
 
   suffix1?: string | null;
@@ -297,6 +303,8 @@ export interface InvitationUpdateParams {
   level?: 'admin' | 'member';
 
   middleName?: string | null;
+
+  npiNumber?: string | null;
 
   phoneNumber?: string | null;
 

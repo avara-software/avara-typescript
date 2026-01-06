@@ -51,6 +51,7 @@ describe('resource invitations', () => {
           lastName: 'x',
           level: 'admin',
           middleName: 'x',
+          npiNumber: '7321669910',
           phoneNumber: '321669910225610',
           suffix1: 'x',
           suffix2: 'x',
