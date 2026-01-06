@@ -35,7 +35,7 @@ import {
   UnwrapWebhookEvent,
   Webhooks,
 } from './resources/webhooks';
-import { AutoScribe } from './resources/auto-scribe/auto-scribe';
+import { AutoScribe, StudyReportMetadata } from './resources/auto-scribe/auto-scribe';
 import {
   OrgCreateParams,
   OrgCreateResponse,
@@ -787,7 +787,7 @@ export declare namespace Avara {
 
   export { Viewer as Viewer };
 
-  export { AutoScribe as AutoScribe };
+  export { AutoScribe as AutoScribe, type StudyReportMetadata as StudyReportMetadata };
 
   export {
     Orgs as Orgs,
@@ -809,4 +809,8 @@ export declare namespace Avara {
     type ReportDeliveredWebhookEvent as ReportDeliveredWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
   };
+
+  export type APIKeyReference = API.APIKeyReference;
+  export type OrgReference = API.OrgReference;
+  export type UserReference = API.UserReference;
 }

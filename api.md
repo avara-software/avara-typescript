@@ -1,3 +1,11 @@
+# Shared
+
+Types:
+
+- <code><a href="./src/resources/shared.ts">APIKeyReference</a></code>
+- <code><a href="./src/resources/shared.ts">OrgReference</a></code>
+- <code><a href="./src/resources/shared.ts">UserReference</a></code>
+
 # Viewer
 
 ## Studies
@@ -62,10 +70,15 @@ Methods:
 
 # AutoScribe
 
+Types:
+
+- <code><a href="./src/resources/auto-scribe/auto-scribe.ts">StudyReportMetadata</a></code>
+
 ## Studies
 
 Types:
 
+- <code><a href="./src/resources/auto-scribe/studies.ts">ReportIDWithStatus</a></code>
 - <code><a href="./src/resources/auto-scribe/studies.ts">StudyCreateResponse</a></code>
 - <code><a href="./src/resources/auto-scribe/studies.ts">StudyRetrieveResponse</a></code>
 - <code><a href="./src/resources/auto-scribe/studies.ts">StudyUpdateResponse</a></code>

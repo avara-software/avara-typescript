@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as Shared from '../shared';
+import * as AutoScribeAPI from './auto-scribe';
 import { APIPromise } from '../../core/api-promise';
 import { CursorStudies, type CursorStudiesParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
@@ -66,6 +68,15 @@ export class Studies extends APIResource {
 export type StudyListResponsesCursorStudies = CursorStudies<StudyListResponse>;
 
 /**
+ * A report ID paired with its current status
+ */
+export interface ReportIDWithStatus {
+  reportId: string;
+
+  status: 'in_progress' | 'completed';
+}
+
+/**
  * A study entity in the AutoScribe system with report workflow status
  */
 export interface StudyCreateResponse {
@@ -78,7 +89,7 @@ export interface StudyCreateResponse {
   /**
    * Metadata for a study report including patient demographics and scan information
    */
-  reportMetadata: StudyCreateResponse.ReportMetadata;
+  reportMetadata: AutoScribeAPI.StudyReportMetadata;
 
   severity: 'normal' | 'high' | 'stat';
 
@@ -95,142 +106,30 @@ export interface StudyCreateResponse {
   /**
    * A reference to a user with basic identifying information
    */
-  assignedTo?: StudyCreateResponse.AssignedTo | null;
+  assignedTo?: Shared.UserReference | null;
 
   /**
    * A reference to an API key with basic identifying information
    */
-  createdByApiKey?: StudyCreateResponse.CreatedByAPIKey | null;
+  createdByApiKey?: Shared.APIKeyReference | null;
 
   /**
    * A reference to a user with basic identifying information
    */
-  createdByUser?: StudyCreateResponse.CreatedByUser | null;
+  createdByUser?: Shared.UserReference | null;
 
   metadata?: { [key: string]: string };
 
   /**
    * A reference to an organization with basic identifying information
    */
-  org?: StudyCreateResponse.Org | null;
+  org?: Shared.OrgReference | null;
 
   priorReportTexts?: Array<string>;
 
   priorStudyIds?: Array<string>;
 
-  reportIds?: Array<StudyCreateResponse.ReportID>;
-}
-
-export namespace StudyCreateResponse {
-  /**
-   * Metadata for a study report including patient demographics and scan information
-   */
-  export interface ReportMetadata {
-    age?: string;
-
-    dateOfBirth?: string;
-
-    facilityName?: string;
-
-    height?: ReportMetadata.Height;
-
-    mrn?: string;
-
-    patientName?: string;
-
-    referringPhysicianName?: string;
-
-    scanDate?: string;
-
-    scanTime?: string;
-
-    scanType?: string;
-
-    sex?: 'male' | 'female' | 'other';
-
-    weight?: ReportMetadata.Weight;
-  }
-
-  export namespace ReportMetadata {
-    export interface Height {
-      unit: 'in' | 'cm';
-
-      value: number;
-    }
-
-    export interface Weight {
-      unit: 'lbs' | 'kg';
-
-      value: number;
-    }
-  }
-
-  /**
-   * A reference to a user with basic identifying information
-   */
-  export interface AssignedTo {
-    email: string;
-
-    userId: string;
-
-    firstName?: string;
-
-    lastName?: string;
-
-    middleName?: string;
-
-    suffix1?: string;
-
-    suffix2?: string;
-  }
-
-  /**
-   * A reference to an API key with basic identifying information
-   */
-  export interface CreatedByAPIKey {
-    apiKeyId: string;
-
-    description: string;
-
-    isViewerEnabled?: boolean;
-  }
-
-  /**
-   * A reference to a user with basic identifying information
-   */
-  export interface CreatedByUser {
-    email: string;
-
-    userId: string;
-
-    firstName?: string;
-
-    lastName?: string;
-
-    middleName?: string;
-
-    suffix1?: string;
-
-    suffix2?: string;
-  }
-
-  /**
-   * A reference to an organization with basic identifying information
-   */
-  export interface Org {
-    orgId: string;
-
-    orgName: string;
-  }
-
-  /**
-   * A report ID paired with its current status
-   */
-  export interface ReportID {
-    reportId: string;
-
-    status: 'in_progress' | 'completed';
-  }
+  reportIds?: Array<ReportIDWithStatus>;
 }
 
 /**
@@ -246,7 +145,7 @@ export interface StudyRetrieveResponse {
   /**
    * Metadata for a study report including patient demographics and scan information
    */
-  reportMetadata: StudyRetrieveResponse.ReportMetadata;
+  reportMetadata: AutoScribeAPI.StudyReportMetadata;
 
   severity: 'normal' | 'high' | 'stat';
 
@@ -263,142 +162,30 @@ export interface StudyRetrieveResponse {
   /**
    * A reference to a user with basic identifying information
    */
-  assignedTo?: StudyRetrieveResponse.AssignedTo | null;
+  assignedTo?: Shared.UserReference | null;
 
   /**
    * A reference to an API key with basic identifying information
    */
-  createdByApiKey?: StudyRetrieveResponse.CreatedByAPIKey | null;
+  createdByApiKey?: Shared.APIKeyReference | null;
 
   /**
    * A reference to a user with basic identifying information
    */
-  createdByUser?: StudyRetrieveResponse.CreatedByUser | null;
+  createdByUser?: Shared.UserReference | null;
 
   metadata?: { [key: string]: string };
 
   /**
    * A reference to an organization with basic identifying information
    */
-  org?: StudyRetrieveResponse.Org | null;
+  org?: Shared.OrgReference | null;
 
   priorReportTexts?: Array<string>;
 
   priorStudyIds?: Array<string>;
 
-  reportIds?: Array<StudyRetrieveResponse.ReportID>;
-}
-
-export namespace StudyRetrieveResponse {
-  /**
-   * Metadata for a study report including patient demographics and scan information
-   */
-  export interface ReportMetadata {
-    age?: string;
-
-    dateOfBirth?: string;
-
-    facilityName?: string;
-
-    height?: ReportMetadata.Height;
-
-    mrn?: string;
-
-    patientName?: string;
-
-    referringPhysicianName?: string;
-
-    scanDate?: string;
-
-    scanTime?: string;
-
-    scanType?: string;
-
-    sex?: 'male' | 'female' | 'other';
-
-    weight?: ReportMetadata.Weight;
-  }
-
-  export namespace ReportMetadata {
-    export interface Height {
-      unit: 'in' | 'cm';
-
-      value: number;
-    }
-
-    export interface Weight {
-      unit: 'lbs' | 'kg';
-
-      value: number;
-    }
-  }
-
-  /**
-   * A reference to a user with basic identifying information
-   */
-  export interface AssignedTo {
-    email: string;
-
-    userId: string;
-
-    firstName?: string;
-
-    lastName?: string;
-
-    middleName?: string;
-
-    suffix1?: string;
-
-    suffix2?: string;
-  }
-
-  /**
-   * A reference to an API key with basic identifying information
-   */
-  export interface CreatedByAPIKey {
-    apiKeyId: string;
-
-    description: string;
-
-    isViewerEnabled?: boolean;
-  }
-
-  /**
-   * A reference to a user with basic identifying information
-   */
-  export interface CreatedByUser {
-    email: string;
-
-    userId: string;
-
-    firstName?: string;
-
-    lastName?: string;
-
-    middleName?: string;
-
-    suffix1?: string;
-
-    suffix2?: string;
-  }
-
-  /**
-   * A reference to an organization with basic identifying information
-   */
-  export interface Org {
-    orgId: string;
-
-    orgName: string;
-  }
-
-  /**
-   * A report ID paired with its current status
-   */
-  export interface ReportID {
-    reportId: string;
-
-    status: 'in_progress' | 'completed';
-  }
+  reportIds?: Array<ReportIDWithStatus>;
 }
 
 /**
@@ -414,7 +201,7 @@ export interface StudyUpdateResponse {
   /**
    * Metadata for a study report including patient demographics and scan information
    */
-  reportMetadata: StudyUpdateResponse.ReportMetadata;
+  reportMetadata: AutoScribeAPI.StudyReportMetadata;
 
   severity: 'normal' | 'high' | 'stat';
 
@@ -431,142 +218,30 @@ export interface StudyUpdateResponse {
   /**
    * A reference to a user with basic identifying information
    */
-  assignedTo?: StudyUpdateResponse.AssignedTo | null;
+  assignedTo?: Shared.UserReference | null;
 
   /**
    * A reference to an API key with basic identifying information
    */
-  createdByApiKey?: StudyUpdateResponse.CreatedByAPIKey | null;
+  createdByApiKey?: Shared.APIKeyReference | null;
 
   /**
    * A reference to a user with basic identifying information
    */
-  createdByUser?: StudyUpdateResponse.CreatedByUser | null;
+  createdByUser?: Shared.UserReference | null;
 
   metadata?: { [key: string]: string };
 
   /**
    * A reference to an organization with basic identifying information
    */
-  org?: StudyUpdateResponse.Org | null;
+  org?: Shared.OrgReference | null;
 
   priorReportTexts?: Array<string>;
 
   priorStudyIds?: Array<string>;
 
-  reportIds?: Array<StudyUpdateResponse.ReportID>;
-}
-
-export namespace StudyUpdateResponse {
-  /**
-   * Metadata for a study report including patient demographics and scan information
-   */
-  export interface ReportMetadata {
-    age?: string;
-
-    dateOfBirth?: string;
-
-    facilityName?: string;
-
-    height?: ReportMetadata.Height;
-
-    mrn?: string;
-
-    patientName?: string;
-
-    referringPhysicianName?: string;
-
-    scanDate?: string;
-
-    scanTime?: string;
-
-    scanType?: string;
-
-    sex?: 'male' | 'female' | 'other';
-
-    weight?: ReportMetadata.Weight;
-  }
-
-  export namespace ReportMetadata {
-    export interface Height {
-      unit: 'in' | 'cm';
-
-      value: number;
-    }
-
-    export interface Weight {
-      unit: 'lbs' | 'kg';
-
-      value: number;
-    }
-  }
-
-  /**
-   * A reference to a user with basic identifying information
-   */
-  export interface AssignedTo {
-    email: string;
-
-    userId: string;
-
-    firstName?: string;
-
-    lastName?: string;
-
-    middleName?: string;
-
-    suffix1?: string;
-
-    suffix2?: string;
-  }
-
-  /**
-   * A reference to an API key with basic identifying information
-   */
-  export interface CreatedByAPIKey {
-    apiKeyId: string;
-
-    description: string;
-
-    isViewerEnabled?: boolean;
-  }
-
-  /**
-   * A reference to a user with basic identifying information
-   */
-  export interface CreatedByUser {
-    email: string;
-
-    userId: string;
-
-    firstName?: string;
-
-    lastName?: string;
-
-    middleName?: string;
-
-    suffix1?: string;
-
-    suffix2?: string;
-  }
-
-  /**
-   * A reference to an organization with basic identifying information
-   */
-  export interface Org {
-    orgId: string;
-
-    orgName: string;
-  }
-
-  /**
-   * A report ID paired with its current status
-   */
-  export interface ReportID {
-    reportId: string;
-
-    status: 'in_progress' | 'completed';
-  }
+  reportIds?: Array<ReportIDWithStatus>;
 }
 
 /**
@@ -582,7 +257,7 @@ export interface StudyListResponse {
   /**
    * Metadata for a study report including patient demographics and scan information
    */
-  reportMetadata: StudyListResponse.ReportMetadata;
+  reportMetadata: AutoScribeAPI.StudyReportMetadata;
 
   severity: 'normal' | 'high' | 'stat';
 
@@ -599,142 +274,30 @@ export interface StudyListResponse {
   /**
    * A reference to a user with basic identifying information
    */
-  assignedTo?: StudyListResponse.AssignedTo | null;
+  assignedTo?: Shared.UserReference | null;
 
   /**
    * A reference to an API key with basic identifying information
    */
-  createdByApiKey?: StudyListResponse.CreatedByAPIKey | null;
+  createdByApiKey?: Shared.APIKeyReference | null;
 
   /**
    * A reference to a user with basic identifying information
    */
-  createdByUser?: StudyListResponse.CreatedByUser | null;
+  createdByUser?: Shared.UserReference | null;
 
   metadata?: { [key: string]: string };
 
   /**
    * A reference to an organization with basic identifying information
    */
-  org?: StudyListResponse.Org | null;
+  org?: Shared.OrgReference | null;
 
   priorReportTexts?: Array<string>;
 
   priorStudyIds?: Array<string>;
 
-  reportIds?: Array<StudyListResponse.ReportID>;
-}
-
-export namespace StudyListResponse {
-  /**
-   * Metadata for a study report including patient demographics and scan information
-   */
-  export interface ReportMetadata {
-    age?: string;
-
-    dateOfBirth?: string;
-
-    facilityName?: string;
-
-    height?: ReportMetadata.Height;
-
-    mrn?: string;
-
-    patientName?: string;
-
-    referringPhysicianName?: string;
-
-    scanDate?: string;
-
-    scanTime?: string;
-
-    scanType?: string;
-
-    sex?: 'male' | 'female' | 'other';
-
-    weight?: ReportMetadata.Weight;
-  }
-
-  export namespace ReportMetadata {
-    export interface Height {
-      unit: 'in' | 'cm';
-
-      value: number;
-    }
-
-    export interface Weight {
-      unit: 'lbs' | 'kg';
-
-      value: number;
-    }
-  }
-
-  /**
-   * A reference to a user with basic identifying information
-   */
-  export interface AssignedTo {
-    email: string;
-
-    userId: string;
-
-    firstName?: string;
-
-    lastName?: string;
-
-    middleName?: string;
-
-    suffix1?: string;
-
-    suffix2?: string;
-  }
-
-  /**
-   * A reference to an API key with basic identifying information
-   */
-  export interface CreatedByAPIKey {
-    apiKeyId: string;
-
-    description: string;
-
-    isViewerEnabled?: boolean;
-  }
-
-  /**
-   * A reference to a user with basic identifying information
-   */
-  export interface CreatedByUser {
-    email: string;
-
-    userId: string;
-
-    firstName?: string;
-
-    lastName?: string;
-
-    middleName?: string;
-
-    suffix1?: string;
-
-    suffix2?: string;
-  }
-
-  /**
-   * A reference to an organization with basic identifying information
-   */
-  export interface Org {
-    orgId: string;
-
-    orgName: string;
-  }
-
-  /**
-   * A report ID paired with its current status
-   */
-  export interface ReportID {
-    reportId: string;
-
-    status: 'in_progress' | 'completed';
-  }
+  reportIds?: Array<ReportIDWithStatus>;
 }
 
 /**
@@ -766,7 +329,7 @@ export interface StudyRetrieveByUidResponse {
   /**
    * Metadata for a study report including patient demographics and scan information
    */
-  reportMetadata: StudyRetrieveByUidResponse.ReportMetadata;
+  reportMetadata: AutoScribeAPI.StudyReportMetadata;
 
   severity: 'normal' | 'high' | 'stat';
 
@@ -783,142 +346,30 @@ export interface StudyRetrieveByUidResponse {
   /**
    * A reference to a user with basic identifying information
    */
-  assignedTo?: StudyRetrieveByUidResponse.AssignedTo | null;
+  assignedTo?: Shared.UserReference | null;
 
   /**
    * A reference to an API key with basic identifying information
    */
-  createdByApiKey?: StudyRetrieveByUidResponse.CreatedByAPIKey | null;
+  createdByApiKey?: Shared.APIKeyReference | null;
 
   /**
    * A reference to a user with basic identifying information
    */
-  createdByUser?: StudyRetrieveByUidResponse.CreatedByUser | null;
+  createdByUser?: Shared.UserReference | null;
 
   metadata?: { [key: string]: string };
 
   /**
    * A reference to an organization with basic identifying information
    */
-  org?: StudyRetrieveByUidResponse.Org | null;
+  org?: Shared.OrgReference | null;
 
   priorReportTexts?: Array<string>;
 
   priorStudyIds?: Array<string>;
 
-  reportIds?: Array<StudyRetrieveByUidResponse.ReportID>;
-}
-
-export namespace StudyRetrieveByUidResponse {
-  /**
-   * Metadata for a study report including patient demographics and scan information
-   */
-  export interface ReportMetadata {
-    age?: string;
-
-    dateOfBirth?: string;
-
-    facilityName?: string;
-
-    height?: ReportMetadata.Height;
-
-    mrn?: string;
-
-    patientName?: string;
-
-    referringPhysicianName?: string;
-
-    scanDate?: string;
-
-    scanTime?: string;
-
-    scanType?: string;
-
-    sex?: 'male' | 'female' | 'other';
-
-    weight?: ReportMetadata.Weight;
-  }
-
-  export namespace ReportMetadata {
-    export interface Height {
-      unit: 'in' | 'cm';
-
-      value: number;
-    }
-
-    export interface Weight {
-      unit: 'lbs' | 'kg';
-
-      value: number;
-    }
-  }
-
-  /**
-   * A reference to a user with basic identifying information
-   */
-  export interface AssignedTo {
-    email: string;
-
-    userId: string;
-
-    firstName?: string;
-
-    lastName?: string;
-
-    middleName?: string;
-
-    suffix1?: string;
-
-    suffix2?: string;
-  }
-
-  /**
-   * A reference to an API key with basic identifying information
-   */
-  export interface CreatedByAPIKey {
-    apiKeyId: string;
-
-    description: string;
-
-    isViewerEnabled?: boolean;
-  }
-
-  /**
-   * A reference to a user with basic identifying information
-   */
-  export interface CreatedByUser {
-    email: string;
-
-    userId: string;
-
-    firstName?: string;
-
-    lastName?: string;
-
-    middleName?: string;
-
-    suffix1?: string;
-
-    suffix2?: string;
-  }
-
-  /**
-   * A reference to an organization with basic identifying information
-   */
-  export interface Org {
-    orgId: string;
-
-    orgName: string;
-  }
-
-  /**
-   * A report ID paired with its current status
-   */
-  export interface ReportID {
-    reportId: string;
-
-    status: 'in_progress' | 'completed';
-  }
+  reportIds?: Array<ReportIDWithStatus>;
 }
 
 /**
@@ -942,7 +393,7 @@ export interface StudyCreateParams {
   /**
    * Metadata for a study report including patient demographics and scan information
    */
-  reportMetadata: StudyCreateParams.ReportMetadata;
+  reportMetadata: AutoScribeAPI.StudyReportMetadata;
 
   severity: 'normal' | 'high' | 'stat';
 
@@ -959,51 +410,6 @@ export interface StudyCreateParams {
   priorReportTexts?: Array<string>;
 
   priorStudyIds?: Array<string>;
-}
-
-export namespace StudyCreateParams {
-  /**
-   * Metadata for a study report including patient demographics and scan information
-   */
-  export interface ReportMetadata {
-    age?: string;
-
-    dateOfBirth?: string;
-
-    facilityName?: string;
-
-    height?: ReportMetadata.Height;
-
-    mrn?: string;
-
-    patientName?: string;
-
-    referringPhysicianName?: string;
-
-    scanDate?: string;
-
-    scanTime?: string;
-
-    scanType?: string;
-
-    sex?: 'male' | 'female' | 'other';
-
-    weight?: ReportMetadata.Weight;
-  }
-
-  export namespace ReportMetadata {
-    export interface Height {
-      unit: 'in' | 'cm';
-
-      value: number;
-    }
-
-    export interface Weight {
-      unit: 'lbs' | 'kg';
-
-      value: number;
-    }
-  }
 }
 
 export interface StudyUpdateParams {
@@ -1124,6 +530,7 @@ export interface StudyViewerOnlyRerouteURLParams {
 
 export declare namespace Studies {
   export {
+    type ReportIDWithStatus as ReportIDWithStatus,
     type StudyCreateResponse as StudyCreateResponse,
     type StudyRetrieveResponse as StudyRetrieveResponse,
     type StudyUpdateResponse as StudyUpdateResponse,
