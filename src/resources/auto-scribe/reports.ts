@@ -36,6 +36,9 @@ export class Reports extends APIResource {
   }
 }
 
+/**
+ * Response containing a list of reports for a study
+ */
 export interface ReportListResponse {
   reports: Array<ReportListResponse.Report>;
 
@@ -45,6 +48,9 @@ export interface ReportListResponse {
 }
 
 export namespace ReportListResponse {
+  /**
+   * A radiology report in the AutoScribe system
+   */
   export interface Report {
     createdAt: string | null;
 
@@ -54,6 +60,9 @@ export namespace ReportListResponse {
 
     signedAt: string | null;
 
+    /**
+     * Metadata for a study report including patient demographics and scan information
+     */
     snapshotMetadata: Report.SnapshotMetadata;
 
     status: 'in_progress' | 'completed';
@@ -68,6 +77,9 @@ export namespace ReportListResponse {
   }
 
   export namespace Report {
+    /**
+     * Metadata for a study report including patient demographics and scan information
+     */
     export interface SnapshotMetadata {
       age?: string;
 
@@ -110,28 +122,43 @@ export namespace ReportListResponse {
   }
 }
 
+/**
+ * Response for creating a report addendum
+ */
 export interface ReportAddendumResponse {
   success: boolean;
 
   message?: string;
 }
 
+/**
+ * Response for cancelling a report addendum
+ */
 export interface ReportCancelAddendumResponse {
   success: boolean;
 
   message?: string;
 }
 
+/**
+ * Response containing a single report with its PDF download URL
+ */
 export type ReportPdfResponse =
   | ReportPdfResponse.SingleReportPdfResponse
   | ReportPdfResponse.ListReportsPdfResponse;
 
 export namespace ReportPdfResponse {
+  /**
+   * Response containing a single report with its PDF download URL
+   */
   export interface SingleReportPdfResponse {
     presignedUrl: string;
 
     reportId: string;
 
+    /**
+     * Metadata for a study report including patient demographics and scan information
+     */
     snapshotMetadata: SingleReportPdfResponse.SnapshotMetadata;
 
     studyId: string;
@@ -140,6 +167,9 @@ export namespace ReportPdfResponse {
   }
 
   export namespace SingleReportPdfResponse {
+    /**
+     * Metadata for a study report including patient demographics and scan information
+     */
     export interface SnapshotMetadata {
       age?: string;
 
@@ -181,6 +211,9 @@ export namespace ReportPdfResponse {
     }
   }
 
+  /**
+   * Response containing a list of reports with their PDF download URLs
+   */
   export interface ListReportsPdfResponse {
     reports: Array<ListReportsPdfResponse.Report>;
 
@@ -190,11 +223,17 @@ export namespace ReportPdfResponse {
   }
 
   export namespace ListReportsPdfResponse {
+    /**
+     * A report with its PDF download URL
+     */
     export interface Report {
       presignedUrl: string;
 
       reportId: string;
 
+      /**
+       * Metadata for a study report including patient demographics and scan information
+       */
       snapshotMetadata: Report.SnapshotMetadata;
 
       studyId: string;
@@ -203,6 +242,9 @@ export namespace ReportPdfResponse {
     }
 
     export namespace Report {
+      /**
+       * Metadata for a study report including patient demographics and scan information
+       */
       export interface SnapshotMetadata {
         age?: string;
 
@@ -246,14 +288,23 @@ export namespace ReportPdfResponse {
   }
 }
 
+/**
+ * Response containing a single report with its plain text
+ */
 export type ReportTextResponse =
   | ReportTextResponse.SingleReportTextResponse
   | ReportTextResponse.ListReportsTextResponse;
 
 export namespace ReportTextResponse {
+  /**
+   * Response containing a single report with its plain text
+   */
   export interface SingleReportTextResponse {
     reportId: string;
 
+    /**
+     * Metadata for a study report including patient demographics and scan information
+     */
     snapshotMetadata: SingleReportTextResponse.SnapshotMetadata;
 
     studyId: string;
@@ -264,6 +315,9 @@ export namespace ReportTextResponse {
   }
 
   export namespace SingleReportTextResponse {
+    /**
+     * Metadata for a study report including patient demographics and scan information
+     */
     export interface SnapshotMetadata {
       age?: string;
 
@@ -305,6 +359,9 @@ export namespace ReportTextResponse {
     }
   }
 
+  /**
+   * Response containing a list of reports with their plain text
+   */
   export interface ListReportsTextResponse {
     reports: Array<ListReportsTextResponse.Report>;
 
@@ -314,9 +371,15 @@ export namespace ReportTextResponse {
   }
 
   export namespace ListReportsTextResponse {
+    /**
+     * A report with its plain text content
+     */
     export interface Report {
       reportId: string;
 
+      /**
+       * Metadata for a study report including patient demographics and scan information
+       */
       snapshotMetadata: Report.SnapshotMetadata;
 
       studyId: string;
@@ -327,6 +390,9 @@ export namespace ReportTextResponse {
     }
 
     export namespace Report {
+      /**
+       * Metadata for a study report including patient demographics and scan information
+       */
       export interface SnapshotMetadata {
         age?: string;
 
