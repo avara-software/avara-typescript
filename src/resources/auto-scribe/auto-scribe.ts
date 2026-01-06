@@ -15,6 +15,7 @@ import {
 } from './reports';
 import * as StudiesAPI from './studies';
 import {
+  ReportIDWithStatus,
   Studies,
   StudyCancelParams,
   StudyCancelResponse,
@@ -57,13 +58,59 @@ export class AutoScribe extends APIResource {
   reports: ReportsAPI.Reports = new ReportsAPI.Reports(this._client);
 }
 
+/**
+ * Metadata for a study report including patient demographics and scan information
+ */
+export interface StudyReportMetadata {
+  age?: string;
+
+  dateOfBirth?: string;
+
+  facilityName?: string;
+
+  height?: StudyReportMetadata.Height;
+
+  mrn?: string;
+
+  patientName?: string;
+
+  referringPhysicianName?: string;
+
+  scanDate?: string;
+
+  scanTime?: string;
+
+  scanType?: string;
+
+  sex?: 'male' | 'female' | 'other';
+
+  weight?: StudyReportMetadata.Weight;
+}
+
+export namespace StudyReportMetadata {
+  export interface Height {
+    unit: 'in' | 'cm';
+
+    value: number;
+  }
+
+  export interface Weight {
+    unit: 'lbs' | 'kg';
+
+    value: number;
+  }
+}
+
 AutoScribe.Studies = Studies;
 AutoScribe.Users = Users;
 AutoScribe.Reports = Reports;
 
 export declare namespace AutoScribe {
+  export { type StudyReportMetadata as StudyReportMetadata };
+
   export {
     Studies as Studies,
+    type ReportIDWithStatus as ReportIDWithStatus,
     type StudyCreateResponse as StudyCreateResponse,
     type StudyRetrieveResponse as StudyRetrieveResponse,
     type StudyUpdateResponse as StudyUpdateResponse,

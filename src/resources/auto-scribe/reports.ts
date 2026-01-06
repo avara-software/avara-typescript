@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as AutoScribeAPI from './auto-scribe';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -63,7 +64,7 @@ export namespace ReportListResponse {
     /**
      * Metadata for a study report including patient demographics and scan information
      */
-    snapshotMetadata: Report.SnapshotMetadata;
+    snapshotMetadata: AutoScribeAPI.StudyReportMetadata;
 
     status: 'in_progress' | 'completed';
 
@@ -74,51 +75,6 @@ export namespace ReportListResponse {
     userId: string;
 
     reportPlainText?: string;
-  }
-
-  export namespace Report {
-    /**
-     * Metadata for a study report including patient demographics and scan information
-     */
-    export interface SnapshotMetadata {
-      age?: string;
-
-      dateOfBirth?: string;
-
-      facilityName?: string;
-
-      height?: SnapshotMetadata.Height;
-
-      mrn?: string;
-
-      patientName?: string;
-
-      referringPhysicianName?: string;
-
-      scanDate?: string;
-
-      scanTime?: string;
-
-      scanType?: string;
-
-      sex?: 'male' | 'female' | 'other';
-
-      weight?: SnapshotMetadata.Weight;
-    }
-
-    export namespace SnapshotMetadata {
-      export interface Height {
-        unit: 'in' | 'cm';
-
-        value: number;
-      }
-
-      export interface Weight {
-        unit: 'lbs' | 'kg';
-
-        value: number;
-      }
-    }
   }
 }
 
@@ -159,56 +115,11 @@ export namespace ReportPdfResponse {
     /**
      * Metadata for a study report including patient demographics and scan information
      */
-    snapshotMetadata: SingleReportPdfResponse.SnapshotMetadata;
+    snapshotMetadata: AutoScribeAPI.StudyReportMetadata;
 
     studyId: string;
 
     studyInstanceUid: string;
-  }
-
-  export namespace SingleReportPdfResponse {
-    /**
-     * Metadata for a study report including patient demographics and scan information
-     */
-    export interface SnapshotMetadata {
-      age?: string;
-
-      dateOfBirth?: string;
-
-      facilityName?: string;
-
-      height?: SnapshotMetadata.Height;
-
-      mrn?: string;
-
-      patientName?: string;
-
-      referringPhysicianName?: string;
-
-      scanDate?: string;
-
-      scanTime?: string;
-
-      scanType?: string;
-
-      sex?: 'male' | 'female' | 'other';
-
-      weight?: SnapshotMetadata.Weight;
-    }
-
-    export namespace SnapshotMetadata {
-      export interface Height {
-        unit: 'in' | 'cm';
-
-        value: number;
-      }
-
-      export interface Weight {
-        unit: 'lbs' | 'kg';
-
-        value: number;
-      }
-    }
   }
 
   /**
@@ -234,56 +145,11 @@ export namespace ReportPdfResponse {
       /**
        * Metadata for a study report including patient demographics and scan information
        */
-      snapshotMetadata: Report.SnapshotMetadata;
+      snapshotMetadata: AutoScribeAPI.StudyReportMetadata;
 
       studyId: string;
 
       studyInstanceUid: string;
-    }
-
-    export namespace Report {
-      /**
-       * Metadata for a study report including patient demographics and scan information
-       */
-      export interface SnapshotMetadata {
-        age?: string;
-
-        dateOfBirth?: string;
-
-        facilityName?: string;
-
-        height?: SnapshotMetadata.Height;
-
-        mrn?: string;
-
-        patientName?: string;
-
-        referringPhysicianName?: string;
-
-        scanDate?: string;
-
-        scanTime?: string;
-
-        scanType?: string;
-
-        sex?: 'male' | 'female' | 'other';
-
-        weight?: SnapshotMetadata.Weight;
-      }
-
-      export namespace SnapshotMetadata {
-        export interface Height {
-          unit: 'in' | 'cm';
-
-          value: number;
-        }
-
-        export interface Weight {
-          unit: 'lbs' | 'kg';
-
-          value: number;
-        }
-      }
     }
   }
 }
@@ -305,58 +171,13 @@ export namespace ReportTextResponse {
     /**
      * Metadata for a study report including patient demographics and scan information
      */
-    snapshotMetadata: SingleReportTextResponse.SnapshotMetadata;
+    snapshotMetadata: AutoScribeAPI.StudyReportMetadata;
 
     studyId: string;
 
     studyInstanceUid: string;
 
     plainText?: string;
-  }
-
-  export namespace SingleReportTextResponse {
-    /**
-     * Metadata for a study report including patient demographics and scan information
-     */
-    export interface SnapshotMetadata {
-      age?: string;
-
-      dateOfBirth?: string;
-
-      facilityName?: string;
-
-      height?: SnapshotMetadata.Height;
-
-      mrn?: string;
-
-      patientName?: string;
-
-      referringPhysicianName?: string;
-
-      scanDate?: string;
-
-      scanTime?: string;
-
-      scanType?: string;
-
-      sex?: 'male' | 'female' | 'other';
-
-      weight?: SnapshotMetadata.Weight;
-    }
-
-    export namespace SnapshotMetadata {
-      export interface Height {
-        unit: 'in' | 'cm';
-
-        value: number;
-      }
-
-      export interface Weight {
-        unit: 'lbs' | 'kg';
-
-        value: number;
-      }
-    }
   }
 
   /**
@@ -380,58 +201,13 @@ export namespace ReportTextResponse {
       /**
        * Metadata for a study report including patient demographics and scan information
        */
-      snapshotMetadata: Report.SnapshotMetadata;
+      snapshotMetadata: AutoScribeAPI.StudyReportMetadata;
 
       studyId: string;
 
       studyInstanceUid: string;
 
       plainText?: string;
-    }
-
-    export namespace Report {
-      /**
-       * Metadata for a study report including patient demographics and scan information
-       */
-      export interface SnapshotMetadata {
-        age?: string;
-
-        dateOfBirth?: string;
-
-        facilityName?: string;
-
-        height?: SnapshotMetadata.Height;
-
-        mrn?: string;
-
-        patientName?: string;
-
-        referringPhysicianName?: string;
-
-        scanDate?: string;
-
-        scanTime?: string;
-
-        scanType?: string;
-
-        sex?: 'male' | 'female' | 'other';
-
-        weight?: SnapshotMetadata.Weight;
-      }
-
-      export namespace SnapshotMetadata {
-        export interface Height {
-          unit: 'in' | 'cm';
-
-          value: number;
-        }
-
-        export interface Weight {
-          unit: 'lbs' | 'kg';
-
-          value: number;
-        }
-      }
     }
   }
 }

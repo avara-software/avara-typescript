@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { AutoScribe } from './auto-scribe';
+export { AutoScribe, type StudyReportMetadata } from './auto-scribe';
 export {
   Reports,
   type ReportListResponse,
@@ -14,6 +14,7 @@ export {
 } from './reports';
 export {
   Studies,
+  type ReportIDWithStatus,
   type StudyCreateResponse,
   type StudyRetrieveResponse,
   type StudyUpdateResponse,
