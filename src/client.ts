@@ -30,9 +30,12 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import {
-  ReportDeliveredWebhookEvent,
-  StudyAccessRequestedWebhookEvent,
+  ReportDeliveredEvent,
+  ReportDeliveredResponse,
+  StudyAccessRequestedEvent,
+  StudyAccessRequestedResponse,
   UnwrapWebhookEvent,
+  WebhookEvent,
   Webhooks,
 } from './resources/webhooks';
 import { AutoScribe, StudyReportMetadata } from './resources/auto-scribe/auto-scribe';
@@ -68,6 +71,11 @@ export interface ClientOptions {
    * API key authentication. Format: sk_live_{32-hex-chars}. Example: sk_live_1234567890abcdef1234567890abcdef
    */
   apiKey?: string | undefined;
+
+  /**
+   * Webhook signing JWT secret for signature verification. Format: whsec_{base64}. Get this from your Avara dashboard under API Keys > View JWT Secret.
+   */
+  webhookKey?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -143,6 +151,7 @@ export interface ClientOptions {
  */
 export class Avara {
   apiKey: string;
+  webhookKey: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -160,6 +169,7 @@ export class Avara {
    * API Client for interfacing with the Avara API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['AVARA_API_KEY'] ?? undefined]
+   * @param {string | null | undefined} [opts.webhookKey=process.env['AVARA_WEBHOOK_KEY'] ?? null]
    * @param {string} [opts.baseURL=process.env['AVARA_BASE_URL'] ?? https://api.avarasoftware.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -171,6 +181,7 @@ export class Avara {
   constructor({
     baseURL = readEnv('AVARA_BASE_URL'),
     apiKey = readEnv('AVARA_API_KEY'),
+    webhookKey = readEnv('AVARA_WEBHOOK_KEY') ?? null,
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
@@ -181,6 +192,7 @@ export class Avara {
 
     const options: ClientOptions = {
       apiKey,
+      webhookKey,
       ...opts,
       baseURL: baseURL || `https://api.avarasoftware.com`,
     };
@@ -203,6 +215,7 @@ export class Avara {
     this._options = options;
 
     this.apiKey = apiKey;
+    this.webhookKey = webhookKey;
   }
 
   /**
@@ -219,6 +232,7 @@ export class Avara {
       fetch: this.fetch,
       fetchOptions: this.fetchOptions,
       apiKey: this.apiKey,
+      webhookKey: this.webhookKey,
       ...options,
     });
     return client;
@@ -753,6 +767,84 @@ export class Avara {
   autoScribe: API.AutoScribe = new API.AutoScribe(this);
   viewer: API.Viewer = new API.Viewer(this);
   orgs: API.Orgs = new API.Orgs(this);
+  /**
+   * Webhook event handling utilities for Avara.
+   *
+   * Avara sends webhook events to your configured endpoint with Standard Webhooks headers
+   * (`webhook-id`, `webhook-timestamp`, `webhook-signature`) for signature verification.
+   *
+   * ## Event Types
+   *
+   * - **`study.access_requested`**: Synchronous - you must return presigned DICOM image URLs within the request timeout
+   * - **`report.delivered`**: Asynchronous notification when a report is completed
+   *
+   * ## TypeScript
+   *
+   * ```typescript
+   * import Avara from 'avara';
+   * import express from 'express';
+   *
+   * const client = new Avara({
+   *   webhookKey: process.env.AVARA_WEBHOOK_KEY, // From your Avara dashboard
+   * });
+   *
+   * app.post('/webhooks/avara', express.raw({ type: 'application/json' }), (req, res) => {
+   *   try {
+   *     const event = client.webhooks.unwrap(req.body.toString(), req.headers);
+   *
+   *     if (event.type === 'report.delivered') {
+   *       console.log('Report ready:', event.data.reportId);
+   *       console.log('PDF URL:', event.data.presignedUrl);
+   *       return res.json({ success: true });
+   *     }
+   *
+   *     if (event.type === 'study.access_requested') {
+   *       // Fetch presigned URLs from your PACS/storage
+   *       const urls = await getPresignedUrls(event.data.studyInstanceUid);
+   *       return res.json({ authorized: true, urls });
+   *     }
+   *   } catch (err) {
+   *     console.error('Webhook error:', err);
+   *     return res.status(400).json({ error: 'Invalid webhook' });
+   *   }
+   * });
+   * ```
+   *
+   * ## Python
+   *
+   * ```python
+   * import os
+   * from flask import Flask, request, jsonify
+   * from avara import Avara
+   *
+   * app = Flask(__name__)
+   * client = Avara(webhook_key=os.environ['AVARA_WEBHOOK_KEY'])
+   *
+   * @app.route('/webhooks/avara', methods=['POST'])
+   * def handle_webhook():
+   *     try:
+   *         event = client.webhooks.unwrap(request.data, dict(request.headers))
+   *
+   *         if event.type == 'report.delivered':
+   *             print(f"Report ready: {event.data.report_id}")
+   *             print(f"PDF URL: {event.data.presigned_url}")
+   *             return jsonify({'success': True})
+   *
+   *         if event.type == 'study.access_requested':
+   *             # Fetch presigned URLs from your PACS/storage
+   *             urls = get_presigned_urls(event.data.study_instance_uid)
+   *             return jsonify({'authorized': True, 'urls': urls})
+   *
+   *     except Exception as e:
+   *         print(f"Webhook error: {e}")
+   *         return jsonify({'error': 'Invalid webhook'}), 400
+   * ```
+   *
+   * ## Verification
+   *
+   * The `unwrap()` method verifies the webhook signature using your `webhookKey` before parsing.
+   * This ensures the request came from Avara and wasn't tampered with.
+   */
   webhooks: API.Webhooks = new API.Webhooks(this);
 }
 
@@ -805,8 +897,11 @@ export declare namespace Avara {
 
   export {
     Webhooks as Webhooks,
-    type StudyAccessRequestedWebhookEvent as StudyAccessRequestedWebhookEvent,
-    type ReportDeliveredWebhookEvent as ReportDeliveredWebhookEvent,
+    type ReportDeliveredEvent as ReportDeliveredEvent,
+    type ReportDeliveredResponse as ReportDeliveredResponse,
+    type StudyAccessRequestedEvent as StudyAccessRequestedEvent,
+    type StudyAccessRequestedResponse as StudyAccessRequestedResponse,
+    type WebhookEvent as WebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
   };
 

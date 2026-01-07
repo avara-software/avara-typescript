@@ -191,8 +191,11 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/webhooks.ts">StudyAccessRequestedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">ReportDeliveredWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ReportDeliveredEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ReportDeliveredResponse</a></code>
+- <code><a href="./src/resources/webhooks.ts">StudyAccessRequestedEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">StudyAccessRequestedResponse</a></code>
+- <code><a href="./src/resources/webhooks.ts">WebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">UnwrapWebhookEvent</a></code>
 
 Methods:
