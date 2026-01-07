@@ -7,10 +7,19 @@ import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
 export class Invitations extends APIResource {
+  /**
+   * Retrieves a single invitation by its unique invitation ID. Returns the complete
+   * invitation details including status, expiration, and associated user
+   * information.
+   */
   retrieve(invitationID: string, options?: RequestOptions): APIPromise<InvitationRetrieveResponse> {
     return this._client.get(path`/v1/viewer/users/invitations/${invitationID}`, options);
   }
 
+  /**
+   * Updates a pending invitation's user details and permissions before it is
+   * accepted. Only valid for invitations that have not expired or been processed.
+   */
   update(
     invitationID: string,
     body: InvitationUpdateParams | null | undefined = {},
@@ -19,6 +28,11 @@ export class Invitations extends APIResource {
     return this._client.patch(path`/v1/viewer/users/invitations/${invitationID}`, { body, ...options });
   }
 
+  /**
+   * Retrieves a paginated list of user invitations with optional filtering by
+   * status, expiration, date range, and user ID. Returns up to 100 invitations per
+   * request.
+   */
   list(
     query: InvitationListParams | null | undefined = {},
     options?: RequestOptions,
@@ -30,6 +44,11 @@ export class Invitations extends APIResource {
     );
   }
 
+  /**
+   * Revokes a pending invitation, preventing it from being accepted. Can revoke by
+   * invitation ID, user ID, or both. Useful for cancelling invitations sent in
+   * error.
+   */
   revoke(
     body: InvitationRevokeParams | null | undefined = {},
     options?: RequestOptions,

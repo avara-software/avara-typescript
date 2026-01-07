@@ -59,41 +59,87 @@ export class AutoScribe extends APIResource {
 }
 
 /**
- * Metadata for a study report including patient demographics and scan information
+ * Patient demographics and scan information for report generation
  */
 export interface StudyReportMetadata {
+  /**
+   * Patient's age at time of scan (e.g., '34.5 years', '2 months')
+   */
   age?: string;
 
+  /**
+   * Patient's date of birth. Format: YYYY-MM-DD (e.g., '1990-05-20')
+   */
   dateOfBirth?: string;
 
+  /**
+   * Name of the medical facility where the scan was performed
+   */
   facilityName?: string;
 
+  /**
+   * Patient's height with unit (e.g., {value: 70, unit: 'inches'} or {value: 178,
+   * unit: 'cm'})
+   */
   height?: StudyReportMetadata.Height;
 
+  /**
+   * Medical Record Number - unique patient identifier
+   */
   mrn?: string;
 
+  /**
+   * Full name of the patient
+   */
   patientName?: string;
 
+  /**
+   * Name of the physician who referred the patient for this scan
+   */
   referringPhysicianName?: string;
 
+  /**
+   * Date the scan was performed. Format: YYYY-MM-DD (e.g., '2024-01-15')
+   */
   scanDate?: string;
 
+  /**
+   * Time the scan was performed. Format: HH:MM (e.g., '14:30')
+   */
   scanTime?: string;
 
+  /**
+   * Type of scan or imaging modality (e.g., 'MRI', 'CT', 'X-Ray', 'Ultrasound')
+   */
   scanType?: string;
 
+  /**
+   * Patient's biological sex. Options: 'male', 'female', 'other'
+   */
   sex?: 'male' | 'female' | 'other';
 
+  /**
+   * Patient's weight with unit (e.g., {value: 150, unit: 'lbs'} or {value: 68, unit:
+   * 'kg'})
+   */
   weight?: StudyReportMetadata.Weight;
 }
 
 export namespace StudyReportMetadata {
+  /**
+   * Patient's height with unit (e.g., {value: 70, unit: 'inches'} or {value: 178,
+   * unit: 'cm'})
+   */
   export interface Height {
     unit: 'in' | 'cm';
 
     value: number;
   }
 
+  /**
+   * Patient's weight with unit (e.g., {value: 150, unit: 'lbs'} or {value: 68, unit:
+   * 'kg'})
+   */
   export interface Weight {
     unit: 'lbs' | 'kg';
 
