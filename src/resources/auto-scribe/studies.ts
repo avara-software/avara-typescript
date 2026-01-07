@@ -1435,30 +1435,60 @@ export interface StudyListParams extends CursorStudiesParams {
 }
 
 export interface StudyCancelParams {
+  /**
+   * Unique study identifier. Format: stu\_{32-hex-chars}
+   */
   studyId?: string;
 
+  /**
+   * DICOM Study Instance UID
+   */
   studyInstanceUid?: string;
 }
 
 export interface StudyRerouteURLParams {
+  /**
+   * User ID to assign study to. Format: usr\_{32-hex-chars}
+   */
   assignedToUserId: string;
 
+  /**
+   * Unique study identifier. Format: stu\_{32-hex-chars}
+   */
   studyId?: string;
 
+  /**
+   * DICOM Study Instance UID
+   */
   studyInstanceUid?: string;
 }
 
 export interface StudyUncancelParams {
+  /**
+   * Unique study identifier. Format: stu\_{32-hex-chars}
+   */
   studyId?: string;
 
+  /**
+   * DICOM Study Instance UID
+   */
   studyInstanceUid?: string;
 }
 
 export interface StudyViewerOnlyRerouteURLParams {
+  /**
+   * Unique study identifier. Format: stu\_{32-hex-chars}
+   */
   studyId?: string;
 
+  /**
+   * DICOM Study Instance UID
+   */
   studyInstanceUid?: string;
 
+  /**
+   * Optional user ID for audit tracking. Format: usr\_{32-hex-chars}
+   */
   userId?: string;
 }
 

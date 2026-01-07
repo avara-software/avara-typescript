@@ -773,10 +773,16 @@ export interface UserInviteParams {
 }
 
 export interface UserReactivateParams {
+  /**
+   * User ID to reactivate. Format: usr\_{32-hex-chars}
+   */
   userId: string;
 }
 
 export interface UserRevokeAccessParams {
+  /**
+   * User ID to revoke access for. Format: usr\_{32-hex-chars}
+   */
   userId: string;
 }
 

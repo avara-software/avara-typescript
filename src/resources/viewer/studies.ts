@@ -628,20 +628,38 @@ export interface StudyListParams extends CursorStudiesParams {
 }
 
 export interface StudyCancelParams {
+  /**
+   * Unique study identifier. Format: stu\_{32-hex-chars}
+   */
   studyId?: string;
 
+  /**
+   * DICOM Study Instance UID
+   */
   studyInstanceUid?: string;
 }
 
 export interface StudyRerouteURLParams {
+  /**
+   * Unique study identifier. Format: stu\_{32-hex-chars}
+   */
   studyId?: string;
 
+  /**
+   * DICOM Study Instance UID
+   */
   studyInstanceUid?: string;
 }
 
 export interface StudyUncancelParams {
+  /**
+   * Unique study identifier. Format: stu\_{32-hex-chars}
+   */
   studyId?: string;
 
+  /**
+   * DICOM Study Instance UID
+   */
   studyInstanceUid?: string;
 }
 

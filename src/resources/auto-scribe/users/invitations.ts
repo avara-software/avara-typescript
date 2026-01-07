@@ -429,12 +429,21 @@ export interface InvitationListParams extends CursorInvitationsParams {
    */
   status?: Array<'sent' | 'accepted' | 'rejected' | 'revoked'>;
 
+  /**
+   * Filter by user ID. Format: usr\_{32-hex-chars}
+   */
   userId?: string;
 }
 
 export interface InvitationRevokeParams {
+  /**
+   * Invitation ID to revoke. Format: inv\_{32-hex-chars}
+   */
   invitationId?: string;
 
+  /**
+   * User ID whose pending invitation to revoke. Format: usr\_{32-hex-chars}
+   */
   userId?: string;
 }
 
