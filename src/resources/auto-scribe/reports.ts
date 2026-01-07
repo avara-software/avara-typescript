@@ -273,7 +273,8 @@ export interface ReportListParams {
   studyId?: string;
 
   /**
-   * DICOM Study Instance UID
+   * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+   * '1.2.840.10008.5.1.4.1.1.2')
    */
   studyInstanceUid?: string;
 }
@@ -290,7 +291,8 @@ export interface ReportPdfParams {
   studyId?: string;
 
   /**
-   * DICOM Study Instance UID
+   * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+   * '1.2.840.10008.5.1.4.1.1.2')
    */
   studyInstanceUid?: string;
 }
@@ -307,7 +309,8 @@ export interface ReportTextParams {
   studyId?: string;
 
   /**
-   * DICOM Study Instance UID
+   * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+   * '1.2.840.10008.5.1.4.1.1.2')
    */
   studyInstanceUid?: string;
 }

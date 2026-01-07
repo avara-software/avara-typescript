@@ -1441,7 +1441,8 @@ export interface StudyCancelParams {
   studyId?: string;
 
   /**
-   * DICOM Study Instance UID
+   * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+   * '1.2.840.10008.5.1.4.1.1.2')
    */
   studyInstanceUid?: string;
 }
@@ -1458,7 +1459,8 @@ export interface StudyRerouteURLParams {
   studyId?: string;
 
   /**
-   * DICOM Study Instance UID
+   * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+   * '1.2.840.10008.5.1.4.1.1.2')
    */
   studyInstanceUid?: string;
 }
@@ -1470,7 +1472,8 @@ export interface StudyUncancelParams {
   studyId?: string;
 
   /**
-   * DICOM Study Instance UID
+   * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+   * '1.2.840.10008.5.1.4.1.1.2')
    */
   studyInstanceUid?: string;
 }
@@ -1482,7 +1485,8 @@ export interface StudyViewerOnlyRerouteURLParams {
   studyId?: string;
 
   /**
-   * DICOM Study Instance UID
+   * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+   * '1.2.840.10008.5.1.4.1.1.2')
    */
   studyInstanceUid?: string;
 
