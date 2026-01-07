@@ -11,6 +11,14 @@ export class Invitations extends APIResource {
    * Retrieves a single invitation by its unique invitation ID. Returns the complete
    * invitation details including status, expiration, associated user information,
    * and AutoScribe-specific permissions.
+   *
+   * @example
+   * ```ts
+   * const invitation =
+   *   await client.autoScribe.users.invitations.retrieve(
+   *     'inv_1234567890abcdef1234567890abcdef',
+   *   );
+   * ```
    */
   retrieve(invitationID: string, options?: RequestOptions): APIPromise<InvitationRetrieveResponse> {
     return this._client.get(path`/v1/autoScribe/users/invitations/${invitationID}`, options);
@@ -21,6 +29,14 @@ export class Invitations extends APIResource {
    * AutoScribe-specific settings before it is accepted. Only valid for invitations
    * that have not expired or been processed. NPI number is required if enabling
    * report creation.
+   *
+   * @example
+   * ```ts
+   * const invitation =
+   *   await client.autoScribe.users.invitations.update(
+   *     'inv_1234567890abcdef1234567890abcdef',
+   *   );
+   * ```
    */
   update(
     invitationID: string,
@@ -34,6 +50,14 @@ export class Invitations extends APIResource {
    * Retrieves a paginated list of user invitations with optional filtering by
    * status, expiration, date range, and user ID. Returns up to 100 invitations per
    * request.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const invitationListResponse of client.autoScribe.users.invitations.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: InvitationListParams | null | undefined = {},
@@ -50,6 +74,12 @@ export class Invitations extends APIResource {
    * Revokes a pending invitation, preventing it from being accepted. Can revoke by
    * invitation ID, user ID, or both. Useful for cancelling invitations sent in
    * error.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.autoScribe.users.invitations.revoke();
+   * ```
    */
   revoke(
     body: InvitationRevokeParams | null | undefined = {},
@@ -102,7 +132,7 @@ export interface InvitationRetrieveResponse {
     | 'Administrative Assistant'
     | 'Other';
 
-  createdAt: string | null;
+  createdAt: string;
 
   email: string;
 
@@ -186,7 +216,7 @@ export interface InvitationUpdateResponse {
     | 'Administrative Assistant'
     | 'Other';
 
-  createdAt: string | null;
+  createdAt: string;
 
   email: string;
 
@@ -270,7 +300,7 @@ export interface InvitationListResponse {
     | 'Administrative Assistant'
     | 'Other';
 
-  createdAt: string | null;
+  createdAt: string;
 
   email: string;
 

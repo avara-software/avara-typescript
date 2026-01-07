@@ -15,6 +15,11 @@ export class Orgs extends APIResource {
    * Creates a new organization with a unique identifier and name. Organizations can
    * be used to group and manage users, studies, and access permissions across the
    * Avara platform.
+   *
+   * @example
+   * ```ts
+   * const org = await client.orgs.create({ orgName: 'x' });
+   * ```
    */
   create(body: OrgCreateParams, options?: RequestOptions): APIPromise<OrgCreateResponse> {
     return this._client.post('/v1/orgs', { body, ...options });
@@ -23,6 +28,13 @@ export class Orgs extends APIResource {
   /**
    * Retrieves a single organization by its unique organization ID. Returns the
    * complete organization object with name, status, and timestamps.
+   *
+   * @example
+   * ```ts
+   * const org = await client.orgs.retrieve(
+   *   'org_1234567890abcdef1234567890abcdef',
+   * );
+   * ```
    */
   retrieve(orgID: string, options?: RequestOptions): APIPromise<OrgRetrieveResponse> {
     return this._client.get(path`/v1/orgs/${orgID}`, options);
@@ -31,6 +43,13 @@ export class Orgs extends APIResource {
   /**
    * Updates an organization's properties such as name or other metadata. All fields
    * are optional - only provided fields will be updated.
+   *
+   * @example
+   * ```ts
+   * const org = await client.orgs.update(
+   *   'org_1234567890abcdef1234567890abcdef',
+   * );
+   * ```
    */
   update(
     orgID: string,
@@ -43,6 +62,14 @@ export class Orgs extends APIResource {
   /**
    * Retrieves a paginated list of organizations with optional filtering by name.
    * Returns up to 100 organizations per request.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const orgListResponse of client.orgs.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: OrgListParams | null | undefined = {},
@@ -55,6 +82,13 @@ export class Orgs extends APIResource {
    * Deactivates an organization, preventing it from being used for new studies or
    * user assignments. Existing data is preserved and the organization can be
    * reactivated later.
+   *
+   * @example
+   * ```ts
+   * const response = await client.orgs.deactivate(
+   *   'org_1234567890abcdef1234567890abcdef',
+   * );
+   * ```
    */
   deactivate(orgID: string, options?: RequestOptions): APIPromise<OrgDeactivateResponse> {
     return this._client.post(path`/v1/orgs/${orgID}/deactivate`, options);
@@ -63,6 +97,13 @@ export class Orgs extends APIResource {
   /**
    * Restores a deactivated organization to active status, allowing it to be used for
    * new studies and user assignments again.
+   *
+   * @example
+   * ```ts
+   * const response = await client.orgs.reactivate(
+   *   'org_1234567890abcdef1234567890abcdef',
+   * );
+   * ```
    */
   reactivate(orgID: string, options?: RequestOptions): APIPromise<OrgReactivateResponse> {
     return this._client.post(path`/v1/orgs/${orgID}/reactivate`, options);
@@ -75,7 +116,7 @@ export type OrgListResponsesCursorOrganizations = CursorOrganizations<OrgListRes
  * An organization entity that groups users and studies
  */
 export interface OrgCreateResponse {
-  createdAt: string | null;
+  createdAt: string;
 
   isActive: boolean;
 
@@ -83,13 +124,13 @@ export interface OrgCreateResponse {
 
   orgName: string;
 
-  updatedAt: string | null;
+  updatedAt: string;
 
   userCount: number;
 
   createdByApiKeyId?: string | null;
 
-  createdByUserId?: string | null;
+  createdByUserId?: string;
 
   metadata?: { [key: string]: string };
 }
@@ -98,7 +139,7 @@ export interface OrgCreateResponse {
  * An organization entity that groups users and studies
  */
 export interface OrgRetrieveResponse {
-  createdAt: string | null;
+  createdAt: string;
 
   isActive: boolean;
 
@@ -106,13 +147,13 @@ export interface OrgRetrieveResponse {
 
   orgName: string;
 
-  updatedAt: string | null;
+  updatedAt: string;
 
   userCount: number;
 
   createdByApiKeyId?: string | null;
 
-  createdByUserId?: string | null;
+  createdByUserId?: string;
 
   metadata?: { [key: string]: string };
 }
@@ -121,7 +162,7 @@ export interface OrgRetrieveResponse {
  * An organization entity that groups users and studies
  */
 export interface OrgUpdateResponse {
-  createdAt: string | null;
+  createdAt: string;
 
   isActive: boolean;
 
@@ -129,13 +170,13 @@ export interface OrgUpdateResponse {
 
   orgName: string;
 
-  updatedAt: string | null;
+  updatedAt: string;
 
   userCount: number;
 
   createdByApiKeyId?: string | null;
 
-  createdByUserId?: string | null;
+  createdByUserId?: string;
 
   metadata?: { [key: string]: string };
 }
@@ -144,7 +185,7 @@ export interface OrgUpdateResponse {
  * An organization entity that groups users and studies
  */
 export interface OrgListResponse {
-  createdAt: string | null;
+  createdAt: string;
 
   isActive: boolean;
 
@@ -152,13 +193,13 @@ export interface OrgListResponse {
 
   orgName: string;
 
-  updatedAt: string | null;
+  updatedAt: string;
 
   userCount: number;
 
   createdByApiKeyId?: string | null;
 
-  createdByUserId?: string | null;
+  createdByUserId?: string;
 
   metadata?: { [key: string]: string };
 }
@@ -167,7 +208,7 @@ export interface OrgListResponse {
  * An organization entity that groups users and studies
  */
 export interface OrgDeactivateResponse {
-  createdAt: string | null;
+  createdAt: string;
 
   isActive: boolean;
 
@@ -175,13 +216,13 @@ export interface OrgDeactivateResponse {
 
   orgName: string;
 
-  updatedAt: string | null;
+  updatedAt: string;
 
   userCount: number;
 
   createdByApiKeyId?: string | null;
 
-  createdByUserId?: string | null;
+  createdByUserId?: string;
 
   metadata?: { [key: string]: string };
 }
@@ -190,7 +231,7 @@ export interface OrgDeactivateResponse {
  * An organization entity that groups users and studies
  */
 export interface OrgReactivateResponse {
-  createdAt: string | null;
+  createdAt: string;
 
   isActive: boolean;
 
@@ -198,13 +239,13 @@ export interface OrgReactivateResponse {
 
   orgName: string;
 
-  updatedAt: string | null;
+  updatedAt: string;
 
   userCount: number;
 
   createdByApiKeyId?: string | null;
 
-  createdByUserId?: string | null;
+  createdByUserId?: string;
 
   metadata?: { [key: string]: string };
 }
