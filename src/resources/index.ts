@@ -18,7 +18,10 @@ export {
 export { Viewer } from './viewer/viewer';
 export {
   Webhooks,
-  type StudyAccessRequestedWebhookEvent,
-  type ReportDeliveredWebhookEvent,
+  type ReportDeliveredEvent,
+  type ReportDeliveredResponse,
+  type StudyAccessRequestedEvent,
+  type StudyAccessRequestedResponse,
+  type WebhookEvent,
   type UnwrapWebhookEvent,
 } from './webhooks';
