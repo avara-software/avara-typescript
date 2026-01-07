@@ -18,7 +18,9 @@ export class Orgs extends APIResource {
    *
    * @example
    * ```ts
-   * const org = await client.orgs.create({ orgName: 'x' });
+   * const org = await client.orgs.create({
+   *   orgName: 'City Medical Center - Radiology Department',
+   * });
    * ```
    */
   create(body: OrgCreateParams, options?: RequestOptions): APIPromise<OrgCreateResponse> {
@@ -128,7 +130,7 @@ export interface OrgCreateResponse {
 
   userCount: number;
 
-  createdByApiKeyId?: string | null;
+  createdByApiKeyId?: string;
 
   createdByUserId?: string;
 
@@ -151,7 +153,7 @@ export interface OrgRetrieveResponse {
 
   userCount: number;
 
-  createdByApiKeyId?: string | null;
+  createdByApiKeyId?: string;
 
   createdByUserId?: string;
 
@@ -174,7 +176,7 @@ export interface OrgUpdateResponse {
 
   userCount: number;
 
-  createdByApiKeyId?: string | null;
+  createdByApiKeyId?: string;
 
   createdByUserId?: string;
 
@@ -197,7 +199,7 @@ export interface OrgListResponse {
 
   userCount: number;
 
-  createdByApiKeyId?: string | null;
+  createdByApiKeyId?: string;
 
   createdByUserId?: string;
 
@@ -220,7 +222,7 @@ export interface OrgDeactivateResponse {
 
   userCount: number;
 
-  createdByApiKeyId?: string | null;
+  createdByApiKeyId?: string;
 
   createdByUserId?: string;
 
@@ -243,7 +245,7 @@ export interface OrgReactivateResponse {
 
   userCount: number;
 
-  createdByApiKeyId?: string | null;
+  createdByApiKeyId?: string;
 
   createdByUserId?: string;
 

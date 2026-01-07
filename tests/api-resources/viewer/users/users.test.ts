@@ -41,12 +41,12 @@ describe('resource users', () => {
         {
           canManageStudies: true,
           clinicRole: 'Radiologist',
-          firstName: 'x',
+          firstName: 'Sarah',
           hasDashboardAccess: true,
-          lastName: 'x',
+          lastName: 'Johnson-Smith',
           level: 'admin',
           middleName: 'x',
-          phoneNumber: '321669910225610',
+          phoneNumber: '5551234567',
           suffix1: 'x',
           suffix2: 'x',
         },
@@ -91,11 +91,11 @@ describe('resource users', () => {
     const responsePromise = client.viewer.users.invite({
       canManageStudies: true,
       clinicRole: 'Radiologist',
-      email: 'S%+_FW+l+.n-@1F.-.eVZe',
-      firstName: 'x',
+      email: 'dr.johnson@hospital.org',
+      firstName: 'Sarah',
       hasDashboardAccess: true,
-      lastName: 'x',
-      level: 'admin',
+      lastName: 'Johnson',
+      level: 'member',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -111,15 +111,15 @@ describe('resource users', () => {
     const response = await client.viewer.users.invite({
       canManageStudies: true,
       clinicRole: 'Radiologist',
-      email: 'S%+_FW+l+.n-@1F.-.eVZe',
-      firstName: 'x',
+      email: 'dr.johnson@hospital.org',
+      firstName: 'Sarah',
       hasDashboardAccess: true,
-      lastName: 'x',
-      level: 'admin',
-      middleName: 'x',
-      phoneNumber: '321669910225610',
-      suffix1: 'x',
-      suffix2: 'x',
+      lastName: 'Johnson',
+      level: 'member',
+      middleName: 'Marie',
+      phoneNumber: '5551234567',
+      suffix1: 'MD',
+      suffix2: 'FACR',
     });
   });
 

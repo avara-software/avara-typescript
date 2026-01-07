@@ -13,8 +13,8 @@ describe('resource studies', () => {
     const responsePromise = client.autoScribe.studies.create({
       reportMetadata: {},
       severity: 'normal',
-      studyDescription: 'x',
-      studyInstanceUid: '.16...2511..',
+      studyDescription: 'Brain MRI with Contrast',
+      studyInstanceUid: '1.2.840.113619.2.55.3.604688119.868.1234567890.123',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,24 +29,24 @@ describe('resource studies', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.autoScribe.studies.create({
       reportMetadata: {
-        age: 'age',
-        dateOfBirth: '7321-69-10',
-        facilityName: 'facilityName',
-        height: { unit: 'in', value: 0 },
-        mrn: 'mrn',
-        patientName: 'patientName',
-        referringPhysicianName: 'referringPhysicianName',
-        scanDate: '7321-69-10',
-        scanTime: 'scanTime',
-        scanType: 'scanType',
-        sex: 'male',
-        weight: { unit: 'lbs', value: 0 },
+        age: '38 years',
+        dateOfBirth: '1985-07-20',
+        facilityName: 'City Medical Center',
+        height: { unit: 'cm', value: 165 },
+        mrn: 'MRN-2024-001234',
+        patientName: 'Jane Doe',
+        referringPhysicianName: 'Dr. Michael Chen',
+        scanDate: '2024-03-15',
+        scanTime: '14:30',
+        scanType: 'MRI Brain with Contrast',
+        sex: 'female',
+        weight: { unit: 'kg', value: 62 },
       },
       severity: 'normal',
-      studyDescription: 'x',
-      studyInstanceUid: '.16...2511..',
+      studyDescription: 'Brain MRI with Contrast',
+      studyInstanceUid: '1.2.840.113619.2.55.3.604688119.868.1234567890.123',
       assignedTo: 'usr_1234567890abcdef1234567890abcdef',
-      metadata: { foo: 'string' },
+      metadata: { department: 'radiology', priority: 'routine' },
       orgId: 'org_1234567890abcdef1234567890abcdef',
       priorReportTexts: ['x'],
       priorStudyIds: ['string'],
@@ -93,18 +93,18 @@ describe('resource studies', () => {
             age: 'age',
             dateOfBirth: '7321-69-10',
             facilityName: 'facilityName',
-            height: { unit: 'in', value: 0 },
+            height: { unit: 'cm', value: 170 },
             mrn: 'mrn',
-            patientName: 'patientName',
+            patientName: 'Jane M. Doe',
             referringPhysicianName: 'referringPhysicianName',
             scanDate: '7321-69-10',
             scanTime: 'scanTime',
             scanType: 'scanType',
-            sex: 'male',
-            weight: { unit: 'lbs', value: 0 },
+            sex: 'female',
+            weight: { unit: 'kg', value: 68 },
           },
-          severity: 'normal',
-          studyDescription: 'x',
+          severity: 'high',
+          studyDescription: 'Brain MRI with and without Contrast',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -159,7 +159,10 @@ describe('resource studies', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.autoScribe.studies.cancel(
-        { studyId: 'stu_1234567890abcdef1234567890abcdef', studyInstanceUid: '.16...2511..' },
+        {
+          studyId: 'stu_1234567890abcdef1234567890abcdef',
+          studyInstanceUid: '1.2.840.113619.2.55.3.604688119.868.1234567890.123',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Avara.NotFoundError);
@@ -184,7 +187,7 @@ describe('resource studies', () => {
     const response = await client.autoScribe.studies.rerouteURL({
       assignedToUserId: 'usr_1234567890abcdef1234567890abcdef',
       studyId: 'stu_1234567890abcdef1234567890abcdef',
-      studyInstanceUid: '.16...2511..',
+      studyInstanceUid: '1.2.840.113619.2.55.3.604688119.868.1234567890.123',
     });
   });
 
@@ -217,7 +220,10 @@ describe('resource studies', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.autoScribe.studies.uncancel(
-        { studyId: 'stu_1234567890abcdef1234567890abcdef', studyInstanceUid: '.16...2511..' },
+        {
+          studyId: 'stu_1234567890abcdef1234567890abcdef',
+          studyInstanceUid: '1.2.840.113619.2.55.3.604688119.868.1234567890.123',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Avara.NotFoundError);
@@ -242,7 +248,7 @@ describe('resource studies', () => {
       client.autoScribe.studies.viewerOnlyRerouteURL(
         {
           studyId: 'stu_1234567890abcdef1234567890abcdef',
-          studyInstanceUid: '.16...2511..',
+          studyInstanceUid: '1.2.840.113619.2.55.3.604688119.868.1234567890.123',
           userId: 'usr_1234567890abcdef1234567890abcdef',
         },
         { path: '/_stainless_unknown_path' },

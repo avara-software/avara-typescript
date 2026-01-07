@@ -18,8 +18,9 @@ export class Studies extends APIResource {
    * const study = await client.autoScribe.studies.create({
    *   reportMetadata: {},
    *   severity: 'normal',
-   *   studyDescription: 'x',
-   *   studyInstanceUid: '.16...2511..',
+   *   studyDescription: 'Brain MRI with Contrast',
+   *   studyInstanceUid:
+   *     '1.2.840.113619.2.55.3.604688119.868.1234567890.123',
    * });
    * ```
    */

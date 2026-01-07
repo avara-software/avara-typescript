@@ -15,9 +15,10 @@ export class Studies extends APIResource {
    * @example
    * ```ts
    * const study = await client.viewer.studies.create({
-   *   severity: 'normal',
-   *   studyDescription: 'x',
-   *   studyInstanceUid: '.16...2511..',
+   *   severity: 'high',
+   *   studyDescription: 'CT Chest/Abdomen/Pelvis',
+   *   studyInstanceUid:
+   *     '1.2.840.113619.2.55.3.604688119.868.1234567890.123',
    * });
    * ```
    */
