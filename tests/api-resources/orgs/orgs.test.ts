@@ -22,7 +22,10 @@ describe('resource orgs', () => {
 
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.orgs.create({ orgName: 'x', metadata: { foo: 'string' } });
+    const response = await client.orgs.create({
+      orgName: 'x',
+      metadata: { foo: 'string' },
+    });
   });
 
   // Prism tests are disabled
@@ -55,7 +58,10 @@ describe('resource orgs', () => {
     await expect(
       client.orgs.update(
         'org_1234567890abcdef1234567890abcdef',
-        { metadata: { foo: 'string' }, orgName: 'x' },
+        {
+          metadata: { foo: 'string' },
+          orgName: 'x',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Avara.NotFoundError);

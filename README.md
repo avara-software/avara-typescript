@@ -114,7 +114,11 @@ const client = new Avara({
 });
 
 // Or, configure per-request:
-await client.viewer.studies.create({ severity: 'normal', studyDescription: 'Brain MRI with Contrast', studyInstanceUid: '1.3.6.1.4.1.62853.20250130.1738242672936.234543143652' }, {
+await client.viewer.studies.create({
+  severity: 'normal',
+  studyDescription: 'Brain MRI with Contrast',
+  studyInstanceUid: '1.3.6.1.4.1.62853.20250130.1738242672936.234543143652',
+}, {
   maxRetries: 5,
 });
 ```
@@ -131,7 +135,11 @@ const client = new Avara({
 });
 
 // Override per-request:
-await client.viewer.studies.create({ severity: 'normal', studyDescription: 'Brain MRI with Contrast', studyInstanceUid: '1.3.6.1.4.1.62853.20250130.1738242672936.234543143652' }, {
+await client.viewer.studies.create({
+  severity: 'normal',
+  studyDescription: 'Brain MRI with Contrast',
+  studyInstanceUid: '1.3.6.1.4.1.62853.20250130.1738242672936.234543143652',
+}, {
   timeout: 5 * 1000,
 });
 ```
