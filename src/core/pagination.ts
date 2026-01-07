@@ -108,24 +108,48 @@ export class PagePromise<
 }
 
 export interface CursorUsersResponse<Item> {
+  /**
+   * Array of user objects
+   */
   users: Array<Item>;
 
+  /**
+   * Next page cursor. Pass this to the next request to get the next page of results
+   */
   cursor: string;
 
+  /**
+   * Whether there are more results available
+   */
   hasMore: boolean;
 }
 
 export interface CursorUsersParams {
+  /**
+   * Base64 encoded cursor from previous response for pagination
+   */
   cursor?: string;
 
+  /**
+   * Number of results to return (1-100). Defaults to 20
+   */
   limit?: number;
 }
 
 export class CursorUsers<Item> extends AbstractPage<Item> implements CursorUsersResponse<Item> {
+  /**
+   * Array of user objects
+   */
   users: Array<Item>;
 
+  /**
+   * Next page cursor. Pass this to the next request to get the next page of results
+   */
   cursor: string;
 
+  /**
+   * Whether there are more results available
+   */
   hasMore: boolean;
 
   constructor(
@@ -170,24 +194,48 @@ export class CursorUsers<Item> extends AbstractPage<Item> implements CursorUsers
 }
 
 export interface CursorStudiesResponse<Item> {
+  /**
+   * Array of study objects
+   */
   studies: Array<Item>;
 
+  /**
+   * Next page cursor. Pass this to the next request to get the next page of results
+   */
   cursor: string;
 
+  /**
+   * Whether there are more results available
+   */
   hasMore: boolean;
 }
 
 export interface CursorStudiesParams {
+  /**
+   * Base64 encoded cursor from previous response for pagination
+   */
   cursor?: string;
 
+  /**
+   * Number of results to return (1-100). Defaults to 20
+   */
   limit?: number;
 }
 
 export class CursorStudies<Item> extends AbstractPage<Item> implements CursorStudiesResponse<Item> {
+  /**
+   * Array of study objects
+   */
   studies: Array<Item>;
 
+  /**
+   * Next page cursor. Pass this to the next request to get the next page of results
+   */
   cursor: string;
 
+  /**
+   * Whether there are more results available
+   */
   hasMore: boolean;
 
   constructor(
@@ -232,24 +280,48 @@ export class CursorStudies<Item> extends AbstractPage<Item> implements CursorStu
 }
 
 export interface CursorInvitationsResponse<Item> {
+  /**
+   * Array of invitation objects
+   */
   invitations: Array<Item>;
 
+  /**
+   * Next page cursor. Pass this to the next request to get the next page of results
+   */
   cursor: string;
 
+  /**
+   * Whether there are more results available
+   */
   hasMore: boolean;
 }
 
 export interface CursorInvitationsParams {
+  /**
+   * Base64 encoded cursor from previous response for pagination
+   */
   cursor?: string;
 
+  /**
+   * Number of results to return (1-100). Defaults to 20
+   */
   limit?: number;
 }
 
 export class CursorInvitations<Item> extends AbstractPage<Item> implements CursorInvitationsResponse<Item> {
+  /**
+   * Array of invitation objects
+   */
   invitations: Array<Item>;
 
+  /**
+   * Next page cursor. Pass this to the next request to get the next page of results
+   */
   cursor: string;
 
+  /**
+   * Whether there are more results available
+   */
   hasMore: boolean;
 
   constructor(
@@ -294,16 +366,31 @@ export class CursorInvitations<Item> extends AbstractPage<Item> implements Curso
 }
 
 export interface CursorOrganizationsResponse<Item> {
+  /**
+   * Array of organization objects
+   */
   organizations: Array<Item>;
 
+  /**
+   * Next page cursor. Pass this to the next request to get the next page of results
+   */
   cursor: string;
 
+  /**
+   * Whether there are more results available
+   */
   hasMore: boolean;
 }
 
 export interface CursorOrganizationsParams {
+  /**
+   * Base64 encoded cursor from previous response for pagination
+   */
   cursor?: string;
 
+  /**
+   * Number of results to return (1-100). Defaults to 20
+   */
   limit?: number;
 }
 
@@ -311,10 +398,19 @@ export class CursorOrganizations<Item>
   extends AbstractPage<Item>
   implements CursorOrganizationsResponse<Item>
 {
+  /**
+   * Array of organization objects
+   */
   organizations: Array<Item>;
 
+  /**
+   * Next page cursor. Pass this to the next request to get the next page of results
+   */
   cursor: string;
 
+  /**
+   * Whether there are more results available
+   */
   hasMore: boolean;
 
   constructor(
