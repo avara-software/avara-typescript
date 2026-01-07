@@ -10,7 +10,7 @@ const client = new Avara({
 describe('resource orgs', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.orgs.create({ orgName: 'x' });
+    const responsePromise = client.orgs.create({ orgName: 'City Medical Center - Radiology Department' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,8 +23,8 @@ describe('resource orgs', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.orgs.create({
-      orgName: 'x',
-      metadata: { foo: 'string' },
+      orgName: 'City Medical Center - Radiology Department',
+      metadata: { department: 'radiology', region: 'northeast' },
     });
   });
 
@@ -59,8 +59,12 @@ describe('resource orgs', () => {
       client.orgs.update(
         'org_1234567890abcdef1234567890abcdef',
         {
-          metadata: { foo: 'string' },
-          orgName: 'x',
+          metadata: {
+            department: 'radiology',
+            region: 'northeast',
+            wing: 'Building A',
+          },
+          orgName: 'City Medical Center - Radiology & Imaging',
         },
         { path: '/_stainless_unknown_path' },
       ),

@@ -11,9 +11,9 @@ describe('resource studies', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.viewer.studies.create({
-      severity: 'normal',
-      studyDescription: 'x',
-      studyInstanceUid: '.16...2511..',
+      severity: 'high',
+      studyDescription: 'CT Chest/Abdomen/Pelvis',
+      studyInstanceUid: '1.2.840.113619.2.55.3.604688119.868.1234567890.123',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,11 +27,11 @@ describe('resource studies', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.viewer.studies.create({
-      severity: 'normal',
-      studyDescription: 'x',
-      studyInstanceUid: '.16...2511..',
+      severity: 'high',
+      studyDescription: 'CT Chest/Abdomen/Pelvis',
+      studyInstanceUid: '1.2.840.113619.2.55.3.604688119.868.1234567890.123',
       assignedTo: 'usr_1234567890abcdef1234567890abcdef',
-      metadata: { foo: 'string' },
+      metadata: { department: 'radiology', priority: 'urgent' },
       orgId: 'org_1234567890abcdef1234567890abcdef',
     });
   });
@@ -69,9 +69,9 @@ describe('resource studies', () => {
         {
           assignedTo: 'usr_1234567890abcdef1234567890abcdef',
           metadata: { foo: 'string' },
-          severity: 'normal',
-          studyDescription: 'x',
-          studyViewerStatus: 'incomplete',
+          severity: 'stat',
+          studyDescription: 'CT Chest/Abdomen/Pelvis with Contrast',
+          studyViewerStatus: 'complete',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -126,7 +126,10 @@ describe('resource studies', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.viewer.studies.cancel(
-        { studyId: 'stu_1234567890abcdef1234567890abcdef', studyInstanceUid: '.16...2511..' },
+        {
+          studyId: 'stu_1234567890abcdef1234567890abcdef',
+          studyInstanceUid: '1.2.840.113619.2.55.3.604688119.868.1234567890.123',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Avara.NotFoundError);
@@ -149,7 +152,10 @@ describe('resource studies', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.viewer.studies.rerouteURL(
-        { studyId: 'stu_1234567890abcdef1234567890abcdef', studyInstanceUid: '.16...2511..' },
+        {
+          studyId: 'stu_1234567890abcdef1234567890abcdef',
+          studyInstanceUid: '1.2.840.113619.2.55.3.604688119.868.1234567890.123',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Avara.NotFoundError);
@@ -184,7 +190,10 @@ describe('resource studies', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.viewer.studies.uncancel(
-        { studyId: 'stu_1234567890abcdef1234567890abcdef', studyInstanceUid: '.16...2511..' },
+        {
+          studyId: 'stu_1234567890abcdef1234567890abcdef',
+          studyInstanceUid: '1.2.840.113619.2.55.3.604688119.868.1234567890.123',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Avara.NotFoundError);

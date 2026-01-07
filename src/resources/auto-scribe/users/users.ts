@@ -93,11 +93,11 @@ export class Users extends APIResource {
    *   canCreateReports: true,
    *   canManageStudies: true,
    *   clinicRole: 'Radiologist',
-   *   email: 'S%+_FW+l+.n-@1F.-.eVZe',
-   *   firstName: 'x',
+   *   email: 'dr.johnson@hospital.org',
+   *   firstName: 'Sarah',
    *   hasDashboardAccess: true,
-   *   lastName: 'x',
-   *   level: 'admin',
+   *   lastName: 'Johnson',
+   *   level: 'member',
    * });
    * ```
    */
