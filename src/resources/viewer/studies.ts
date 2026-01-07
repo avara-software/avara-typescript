@@ -8,14 +8,50 @@ import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
 export class Studies extends APIResource {
+  /**
+   * Creates a new study in the Viewer system with the specified DICOM Study Instance
+   * UID and metadata. The study can be optionally assigned to a user.
+   *
+   * @example
+   * ```ts
+   * const study = await client.viewer.studies.create({
+   *   severity: 'normal',
+   *   studyDescription: 'x',
+   *   studyInstanceUid: '.16...2511..',
+   * });
+   * ```
+   */
   create(body: StudyCreateParams, options?: RequestOptions): APIPromise<StudyCreateResponse> {
     return this._client.post('/v1/viewer/studies', { body, ...options });
   }
 
+  /**
+   * Retrieves a single study by its unique study ID. Returns the complete study
+   * object with all metadata and status information.
+   *
+   * @example
+   * ```ts
+   * const study = await client.viewer.studies.retrieve(
+   *   'stu_1234567890abcdef1234567890abcdef',
+   * );
+   * ```
+   */
   retrieve(studyID: string, options?: RequestOptions): APIPromise<StudyRetrieveResponse> {
     return this._client.get(path`/v1/viewer/studies/${studyID}`, options);
   }
 
+  /**
+   * Updates a study's properties including description, severity, assignment,
+   * organization, and metadata. All fields are optional - only provided fields will
+   * be updated.
+   *
+   * @example
+   * ```ts
+   * const study = await client.viewer.studies.update(
+   *   'stu_1234567890abcdef1234567890abcdef',
+   * );
+   * ```
+   */
   update(
     studyID: string,
     body: StudyUpdateParams | null | undefined = {},
@@ -24,6 +60,19 @@ export class Studies extends APIResource {
     return this._client.patch(path`/v1/viewer/studies/${studyID}`, { body, ...options });
   }
 
+  /**
+   * Retrieves a paginated list of studies with optional filtering by assignment,
+   * severity, description, cancellation status, and viewer status. Returns up to 100
+   * studies per request.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const studyListResponse of client.viewer.studies.list()) {
+   *   // ...
+   * }
+   * ```
+   */
   list(
     query: StudyListParams | null | undefined = {},
     options?: RequestOptions,
@@ -34,6 +83,15 @@ export class Studies extends APIResource {
     });
   }
 
+  /**
+   * Marks a study as cancelled. Cancelled studies are preserved but flagged as
+   * inactive. Can be identified by either study ID or DICOM Study Instance UID.
+   *
+   * @example
+   * ```ts
+   * const response = await client.viewer.studies.cancel();
+   * ```
+   */
   cancel(
     body: StudyCancelParams | null | undefined = {},
     options?: RequestOptions,
@@ -41,6 +99,16 @@ export class Studies extends APIResource {
     return this._client.post('/v1/viewer/studies/cancel', { body, ...options });
   }
 
+  /**
+   * Generates a tokenized URL that redirects users directly to the Avara Viewer for
+   * the specified study. The URL includes authentication and is time-limited for
+   * security.
+   *
+   * @example
+   * ```ts
+   * const response = await client.viewer.studies.rerouteURL();
+   * ```
+   */
   rerouteURL(
     body: StudyRerouteURLParams | null | undefined = {},
     options?: RequestOptions,
@@ -48,10 +116,30 @@ export class Studies extends APIResource {
     return this._client.post('/v1/viewer/studies/reroute-url', { body, ...options });
   }
 
+  /**
+   * Retrieves a single study by its DICOM Study Instance UID. This is useful when
+   * you have the DICOM UID but not the Avara study ID.
+   *
+   * @example
+   * ```ts
+   * const response = await client.viewer.studies.retrieveByUid(
+   *   '1.2.840.10008.5.1.4.1.1.2',
+   * );
+   * ```
+   */
   retrieveByUid(studyInstanceUid: string, options?: RequestOptions): APIPromise<StudyRetrieveByUidResponse> {
     return this._client.get(path`/v1/viewer/studies/by-uid/${studyInstanceUid}`, options);
   }
 
+  /**
+   * Restores a cancelled study to active status. The study must have been previously
+   * cancelled. Can be identified by either study ID or DICOM Study Instance UID.
+   *
+   * @example
+   * ```ts
+   * const response = await client.viewer.studies.uncancel();
+   * ```
+   */
   uncancel(
     body: StudyUncancelParams | null | undefined = {},
     options?: RequestOptions,
@@ -66,22 +154,48 @@ export type StudyListResponsesCursorStudies = CursorStudies<StudyListResponse>;
  * A study entity in the Viewer system with viewing status
  */
 export interface StudyCreateResponse {
+  /**
+   * Timestamp when the study was cancelled, null if not cancelled
+   */
   cancelledAt: string | null;
 
+  /**
+   * Timestamp when the study was created
+   */
   createdAt: string | null;
 
+  /**
+   * Whether the study has been cancelled
+   */
   isCancelled: boolean;
 
+  /**
+   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention
+   */
   severity: 'normal' | 'high' | 'stat';
 
+  /**
+   * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
+   */
   studyDescription: string;
 
+  /**
+   * Unique study identifier. Format: stu\_{32-hex-chars}
+   */
   studyId: string;
 
+  /**
+   * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+   * '1.2.840.10008.5.1.4.1.1.2')
+   */
   studyInstanceUid: string;
 
   studyViewerStatus: 'incomplete' | 'complete';
 
+  /**
+   * Timestamp when the study was last updated
+   */
   updatedAt: string | null;
 
   /**
@@ -99,6 +213,10 @@ export interface StudyCreateResponse {
    */
   createdByUser?: Shared.UserReference | null;
 
+  /**
+   * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
+   * values up to 1000 chars
+   */
   metadata?: { [key: string]: string };
 
   /**
@@ -111,22 +229,48 @@ export interface StudyCreateResponse {
  * A study entity in the Viewer system with viewing status
  */
 export interface StudyRetrieveResponse {
+  /**
+   * Timestamp when the study was cancelled, null if not cancelled
+   */
   cancelledAt: string | null;
 
+  /**
+   * Timestamp when the study was created
+   */
   createdAt: string | null;
 
+  /**
+   * Whether the study has been cancelled
+   */
   isCancelled: boolean;
 
+  /**
+   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention
+   */
   severity: 'normal' | 'high' | 'stat';
 
+  /**
+   * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
+   */
   studyDescription: string;
 
+  /**
+   * Unique study identifier. Format: stu\_{32-hex-chars}
+   */
   studyId: string;
 
+  /**
+   * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+   * '1.2.840.10008.5.1.4.1.1.2')
+   */
   studyInstanceUid: string;
 
   studyViewerStatus: 'incomplete' | 'complete';
 
+  /**
+   * Timestamp when the study was last updated
+   */
   updatedAt: string | null;
 
   /**
@@ -144,6 +288,10 @@ export interface StudyRetrieveResponse {
    */
   createdByUser?: Shared.UserReference | null;
 
+  /**
+   * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
+   * values up to 1000 chars
+   */
   metadata?: { [key: string]: string };
 
   /**
@@ -156,22 +304,48 @@ export interface StudyRetrieveResponse {
  * A study entity in the Viewer system with viewing status
  */
 export interface StudyUpdateResponse {
+  /**
+   * Timestamp when the study was cancelled, null if not cancelled
+   */
   cancelledAt: string | null;
 
+  /**
+   * Timestamp when the study was created
+   */
   createdAt: string | null;
 
+  /**
+   * Whether the study has been cancelled
+   */
   isCancelled: boolean;
 
+  /**
+   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention
+   */
   severity: 'normal' | 'high' | 'stat';
 
+  /**
+   * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
+   */
   studyDescription: string;
 
+  /**
+   * Unique study identifier. Format: stu\_{32-hex-chars}
+   */
   studyId: string;
 
+  /**
+   * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+   * '1.2.840.10008.5.1.4.1.1.2')
+   */
   studyInstanceUid: string;
 
   studyViewerStatus: 'incomplete' | 'complete';
 
+  /**
+   * Timestamp when the study was last updated
+   */
   updatedAt: string | null;
 
   /**
@@ -189,6 +363,10 @@ export interface StudyUpdateResponse {
    */
   createdByUser?: Shared.UserReference | null;
 
+  /**
+   * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
+   * values up to 1000 chars
+   */
   metadata?: { [key: string]: string };
 
   /**
@@ -201,22 +379,48 @@ export interface StudyUpdateResponse {
  * A study entity in the Viewer system with viewing status
  */
 export interface StudyListResponse {
+  /**
+   * Timestamp when the study was cancelled, null if not cancelled
+   */
   cancelledAt: string | null;
 
+  /**
+   * Timestamp when the study was created
+   */
   createdAt: string | null;
 
+  /**
+   * Whether the study has been cancelled
+   */
   isCancelled: boolean;
 
+  /**
+   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention
+   */
   severity: 'normal' | 'high' | 'stat';
 
+  /**
+   * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
+   */
   studyDescription: string;
 
+  /**
+   * Unique study identifier. Format: stu\_{32-hex-chars}
+   */
   studyId: string;
 
+  /**
+   * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+   * '1.2.840.10008.5.1.4.1.1.2')
+   */
   studyInstanceUid: string;
 
   studyViewerStatus: 'incomplete' | 'complete';
 
+  /**
+   * Timestamp when the study was last updated
+   */
   updatedAt: string | null;
 
   /**
@@ -234,6 +438,10 @@ export interface StudyListResponse {
    */
   createdByUser?: Shared.UserReference | null;
 
+  /**
+   * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
+   * values up to 1000 chars
+   */
   metadata?: { [key: string]: string };
 
   /**
@@ -262,22 +470,48 @@ export interface StudyRerouteURLResponse {
  * A study entity in the Viewer system with viewing status
  */
 export interface StudyRetrieveByUidResponse {
+  /**
+   * Timestamp when the study was cancelled, null if not cancelled
+   */
   cancelledAt: string | null;
 
+  /**
+   * Timestamp when the study was created
+   */
   createdAt: string | null;
 
+  /**
+   * Whether the study has been cancelled
+   */
   isCancelled: boolean;
 
+  /**
+   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention
+   */
   severity: 'normal' | 'high' | 'stat';
 
+  /**
+   * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
+   */
   studyDescription: string;
 
+  /**
+   * Unique study identifier. Format: stu\_{32-hex-chars}
+   */
   studyId: string;
 
+  /**
+   * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+   * '1.2.840.10008.5.1.4.1.1.2')
+   */
   studyInstanceUid: string;
 
   studyViewerStatus: 'incomplete' | 'complete';
 
+  /**
+   * Timestamp when the study was last updated
+   */
   updatedAt: string | null;
 
   /**
@@ -295,6 +529,10 @@ export interface StudyRetrieveByUidResponse {
    */
   createdByUser?: Shared.UserReference | null;
 
+  /**
+   * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
+   * values up to 1000 chars
+   */
   metadata?: { [key: string]: string };
 
   /**
@@ -313,26 +551,48 @@ export interface StudyUncancelResponse {
 }
 
 export interface StudyCreateParams {
+  /**
+   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention
+   */
   severity: 'normal' | 'high' | 'stat';
 
+  /**
+   * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
+   */
   studyDescription: string;
 
+  /**
+   * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+   * '1.2.840.10008.5.1.4.1.1.2')
+   */
   studyInstanceUid: string;
 
   assignedTo?: string;
 
+  /**
+   * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
+   * values up to 1000 chars
+   */
   metadata?: { [key: string]: string };
 
   orgId?: string;
 }
 
 export interface StudyUpdateParams {
-  assignedTo?: string | null;
+  assignedTo?: string;
 
   metadata?: { [key: string]: string } | null;
 
+  /**
+   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention
+   */
   severity?: 'normal' | 'high' | 'stat';
 
+  /**
+   * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
+   */
   studyDescription?: string;
 
   studyViewerStatus?: 'incomplete' | 'complete';

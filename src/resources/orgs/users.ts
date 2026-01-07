@@ -6,10 +6,35 @@ import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
 export class Users extends APIResource {
+  /**
+   * Associates an existing user with an organization, granting them access to
+   * organization-specific resources and studies.
+   *
+   * @example
+   * ```ts
+   * const response = await client.orgs.users.add(
+   *   'org_1234567890abcdef1234567890abcdef',
+   *   { userId: 'usr_1234567890abcdef1234567890abcdef' },
+   * );
+   * ```
+   */
   add(orgID: string, body: UserAddParams, options?: RequestOptions): APIPromise<UserAddResponse> {
     return this._client.post(path`/v1/orgs/${orgID}/users`, { body, ...options });
   }
 
+  /**
+   * Removes a user's association with an organization, revoking their access to
+   * organization-specific resources. The user account remains active but is no
+   * longer linked to this organization.
+   *
+   * @example
+   * ```ts
+   * const user = await client.orgs.users.remove(
+   *   'org_1234567890abcdef1234567890abcdef',
+   *   { userId: 'usr_1234567890abcdef1234567890abcdef' },
+   * );
+   * ```
+   */
   remove(orgID: string, body: UserRemoveParams, options?: RequestOptions): APIPromise<UserRemoveResponse> {
     return this._client.delete(path`/v1/orgs/${orgID}/users`, { body, ...options });
   }

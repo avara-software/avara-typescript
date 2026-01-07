@@ -7,6 +7,16 @@ import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
 export class Reports extends APIResource {
+  /**
+   * Retrieves all reports (including versions and addendums) for a specific study.
+   * Must provide either study ID or DICOM Study Instance UID. Returns report
+   * metadata including status, version, and timestamps.
+   *
+   * @example
+   * ```ts
+   * const reports = await client.autoScribe.reports.list();
+   * ```
+   */
   list(
     query: ReportListParams | null | undefined = {},
     options?: RequestOptions,
@@ -14,14 +24,48 @@ export class Reports extends APIResource {
     return this._client.get('/v1/autoScribe/reports', { query, ...options });
   }
 
+  /**
+   * Initiates the creation of an addendum to an existing completed report. The study
+   * status will change to 'addendum_active' allowing the radiologist to dictate
+   * additional findings.
+   *
+   * @example
+   * ```ts
+   * const response = await client.autoScribe.reports.addendum(
+   *   'rep_1234567890abcdef1234567890abcdef',
+   * );
+   * ```
+   */
   addendum(reportID: string, options?: RequestOptions): APIPromise<ReportAddendumResponse> {
     return this._client.post(path`/v1/autoScribe/reports/${reportID}/addendum`, options);
   }
 
+  /**
+   * Cancels an in-progress addendum and reverts the study status to 'completed'. The
+   * original report remains unchanged. Only valid for active addendums.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.autoScribe.reports.cancelAddendum(
+   *     'rep_1234567890abcdef1234567890abcdef',
+   *   );
+   * ```
+   */
   cancelAddendum(reportID: string, options?: RequestOptions): APIPromise<ReportCancelAddendumResponse> {
     return this._client.post(path`/v1/autoScribe/reports/${reportID}/cancel-addendum`, options);
   }
 
+  /**
+   * Retrieves presigned URLs for accessing report PDFs. Can fetch a single report by
+   * report ID, or all reports for a study by study ID/DICOM UID. URLs are
+   * time-limited for security.
+   *
+   * @example
+   * ```ts
+   * const response = await client.autoScribe.reports.pdf();
+   * ```
+   */
   pdf(
     query: ReportPdfParams | null | undefined = {},
     options?: RequestOptions,
@@ -29,6 +73,16 @@ export class Reports extends APIResource {
     return this._client.get('/v1/autoScribe/reports/pdf', { query, ...options });
   }
 
+  /**
+   * Retrieves the text content of a report. Can fetch a single report by report ID,
+   * or all reports for a study by study ID/DICOM UID. Returns plain text report
+   * content.
+   *
+   * @example
+   * ```ts
+   * const response = await client.autoScribe.reports.text();
+   * ```
+   */
   text(
     query: ReportTextParams | null | undefined = {},
     options?: RequestOptions,
@@ -62,7 +116,7 @@ export namespace ReportListResponse {
     signedAt: string | null;
 
     /**
-     * Metadata for a study report including patient demographics and scan information
+     * Patient demographics and scan information for report generation
      */
     snapshotMetadata: AutoScribeAPI.StudyReportMetadata;
 
@@ -113,7 +167,7 @@ export namespace ReportPdfResponse {
     reportId: string;
 
     /**
-     * Metadata for a study report including patient demographics and scan information
+     * Patient demographics and scan information for report generation
      */
     snapshotMetadata: AutoScribeAPI.StudyReportMetadata;
 
@@ -143,7 +197,7 @@ export namespace ReportPdfResponse {
       reportId: string;
 
       /**
-       * Metadata for a study report including patient demographics and scan information
+       * Patient demographics and scan information for report generation
        */
       snapshotMetadata: AutoScribeAPI.StudyReportMetadata;
 
@@ -169,7 +223,7 @@ export namespace ReportTextResponse {
     reportId: string;
 
     /**
-     * Metadata for a study report including patient demographics and scan information
+     * Patient demographics and scan information for report generation
      */
     snapshotMetadata: AutoScribeAPI.StudyReportMetadata;
 
@@ -199,7 +253,7 @@ export namespace ReportTextResponse {
       reportId: string;
 
       /**
-       * Metadata for a study report including patient demographics and scan information
+       * Patient demographics and scan information for report generation
        */
       snapshotMetadata: AutoScribeAPI.StudyReportMetadata;
 
@@ -213,9 +267,6 @@ export namespace ReportTextResponse {
 }
 
 export interface ReportListParams {
-  /**
-   * Study ID. Format: stu\_<32-hex-chars>
-   */
   studyId?: string;
 
   /**
@@ -225,14 +276,8 @@ export interface ReportListParams {
 }
 
 export interface ReportPdfParams {
-  /**
-   * Report ID. Format: rep\_<32-hex-chars>
-   */
   reportId?: string;
 
-  /**
-   * Study ID. Format: stu\_<32-hex-chars>
-   */
   studyId?: string;
 
   /**
@@ -242,14 +287,8 @@ export interface ReportPdfParams {
 }
 
 export interface ReportTextParams {
-  /**
-   * Report ID. Format: rep\_<32-hex-chars>
-   */
   reportId?: string;
 
-  /**
-   * Study ID. Format: stu\_<32-hex-chars>
-   */
   studyId?: string;
 
   /**
