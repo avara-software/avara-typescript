@@ -25,6 +25,13 @@ export class Users extends APIResource {
    * Retrieves a single user by their unique user ID. Returns the complete user
    * object with all profile information, permissions, AutoScribe-specific settings,
    * and status.
+   *
+   * @example
+   * ```ts
+   * const user = await client.autoScribe.users.retrieve(
+   *   'usr_1234567890abcdef1234567890abcdef',
+   * );
+   * ```
    */
   retrieve(userID: string, options?: RequestOptions): APIPromise<UserRetrieveResponse> {
     return this._client.get(path`/v1/autoScribe/users/${userID}`, options);
@@ -35,6 +42,13 @@ export class Users extends APIResource {
    * settings. All fields are optional - only provided fields will be updated. Email
    * cannot be changed via API. NPI number is required if enabling report creation
    * capability.
+   *
+   * @example
+   * ```ts
+   * const user = await client.autoScribe.users.update(
+   *   'usr_1234567890abcdef1234567890abcdef',
+   * );
+   * ```
    */
   update(
     userID: string,
@@ -48,6 +62,14 @@ export class Users extends APIResource {
    * Retrieves a paginated list of users with optional filtering by access level,
    * email, name, invitation source, and report creation capability. Returns up to
    * 100 users per request.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const userListResponse of client.autoScribe.users.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: UserListParams | null | undefined = {},
@@ -64,6 +86,20 @@ export class Users extends APIResource {
    * The user will have the specified permissions including report creation and study
    * management capabilities. NPI number is required for users who can create
    * reports.
+   *
+   * @example
+   * ```ts
+   * const response = await client.autoScribe.users.invite({
+   *   canCreateReports: true,
+   *   canManageStudies: true,
+   *   clinicRole: 'Radiologist',
+   *   email: 'S%+_FW+l+.n-@1F.-.eVZe',
+   *   firstName: 'x',
+   *   hasDashboardAccess: true,
+   *   lastName: 'x',
+   *   level: 'admin',
+   * });
+   * ```
    */
   invite(body: UserInviteParams, options?: RequestOptions): APIPromise<UserInviteResponse> {
     return this._client.post('/v1/autoScribe/users', { body, ...options });
@@ -73,6 +109,13 @@ export class Users extends APIResource {
    * Restores access for a previously deactivated user. The user will regain their
    * original permissions including report creation and study management
    * capabilities.
+   *
+   * @example
+   * ```ts
+   * const response = await client.autoScribe.users.reactivate({
+   *   userId: 'usr_1234567890abcdef1234567890abcdef',
+   * });
+   * ```
    */
   reactivate(body: UserReactivateParams, options?: RequestOptions): APIPromise<UserReactivateResponse> {
     return this._client.post('/v1/autoScribe/users/reactivate', { body, ...options });
@@ -82,6 +125,13 @@ export class Users extends APIResource {
    * Deactivates a user's access to the system. The user will no longer be able to
    * log in, create reports, or access studies. User data is preserved and can be
    * reactivated later.
+   *
+   * @example
+   * ```ts
+   * const response = await client.autoScribe.users.revokeAccess(
+   *   { userId: 'usr_1234567890abcdef1234567890abcdef' },
+   * );
+   * ```
    */
   revokeAccess(body: UserRevokeAccessParams, options?: RequestOptions): APIPromise<UserRevokeAccessResponse> {
     return this._client.post('/v1/autoScribe/users/revoke-access', { body, ...options });
@@ -133,7 +183,7 @@ export interface UserRetrieveResponse {
   /**
    * Timestamp when the user was created
    */
-  createdAt: string | null;
+  createdAt: string;
 
   /**
    * User's email address for login and notifications
@@ -246,7 +296,7 @@ export interface UserUpdateResponse {
   /**
    * Timestamp when the user was created
    */
-  createdAt: string | null;
+  createdAt: string;
 
   /**
    * User's email address for login and notifications
@@ -359,7 +409,7 @@ export interface UserListResponse {
   /**
    * Timestamp when the user was created
    */
-  createdAt: string | null;
+  createdAt: string;
 
   /**
    * User's email address for login and notifications
@@ -472,7 +522,7 @@ export interface UserInviteResponse {
   /**
    * Timestamp when the user was created
    */
-  createdAt: string | null;
+  createdAt: string;
 
   /**
    * User's email address for login and notifications

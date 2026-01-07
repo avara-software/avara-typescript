@@ -11,6 +11,15 @@ export class Studies extends APIResource {
   /**
    * Creates a new study in the Viewer system with the specified DICOM Study Instance
    * UID and metadata. The study can be optionally assigned to a user.
+   *
+   * @example
+   * ```ts
+   * const study = await client.viewer.studies.create({
+   *   severity: 'normal',
+   *   studyDescription: 'x',
+   *   studyInstanceUid: '.16...2511..',
+   * });
+   * ```
    */
   create(body: StudyCreateParams, options?: RequestOptions): APIPromise<StudyCreateResponse> {
     return this._client.post('/v1/viewer/studies', { body, ...options });
@@ -19,6 +28,13 @@ export class Studies extends APIResource {
   /**
    * Retrieves a single study by its unique study ID. Returns the complete study
    * object with all metadata and status information.
+   *
+   * @example
+   * ```ts
+   * const study = await client.viewer.studies.retrieve(
+   *   'stu_1234567890abcdef1234567890abcdef',
+   * );
+   * ```
    */
   retrieve(studyID: string, options?: RequestOptions): APIPromise<StudyRetrieveResponse> {
     return this._client.get(path`/v1/viewer/studies/${studyID}`, options);
@@ -28,6 +44,13 @@ export class Studies extends APIResource {
    * Updates a study's properties including description, severity, assignment,
    * organization, and metadata. All fields are optional - only provided fields will
    * be updated.
+   *
+   * @example
+   * ```ts
+   * const study = await client.viewer.studies.update(
+   *   'stu_1234567890abcdef1234567890abcdef',
+   * );
+   * ```
    */
   update(
     studyID: string,
@@ -41,6 +64,14 @@ export class Studies extends APIResource {
    * Retrieves a paginated list of studies with optional filtering by assignment,
    * severity, description, cancellation status, and viewer status. Returns up to 100
    * studies per request.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const studyListResponse of client.viewer.studies.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: StudyListParams | null | undefined = {},
@@ -55,6 +86,11 @@ export class Studies extends APIResource {
   /**
    * Marks a study as cancelled. Cancelled studies are preserved but flagged as
    * inactive. Can be identified by either study ID or DICOM Study Instance UID.
+   *
+   * @example
+   * ```ts
+   * const response = await client.viewer.studies.cancel();
+   * ```
    */
   cancel(
     body: StudyCancelParams | null | undefined = {},
@@ -67,6 +103,11 @@ export class Studies extends APIResource {
    * Generates a tokenized URL that redirects users directly to the Avara Viewer for
    * the specified study. The URL includes authentication and is time-limited for
    * security.
+   *
+   * @example
+   * ```ts
+   * const response = await client.viewer.studies.rerouteURL();
+   * ```
    */
   rerouteURL(
     body: StudyRerouteURLParams | null | undefined = {},
@@ -78,6 +119,13 @@ export class Studies extends APIResource {
   /**
    * Retrieves a single study by its DICOM Study Instance UID. This is useful when
    * you have the DICOM UID but not the Avara study ID.
+   *
+   * @example
+   * ```ts
+   * const response = await client.viewer.studies.retrieveByUid(
+   *   '1.2.840.10008.5.1.4.1.1.2',
+   * );
+   * ```
    */
   retrieveByUid(studyInstanceUid: string, options?: RequestOptions): APIPromise<StudyRetrieveByUidResponse> {
     return this._client.get(path`/v1/viewer/studies/by-uid/${studyInstanceUid}`, options);
@@ -86,6 +134,11 @@ export class Studies extends APIResource {
   /**
    * Restores a cancelled study to active status. The study must have been previously
    * cancelled. Can be identified by either study ID or DICOM Study Instance UID.
+   *
+   * @example
+   * ```ts
+   * const response = await client.viewer.studies.uncancel();
+   * ```
    */
   uncancel(
     body: StudyUncancelParams | null | undefined = {},
@@ -109,7 +162,7 @@ export interface StudyCreateResponse {
   /**
    * Timestamp when the study was created
    */
-  createdAt: string | null;
+  createdAt: string;
 
   /**
    * Whether the study has been cancelled
@@ -143,7 +196,7 @@ export interface StudyCreateResponse {
   /**
    * Timestamp when the study was last updated
    */
-  updatedAt: string | null;
+  updatedAt: string;
 
   /**
    * A reference to a user with basic identifying information
@@ -184,7 +237,7 @@ export interface StudyRetrieveResponse {
   /**
    * Timestamp when the study was created
    */
-  createdAt: string | null;
+  createdAt: string;
 
   /**
    * Whether the study has been cancelled
@@ -218,7 +271,7 @@ export interface StudyRetrieveResponse {
   /**
    * Timestamp when the study was last updated
    */
-  updatedAt: string | null;
+  updatedAt: string;
 
   /**
    * A reference to a user with basic identifying information
@@ -259,7 +312,7 @@ export interface StudyUpdateResponse {
   /**
    * Timestamp when the study was created
    */
-  createdAt: string | null;
+  createdAt: string;
 
   /**
    * Whether the study has been cancelled
@@ -293,7 +346,7 @@ export interface StudyUpdateResponse {
   /**
    * Timestamp when the study was last updated
    */
-  updatedAt: string | null;
+  updatedAt: string;
 
   /**
    * A reference to a user with basic identifying information
@@ -334,7 +387,7 @@ export interface StudyListResponse {
   /**
    * Timestamp when the study was created
    */
-  createdAt: string | null;
+  createdAt: string;
 
   /**
    * Whether the study has been cancelled
@@ -368,7 +421,7 @@ export interface StudyListResponse {
   /**
    * Timestamp when the study was last updated
    */
-  updatedAt: string | null;
+  updatedAt: string;
 
   /**
    * A reference to a user with basic identifying information
@@ -425,7 +478,7 @@ export interface StudyRetrieveByUidResponse {
   /**
    * Timestamp when the study was created
    */
-  createdAt: string | null;
+  createdAt: string;
 
   /**
    * Whether the study has been cancelled
@@ -459,7 +512,7 @@ export interface StudyRetrieveByUidResponse {
   /**
    * Timestamp when the study was last updated
    */
-  updatedAt: string | null;
+  updatedAt: string;
 
   /**
    * A reference to a user with basic identifying information
@@ -527,7 +580,7 @@ export interface StudyCreateParams {
 }
 
 export interface StudyUpdateParams {
-  assignedTo?: string | null;
+  assignedTo?: string;
 
   metadata?: { [key: string]: string } | null;
 
