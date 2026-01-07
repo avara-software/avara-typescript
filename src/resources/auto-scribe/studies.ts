@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as Shared from '../shared';
 import * as AutoScribeAPI from './auto-scribe';
 import { APIPromise } from '../../core/api-promise';
 import { CursorStudies, type CursorStudiesParams, PagePromise } from '../../core/pagination';
@@ -9,14 +8,28 @@ import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
 export class Studies extends APIResource {
+  /**
+   * Creates a new study in the AutoScribe system with DICOM metadata and report
+   * generation information. The study can include patient demographics, scan
+   * details, and references to prior studies/reports for context.
+   */
   create(body: StudyCreateParams, options?: RequestOptions): APIPromise<StudyCreateResponse> {
     return this._client.post('/v1/autoScribe/studies', { body, ...options });
   }
 
+  /**
+   * Retrieves a single study by its unique study ID. Returns the complete study
+   * object with all metadata, report status, and patient information.
+   */
   retrieve(studyID: string, options?: RequestOptions): APIPromise<StudyRetrieveResponse> {
     return this._client.get(path`/v1/autoScribe/studies/${studyID}`, options);
   }
 
+  /**
+   * Updates a study's properties including description, severity, assignment,
+   * organization, metadata, and report metadata. All fields are optional - only
+   * provided fields will be updated.
+   */
   update(
     studyID: string,
     body: StudyUpdateParams | null | undefined = {},
@@ -25,6 +38,11 @@ export class Studies extends APIResource {
     return this._client.patch(path`/v1/autoScribe/studies/${studyID}`, { body, ...options });
   }
 
+  /**
+   * Retrieves a paginated list of studies with optional filtering by assignment,
+   * severity, description, cancellation status, and report status. Returns up to 100
+   * studies per request.
+   */
   list(
     query: StudyListParams | null | undefined = {},
     options?: RequestOptions,
@@ -35,6 +53,10 @@ export class Studies extends APIResource {
     });
   }
 
+  /**
+   * Marks a study as cancelled. Cancelled studies are preserved but flagged as
+   * inactive. Can be identified by either study ID or DICOM Study Instance UID.
+   */
   cancel(
     body: StudyCancelParams | null | undefined = {},
     options?: RequestOptions,
@@ -42,14 +64,27 @@ export class Studies extends APIResource {
     return this._client.post('/v1/autoScribe/studies/cancel', { body, ...options });
   }
 
+  /**
+   * Generates a tokenized URL that redirects users to the AutoScribe interface
+   * (viewer + dictation) for the specified study and user. The URL includes
+   * authentication and is time-limited for security.
+   */
   rerouteURL(body: StudyRerouteURLParams, options?: RequestOptions): APIPromise<StudyRerouteURLResponse> {
     return this._client.post('/v1/autoScribe/studies/reroute-url', { body, ...options });
   }
 
+  /**
+   * Retrieves a single study by its DICOM Study Instance UID. This is useful when
+   * you have the DICOM UID but not the Avara study ID.
+   */
   retrieveByUid(studyInstanceUid: string, options?: RequestOptions): APIPromise<StudyRetrieveByUidResponse> {
     return this._client.get(path`/v1/autoScribe/studies/by-uid/${studyInstanceUid}`, options);
   }
 
+  /**
+   * Restores a cancelled study to active status. The study must have been previously
+   * cancelled. Can be identified by either study ID or DICOM Study Instance UID.
+   */
   uncancel(
     body: StudyUncancelParams | null | undefined = {},
     options?: RequestOptions,
@@ -57,6 +92,11 @@ export class Studies extends APIResource {
     return this._client.post('/v1/autoScribe/studies/uncancel', { body, ...options });
   }
 
+  /**
+   * Generates a tokenized URL that redirects users to the viewer interface only (no
+   * dictation) for the specified study. Useful for read-only access or referring
+   * physicians. The URL includes authentication and is time-limited.
+   */
   viewerOnlyRerouteURL(
     body: StudyViewerOnlyRerouteURLParams | null | undefined = {},
     options?: RequestOptions,
@@ -80,224 +120,640 @@ export interface ReportIDWithStatus {
  * A study entity in the AutoScribe system with report workflow status
  */
 export interface StudyCreateResponse {
+  /**
+   * Timestamp when the study was cancelled, null if not cancelled
+   */
   cancelledAt: string | null;
 
+  /**
+   * Timestamp when the study was created
+   */
   createdAt: string | null;
 
+  /**
+   * Whether the study has been cancelled
+   */
   isCancelled: boolean;
 
   /**
-   * Metadata for a study report including patient demographics and scan information
+   * Patient demographics and scan information for report generation
    */
   reportMetadata: AutoScribeAPI.StudyReportMetadata;
 
+  /**
+   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention
+   */
   severity: 'normal' | 'high' | 'stat';
 
+  /**
+   * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
+   */
   studyDescription: string;
 
+  /**
+   * Unique study identifier. Format: stu\_{32-hex-chars}
+   */
   studyId: string;
 
+  /**
+   * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+   * '1.2.840.10008.5.1.4.1.1.2')
+   */
   studyInstanceUid: string;
 
+  /**
+   * Report workflow status. 'unassigned' = no radiologist assigned, 'assigned' =
+   * assigned but not started, 'in_progress' = actively being dictated, 'completed' =
+   * report signed, 'addendum_active' = addendum in progress
+   */
   studyReportStatus: 'unassigned' | 'assigned' | 'in_progress' | 'completed' | 'addendum_active';
 
+  /**
+   * Timestamp when the study was last updated
+   */
   updatedAt: string | null;
 
   /**
-   * A reference to a user with basic identifying information
+   * Reference to the assigned radiologist, null if unassigned
    */
-  assignedTo?: Shared.UserReference | null;
+  assignedTo?: StudyCreateResponse.AssignedTo | null;
 
   /**
-   * A reference to an API key with basic identifying information
+   * Reference to the API key used to create this study
    */
-  createdByApiKey?: Shared.APIKeyReference | null;
+  createdByApiKey?: StudyCreateResponse.CreatedByAPIKey | null;
 
   /**
-   * A reference to a user with basic identifying information
+   * Reference to the user who created this study via dashboard
    */
-  createdByUser?: Shared.UserReference | null;
+  createdByUser?: StudyCreateResponse.CreatedByUser | null;
 
+  /**
+   * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
+   * values up to 1000 chars
+   */
   metadata?: { [key: string]: string };
 
   /**
-   * A reference to an organization with basic identifying information
+   * Reference to the organization this study belongs to
    */
-  org?: Shared.OrgReference | null;
+  org?: StudyCreateResponse.Org | null;
 
+  /**
+   * Array of prior report texts to provide clinical context
+   */
   priorReportTexts?: Array<string>;
 
+  /**
+   * Array of prior study IDs for comparison context (format: stu\_{32-hex-chars})
+   */
   priorStudyIds?: Array<string>;
 
+  /**
+   * Array of report IDs associated with this study, including addendums
+   */
   reportIds?: Array<ReportIDWithStatus>;
+}
+
+export namespace StudyCreateResponse {
+  /**
+   * Reference to the assigned radiologist, null if unassigned
+   */
+  export interface AssignedTo {
+    email: string;
+
+    userId: string;
+
+    firstName?: string;
+
+    lastName?: string;
+
+    middleName?: string;
+
+    suffix1?: string;
+
+    suffix2?: string;
+  }
+
+  /**
+   * Reference to the API key used to create this study
+   */
+  export interface CreatedByAPIKey {
+    apiKeyId: string;
+
+    description: string;
+
+    isViewerEnabled?: boolean;
+  }
+
+  /**
+   * Reference to the user who created this study via dashboard
+   */
+  export interface CreatedByUser {
+    email: string;
+
+    userId: string;
+
+    firstName?: string;
+
+    lastName?: string;
+
+    middleName?: string;
+
+    suffix1?: string;
+
+    suffix2?: string;
+  }
+
+  /**
+   * Reference to the organization this study belongs to
+   */
+  export interface Org {
+    orgId: string;
+
+    orgName: string;
+  }
 }
 
 /**
  * A study entity in the AutoScribe system with report workflow status
  */
 export interface StudyRetrieveResponse {
+  /**
+   * Timestamp when the study was cancelled, null if not cancelled
+   */
   cancelledAt: string | null;
 
+  /**
+   * Timestamp when the study was created
+   */
   createdAt: string | null;
 
+  /**
+   * Whether the study has been cancelled
+   */
   isCancelled: boolean;
 
   /**
-   * Metadata for a study report including patient demographics and scan information
+   * Patient demographics and scan information for report generation
    */
   reportMetadata: AutoScribeAPI.StudyReportMetadata;
 
+  /**
+   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention
+   */
   severity: 'normal' | 'high' | 'stat';
 
+  /**
+   * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
+   */
   studyDescription: string;
 
+  /**
+   * Unique study identifier. Format: stu\_{32-hex-chars}
+   */
   studyId: string;
 
+  /**
+   * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+   * '1.2.840.10008.5.1.4.1.1.2')
+   */
   studyInstanceUid: string;
 
+  /**
+   * Report workflow status. 'unassigned' = no radiologist assigned, 'assigned' =
+   * assigned but not started, 'in_progress' = actively being dictated, 'completed' =
+   * report signed, 'addendum_active' = addendum in progress
+   */
   studyReportStatus: 'unassigned' | 'assigned' | 'in_progress' | 'completed' | 'addendum_active';
 
+  /**
+   * Timestamp when the study was last updated
+   */
   updatedAt: string | null;
 
   /**
-   * A reference to a user with basic identifying information
+   * Reference to the assigned radiologist, null if unassigned
    */
-  assignedTo?: Shared.UserReference | null;
+  assignedTo?: StudyRetrieveResponse.AssignedTo | null;
 
   /**
-   * A reference to an API key with basic identifying information
+   * Reference to the API key used to create this study
    */
-  createdByApiKey?: Shared.APIKeyReference | null;
+  createdByApiKey?: StudyRetrieveResponse.CreatedByAPIKey | null;
 
   /**
-   * A reference to a user with basic identifying information
+   * Reference to the user who created this study via dashboard
    */
-  createdByUser?: Shared.UserReference | null;
+  createdByUser?: StudyRetrieveResponse.CreatedByUser | null;
 
+  /**
+   * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
+   * values up to 1000 chars
+   */
   metadata?: { [key: string]: string };
 
   /**
-   * A reference to an organization with basic identifying information
+   * Reference to the organization this study belongs to
    */
-  org?: Shared.OrgReference | null;
+  org?: StudyRetrieveResponse.Org | null;
 
+  /**
+   * Array of prior report texts to provide clinical context
+   */
   priorReportTexts?: Array<string>;
 
+  /**
+   * Array of prior study IDs for comparison context (format: stu\_{32-hex-chars})
+   */
   priorStudyIds?: Array<string>;
 
+  /**
+   * Array of report IDs associated with this study, including addendums
+   */
   reportIds?: Array<ReportIDWithStatus>;
+}
+
+export namespace StudyRetrieveResponse {
+  /**
+   * Reference to the assigned radiologist, null if unassigned
+   */
+  export interface AssignedTo {
+    email: string;
+
+    userId: string;
+
+    firstName?: string;
+
+    lastName?: string;
+
+    middleName?: string;
+
+    suffix1?: string;
+
+    suffix2?: string;
+  }
+
+  /**
+   * Reference to the API key used to create this study
+   */
+  export interface CreatedByAPIKey {
+    apiKeyId: string;
+
+    description: string;
+
+    isViewerEnabled?: boolean;
+  }
+
+  /**
+   * Reference to the user who created this study via dashboard
+   */
+  export interface CreatedByUser {
+    email: string;
+
+    userId: string;
+
+    firstName?: string;
+
+    lastName?: string;
+
+    middleName?: string;
+
+    suffix1?: string;
+
+    suffix2?: string;
+  }
+
+  /**
+   * Reference to the organization this study belongs to
+   */
+  export interface Org {
+    orgId: string;
+
+    orgName: string;
+  }
 }
 
 /**
  * A study entity in the AutoScribe system with report workflow status
  */
 export interface StudyUpdateResponse {
+  /**
+   * Timestamp when the study was cancelled, null if not cancelled
+   */
   cancelledAt: string | null;
 
+  /**
+   * Timestamp when the study was created
+   */
   createdAt: string | null;
 
+  /**
+   * Whether the study has been cancelled
+   */
   isCancelled: boolean;
 
   /**
-   * Metadata for a study report including patient demographics and scan information
+   * Patient demographics and scan information for report generation
    */
   reportMetadata: AutoScribeAPI.StudyReportMetadata;
 
+  /**
+   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention
+   */
   severity: 'normal' | 'high' | 'stat';
 
+  /**
+   * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
+   */
   studyDescription: string;
 
+  /**
+   * Unique study identifier. Format: stu\_{32-hex-chars}
+   */
   studyId: string;
 
+  /**
+   * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+   * '1.2.840.10008.5.1.4.1.1.2')
+   */
   studyInstanceUid: string;
 
+  /**
+   * Report workflow status. 'unassigned' = no radiologist assigned, 'assigned' =
+   * assigned but not started, 'in_progress' = actively being dictated, 'completed' =
+   * report signed, 'addendum_active' = addendum in progress
+   */
   studyReportStatus: 'unassigned' | 'assigned' | 'in_progress' | 'completed' | 'addendum_active';
 
+  /**
+   * Timestamp when the study was last updated
+   */
   updatedAt: string | null;
 
   /**
-   * A reference to a user with basic identifying information
+   * Reference to the assigned radiologist, null if unassigned
    */
-  assignedTo?: Shared.UserReference | null;
+  assignedTo?: StudyUpdateResponse.AssignedTo | null;
 
   /**
-   * A reference to an API key with basic identifying information
+   * Reference to the API key used to create this study
    */
-  createdByApiKey?: Shared.APIKeyReference | null;
+  createdByApiKey?: StudyUpdateResponse.CreatedByAPIKey | null;
 
   /**
-   * A reference to a user with basic identifying information
+   * Reference to the user who created this study via dashboard
    */
-  createdByUser?: Shared.UserReference | null;
+  createdByUser?: StudyUpdateResponse.CreatedByUser | null;
 
+  /**
+   * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
+   * values up to 1000 chars
+   */
   metadata?: { [key: string]: string };
 
   /**
-   * A reference to an organization with basic identifying information
+   * Reference to the organization this study belongs to
    */
-  org?: Shared.OrgReference | null;
+  org?: StudyUpdateResponse.Org | null;
 
+  /**
+   * Array of prior report texts to provide clinical context
+   */
   priorReportTexts?: Array<string>;
 
+  /**
+   * Array of prior study IDs for comparison context (format: stu\_{32-hex-chars})
+   */
   priorStudyIds?: Array<string>;
 
+  /**
+   * Array of report IDs associated with this study, including addendums
+   */
   reportIds?: Array<ReportIDWithStatus>;
+}
+
+export namespace StudyUpdateResponse {
+  /**
+   * Reference to the assigned radiologist, null if unassigned
+   */
+  export interface AssignedTo {
+    email: string;
+
+    userId: string;
+
+    firstName?: string;
+
+    lastName?: string;
+
+    middleName?: string;
+
+    suffix1?: string;
+
+    suffix2?: string;
+  }
+
+  /**
+   * Reference to the API key used to create this study
+   */
+  export interface CreatedByAPIKey {
+    apiKeyId: string;
+
+    description: string;
+
+    isViewerEnabled?: boolean;
+  }
+
+  /**
+   * Reference to the user who created this study via dashboard
+   */
+  export interface CreatedByUser {
+    email: string;
+
+    userId: string;
+
+    firstName?: string;
+
+    lastName?: string;
+
+    middleName?: string;
+
+    suffix1?: string;
+
+    suffix2?: string;
+  }
+
+  /**
+   * Reference to the organization this study belongs to
+   */
+  export interface Org {
+    orgId: string;
+
+    orgName: string;
+  }
 }
 
 /**
  * A study entity in the AutoScribe system with report workflow status
  */
 export interface StudyListResponse {
+  /**
+   * Timestamp when the study was cancelled, null if not cancelled
+   */
   cancelledAt: string | null;
 
+  /**
+   * Timestamp when the study was created
+   */
   createdAt: string | null;
 
+  /**
+   * Whether the study has been cancelled
+   */
   isCancelled: boolean;
 
   /**
-   * Metadata for a study report including patient demographics and scan information
+   * Patient demographics and scan information for report generation
    */
   reportMetadata: AutoScribeAPI.StudyReportMetadata;
 
+  /**
+   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention
+   */
   severity: 'normal' | 'high' | 'stat';
 
+  /**
+   * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
+   */
   studyDescription: string;
 
+  /**
+   * Unique study identifier. Format: stu\_{32-hex-chars}
+   */
   studyId: string;
 
+  /**
+   * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+   * '1.2.840.10008.5.1.4.1.1.2')
+   */
   studyInstanceUid: string;
 
+  /**
+   * Report workflow status. 'unassigned' = no radiologist assigned, 'assigned' =
+   * assigned but not started, 'in_progress' = actively being dictated, 'completed' =
+   * report signed, 'addendum_active' = addendum in progress
+   */
   studyReportStatus: 'unassigned' | 'assigned' | 'in_progress' | 'completed' | 'addendum_active';
 
+  /**
+   * Timestamp when the study was last updated
+   */
   updatedAt: string | null;
 
   /**
-   * A reference to a user with basic identifying information
+   * Reference to the assigned radiologist, null if unassigned
    */
-  assignedTo?: Shared.UserReference | null;
+  assignedTo?: StudyListResponse.AssignedTo | null;
 
   /**
-   * A reference to an API key with basic identifying information
+   * Reference to the API key used to create this study
    */
-  createdByApiKey?: Shared.APIKeyReference | null;
+  createdByApiKey?: StudyListResponse.CreatedByAPIKey | null;
 
   /**
-   * A reference to a user with basic identifying information
+   * Reference to the user who created this study via dashboard
    */
-  createdByUser?: Shared.UserReference | null;
+  createdByUser?: StudyListResponse.CreatedByUser | null;
 
+  /**
+   * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
+   * values up to 1000 chars
+   */
   metadata?: { [key: string]: string };
 
   /**
-   * A reference to an organization with basic identifying information
+   * Reference to the organization this study belongs to
    */
-  org?: Shared.OrgReference | null;
+  org?: StudyListResponse.Org | null;
 
+  /**
+   * Array of prior report texts to provide clinical context
+   */
   priorReportTexts?: Array<string>;
 
+  /**
+   * Array of prior study IDs for comparison context (format: stu\_{32-hex-chars})
+   */
   priorStudyIds?: Array<string>;
 
+  /**
+   * Array of report IDs associated with this study, including addendums
+   */
   reportIds?: Array<ReportIDWithStatus>;
+}
+
+export namespace StudyListResponse {
+  /**
+   * Reference to the assigned radiologist, null if unassigned
+   */
+  export interface AssignedTo {
+    email: string;
+
+    userId: string;
+
+    firstName?: string;
+
+    lastName?: string;
+
+    middleName?: string;
+
+    suffix1?: string;
+
+    suffix2?: string;
+  }
+
+  /**
+   * Reference to the API key used to create this study
+   */
+  export interface CreatedByAPIKey {
+    apiKeyId: string;
+
+    description: string;
+
+    isViewerEnabled?: boolean;
+  }
+
+  /**
+   * Reference to the user who created this study via dashboard
+   */
+  export interface CreatedByUser {
+    email: string;
+
+    userId: string;
+
+    firstName?: string;
+
+    lastName?: string;
+
+    middleName?: string;
+
+    suffix1?: string;
+
+    suffix2?: string;
+  }
+
+  /**
+   * Reference to the organization this study belongs to
+   */
+  export interface Org {
+    orgId: string;
+
+    orgName: string;
+  }
 }
 
 /**
@@ -320,56 +776,160 @@ export interface StudyRerouteURLResponse {
  * A study entity in the AutoScribe system with report workflow status
  */
 export interface StudyRetrieveByUidResponse {
+  /**
+   * Timestamp when the study was cancelled, null if not cancelled
+   */
   cancelledAt: string | null;
 
+  /**
+   * Timestamp when the study was created
+   */
   createdAt: string | null;
 
+  /**
+   * Whether the study has been cancelled
+   */
   isCancelled: boolean;
 
   /**
-   * Metadata for a study report including patient demographics and scan information
+   * Patient demographics and scan information for report generation
    */
   reportMetadata: AutoScribeAPI.StudyReportMetadata;
 
+  /**
+   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention
+   */
   severity: 'normal' | 'high' | 'stat';
 
+  /**
+   * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
+   */
   studyDescription: string;
 
+  /**
+   * Unique study identifier. Format: stu\_{32-hex-chars}
+   */
   studyId: string;
 
+  /**
+   * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+   * '1.2.840.10008.5.1.4.1.1.2')
+   */
   studyInstanceUid: string;
 
+  /**
+   * Report workflow status. 'unassigned' = no radiologist assigned, 'assigned' =
+   * assigned but not started, 'in_progress' = actively being dictated, 'completed' =
+   * report signed, 'addendum_active' = addendum in progress
+   */
   studyReportStatus: 'unassigned' | 'assigned' | 'in_progress' | 'completed' | 'addendum_active';
 
+  /**
+   * Timestamp when the study was last updated
+   */
   updatedAt: string | null;
 
   /**
-   * A reference to a user with basic identifying information
+   * Reference to the assigned radiologist, null if unassigned
    */
-  assignedTo?: Shared.UserReference | null;
+  assignedTo?: StudyRetrieveByUidResponse.AssignedTo | null;
 
   /**
-   * A reference to an API key with basic identifying information
+   * Reference to the API key used to create this study
    */
-  createdByApiKey?: Shared.APIKeyReference | null;
+  createdByApiKey?: StudyRetrieveByUidResponse.CreatedByAPIKey | null;
 
   /**
-   * A reference to a user with basic identifying information
+   * Reference to the user who created this study via dashboard
    */
-  createdByUser?: Shared.UserReference | null;
+  createdByUser?: StudyRetrieveByUidResponse.CreatedByUser | null;
 
+  /**
+   * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
+   * values up to 1000 chars
+   */
   metadata?: { [key: string]: string };
 
   /**
-   * A reference to an organization with basic identifying information
+   * Reference to the organization this study belongs to
    */
-  org?: Shared.OrgReference | null;
+  org?: StudyRetrieveByUidResponse.Org | null;
 
+  /**
+   * Array of prior report texts to provide clinical context
+   */
   priorReportTexts?: Array<string>;
 
+  /**
+   * Array of prior study IDs for comparison context (format: stu\_{32-hex-chars})
+   */
   priorStudyIds?: Array<string>;
 
+  /**
+   * Array of report IDs associated with this study, including addendums
+   */
   reportIds?: Array<ReportIDWithStatus>;
+}
+
+export namespace StudyRetrieveByUidResponse {
+  /**
+   * Reference to the assigned radiologist, null if unassigned
+   */
+  export interface AssignedTo {
+    email: string;
+
+    userId: string;
+
+    firstName?: string;
+
+    lastName?: string;
+
+    middleName?: string;
+
+    suffix1?: string;
+
+    suffix2?: string;
+  }
+
+  /**
+   * Reference to the API key used to create this study
+   */
+  export interface CreatedByAPIKey {
+    apiKeyId: string;
+
+    description: string;
+
+    isViewerEnabled?: boolean;
+  }
+
+  /**
+   * Reference to the user who created this study via dashboard
+   */
+  export interface CreatedByUser {
+    email: string;
+
+    userId: string;
+
+    firstName?: string;
+
+    lastName?: string;
+
+    middleName?: string;
+
+    suffix1?: string;
+
+    suffix2?: string;
+  }
+
+  /**
+   * Reference to the organization this study belongs to
+   */
+  export interface Org {
+    orgId: string;
+
+    orgName: string;
+  }
 }
 
 /**
@@ -391,18 +951,33 @@ export interface StudyViewerOnlyRerouteURLResponse {
 
 export interface StudyCreateParams {
   /**
-   * Metadata for a study report including patient demographics and scan information
+   * Patient demographics and scan information for report generation
    */
   reportMetadata: AutoScribeAPI.StudyReportMetadata;
 
+  /**
+   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention
+   */
   severity: 'normal' | 'high' | 'stat';
 
+  /**
+   * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
+   */
   studyDescription: string;
 
+  /**
+   * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+   * '1.2.840.10008.5.1.4.1.1.2')
+   */
   studyInstanceUid: string;
 
   assignedTo?: string;
 
+  /**
+   * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
+   * values up to 1000 chars
+   */
   metadata?: { [key: string]: string };
 
   orgId?: string;
@@ -425,8 +1000,15 @@ export interface StudyUpdateParams {
 
   reportMetadata?: StudyUpdateParams.ReportMetadata;
 
+  /**
+   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention
+   */
   severity?: 'normal' | 'high' | 'stat';
 
+  /**
+   * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
+   */
   studyDescription?: string;
 }
 

@@ -11,14 +11,27 @@ import { path } from '../../internal/utils/path';
 export class Orgs extends APIResource {
   users: UsersAPI.Users = new UsersAPI.Users(this._client);
 
+  /**
+   * Creates a new organization with a unique identifier and name. Organizations can
+   * be used to group and manage users, studies, and access permissions across the
+   * Avara platform.
+   */
   create(body: OrgCreateParams, options?: RequestOptions): APIPromise<OrgCreateResponse> {
     return this._client.post('/v1/orgs', { body, ...options });
   }
 
+  /**
+   * Retrieves a single organization by its unique organization ID. Returns the
+   * complete organization object with name, status, and timestamps.
+   */
   retrieve(orgID: string, options?: RequestOptions): APIPromise<OrgRetrieveResponse> {
     return this._client.get(path`/v1/orgs/${orgID}`, options);
   }
 
+  /**
+   * Updates an organization's properties such as name or other metadata. All fields
+   * are optional - only provided fields will be updated.
+   */
   update(
     orgID: string,
     body: OrgUpdateParams | null | undefined = {},
@@ -27,6 +40,10 @@ export class Orgs extends APIResource {
     return this._client.patch(path`/v1/orgs/${orgID}`, { body, ...options });
   }
 
+  /**
+   * Retrieves a paginated list of organizations with optional filtering by name.
+   * Returns up to 100 organizations per request.
+   */
   list(
     query: OrgListParams | null | undefined = {},
     options?: RequestOptions,
@@ -34,10 +51,19 @@ export class Orgs extends APIResource {
     return this._client.getAPIList('/v1/orgs', CursorOrganizations<OrgListResponse>, { query, ...options });
   }
 
+  /**
+   * Deactivates an organization, preventing it from being used for new studies or
+   * user assignments. Existing data is preserved and the organization can be
+   * reactivated later.
+   */
   deactivate(orgID: string, options?: RequestOptions): APIPromise<OrgDeactivateResponse> {
     return this._client.post(path`/v1/orgs/${orgID}/deactivate`, options);
   }
 
+  /**
+   * Restores a deactivated organization to active status, allowing it to be used for
+   * new studies and user assignments again.
+   */
   reactivate(orgID: string, options?: RequestOptions): APIPromise<OrgReactivateResponse> {
     return this._client.post(path`/v1/orgs/${orgID}/reactivate`, options);
   }
