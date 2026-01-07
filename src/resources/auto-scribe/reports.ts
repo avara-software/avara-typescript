@@ -267,6 +267,9 @@ export namespace ReportTextResponse {
 }
 
 export interface ReportListParams {
+  /**
+   * Unique study identifier. Format: stu\_{32-hex-chars}
+   */
   studyId?: string;
 
   /**
@@ -276,8 +279,14 @@ export interface ReportListParams {
 }
 
 export interface ReportPdfParams {
+  /**
+   * Unique report identifier. Format: rep\_{32-hex-chars}
+   */
   reportId?: string;
 
+  /**
+   * Unique study identifier. Format: stu\_{32-hex-chars}
+   */
   studyId?: string;
 
   /**
@@ -287,8 +296,14 @@ export interface ReportPdfParams {
 }
 
 export interface ReportTextParams {
+  /**
+   * Unique report identifier. Format: rep\_{32-hex-chars}
+   */
   reportId?: string;
 
+  /**
+   * Unique study identifier. Format: stu\_{32-hex-chars}
+   */
   studyId?: string;
 
   /**
