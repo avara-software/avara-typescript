@@ -157,7 +157,7 @@ You can use the `for await … of` syntax to iterate through items across all pa
 async function fetchAllStudyListResponses(params) {
   const allStudyListResponses = [];
   // Automatically fetches more pages as needed.
-  for await (const studyListResponse of client.viewer.studies.list()) {
+  for await (const studyListResponse of client.autoScribe.studies.list()) {
     allStudyListResponses.push(studyListResponse);
   }
   return allStudyListResponses;
@@ -167,7 +167,7 @@ async function fetchAllStudyListResponses(params) {
 Alternatively, you can request a single page at a time:
 
 ```ts
-let page = await client.viewer.studies.list();
+let page = await client.autoScribe.studies.list();
 for (const studyListResponse of page.studies) {
   console.log(studyListResponse);
 }

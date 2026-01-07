@@ -10,7 +10,7 @@ const client = new Avara({
 describe('resource users', () => {
   // Prism tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.autoScribe.users.retrieve('usr_1234567890abcdef1234567890abcdef');
+    const responsePromise = client.autoScribe.users.retrieve('usr_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -132,7 +132,7 @@ describe('resource users', () => {
   // Prism tests are disabled
   test.skip('reactivate: only required params', async () => {
     const responsePromise = client.autoScribe.users.reactivate({
-      userId: 'usr_1234567890abcdef1234567890abcdef',
+      userId: 'usr_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -146,14 +146,14 @@ describe('resource users', () => {
   // Prism tests are disabled
   test.skip('reactivate: required and optional params', async () => {
     const response = await client.autoScribe.users.reactivate({
-      userId: 'usr_1234567890abcdef1234567890abcdef',
+      userId: 'usr_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD',
     });
   });
 
   // Prism tests are disabled
   test.skip('revokeAccess: only required params', async () => {
     const responsePromise = client.autoScribe.users.revokeAccess({
-      userId: 'usr_1234567890abcdef1234567890abcdef',
+      userId: 'usr_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -167,7 +167,7 @@ describe('resource users', () => {
   // Prism tests are disabled
   test.skip('revokeAccess: required and optional params', async () => {
     const response = await client.autoScribe.users.revokeAccess({
-      userId: 'usr_1234567890abcdef1234567890abcdef',
+      userId: 'usr_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD',
     });
   });
 });
