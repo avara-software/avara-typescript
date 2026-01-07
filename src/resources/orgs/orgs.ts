@@ -118,22 +118,50 @@ export type OrgListResponsesCursorOrganizations = CursorOrganizations<OrgListRes
  * An organization entity that groups users and studies
  */
 export interface OrgCreateResponse {
+  /**
+   * Timestamp when the organization was created
+   */
   createdAt: string | null;
 
+  /**
+   * Whether the organization is currently active
+   */
   isActive: boolean;
 
+  /**
+   * Unique organization identifier. Format: org\_{32-hex-chars}
+   */
   orgId: string;
 
+  /**
+   * Name of the organization
+   */
   orgName: string;
 
+  /**
+   * Timestamp when the organization was last updated
+   */
   updatedAt: string | null;
 
+  /**
+   * Number of users currently in this organization
+   */
   userCount: number;
 
+  /**
+   * UUID of the API key used to create this organization, for audit tracking
+   */
   createdByApiKeyId?: string;
 
+  /**
+   * User ID who created this organization via dashboard, null if created via API key
+   */
   createdByUserId?: string;
 
+  /**
+   * Custom key-value metadata for the organization. Maximum 50 pairs, keys up to 100
+   * chars, values up to 1000 chars
+   */
   metadata?: { [key: string]: string };
 }
 
@@ -141,22 +169,50 @@ export interface OrgCreateResponse {
  * An organization entity that groups users and studies
  */
 export interface OrgRetrieveResponse {
+  /**
+   * Timestamp when the organization was created
+   */
   createdAt: string | null;
 
+  /**
+   * Whether the organization is currently active
+   */
   isActive: boolean;
 
+  /**
+   * Unique organization identifier. Format: org\_{32-hex-chars}
+   */
   orgId: string;
 
+  /**
+   * Name of the organization
+   */
   orgName: string;
 
+  /**
+   * Timestamp when the organization was last updated
+   */
   updatedAt: string | null;
 
+  /**
+   * Number of users currently in this organization
+   */
   userCount: number;
 
+  /**
+   * UUID of the API key used to create this organization, for audit tracking
+   */
   createdByApiKeyId?: string;
 
+  /**
+   * User ID who created this organization via dashboard, null if created via API key
+   */
   createdByUserId?: string;
 
+  /**
+   * Custom key-value metadata for the organization. Maximum 50 pairs, keys up to 100
+   * chars, values up to 1000 chars
+   */
   metadata?: { [key: string]: string };
 }
 
@@ -164,22 +220,50 @@ export interface OrgRetrieveResponse {
  * An organization entity that groups users and studies
  */
 export interface OrgUpdateResponse {
+  /**
+   * Timestamp when the organization was created
+   */
   createdAt: string | null;
 
+  /**
+   * Whether the organization is currently active
+   */
   isActive: boolean;
 
+  /**
+   * Unique organization identifier. Format: org\_{32-hex-chars}
+   */
   orgId: string;
 
+  /**
+   * Name of the organization
+   */
   orgName: string;
 
+  /**
+   * Timestamp when the organization was last updated
+   */
   updatedAt: string | null;
 
+  /**
+   * Number of users currently in this organization
+   */
   userCount: number;
 
+  /**
+   * UUID of the API key used to create this organization, for audit tracking
+   */
   createdByApiKeyId?: string;
 
+  /**
+   * User ID who created this organization via dashboard, null if created via API key
+   */
   createdByUserId?: string;
 
+  /**
+   * Custom key-value metadata for the organization. Maximum 50 pairs, keys up to 100
+   * chars, values up to 1000 chars
+   */
   metadata?: { [key: string]: string };
 }
 
@@ -187,22 +271,50 @@ export interface OrgUpdateResponse {
  * An organization entity that groups users and studies
  */
 export interface OrgListResponse {
+  /**
+   * Timestamp when the organization was created
+   */
   createdAt: string | null;
 
+  /**
+   * Whether the organization is currently active
+   */
   isActive: boolean;
 
+  /**
+   * Unique organization identifier. Format: org\_{32-hex-chars}
+   */
   orgId: string;
 
+  /**
+   * Name of the organization
+   */
   orgName: string;
 
+  /**
+   * Timestamp when the organization was last updated
+   */
   updatedAt: string | null;
 
+  /**
+   * Number of users currently in this organization
+   */
   userCount: number;
 
+  /**
+   * UUID of the API key used to create this organization, for audit tracking
+   */
   createdByApiKeyId?: string;
 
+  /**
+   * User ID who created this organization via dashboard, null if created via API key
+   */
   createdByUserId?: string;
 
+  /**
+   * Custom key-value metadata for the organization. Maximum 50 pairs, keys up to 100
+   * chars, values up to 1000 chars
+   */
   metadata?: { [key: string]: string };
 }
 
@@ -210,22 +322,50 @@ export interface OrgListResponse {
  * An organization entity that groups users and studies
  */
 export interface OrgDeactivateResponse {
+  /**
+   * Timestamp when the organization was created
+   */
   createdAt: string | null;
 
+  /**
+   * Whether the organization is currently active
+   */
   isActive: boolean;
 
+  /**
+   * Unique organization identifier. Format: org\_{32-hex-chars}
+   */
   orgId: string;
 
+  /**
+   * Name of the organization
+   */
   orgName: string;
 
+  /**
+   * Timestamp when the organization was last updated
+   */
   updatedAt: string | null;
 
+  /**
+   * Number of users currently in this organization
+   */
   userCount: number;
 
+  /**
+   * UUID of the API key used to create this organization, for audit tracking
+   */
   createdByApiKeyId?: string;
 
+  /**
+   * User ID who created this organization via dashboard, null if created via API key
+   */
   createdByUserId?: string;
 
+  /**
+   * Custom key-value metadata for the organization. Maximum 50 pairs, keys up to 100
+   * chars, values up to 1000 chars
+   */
   metadata?: { [key: string]: string };
 }
 
@@ -233,34 +373,74 @@ export interface OrgDeactivateResponse {
  * An organization entity that groups users and studies
  */
 export interface OrgReactivateResponse {
+  /**
+   * Timestamp when the organization was created
+   */
   createdAt: string | null;
 
+  /**
+   * Whether the organization is currently active
+   */
   isActive: boolean;
 
+  /**
+   * Unique organization identifier. Format: org\_{32-hex-chars}
+   */
   orgId: string;
 
+  /**
+   * Name of the organization
+   */
   orgName: string;
 
+  /**
+   * Timestamp when the organization was last updated
+   */
   updatedAt: string | null;
 
+  /**
+   * Number of users currently in this organization
+   */
   userCount: number;
 
+  /**
+   * UUID of the API key used to create this organization, for audit tracking
+   */
   createdByApiKeyId?: string;
 
+  /**
+   * User ID who created this organization via dashboard, null if created via API key
+   */
   createdByUserId?: string;
 
+  /**
+   * Custom key-value metadata for the organization. Maximum 50 pairs, keys up to 100
+   * chars, values up to 1000 chars
+   */
   metadata?: { [key: string]: string };
 }
 
 export interface OrgCreateParams {
+  /**
+   * Name of the organization to create
+   */
   orgName: string;
 
+  /**
+   * Custom key-value metadata for the organization. Maximum 50 pairs
+   */
   metadata?: { [key: string]: string };
 }
 
 export interface OrgUpdateParams {
+  /**
+   * Updated metadata. Pass null to clear all metadata
+   */
   metadata?: { [key: string]: string } | null;
 
+  /**
+   * Updated name for the organization
+   */
   orgName?: string;
 }
 
