@@ -104,8 +104,8 @@ describe('resource invitations', () => {
     await expect(
       client.viewer.users.invitations.revoke(
         {
-          invitationId: 'inv_1234567890abcdef1234567890abcdef',
-          userId: 'usr_1234567890abcdef1234567890abcdef',
+          invitationId: 'inv_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD',
+          userId: 'usr_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD',
         },
         { path: '/_stainless_unknown_path' },
       ),

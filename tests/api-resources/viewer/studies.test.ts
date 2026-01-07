@@ -30,15 +30,15 @@ describe('resource studies', () => {
       severity: 'normal',
       studyDescription: 'x',
       studyInstanceUid: '.16...2511..',
-      assignedTo: 'usr_1234567890abcdef1234567890abcdef',
+      assignedTo: 'usr_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD',
       metadata: { foo: 'string' },
-      orgId: 'org_1234567890abcdef1234567890abcdef',
+      orgId: 'org_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD',
     });
   });
 
   // Prism tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.viewer.studies.retrieve('stu_1234567890abcdef1234567890abcdef');
+    const responsePromise = client.viewer.studies.retrieve('stu_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -50,7 +50,7 @@ describe('resource studies', () => {
 
   // Prism tests are disabled
   test.skip('update', async () => {
-    const responsePromise = client.viewer.studies.update('stu_1234567890abcdef1234567890abcdef');
+    const responsePromise = client.viewer.studies.update('stu_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -65,9 +65,9 @@ describe('resource studies', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.viewer.studies.update(
-        'stu_1234567890abcdef1234567890abcdef',
+        'stu_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD',
         {
-          assignedTo: 'usr_1234567890abcdef1234567890abcdef',
+          assignedTo: 'usr_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD',
           metadata: { foo: 'string' },
           severity: 'normal',
           studyDescription: 'x',
@@ -126,7 +126,7 @@ describe('resource studies', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.viewer.studies.cancel(
-        { studyId: 'stu_1234567890abcdef1234567890abcdef', studyInstanceUid: '.16...2511..' },
+        { studyId: 'stu_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD', studyInstanceUid: '.16...2511..' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Avara.NotFoundError);
@@ -149,7 +149,7 @@ describe('resource studies', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.viewer.studies.rerouteURL(
-        { studyId: 'stu_1234567890abcdef1234567890abcdef', studyInstanceUid: '.16...2511..' },
+        { studyId: 'stu_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD', studyInstanceUid: '.16...2511..' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Avara.NotFoundError);
@@ -184,7 +184,7 @@ describe('resource studies', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.viewer.studies.uncancel(
-        { studyId: 'stu_1234567890abcdef1234567890abcdef', studyInstanceUid: '.16...2511..' },
+        { studyId: 'stu_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD', studyInstanceUid: '.16...2511..' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Avara.NotFoundError);

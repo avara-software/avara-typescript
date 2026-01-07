@@ -750,14 +750,14 @@ export class Avara {
 
   static toFile = Uploads.toFile;
 
-  viewer: API.Viewer = new API.Viewer(this);
   autoScribe: API.AutoScribe = new API.AutoScribe(this);
+  viewer: API.Viewer = new API.Viewer(this);
   orgs: API.Orgs = new API.Orgs(this);
   webhooks: API.Webhooks = new API.Webhooks(this);
 }
 
-Avara.Viewer = Viewer;
 Avara.AutoScribe = AutoScribe;
+Avara.Viewer = Viewer;
 Avara.Orgs = Orgs;
 Avara.Webhooks = Webhooks;
 
@@ -785,9 +785,9 @@ export declare namespace Avara {
     type CursorOrganizationsResponse as CursorOrganizationsResponse,
   };
 
-  export { Viewer as Viewer };
-
   export { AutoScribe as AutoScribe, type StudyReportMetadata as StudyReportMetadata };
+
+  export { Viewer as Viewer };
 
   export {
     Orgs as Orgs,
