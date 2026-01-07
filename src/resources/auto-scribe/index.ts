@@ -35,15 +35,15 @@ export {
 } from './studies';
 export {
   Users,
-  type UserCreateResponse,
   type UserRetrieveResponse,
   type UserUpdateResponse,
   type UserListResponse,
+  type UserInviteResponse,
   type UserReactivateResponse,
   type UserRevokeAccessResponse,
-  type UserCreateParams,
   type UserUpdateParams,
   type UserListParams,
+  type UserInviteParams,
   type UserReactivateParams,
   type UserRevokeAccessParams,
   type UserListResponsesCursorUsers,

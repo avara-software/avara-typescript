@@ -15,8 +15,8 @@ export {
 } from './orgs';
 export {
   Users,
-  type UserCreateResponse,
-  type UserDeleteResponse,
-  type UserCreateParams,
-  type UserDeleteParams,
+  type UserAddResponse,
+  type UserRemoveResponse,
+  type UserAddParams,
+  type UserRemoveParams,
 } from './users';

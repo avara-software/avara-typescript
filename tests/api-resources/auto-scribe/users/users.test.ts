@@ -9,46 +9,6 @@ const client = new Avara({
 
 describe('resource users', () => {
   // Prism tests are disabled
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.autoScribe.users.create({
-      canCreateReports: true,
-      canManageStudies: true,
-      clinicRole: 'Radiologist',
-      email: 'S%+_FW+l+.n-@1F.-.eVZe',
-      firstName: 'x',
-      hasDashboardAccess: true,
-      lastName: 'x',
-      level: 'admin',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('create: required and optional params', async () => {
-    const response = await client.autoScribe.users.create({
-      canCreateReports: true,
-      canManageStudies: true,
-      clinicRole: 'Radiologist',
-      email: 'S%+_FW+l+.n-@1F.-.eVZe',
-      firstName: 'x',
-      hasDashboardAccess: true,
-      lastName: 'x',
-      level: 'admin',
-      middleName: 'x',
-      npiNumber: '7321669910',
-      phoneNumber: '321669910225610',
-      suffix1: 'x',
-      suffix2: 'x',
-    });
-  });
-
-  // Prism tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.autoScribe.users.retrieve('usr_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD');
     const rawResponse = await responsePromise.asResponse();
@@ -127,6 +87,46 @@ describe('resource users', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Avara.NotFoundError);
+  });
+
+  // Prism tests are disabled
+  test.skip('invite: only required params', async () => {
+    const responsePromise = client.autoScribe.users.invite({
+      canCreateReports: true,
+      canManageStudies: true,
+      clinicRole: 'Radiologist',
+      email: 'S%+_FW+l+.n-@1F.-.eVZe',
+      firstName: 'x',
+      hasDashboardAccess: true,
+      lastName: 'x',
+      level: 'admin',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('invite: required and optional params', async () => {
+    const response = await client.autoScribe.users.invite({
+      canCreateReports: true,
+      canManageStudies: true,
+      clinicRole: 'Radiologist',
+      email: 'S%+_FW+l+.n-@1F.-.eVZe',
+      firstName: 'x',
+      hasDashboardAccess: true,
+      lastName: 'x',
+      level: 'admin',
+      middleName: 'x',
+      npiNumber: '7321669910',
+      phoneNumber: '321669910225610',
+      suffix1: 'x',
+      suffix2: 'x',
+    });
   });
 
   // Prism tests are disabled

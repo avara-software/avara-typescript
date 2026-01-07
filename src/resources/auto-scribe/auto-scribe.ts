@@ -37,8 +37,8 @@ import {
 } from './studies';
 import * as UsersAPI from './users/users';
 import {
-  UserCreateParams,
-  UserCreateResponse,
+  UserInviteParams,
+  UserInviteResponse,
   UserListParams,
   UserListResponse,
   UserListResponsesCursorUsers,
@@ -132,16 +132,16 @@ export declare namespace AutoScribe {
 
   export {
     Users as Users,
-    type UserCreateResponse as UserCreateResponse,
     type UserRetrieveResponse as UserRetrieveResponse,
     type UserUpdateResponse as UserUpdateResponse,
     type UserListResponse as UserListResponse,
+    type UserInviteResponse as UserInviteResponse,
     type UserReactivateResponse as UserReactivateResponse,
     type UserRevokeAccessResponse as UserRevokeAccessResponse,
     type UserListResponsesCursorUsers as UserListResponsesCursorUsers,
-    type UserCreateParams as UserCreateParams,
     type UserUpdateParams as UserUpdateParams,
     type UserListParams as UserListParams,
+    type UserInviteParams as UserInviteParams,
     type UserReactivateParams as UserReactivateParams,
     type UserRevokeAccessParams as UserRevokeAccessParams,
   };
