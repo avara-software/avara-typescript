@@ -288,18 +288,39 @@ export namespace StudyCreateResponse {
    * Reference to the assigned radiologist, null if unassigned
    */
   export interface AssignedTo {
+    /**
+     * User's email address
+     */
     email: string;
 
+    /**
+     * Unique user identifier. Format: usr\_{32-hex-chars}
+     */
     userId: string;
 
+    /**
+     * User's first name
+     */
     firstName?: string;
 
+    /**
+     * User's last name
+     */
     lastName?: string;
 
+    /**
+     * User's middle name
+     */
     middleName?: string;
 
+    /**
+     * Name suffix (e.g., 'MD', 'Jr.')
+     */
     suffix1?: string;
 
+    /**
+     * Additional name suffix
+     */
     suffix2?: string;
   }
 
@@ -307,10 +328,19 @@ export namespace StudyCreateResponse {
    * Reference to the API key used to create this study
    */
   export interface CreatedByAPIKey {
+    /**
+     * Unique API key identifier (UUIDv4 format)
+     */
     apiKeyId: string;
 
+    /**
+     * Human-readable description of the API key
+     */
     description: string;
 
+    /**
+     * Whether this API key has access to the Viewer product
+     */
     isViewerEnabled?: boolean;
   }
 
@@ -318,18 +348,39 @@ export namespace StudyCreateResponse {
    * Reference to the user who created this study via dashboard
    */
   export interface CreatedByUser {
+    /**
+     * User's email address
+     */
     email: string;
 
+    /**
+     * Unique user identifier. Format: usr\_{32-hex-chars}
+     */
     userId: string;
 
+    /**
+     * User's first name
+     */
     firstName?: string;
 
+    /**
+     * User's last name
+     */
     lastName?: string;
 
+    /**
+     * User's middle name
+     */
     middleName?: string;
 
+    /**
+     * Name suffix (e.g., 'MD', 'Jr.')
+     */
     suffix1?: string;
 
+    /**
+     * Additional name suffix
+     */
     suffix2?: string;
   }
 
@@ -337,8 +388,14 @@ export namespace StudyCreateResponse {
    * Reference to the organization this study belongs to
    */
   export interface Org {
+    /**
+     * Unique organization identifier. Format: org\_{32-hex-chars}
+     */
     orgId: string;
 
+    /**
+     * Name of the organization
+     */
     orgName: string;
   }
 }
@@ -448,18 +505,39 @@ export namespace StudyRetrieveResponse {
    * Reference to the assigned radiologist, null if unassigned
    */
   export interface AssignedTo {
+    /**
+     * User's email address
+     */
     email: string;
 
+    /**
+     * Unique user identifier. Format: usr\_{32-hex-chars}
+     */
     userId: string;
 
+    /**
+     * User's first name
+     */
     firstName?: string;
 
+    /**
+     * User's last name
+     */
     lastName?: string;
 
+    /**
+     * User's middle name
+     */
     middleName?: string;
 
+    /**
+     * Name suffix (e.g., 'MD', 'Jr.')
+     */
     suffix1?: string;
 
+    /**
+     * Additional name suffix
+     */
     suffix2?: string;
   }
 
@@ -467,10 +545,19 @@ export namespace StudyRetrieveResponse {
    * Reference to the API key used to create this study
    */
   export interface CreatedByAPIKey {
+    /**
+     * Unique API key identifier (UUIDv4 format)
+     */
     apiKeyId: string;
 
+    /**
+     * Human-readable description of the API key
+     */
     description: string;
 
+    /**
+     * Whether this API key has access to the Viewer product
+     */
     isViewerEnabled?: boolean;
   }
 
@@ -478,18 +565,39 @@ export namespace StudyRetrieveResponse {
    * Reference to the user who created this study via dashboard
    */
   export interface CreatedByUser {
+    /**
+     * User's email address
+     */
     email: string;
 
+    /**
+     * Unique user identifier. Format: usr\_{32-hex-chars}
+     */
     userId: string;
 
+    /**
+     * User's first name
+     */
     firstName?: string;
 
+    /**
+     * User's last name
+     */
     lastName?: string;
 
+    /**
+     * User's middle name
+     */
     middleName?: string;
 
+    /**
+     * Name suffix (e.g., 'MD', 'Jr.')
+     */
     suffix1?: string;
 
+    /**
+     * Additional name suffix
+     */
     suffix2?: string;
   }
 
@@ -497,8 +605,14 @@ export namespace StudyRetrieveResponse {
    * Reference to the organization this study belongs to
    */
   export interface Org {
+    /**
+     * Unique organization identifier. Format: org\_{32-hex-chars}
+     */
     orgId: string;
 
+    /**
+     * Name of the organization
+     */
     orgName: string;
   }
 }
@@ -608,18 +722,39 @@ export namespace StudyUpdateResponse {
    * Reference to the assigned radiologist, null if unassigned
    */
   export interface AssignedTo {
+    /**
+     * User's email address
+     */
     email: string;
 
+    /**
+     * Unique user identifier. Format: usr\_{32-hex-chars}
+     */
     userId: string;
 
+    /**
+     * User's first name
+     */
     firstName?: string;
 
+    /**
+     * User's last name
+     */
     lastName?: string;
 
+    /**
+     * User's middle name
+     */
     middleName?: string;
 
+    /**
+     * Name suffix (e.g., 'MD', 'Jr.')
+     */
     suffix1?: string;
 
+    /**
+     * Additional name suffix
+     */
     suffix2?: string;
   }
 
@@ -627,10 +762,19 @@ export namespace StudyUpdateResponse {
    * Reference to the API key used to create this study
    */
   export interface CreatedByAPIKey {
+    /**
+     * Unique API key identifier (UUIDv4 format)
+     */
     apiKeyId: string;
 
+    /**
+     * Human-readable description of the API key
+     */
     description: string;
 
+    /**
+     * Whether this API key has access to the Viewer product
+     */
     isViewerEnabled?: boolean;
   }
 
@@ -638,18 +782,39 @@ export namespace StudyUpdateResponse {
    * Reference to the user who created this study via dashboard
    */
   export interface CreatedByUser {
+    /**
+     * User's email address
+     */
     email: string;
 
+    /**
+     * Unique user identifier. Format: usr\_{32-hex-chars}
+     */
     userId: string;
 
+    /**
+     * User's first name
+     */
     firstName?: string;
 
+    /**
+     * User's last name
+     */
     lastName?: string;
 
+    /**
+     * User's middle name
+     */
     middleName?: string;
 
+    /**
+     * Name suffix (e.g., 'MD', 'Jr.')
+     */
     suffix1?: string;
 
+    /**
+     * Additional name suffix
+     */
     suffix2?: string;
   }
 
@@ -657,8 +822,14 @@ export namespace StudyUpdateResponse {
    * Reference to the organization this study belongs to
    */
   export interface Org {
+    /**
+     * Unique organization identifier. Format: org\_{32-hex-chars}
+     */
     orgId: string;
 
+    /**
+     * Name of the organization
+     */
     orgName: string;
   }
 }
@@ -768,18 +939,39 @@ export namespace StudyListResponse {
    * Reference to the assigned radiologist, null if unassigned
    */
   export interface AssignedTo {
+    /**
+     * User's email address
+     */
     email: string;
 
+    /**
+     * Unique user identifier. Format: usr\_{32-hex-chars}
+     */
     userId: string;
 
+    /**
+     * User's first name
+     */
     firstName?: string;
 
+    /**
+     * User's last name
+     */
     lastName?: string;
 
+    /**
+     * User's middle name
+     */
     middleName?: string;
 
+    /**
+     * Name suffix (e.g., 'MD', 'Jr.')
+     */
     suffix1?: string;
 
+    /**
+     * Additional name suffix
+     */
     suffix2?: string;
   }
 
@@ -787,10 +979,19 @@ export namespace StudyListResponse {
    * Reference to the API key used to create this study
    */
   export interface CreatedByAPIKey {
+    /**
+     * Unique API key identifier (UUIDv4 format)
+     */
     apiKeyId: string;
 
+    /**
+     * Human-readable description of the API key
+     */
     description: string;
 
+    /**
+     * Whether this API key has access to the Viewer product
+     */
     isViewerEnabled?: boolean;
   }
 
@@ -798,18 +999,39 @@ export namespace StudyListResponse {
    * Reference to the user who created this study via dashboard
    */
   export interface CreatedByUser {
+    /**
+     * User's email address
+     */
     email: string;
 
+    /**
+     * Unique user identifier. Format: usr\_{32-hex-chars}
+     */
     userId: string;
 
+    /**
+     * User's first name
+     */
     firstName?: string;
 
+    /**
+     * User's last name
+     */
     lastName?: string;
 
+    /**
+     * User's middle name
+     */
     middleName?: string;
 
+    /**
+     * Name suffix (e.g., 'MD', 'Jr.')
+     */
     suffix1?: string;
 
+    /**
+     * Additional name suffix
+     */
     suffix2?: string;
   }
 
@@ -817,8 +1039,14 @@ export namespace StudyListResponse {
    * Reference to the organization this study belongs to
    */
   export interface Org {
+    /**
+     * Unique organization identifier. Format: org\_{32-hex-chars}
+     */
     orgId: string;
 
+    /**
+     * Name of the organization
+     */
     orgName: string;
   }
 }
@@ -944,18 +1172,39 @@ export namespace StudyRetrieveByUidResponse {
    * Reference to the assigned radiologist, null if unassigned
    */
   export interface AssignedTo {
+    /**
+     * User's email address
+     */
     email: string;
 
+    /**
+     * Unique user identifier. Format: usr\_{32-hex-chars}
+     */
     userId: string;
 
+    /**
+     * User's first name
+     */
     firstName?: string;
 
+    /**
+     * User's last name
+     */
     lastName?: string;
 
+    /**
+     * User's middle name
+     */
     middleName?: string;
 
+    /**
+     * Name suffix (e.g., 'MD', 'Jr.')
+     */
     suffix1?: string;
 
+    /**
+     * Additional name suffix
+     */
     suffix2?: string;
   }
 
@@ -963,10 +1212,19 @@ export namespace StudyRetrieveByUidResponse {
    * Reference to the API key used to create this study
    */
   export interface CreatedByAPIKey {
+    /**
+     * Unique API key identifier (UUIDv4 format)
+     */
     apiKeyId: string;
 
+    /**
+     * Human-readable description of the API key
+     */
     description: string;
 
+    /**
+     * Whether this API key has access to the Viewer product
+     */
     isViewerEnabled?: boolean;
   }
 
@@ -974,18 +1232,39 @@ export namespace StudyRetrieveByUidResponse {
    * Reference to the user who created this study via dashboard
    */
   export interface CreatedByUser {
+    /**
+     * User's email address
+     */
     email: string;
 
+    /**
+     * Unique user identifier. Format: usr\_{32-hex-chars}
+     */
     userId: string;
 
+    /**
+     * User's first name
+     */
     firstName?: string;
 
+    /**
+     * User's last name
+     */
     lastName?: string;
 
+    /**
+     * User's middle name
+     */
     middleName?: string;
 
+    /**
+     * Name suffix (e.g., 'MD', 'Jr.')
+     */
     suffix1?: string;
 
+    /**
+     * Additional name suffix
+     */
     suffix2?: string;
   }
 
@@ -993,8 +1272,14 @@ export namespace StudyRetrieveByUidResponse {
    * Reference to the organization this study belongs to
    */
   export interface Org {
+    /**
+     * Unique organization identifier. Format: org\_{32-hex-chars}
+     */
     orgId: string;
 
+    /**
+     * Name of the organization
+     */
     orgName: string;
   }
 }

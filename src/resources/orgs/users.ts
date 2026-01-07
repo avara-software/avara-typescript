@@ -59,10 +59,16 @@ export interface UserRemoveResponse {
 }
 
 export interface UserAddParams {
+  /**
+   * User ID to add to the organization
+   */
   userId: string;
 }
 
 export interface UserRemoveParams {
+  /**
+   * User ID to remove from the organization
+   */
   userId: string;
 }
 
