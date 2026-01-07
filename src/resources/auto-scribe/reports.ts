@@ -107,7 +107,7 @@ export namespace ReportListResponse {
    * A radiology report in the AutoScribe system
    */
   export interface Report {
-    createdAt: string;
+    createdAt: string | null;
 
     isAddendum: boolean;
 
@@ -124,7 +124,7 @@ export namespace ReportListResponse {
 
     studyId: string;
 
-    updatedAt: string;
+    updatedAt: string | null;
 
     userId: string;
 

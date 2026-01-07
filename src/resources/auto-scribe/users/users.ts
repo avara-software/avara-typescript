@@ -183,7 +183,7 @@ export interface UserRetrieveResponse {
   /**
    * Timestamp when the user was created
    */
-  createdAt: string;
+  createdAt: string | null;
 
   /**
    * User's email address for login and notifications
@@ -296,7 +296,7 @@ export interface UserUpdateResponse {
   /**
    * Timestamp when the user was created
    */
-  createdAt: string;
+  createdAt: string | null;
 
   /**
    * User's email address for login and notifications
@@ -409,7 +409,7 @@ export interface UserListResponse {
   /**
    * Timestamp when the user was created
    */
-  createdAt: string;
+  createdAt: string | null;
 
   /**
    * User's email address for login and notifications
@@ -522,7 +522,7 @@ export interface UserInviteResponse {
   /**
    * Timestamp when the user was created
    */
-  createdAt: string;
+  createdAt: string | null;
 
   /**
    * User's email address for login and notifications

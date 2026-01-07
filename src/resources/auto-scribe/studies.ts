@@ -194,7 +194,7 @@ export interface StudyCreateResponse {
   /**
    * Timestamp when the study was created
    */
-  createdAt: string;
+  createdAt: string | null;
 
   /**
    * Whether the study has been cancelled
@@ -238,7 +238,7 @@ export interface StudyCreateResponse {
   /**
    * Timestamp when the study was last updated
    */
-  updatedAt: string;
+  updatedAt: string | null;
 
   /**
    * Reference to the assigned radiologist, null if unassigned
@@ -354,7 +354,7 @@ export interface StudyRetrieveResponse {
   /**
    * Timestamp when the study was created
    */
-  createdAt: string;
+  createdAt: string | null;
 
   /**
    * Whether the study has been cancelled
@@ -398,7 +398,7 @@ export interface StudyRetrieveResponse {
   /**
    * Timestamp when the study was last updated
    */
-  updatedAt: string;
+  updatedAt: string | null;
 
   /**
    * Reference to the assigned radiologist, null if unassigned
@@ -514,7 +514,7 @@ export interface StudyUpdateResponse {
   /**
    * Timestamp when the study was created
    */
-  createdAt: string;
+  createdAt: string | null;
 
   /**
    * Whether the study has been cancelled
@@ -558,7 +558,7 @@ export interface StudyUpdateResponse {
   /**
    * Timestamp when the study was last updated
    */
-  updatedAt: string;
+  updatedAt: string | null;
 
   /**
    * Reference to the assigned radiologist, null if unassigned
@@ -674,7 +674,7 @@ export interface StudyListResponse {
   /**
    * Timestamp when the study was created
    */
-  createdAt: string;
+  createdAt: string | null;
 
   /**
    * Whether the study has been cancelled
@@ -718,7 +718,7 @@ export interface StudyListResponse {
   /**
    * Timestamp when the study was last updated
    */
-  updatedAt: string;
+  updatedAt: string | null;
 
   /**
    * Reference to the assigned radiologist, null if unassigned
@@ -850,7 +850,7 @@ export interface StudyRetrieveByUidResponse {
   /**
    * Timestamp when the study was created
    */
-  createdAt: string;
+  createdAt: string | null;
 
   /**
    * Whether the study has been cancelled
@@ -894,7 +894,7 @@ export interface StudyRetrieveByUidResponse {
   /**
    * Timestamp when the study was last updated
    */
-  updatedAt: string;
+  updatedAt: string | null;
 
   /**
    * Reference to the assigned radiologist, null if unassigned
