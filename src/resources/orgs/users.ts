@@ -6,11 +6,11 @@ import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
 export class Users extends APIResource {
-  create(orgID: string, body: UserCreateParams, options?: RequestOptions): APIPromise<UserCreateResponse> {
+  add(orgID: string, body: UserAddParams, options?: RequestOptions): APIPromise<UserAddResponse> {
     return this._client.post(path`/v1/orgs/${orgID}/users`, { body, ...options });
   }
 
-  delete(orgID: string, body: UserDeleteParams, options?: RequestOptions): APIPromise<UserDeleteResponse> {
+  remove(orgID: string, body: UserRemoveParams, options?: RequestOptions): APIPromise<UserRemoveResponse> {
     return this._client.delete(path`/v1/orgs/${orgID}/users`, { body, ...options });
   }
 }
@@ -18,7 +18,7 @@ export class Users extends APIResource {
 /**
  * Standard success response with optional message
  */
-export interface UserCreateResponse {
+export interface UserAddResponse {
   success: boolean;
 
   message?: string;
@@ -27,25 +27,25 @@ export interface UserCreateResponse {
 /**
  * Standard success response with optional message
  */
-export interface UserDeleteResponse {
+export interface UserRemoveResponse {
   success: boolean;
 
   message?: string;
 }
 
-export interface UserCreateParams {
+export interface UserAddParams {
   userId: string;
 }
 
-export interface UserDeleteParams {
+export interface UserRemoveParams {
   userId: string;
 }
 
 export declare namespace Users {
   export {
-    type UserCreateResponse as UserCreateResponse,
-    type UserDeleteResponse as UserDeleteResponse,
-    type UserCreateParams as UserCreateParams,
-    type UserDeleteParams as UserDeleteParams,
+    type UserAddResponse as UserAddResponse,
+    type UserRemoveResponse as UserRemoveResponse,
+    type UserAddParams as UserAddParams,
+    type UserRemoveParams as UserRemoveParams,
   };
 }

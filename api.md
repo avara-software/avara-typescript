@@ -36,19 +36,19 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/viewer/users/users.ts">UserCreateResponse</a></code>
 - <code><a href="./src/resources/viewer/users/users.ts">UserRetrieveResponse</a></code>
 - <code><a href="./src/resources/viewer/users/users.ts">UserUpdateResponse</a></code>
 - <code><a href="./src/resources/viewer/users/users.ts">UserListResponse</a></code>
+- <code><a href="./src/resources/viewer/users/users.ts">UserInviteResponse</a></code>
 - <code><a href="./src/resources/viewer/users/users.ts">UserReactivateResponse</a></code>
 - <code><a href="./src/resources/viewer/users/users.ts">UserRevokeAccessResponse</a></code>
 
 Methods:
 
-- <code title="post /v1/viewer/users">client.viewer.users.<a href="./src/resources/viewer/users/users.ts">create</a>({ ...params }) -> UserCreateResponse</code>
 - <code title="get /v1/viewer/users/{userId}">client.viewer.users.<a href="./src/resources/viewer/users/users.ts">retrieve</a>(userID) -> UserRetrieveResponse</code>
 - <code title="patch /v1/viewer/users/{userId}">client.viewer.users.<a href="./src/resources/viewer/users/users.ts">update</a>(userID, { ...params }) -> UserUpdateResponse</code>
 - <code title="get /v1/viewer/users">client.viewer.users.<a href="./src/resources/viewer/users/users.ts">list</a>({ ...params }) -> UserListResponsesCursorUsers</code>
+- <code title="post /v1/viewer/users">client.viewer.users.<a href="./src/resources/viewer/users/users.ts">invite</a>({ ...params }) -> UserInviteResponse</code>
 - <code title="post /v1/viewer/users/reactivate">client.viewer.users.<a href="./src/resources/viewer/users/users.ts">reactivate</a>({ ...params }) -> UserReactivateResponse</code>
 - <code title="post /v1/viewer/users/revoke-access">client.viewer.users.<a href="./src/resources/viewer/users/users.ts">revokeAccess</a>({ ...params }) -> UserRevokeAccessResponse</code>
 
@@ -105,19 +105,19 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/auto-scribe/users/users.ts">UserCreateResponse</a></code>
 - <code><a href="./src/resources/auto-scribe/users/users.ts">UserRetrieveResponse</a></code>
 - <code><a href="./src/resources/auto-scribe/users/users.ts">UserUpdateResponse</a></code>
 - <code><a href="./src/resources/auto-scribe/users/users.ts">UserListResponse</a></code>
+- <code><a href="./src/resources/auto-scribe/users/users.ts">UserInviteResponse</a></code>
 - <code><a href="./src/resources/auto-scribe/users/users.ts">UserReactivateResponse</a></code>
 - <code><a href="./src/resources/auto-scribe/users/users.ts">UserRevokeAccessResponse</a></code>
 
 Methods:
 
-- <code title="post /v1/autoScribe/users">client.autoScribe.users.<a href="./src/resources/auto-scribe/users/users.ts">create</a>({ ...params }) -> UserCreateResponse</code>
 - <code title="get /v1/autoScribe/users/{userId}">client.autoScribe.users.<a href="./src/resources/auto-scribe/users/users.ts">retrieve</a>(userID) -> UserRetrieveResponse</code>
 - <code title="patch /v1/autoScribe/users/{userId}">client.autoScribe.users.<a href="./src/resources/auto-scribe/users/users.ts">update</a>(userID, { ...params }) -> UserUpdateResponse</code>
 - <code title="get /v1/autoScribe/users">client.autoScribe.users.<a href="./src/resources/auto-scribe/users/users.ts">list</a>({ ...params }) -> UserListResponsesCursorUsers</code>
+- <code title="post /v1/autoScribe/users">client.autoScribe.users.<a href="./src/resources/auto-scribe/users/users.ts">invite</a>({ ...params }) -> UserInviteResponse</code>
 - <code title="post /v1/autoScribe/users/reactivate">client.autoScribe.users.<a href="./src/resources/auto-scribe/users/users.ts">reactivate</a>({ ...params }) -> UserReactivateResponse</code>
 - <code title="post /v1/autoScribe/users/revoke-access">client.autoScribe.users.<a href="./src/resources/auto-scribe/users/users.ts">revokeAccess</a>({ ...params }) -> UserRevokeAccessResponse</code>
 
@@ -179,13 +179,13 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/orgs/users.ts">UserCreateResponse</a></code>
-- <code><a href="./src/resources/orgs/users.ts">UserDeleteResponse</a></code>
+- <code><a href="./src/resources/orgs/users.ts">UserAddResponse</a></code>
+- <code><a href="./src/resources/orgs/users.ts">UserRemoveResponse</a></code>
 
 Methods:
 
-- <code title="post /v1/orgs/{orgId}/users">client.orgs.users.<a href="./src/resources/orgs/users.ts">create</a>(orgID, { ...params }) -> UserCreateResponse</code>
-- <code title="delete /v1/orgs/{orgId}/users">client.orgs.users.<a href="./src/resources/orgs/users.ts">delete</a>(orgID, { ...params }) -> UserDeleteResponse</code>
+- <code title="post /v1/orgs/{orgId}/users">client.orgs.users.<a href="./src/resources/orgs/users.ts">add</a>(orgID, { ...params }) -> UserAddResponse</code>
+- <code title="delete /v1/orgs/{orgId}/users">client.orgs.users.<a href="./src/resources/orgs/users.ts">remove</a>(orgID, { ...params }) -> UserRemoveResponse</code>
 
 # Webhooks
 

@@ -21,10 +21,6 @@ import { path } from '../../../internal/utils/path';
 export class Users extends APIResource {
   invitations: InvitationsAPI.Invitations = new InvitationsAPI.Invitations(this._client);
 
-  create(body: UserCreateParams, options?: RequestOptions): APIPromise<UserCreateResponse> {
-    return this._client.post('/v1/autoScribe/users', { body, ...options });
-  }
-
   retrieve(userID: string, options?: RequestOptions): APIPromise<UserRetrieveResponse> {
     return this._client.get(path`/v1/autoScribe/users/${userID}`, options);
   }
@@ -47,6 +43,10 @@ export class Users extends APIResource {
     });
   }
 
+  invite(body: UserInviteParams, options?: RequestOptions): APIPromise<UserInviteResponse> {
+    return this._client.post('/v1/autoScribe/users', { body, ...options });
+  }
+
   reactivate(body: UserReactivateParams, options?: RequestOptions): APIPromise<UserReactivateResponse> {
     return this._client.post('/v1/autoScribe/users/reactivate', { body, ...options });
   }
@@ -57,66 +57,6 @@ export class Users extends APIResource {
 }
 
 export type UserListResponsesCursorUsers = CursorUsers<UserListResponse>;
-
-/**
- * A user in the AutoScribe system with report creation permissions
- */
-export interface UserCreateResponse {
-  canCreateReports: boolean;
-
-  canManageStudies: boolean;
-
-  clinicRole:
-    | 'Radiologist'
-    | 'Cardiologist'
-    | 'Neurologist'
-    | 'Urologist'
-    | 'Gynecologist'
-    | 'Endocrinologist'
-    | 'Doctor'
-    | 'Surgeon'
-    | 'Physician'
-    | 'Physician Assistant'
-    | 'Nurse Practitioner'
-    | 'Registered Nurse'
-    | 'Patient Care Coordinator'
-    | 'Front Desk Operator'
-    | 'Imaging Technologist'
-    | 'PACS Administrator'
-    | 'Software Engineer'
-    | 'Revenue Cycle Manager'
-    | 'Administrative Director'
-    | 'Administrative Assistant'
-    | 'Other';
-
-  createdAt: string | null;
-
-  email: string;
-
-  firstName: string;
-
-  hasDashboardAccess: boolean;
-
-  invitedSource: 'dashboard' | 'api';
-
-  lastLoginAt: string | null;
-
-  lastName: string;
-
-  level: 'owner' | 'admin' | 'member';
-
-  userId: string;
-
-  middleName?: string;
-
-  npiNumber?: string;
-
-  phoneNumber?: string;
-
-  suffix1?: string;
-
-  suffix2?: string;
-}
 
 /**
  * A user in the AutoScribe system with report creation permissions
@@ -299,24 +239,9 @@ export interface UserListResponse {
 }
 
 /**
- * Response for reactivating a user in AutoScribe
+ * A user in the AutoScribe system with report creation permissions
  */
-export interface UserReactivateResponse {
-  success: boolean;
-
-  message?: string;
-}
-
-/**
- * Response for revoking user access in AutoScribe
- */
-export interface UserRevokeAccessResponse {
-  success: boolean;
-
-  message?: string;
-}
-
-export interface UserCreateParams {
+export interface UserInviteResponse {
   canCreateReports: boolean;
 
   canManageStudies: boolean;
@@ -344,15 +269,23 @@ export interface UserCreateParams {
     | 'Administrative Assistant'
     | 'Other';
 
+  createdAt: string | null;
+
   email: string;
 
   firstName: string;
 
   hasDashboardAccess: boolean;
 
+  invitedSource: 'dashboard' | 'api';
+
+  lastLoginAt: string | null;
+
   lastName: string;
 
-  level: 'admin' | 'member';
+  level: 'owner' | 'admin' | 'member';
+
+  userId: string;
 
   middleName?: string;
 
@@ -363,6 +296,24 @@ export interface UserCreateParams {
   suffix1?: string;
 
   suffix2?: string;
+}
+
+/**
+ * Response for reactivating a user in AutoScribe
+ */
+export interface UserReactivateResponse {
+  success: boolean;
+
+  message?: string;
+}
+
+/**
+ * Response for revoking user access in AutoScribe
+ */
+export interface UserRevokeAccessResponse {
+  success: boolean;
+
+  message?: string;
 }
 
 export interface UserUpdateParams {
@@ -445,6 +396,55 @@ export interface UserListParams extends CursorUsersParams {
   level?: 'owner' | 'admin' | 'member';
 }
 
+export interface UserInviteParams {
+  canCreateReports: boolean;
+
+  canManageStudies: boolean;
+
+  clinicRole:
+    | 'Radiologist'
+    | 'Cardiologist'
+    | 'Neurologist'
+    | 'Urologist'
+    | 'Gynecologist'
+    | 'Endocrinologist'
+    | 'Doctor'
+    | 'Surgeon'
+    | 'Physician'
+    | 'Physician Assistant'
+    | 'Nurse Practitioner'
+    | 'Registered Nurse'
+    | 'Patient Care Coordinator'
+    | 'Front Desk Operator'
+    | 'Imaging Technologist'
+    | 'PACS Administrator'
+    | 'Software Engineer'
+    | 'Revenue Cycle Manager'
+    | 'Administrative Director'
+    | 'Administrative Assistant'
+    | 'Other';
+
+  email: string;
+
+  firstName: string;
+
+  hasDashboardAccess: boolean;
+
+  lastName: string;
+
+  level: 'admin' | 'member';
+
+  middleName?: string;
+
+  npiNumber?: string;
+
+  phoneNumber?: string;
+
+  suffix1?: string;
+
+  suffix2?: string;
+}
+
 export interface UserReactivateParams {
   userId: string;
 }
@@ -457,16 +457,16 @@ Users.Invitations = Invitations;
 
 export declare namespace Users {
   export {
-    type UserCreateResponse as UserCreateResponse,
     type UserRetrieveResponse as UserRetrieveResponse,
     type UserUpdateResponse as UserUpdateResponse,
     type UserListResponse as UserListResponse,
+    type UserInviteResponse as UserInviteResponse,
     type UserReactivateResponse as UserReactivateResponse,
     type UserRevokeAccessResponse as UserRevokeAccessResponse,
     type UserListResponsesCursorUsers as UserListResponsesCursorUsers,
-    type UserCreateParams as UserCreateParams,
     type UserUpdateParams as UserUpdateParams,
     type UserListParams as UserListParams,
+    type UserInviteParams as UserInviteParams,
     type UserReactivateParams as UserReactivateParams,
     type UserRevokeAccessParams as UserRevokeAccessParams,
   };

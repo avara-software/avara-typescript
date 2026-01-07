@@ -9,8 +9,8 @@ const client = new Avara({
 
 describe('resource users', () => {
   // Prism tests are disabled
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.orgs.users.create('org_1234567890abcdef1234567890abcdef', {
+  test.skip('add: only required params', async () => {
+    const responsePromise = client.orgs.users.add('org_1234567890abcdef1234567890abcdef', {
       userId: 'usr_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -23,15 +23,15 @@ describe('resource users', () => {
   });
 
   // Prism tests are disabled
-  test.skip('create: required and optional params', async () => {
-    const response = await client.orgs.users.create('org_1234567890abcdef1234567890abcdef', {
+  test.skip('add: required and optional params', async () => {
+    const response = await client.orgs.users.add('org_1234567890abcdef1234567890abcdef', {
       userId: 'usr_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD',
     });
   });
 
   // Prism tests are disabled
-  test.skip('delete: only required params', async () => {
-    const responsePromise = client.orgs.users.delete('org_1234567890abcdef1234567890abcdef', {
+  test.skip('remove: only required params', async () => {
+    const responsePromise = client.orgs.users.remove('org_1234567890abcdef1234567890abcdef', {
       userId: 'usr_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -44,8 +44,8 @@ describe('resource users', () => {
   });
 
   // Prism tests are disabled
-  test.skip('delete: required and optional params', async () => {
-    const response = await client.orgs.users.delete('org_1234567890abcdef1234567890abcdef', {
+  test.skip('remove: required and optional params', async () => {
+    const response = await client.orgs.users.remove('org_1234567890abcdef1234567890abcdef', {
       userId: 'usr_E1CB97d8EBbDbaAae6d9B1ca0D1cFaAD',
     });
   });

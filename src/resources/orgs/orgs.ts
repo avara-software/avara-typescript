@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import * as UsersAPI from './users';
-import { UserCreateParams, UserCreateResponse, UserDeleteParams, UserDeleteResponse, Users } from './users';
+import { UserAddParams, UserAddResponse, UserRemoveParams, UserRemoveResponse, Users } from './users';
 import { APIPromise } from '../../core/api-promise';
 import { CursorOrganizations, type CursorOrganizationsParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
@@ -215,9 +215,9 @@ export declare namespace Orgs {
 
   export {
     Users as Users,
-    type UserCreateResponse as UserCreateResponse,
-    type UserDeleteResponse as UserDeleteResponse,
-    type UserCreateParams as UserCreateParams,
-    type UserDeleteParams as UserDeleteParams,
+    type UserAddResponse as UserAddResponse,
+    type UserRemoveResponse as UserRemoveResponse,
+    type UserAddParams as UserAddParams,
+    type UserRemoveParams as UserRemoveParams,
   };
 }
