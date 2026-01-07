@@ -116,7 +116,7 @@ export type OrgListResponsesCursorOrganizations = CursorOrganizations<OrgListRes
  * An organization entity that groups users and studies
  */
 export interface OrgCreateResponse {
-  createdAt: string;
+  createdAt: string | null;
 
   isActive: boolean;
 
@@ -124,7 +124,7 @@ export interface OrgCreateResponse {
 
   orgName: string;
 
-  updatedAt: string;
+  updatedAt: string | null;
 
   userCount: number;
 
@@ -139,7 +139,7 @@ export interface OrgCreateResponse {
  * An organization entity that groups users and studies
  */
 export interface OrgRetrieveResponse {
-  createdAt: string;
+  createdAt: string | null;
 
   isActive: boolean;
 
@@ -147,7 +147,7 @@ export interface OrgRetrieveResponse {
 
   orgName: string;
 
-  updatedAt: string;
+  updatedAt: string | null;
 
   userCount: number;
 
@@ -162,7 +162,7 @@ export interface OrgRetrieveResponse {
  * An organization entity that groups users and studies
  */
 export interface OrgUpdateResponse {
-  createdAt: string;
+  createdAt: string | null;
 
   isActive: boolean;
 
@@ -170,7 +170,7 @@ export interface OrgUpdateResponse {
 
   orgName: string;
 
-  updatedAt: string;
+  updatedAt: string | null;
 
   userCount: number;
 
@@ -185,7 +185,7 @@ export interface OrgUpdateResponse {
  * An organization entity that groups users and studies
  */
 export interface OrgListResponse {
-  createdAt: string;
+  createdAt: string | null;
 
   isActive: boolean;
 
@@ -193,7 +193,7 @@ export interface OrgListResponse {
 
   orgName: string;
 
-  updatedAt: string;
+  updatedAt: string | null;
 
   userCount: number;
 
@@ -208,7 +208,7 @@ export interface OrgListResponse {
  * An organization entity that groups users and studies
  */
 export interface OrgDeactivateResponse {
-  createdAt: string;
+  createdAt: string | null;
 
   isActive: boolean;
 
@@ -216,7 +216,7 @@ export interface OrgDeactivateResponse {
 
   orgName: string;
 
-  updatedAt: string;
+  updatedAt: string | null;
 
   userCount: number;
 
@@ -231,7 +231,7 @@ export interface OrgDeactivateResponse {
  * An organization entity that groups users and studies
  */
 export interface OrgReactivateResponse {
-  createdAt: string;
+  createdAt: string | null;
 
   isActive: boolean;
 
@@ -239,7 +239,7 @@ export interface OrgReactivateResponse {
 
   orgName: string;
 
-  updatedAt: string;
+  updatedAt: string | null;
 
   userCount: number;
 

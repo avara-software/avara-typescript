@@ -120,7 +120,7 @@ export interface InvitationRetrieveResponse {
     | 'Administrative Assistant'
     | 'Other';
 
-  createdAt: string;
+  createdAt: string | null;
 
   email: string;
 
@@ -188,7 +188,7 @@ export interface InvitationUpdateResponse {
     | 'Administrative Assistant'
     | 'Other';
 
-  createdAt: string;
+  createdAt: string | null;
 
   email: string;
 
@@ -256,7 +256,7 @@ export interface InvitationListResponse {
     | 'Administrative Assistant'
     | 'Other';
 
-  createdAt: string;
+  createdAt: string | null;
 
   email: string;
 
