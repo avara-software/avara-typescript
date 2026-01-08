@@ -200,8 +200,9 @@ export interface InvitationRetrieveResponse {
   updatedAt: string | null;
 
   /**
-   * User ID if this invitation has been accepted and linked to a user account. Null
-   * while pending
+   * Pre-generated user ID for this invitation. Format: usr\_{32-hex-chars}. This ID
+   * is assigned at invitation creation and will become the user's permanent ID upon
+   * acceptance
    */
   userId: string;
 
@@ -346,8 +347,9 @@ export interface InvitationUpdateResponse {
   updatedAt: string | null;
 
   /**
-   * User ID if this invitation has been accepted and linked to a user account. Null
-   * while pending
+   * Pre-generated user ID for this invitation. Format: usr\_{32-hex-chars}. This ID
+   * is assigned at invitation creation and will become the user's permanent ID upon
+   * acceptance
    */
   userId: string;
 
@@ -492,8 +494,9 @@ export interface InvitationListResponse {
   updatedAt: string | null;
 
   /**
-   * User ID if this invitation has been accepted and linked to a user account. Null
-   * while pending
+   * Pre-generated user ID for this invitation. Format: usr\_{32-hex-chars}. This ID
+   * is assigned at invitation creation and will become the user's permanent ID upon
+   * acceptance
    */
   userId: string;
 
