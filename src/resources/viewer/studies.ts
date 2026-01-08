@@ -569,6 +569,9 @@ export interface StudyCreateParams {
    */
   studyInstanceUid: string;
 
+  /**
+   * User ID to assign the study to. Format: usr\_{32-hex-chars}
+   */
   assignedTo?: string;
 
   /**
@@ -577,10 +580,16 @@ export interface StudyCreateParams {
    */
   metadata?: { [key: string]: string };
 
+  /**
+   * Organization ID for the study. Format: org\_{32-hex-chars}
+   */
   orgId?: string;
 }
 
 export interface StudyUpdateParams {
+  /**
+   * User ID to assign the study to, or null to unassign. Format: usr\_{32-hex-chars}
+   */
   assignedTo?: string;
 
   metadata?: { [key: string]: string } | null;

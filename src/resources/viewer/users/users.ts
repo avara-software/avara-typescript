@@ -134,6 +134,9 @@ export type UserListResponsesCursorUsers = CursorUsers<UserListResponse>;
  * A user in the Viewer system with study management permissions
  */
 export interface UserRetrieveResponse {
+  /**
+   * Whether the user has permission to create, update, and manage studies
+   */
   canManageStudies: boolean;
 
   /**
@@ -233,6 +236,9 @@ export interface UserRetrieveResponse {
  * A user in the Viewer system with study management permissions
  */
 export interface UserUpdateResponse {
+  /**
+   * Whether the user has permission to create, update, and manage studies
+   */
   canManageStudies: boolean;
 
   /**
@@ -332,6 +338,9 @@ export interface UserUpdateResponse {
  * A user in the Viewer system with study management permissions
  */
 export interface UserListResponse {
+  /**
+   * Whether the user has permission to create, update, and manage studies
+   */
   canManageStudies: boolean;
 
   /**
@@ -428,9 +437,13 @@ export interface UserListResponse {
 }
 
 /**
- * A user in the Viewer system with study management permissions
+ * Response for inviting a user to Viewer. Level is restricted to admin/member
+ * since owners cannot be invited via API.
  */
 export interface UserInviteResponse {
+  /**
+   * Whether the user has permission to create, update, and manage studies
+   */
   canManageStudies: boolean;
 
   /**
@@ -495,10 +508,10 @@ export interface UserInviteResponse {
   lastName: string;
 
   /**
-   * User access level. 'owner' has full control, 'admin' can manage users/settings,
-   * 'member' has standard access
+   * User access level. 'admin' can manage users/settings, 'member' has standard
+   * access
    */
-  level: 'owner' | 'admin' | 'member';
+  level: 'admin' | 'member';
 
   /**
    * Unique user identifier. Format: usr\_{32-hex-chars}
