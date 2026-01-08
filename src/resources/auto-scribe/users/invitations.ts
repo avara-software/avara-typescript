@@ -107,8 +107,14 @@ export interface InvitationRetrieveResponse {
    */
   canManageStudies: boolean;
 
+  /**
+   * UUID of the clinic this invitation belongs to
+   */
   clinicId: string;
 
+  /**
+   * Clinical or organizational role for the invited user
+   */
   clinicRole:
     | 'Radiologist'
     | 'Cardiologist'
@@ -132,34 +138,81 @@ export interface InvitationRetrieveResponse {
     | 'Administrative Assistant'
     | 'Other';
 
+  /**
+   * Timestamp when the invitation was created
+   */
   createdAt: string | null;
 
+  /**
+   * Email address the invitation was sent to
+   */
   email: string;
 
+  /**
+   * When the invitation expires, null if no expiration
+   */
   expiry: string | null;
 
+  /**
+   * Invited user's first name
+   */
   firstName: string;
 
+  /**
+   * Whether the invited user will have dashboard access
+   */
   hasDashboardAccess: boolean;
 
+  /**
+   * Unique invitation identifier. Format: inv\_{32-hex-chars}
+   */
   invitationId: string;
 
+  /**
+   * How the invitation was created - 'dashboard' or 'api'
+   */
   invitedSource: 'dashboard' | 'api';
 
-  inviterId: string | null;
+  /**
+   * User ID of the person who sent the invitation. Format: usr\_{32-hex-chars}. Null
+   * if invited via API
+   */
+  inviterId: string;
 
+  /**
+   * Invited user's last name
+   */
   lastName: string;
 
+  /**
+   * Access level for the invited user. 'admin' or 'member' when created via API
+   */
   level: 'owner' | 'admin' | 'member';
 
+  /**
+   * Invitation status: 'sent', 'accepted', 'rejected', or 'revoked'
+   */
   status: 'sent' | 'accepted' | 'rejected' | 'revoked';
 
+  /**
+   * Timestamp when the invitation was last updated
+   */
   updatedAt: string | null;
 
-  userId: string | null;
+  /**
+   * User ID if this invitation has been accepted and linked to a user account. Null
+   * while pending
+   */
+  userId: string;
 
-  invitedByApiKeyId?: string | null;
+  /**
+   * UUID of the API key used to send this invitation. Null if sent via dashboard
+   */
+  invitedByApiKeyId?: string;
 
+  /**
+   * Invited user's middle name (optional)
+   */
   middleName?: string | null;
 
   /**
@@ -168,10 +221,19 @@ export interface InvitationRetrieveResponse {
    */
   npiNumber?: string;
 
+  /**
+   * Invited user's phone number (optional)
+   */
   phoneNumber?: string | null;
 
+  /**
+   * Name suffix (e.g., 'Jr.', 'MD') - optional
+   */
   suffix1?: string | null;
 
+  /**
+   * Additional name suffix - optional
+   */
   suffix2?: string | null;
 }
 
@@ -191,8 +253,14 @@ export interface InvitationUpdateResponse {
    */
   canManageStudies: boolean;
 
+  /**
+   * UUID of the clinic this invitation belongs to
+   */
   clinicId: string;
 
+  /**
+   * Clinical or organizational role for the invited user
+   */
   clinicRole:
     | 'Radiologist'
     | 'Cardiologist'
@@ -216,34 +284,81 @@ export interface InvitationUpdateResponse {
     | 'Administrative Assistant'
     | 'Other';
 
+  /**
+   * Timestamp when the invitation was created
+   */
   createdAt: string | null;
 
+  /**
+   * Email address the invitation was sent to
+   */
   email: string;
 
+  /**
+   * When the invitation expires, null if no expiration
+   */
   expiry: string | null;
 
+  /**
+   * Invited user's first name
+   */
   firstName: string;
 
+  /**
+   * Whether the invited user will have dashboard access
+   */
   hasDashboardAccess: boolean;
 
+  /**
+   * Unique invitation identifier. Format: inv\_{32-hex-chars}
+   */
   invitationId: string;
 
+  /**
+   * How the invitation was created - 'dashboard' or 'api'
+   */
   invitedSource: 'dashboard' | 'api';
 
-  inviterId: string | null;
+  /**
+   * User ID of the person who sent the invitation. Format: usr\_{32-hex-chars}. Null
+   * if invited via API
+   */
+  inviterId: string;
 
+  /**
+   * Invited user's last name
+   */
   lastName: string;
 
+  /**
+   * Access level for the invited user. 'admin' or 'member' when created via API
+   */
   level: 'owner' | 'admin' | 'member';
 
+  /**
+   * Invitation status: 'sent', 'accepted', 'rejected', or 'revoked'
+   */
   status: 'sent' | 'accepted' | 'rejected' | 'revoked';
 
+  /**
+   * Timestamp when the invitation was last updated
+   */
   updatedAt: string | null;
 
-  userId: string | null;
+  /**
+   * User ID if this invitation has been accepted and linked to a user account. Null
+   * while pending
+   */
+  userId: string;
 
-  invitedByApiKeyId?: string | null;
+  /**
+   * UUID of the API key used to send this invitation. Null if sent via dashboard
+   */
+  invitedByApiKeyId?: string;
 
+  /**
+   * Invited user's middle name (optional)
+   */
   middleName?: string | null;
 
   /**
@@ -252,10 +367,19 @@ export interface InvitationUpdateResponse {
    */
   npiNumber?: string;
 
+  /**
+   * Invited user's phone number (optional)
+   */
   phoneNumber?: string | null;
 
+  /**
+   * Name suffix (e.g., 'Jr.', 'MD') - optional
+   */
   suffix1?: string | null;
 
+  /**
+   * Additional name suffix - optional
+   */
   suffix2?: string | null;
 }
 
@@ -275,8 +399,14 @@ export interface InvitationListResponse {
    */
   canManageStudies: boolean;
 
+  /**
+   * UUID of the clinic this invitation belongs to
+   */
   clinicId: string;
 
+  /**
+   * Clinical or organizational role for the invited user
+   */
   clinicRole:
     | 'Radiologist'
     | 'Cardiologist'
@@ -300,34 +430,81 @@ export interface InvitationListResponse {
     | 'Administrative Assistant'
     | 'Other';
 
+  /**
+   * Timestamp when the invitation was created
+   */
   createdAt: string | null;
 
+  /**
+   * Email address the invitation was sent to
+   */
   email: string;
 
+  /**
+   * When the invitation expires, null if no expiration
+   */
   expiry: string | null;
 
+  /**
+   * Invited user's first name
+   */
   firstName: string;
 
+  /**
+   * Whether the invited user will have dashboard access
+   */
   hasDashboardAccess: boolean;
 
+  /**
+   * Unique invitation identifier. Format: inv\_{32-hex-chars}
+   */
   invitationId: string;
 
+  /**
+   * How the invitation was created - 'dashboard' or 'api'
+   */
   invitedSource: 'dashboard' | 'api';
 
-  inviterId: string | null;
+  /**
+   * User ID of the person who sent the invitation. Format: usr\_{32-hex-chars}. Null
+   * if invited via API
+   */
+  inviterId: string;
 
+  /**
+   * Invited user's last name
+   */
   lastName: string;
 
+  /**
+   * Access level for the invited user. 'admin' or 'member' when created via API
+   */
   level: 'owner' | 'admin' | 'member';
 
+  /**
+   * Invitation status: 'sent', 'accepted', 'rejected', or 'revoked'
+   */
   status: 'sent' | 'accepted' | 'rejected' | 'revoked';
 
+  /**
+   * Timestamp when the invitation was last updated
+   */
   updatedAt: string | null;
 
-  userId: string | null;
+  /**
+   * User ID if this invitation has been accepted and linked to a user account. Null
+   * while pending
+   */
+  userId: string;
 
-  invitedByApiKeyId?: string | null;
+  /**
+   * UUID of the API key used to send this invitation. Null if sent via dashboard
+   */
+  invitedByApiKeyId?: string;
 
+  /**
+   * Invited user's middle name (optional)
+   */
   middleName?: string | null;
 
   /**
@@ -336,10 +513,19 @@ export interface InvitationListResponse {
    */
   npiNumber?: string;
 
+  /**
+   * Invited user's phone number (optional)
+   */
   phoneNumber?: string | null;
 
+  /**
+   * Name suffix (e.g., 'Jr.', 'MD') - optional
+   */
   suffix1?: string | null;
 
+  /**
+   * Additional name suffix - optional
+   */
   suffix2?: string | null;
 }
 
@@ -389,10 +575,19 @@ export interface InvitationUpdateParams {
     | 'Other'
     | null;
 
+  /**
+   * Invited user's first name
+   */
   firstName?: string;
 
+  /**
+   * Whether the invited user will have dashboard access
+   */
   hasDashboardAccess?: boolean;
 
+  /**
+   * Invited user's last name
+   */
   lastName?: string;
 
   level?: 'admin' | 'member';

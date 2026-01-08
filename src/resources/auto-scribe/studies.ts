@@ -178,8 +178,14 @@ export type StudyListResponsesCursorStudies = CursorStudies<StudyListResponse>;
  * A report ID paired with its current status
  */
 export interface ReportIDWithStatus {
+  /**
+   * Unique report identifier. Format: rep\_{32-hex-chars}
+   */
   reportId: string;
 
+  /**
+   * Current status of the report
+   */
   status: 'in_progress' | 'completed';
 }
 
@@ -1061,7 +1067,8 @@ export interface StudyCancelResponse {
 }
 
 /**
- * Response containing the generated reroute URL for a study in AutoScribe
+ * Response containing the generated reroute URL for AutoScribe (viewer +
+ * dictation)
  */
 export interface StudyRerouteURLResponse {
   url: string;
@@ -1294,8 +1301,8 @@ export interface StudyUncancelResponse {
 }
 
 /**
- * Response containing the generated viewer-only reroute URL for a study in
- * AutoScribe
+ * Response containing the generated viewer-only reroute URL. Requires viewer to be
+ * configured.
  */
 export interface StudyViewerOnlyRerouteURLResponse {
   url: string;
@@ -1324,6 +1331,9 @@ export interface StudyCreateParams {
    */
   studyInstanceUid: string;
 
+  /**
+   * User ID to assign the study to. Format: usr\_{32-hex-chars}
+   */
   assignedTo?: string;
 
   /**
@@ -1332,6 +1342,9 @@ export interface StudyCreateParams {
    */
   metadata?: { [key: string]: string };
 
+  /**
+   * Organization ID for the study. Format: org\_{32-hex-chars}
+   */
   orgId?: string;
 
   priorReportTexts?: Array<string>;
@@ -1340,10 +1353,16 @@ export interface StudyCreateParams {
 }
 
 export interface StudyUpdateParams {
+  /**
+   * User ID to assign the study to, or null to unassign. Format: usr\_{32-hex-chars}
+   */
   assignedTo?: string;
 
   metadata?: { [key: string]: string } | null;
 
+  /**
+   * Organization ID for the study, or null to remove. Format: org\_{32-hex-chars}
+   */
   orgId?: string;
 
   priorReportTexts?: Array<string> | null;

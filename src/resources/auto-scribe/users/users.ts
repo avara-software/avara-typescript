@@ -480,7 +480,8 @@ export interface UserListResponse {
 }
 
 /**
- * A user in the AutoScribe system with report creation permissions
+ * Response for inviting a user to AutoScribe. Level is restricted to admin/member
+ * since owners cannot be invited via API.
  */
 export interface UserInviteResponse {
   /**
@@ -555,10 +556,10 @@ export interface UserInviteResponse {
   lastName: string;
 
   /**
-   * User access level. 'owner' has full control, 'admin' can manage users/settings,
-   * 'member' has standard access
+   * User access level. 'admin' can manage users/settings, 'member' has standard
+   * access
    */
-  level: 'owner' | 'admin' | 'member';
+  level: 'admin' | 'member';
 
   /**
    * Unique user identifier. Format: usr\_{32-hex-chars}

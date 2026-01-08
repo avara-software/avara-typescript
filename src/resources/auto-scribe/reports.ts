@@ -95,10 +95,20 @@ export class Reports extends APIResource {
  * Response containing a list of reports for a study
  */
 export interface ReportListResponse {
+  /**
+   * Array of report objects with full details
+   */
   reports: Array<ReportListResponse.Report>;
 
+  /**
+   * Study ID the reports belong to. Format: stu\_{32-hex-chars}
+   */
   studyId: string;
 
+  /**
+   * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+   * '1.2.840.10008.5.1.4.1.1.2')
+   */
   studyInstanceUid: string;
 }
 
@@ -107,12 +117,24 @@ export namespace ReportListResponse {
    * A radiology report in the AutoScribe system
    */
   export interface Report {
+    /**
+     * Timestamp when the report was created
+     */
     createdAt: string | null;
 
+    /**
+     * Whether this report is an addendum to a previous report
+     */
     isAddendum: boolean;
 
+    /**
+     * Unique report identifier. Format: rep\_{32-hex-chars}
+     */
     reportId: string;
 
+    /**
+     * Timestamp when the report was signed, null if not yet signed
+     */
     signedAt: string | null;
 
     /**
@@ -120,14 +142,30 @@ export namespace ReportListResponse {
      */
     snapshotMetadata: AutoScribeAPI.StudyReportMetadata;
 
+    /**
+     * Report status: 'in_progress' or 'completed'
+     */
     status: 'in_progress' | 'completed';
 
+    /**
+     * Study ID this report belongs to. Format: stu\_{32-hex-chars}
+     */
     studyId: string;
 
+    /**
+     * Timestamp when the report was last updated
+     */
     updatedAt: string | null;
 
+    /**
+     * User ID of the radiologist who created/signed this report. Format:
+     * usr\_{32-hex-chars}
+     */
     userId: string;
 
+    /**
+     * Plain text content of the report
+     */
     reportPlainText?: string;
   }
 }
@@ -162,8 +200,14 @@ export namespace ReportPdfResponse {
    * Response containing a single report with its PDF download URL
    */
   export interface SingleReportPdfResponse {
+    /**
+     * Time-limited presigned URL to download the PDF (expires after 1 hour)
+     */
     presignedUrl: string;
 
+    /**
+     * Unique report identifier. Format: rep\_{32-hex-chars}
+     */
     reportId: string;
 
     /**
@@ -171,8 +215,15 @@ export namespace ReportPdfResponse {
      */
     snapshotMetadata: AutoScribeAPI.StudyReportMetadata;
 
+    /**
+     * Study ID this report belongs to. Format: stu\_{32-hex-chars}
+     */
     studyId: string;
 
+    /**
+     * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+     * '1.2.840.10008.5.1.4.1.1.2')
+     */
     studyInstanceUid: string;
   }
 
@@ -180,10 +231,20 @@ export namespace ReportPdfResponse {
    * Response containing a list of reports with their PDF download URLs
    */
   export interface ListReportsPdfResponse {
+    /**
+     * Array of report PDF items with download URLs
+     */
     reports: Array<ListReportsPdfResponse.Report>;
 
+    /**
+     * Study ID the reports belong to. Format: stu\_{32-hex-chars}
+     */
     studyId: string;
 
+    /**
+     * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+     * '1.2.840.10008.5.1.4.1.1.2')
+     */
     studyInstanceUid: string;
   }
 
@@ -192,8 +253,14 @@ export namespace ReportPdfResponse {
      * A report with its PDF download URL
      */
     export interface Report {
+      /**
+       * Time-limited presigned URL to download the PDF (expires after 1 hour)
+       */
       presignedUrl: string;
 
+      /**
+       * Unique report identifier. Format: rep\_{32-hex-chars}
+       */
       reportId: string;
 
       /**
@@ -201,8 +268,15 @@ export namespace ReportPdfResponse {
        */
       snapshotMetadata: AutoScribeAPI.StudyReportMetadata;
 
+      /**
+       * Study ID this report belongs to. Format: stu\_{32-hex-chars}
+       */
       studyId: string;
 
+      /**
+       * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+       * '1.2.840.10008.5.1.4.1.1.2')
+       */
       studyInstanceUid: string;
     }
   }
@@ -220,6 +294,9 @@ export namespace ReportTextResponse {
    * Response containing a single report with its plain text
    */
   export interface SingleReportTextResponse {
+    /**
+     * Unique report identifier. Format: rep\_{32-hex-chars}
+     */
     reportId: string;
 
     /**
@@ -227,10 +304,20 @@ export namespace ReportTextResponse {
      */
     snapshotMetadata: AutoScribeAPI.StudyReportMetadata;
 
+    /**
+     * Study ID this report belongs to. Format: stu\_{32-hex-chars}
+     */
     studyId: string;
 
+    /**
+     * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+     * '1.2.840.10008.5.1.4.1.1.2')
+     */
     studyInstanceUid: string;
 
+    /**
+     * Plain text content of the report
+     */
     plainText?: string;
   }
 
@@ -238,10 +325,20 @@ export namespace ReportTextResponse {
    * Response containing a list of reports with their plain text
    */
   export interface ListReportsTextResponse {
+    /**
+     * Array of report text items
+     */
     reports: Array<ListReportsTextResponse.Report>;
 
+    /**
+     * Study ID the reports belong to. Format: stu\_{32-hex-chars}
+     */
     studyId: string;
 
+    /**
+     * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+     * '1.2.840.10008.5.1.4.1.1.2')
+     */
     studyInstanceUid: string;
   }
 
@@ -250,6 +347,9 @@ export namespace ReportTextResponse {
      * A report with its plain text content
      */
     export interface Report {
+      /**
+       * Unique report identifier. Format: rep\_{32-hex-chars}
+       */
       reportId: string;
 
       /**
@@ -257,10 +357,20 @@ export namespace ReportTextResponse {
        */
       snapshotMetadata: AutoScribeAPI.StudyReportMetadata;
 
+      /**
+       * Study ID this report belongs to. Format: stu\_{32-hex-chars}
+       */
       studyId: string;
 
+      /**
+       * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+       * '1.2.840.10008.5.1.4.1.1.2')
+       */
       studyInstanceUid: string;
 
+      /**
+       * Plain text content of the report
+       */
       plainText?: string;
     }
   }
