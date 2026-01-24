@@ -3,7 +3,6 @@
 Types:
 
 - <code><a href="./src/resources/shared.ts">APIKeyReference</a></code>
-- <code><a href="./src/resources/shared.ts">OrgReference</a></code>
 - <code><a href="./src/resources/shared.ts">UserReference</a></code>
 
 # AutoScribe
@@ -157,35 +156,7 @@ Methods:
 
 # Orgs
 
-Types:
-
-- <code><a href="./src/resources/orgs/orgs.ts">OrgCreateResponse</a></code>
-- <code><a href="./src/resources/orgs/orgs.ts">OrgRetrieveResponse</a></code>
-- <code><a href="./src/resources/orgs/orgs.ts">OrgUpdateResponse</a></code>
-- <code><a href="./src/resources/orgs/orgs.ts">OrgListResponse</a></code>
-- <code><a href="./src/resources/orgs/orgs.ts">OrgDeactivateResponse</a></code>
-- <code><a href="./src/resources/orgs/orgs.ts">OrgReactivateResponse</a></code>
-
-Methods:
-
-- <code title="post /v1/orgs">client.orgs.<a href="./src/resources/orgs/orgs.ts">create</a>({ ...params }) -> OrgCreateResponse</code>
-- <code title="get /v1/orgs/{orgId}">client.orgs.<a href="./src/resources/orgs/orgs.ts">retrieve</a>(orgID) -> OrgRetrieveResponse</code>
-- <code title="patch /v1/orgs/{orgId}">client.orgs.<a href="./src/resources/orgs/orgs.ts">update</a>(orgID, { ...params }) -> OrgUpdateResponse</code>
-- <code title="get /v1/orgs">client.orgs.<a href="./src/resources/orgs/orgs.ts">list</a>({ ...params }) -> OrgListResponsesCursorOrganizations</code>
-- <code title="post /v1/orgs/{orgId}/deactivate">client.orgs.<a href="./src/resources/orgs/orgs.ts">deactivate</a>(orgID) -> OrgDeactivateResponse</code>
-- <code title="post /v1/orgs/{orgId}/reactivate">client.orgs.<a href="./src/resources/orgs/orgs.ts">reactivate</a>(orgID) -> OrgReactivateResponse</code>
-
 ## Users
-
-Types:
-
-- <code><a href="./src/resources/orgs/users.ts">UserAddResponse</a></code>
-- <code><a href="./src/resources/orgs/users.ts">UserRemoveResponse</a></code>
-
-Methods:
-
-- <code title="post /v1/orgs/{orgId}/users">client.orgs.users.<a href="./src/resources/orgs/users.ts">add</a>(orgID, { ...params }) -> UserAddResponse</code>
-- <code title="delete /v1/orgs/{orgId}/users">client.orgs.users.<a href="./src/resources/orgs/users.ts">remove</a>(orgID, { ...params }) -> UserRemoveResponse</code>
 
 # Webhooks
 

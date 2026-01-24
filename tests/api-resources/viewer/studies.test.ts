@@ -31,8 +31,8 @@ describe('resource studies', () => {
       studyDescription: 'CT Chest/Abdomen/Pelvis',
       studyInstanceUid: '1.2.840.113619.2.55.3.604688119.868.1234567890.123',
       assignedTo: 'usr_1234567890abcdef1234567890abcdef',
+      expressCustomerId: 'cus_1234567890abcdef1234567890abcdef',
       metadata: { department: 'radiology', priority: 'urgent' },
-      orgId: 'org_1234567890abcdef1234567890abcdef',
     });
   });
 

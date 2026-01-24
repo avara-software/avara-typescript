@@ -215,15 +215,32 @@ export interface StudyCreateResponse {
   createdByUser?: Shared.UserReference | null;
 
   /**
+   * A reference to an Express customer with basic identifying information
+   */
+  expressCustomer?: StudyCreateResponse.ExpressCustomer | null;
+
+  /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
    * values up to 1000 chars
    */
   metadata?: { [key: string]: string };
+}
 
+export namespace StudyCreateResponse {
   /**
-   * A reference to an organization with basic identifying information
+   * A reference to an Express customer with basic identifying information
    */
-  org?: Shared.OrgReference | null;
+  export interface ExpressCustomer {
+    /**
+     * Unique Express customer identifier. Format: cus\_{32-hex-chars}
+     */
+    expressCustomerId: string;
+
+    /**
+     * Name of the Express customer
+     */
+    expressCustomerName: string;
+  }
 }
 
 /**
@@ -290,15 +307,32 @@ export interface StudyRetrieveResponse {
   createdByUser?: Shared.UserReference | null;
 
   /**
+   * A reference to an Express customer with basic identifying information
+   */
+  expressCustomer?: StudyRetrieveResponse.ExpressCustomer | null;
+
+  /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
    * values up to 1000 chars
    */
   metadata?: { [key: string]: string };
+}
 
+export namespace StudyRetrieveResponse {
   /**
-   * A reference to an organization with basic identifying information
+   * A reference to an Express customer with basic identifying information
    */
-  org?: Shared.OrgReference | null;
+  export interface ExpressCustomer {
+    /**
+     * Unique Express customer identifier. Format: cus\_{32-hex-chars}
+     */
+    expressCustomerId: string;
+
+    /**
+     * Name of the Express customer
+     */
+    expressCustomerName: string;
+  }
 }
 
 /**
@@ -365,15 +399,32 @@ export interface StudyUpdateResponse {
   createdByUser?: Shared.UserReference | null;
 
   /**
+   * A reference to an Express customer with basic identifying information
+   */
+  expressCustomer?: StudyUpdateResponse.ExpressCustomer | null;
+
+  /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
    * values up to 1000 chars
    */
   metadata?: { [key: string]: string };
+}
 
+export namespace StudyUpdateResponse {
   /**
-   * A reference to an organization with basic identifying information
+   * A reference to an Express customer with basic identifying information
    */
-  org?: Shared.OrgReference | null;
+  export interface ExpressCustomer {
+    /**
+     * Unique Express customer identifier. Format: cus\_{32-hex-chars}
+     */
+    expressCustomerId: string;
+
+    /**
+     * Name of the Express customer
+     */
+    expressCustomerName: string;
+  }
 }
 
 /**
@@ -440,15 +491,32 @@ export interface StudyListResponse {
   createdByUser?: Shared.UserReference | null;
 
   /**
+   * A reference to an Express customer with basic identifying information
+   */
+  expressCustomer?: StudyListResponse.ExpressCustomer | null;
+
+  /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
    * values up to 1000 chars
    */
   metadata?: { [key: string]: string };
+}
 
+export namespace StudyListResponse {
   /**
-   * A reference to an organization with basic identifying information
+   * A reference to an Express customer with basic identifying information
    */
-  org?: Shared.OrgReference | null;
+  export interface ExpressCustomer {
+    /**
+     * Unique Express customer identifier. Format: cus\_{32-hex-chars}
+     */
+    expressCustomerId: string;
+
+    /**
+     * Name of the Express customer
+     */
+    expressCustomerName: string;
+  }
 }
 
 /**
@@ -531,15 +599,32 @@ export interface StudyRetrieveByUidResponse {
   createdByUser?: Shared.UserReference | null;
 
   /**
+   * A reference to an Express customer with basic identifying information
+   */
+  expressCustomer?: StudyRetrieveByUidResponse.ExpressCustomer | null;
+
+  /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
    * values up to 1000 chars
    */
   metadata?: { [key: string]: string };
+}
 
+export namespace StudyRetrieveByUidResponse {
   /**
-   * A reference to an organization with basic identifying information
+   * A reference to an Express customer with basic identifying information
    */
-  org?: Shared.OrgReference | null;
+  export interface ExpressCustomer {
+    /**
+     * Unique Express customer identifier. Format: cus\_{32-hex-chars}
+     */
+    expressCustomerId: string;
+
+    /**
+     * Name of the Express customer
+     */
+    expressCustomerName: string;
+  }
 }
 
 /**
@@ -575,15 +660,15 @@ export interface StudyCreateParams {
   assignedTo?: string;
 
   /**
+   * Express customer ID for the study. Format: cus\_{32-hex-chars}
+   */
+  expressCustomerId?: string;
+
+  /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
    * values up to 1000 chars
    */
   metadata?: { [key: string]: string };
-
-  /**
-   * Organization ID for the study. Format: org\_{32-hex-chars}
-   */
-  orgId?: string;
 }
 
 export interface StudyUpdateParams {

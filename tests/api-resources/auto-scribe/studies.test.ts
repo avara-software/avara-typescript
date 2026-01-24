@@ -46,8 +46,8 @@ describe('resource studies', () => {
       studyDescription: 'Brain MRI with Contrast',
       studyInstanceUid: '1.2.840.113619.2.55.3.604688119.868.1234567890.123',
       assignedTo: 'usr_1234567890abcdef1234567890abcdef',
+      expressCustomerId: 'cus_1234567890abcdef1234567890abcdef',
       metadata: { department: 'radiology', priority: 'routine' },
-      orgId: 'org_1234567890abcdef1234567890abcdef',
       priorReportTexts: ['x'],
       priorStudyIds: ['string'],
     });
@@ -85,8 +85,8 @@ describe('resource studies', () => {
         'stu_1234567890abcdef1234567890abcdef',
         {
           assignedTo: 'usr_1234567890abcdef1234567890abcdef',
+          expressCustomerId: 'cus_1234567890abcdef1234567890abcdef',
           metadata: { foo: 'string' },
-          orgId: 'org_1234567890abcdef1234567890abcdef',
           priorReportTexts: ['x'],
           priorStudyIds: ['string'],
           reportMetadata: {

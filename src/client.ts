@@ -39,19 +39,7 @@ import {
   Webhooks,
 } from './resources/webhooks';
 import { AutoScribe, StudyReportMetadata } from './resources/auto-scribe/auto-scribe';
-import {
-  OrgCreateParams,
-  OrgCreateResponse,
-  OrgDeactivateResponse,
-  OrgListParams,
-  OrgListResponse,
-  OrgListResponsesCursorOrganizations,
-  OrgReactivateResponse,
-  OrgRetrieveResponse,
-  OrgUpdateParams,
-  OrgUpdateResponse,
-  Orgs,
-} from './resources/orgs/orgs';
+import { Orgs } from './resources/orgs/orgs';
 import { Viewer } from './resources/viewer/viewer';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
@@ -803,19 +791,7 @@ export declare namespace Avara {
 
   export { Viewer as Viewer };
 
-  export {
-    Orgs as Orgs,
-    type OrgCreateResponse as OrgCreateResponse,
-    type OrgRetrieveResponse as OrgRetrieveResponse,
-    type OrgUpdateResponse as OrgUpdateResponse,
-    type OrgListResponse as OrgListResponse,
-    type OrgDeactivateResponse as OrgDeactivateResponse,
-    type OrgReactivateResponse as OrgReactivateResponse,
-    type OrgListResponsesCursorOrganizations as OrgListResponsesCursorOrganizations,
-    type OrgCreateParams as OrgCreateParams,
-    type OrgUpdateParams as OrgUpdateParams,
-    type OrgListParams as OrgListParams,
-  };
+  export { Orgs as Orgs };
 
   export {
     Webhooks as Webhooks,
@@ -828,6 +804,5 @@ export declare namespace Avara {
   };
 
   export type APIKeyReference = API.APIKeyReference;
-  export type OrgReference = API.OrgReference;
   export type UserReference = API.UserReference;
 }
