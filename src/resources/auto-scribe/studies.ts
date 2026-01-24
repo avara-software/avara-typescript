@@ -263,15 +263,15 @@ export interface StudyCreateResponse {
   createdByUser?: StudyCreateResponse.CreatedByUser | null;
 
   /**
+   * Reference to the Express customer this study belongs to
+   */
+  expressCustomer?: StudyCreateResponse.ExpressCustomer | null;
+
+  /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
    * values up to 1000 chars
    */
   metadata?: { [key: string]: string };
-
-  /**
-   * Reference to the organization this study belongs to
-   */
-  org?: StudyCreateResponse.Org | null;
 
   /**
    * Array of prior report texts to provide clinical context
@@ -391,18 +391,18 @@ export namespace StudyCreateResponse {
   }
 
   /**
-   * Reference to the organization this study belongs to
+   * Reference to the Express customer this study belongs to
    */
-  export interface Org {
+  export interface ExpressCustomer {
     /**
-     * Unique organization identifier. Format: org\_{32-hex-chars}
+     * Unique Express customer identifier. Format: cus\_{32-hex-chars}
      */
-    orgId: string;
+    expressCustomerId: string;
 
     /**
-     * Name of the organization
+     * Name of the Express customer
      */
-    orgName: string;
+    expressCustomerName: string;
   }
 }
 
@@ -480,15 +480,15 @@ export interface StudyRetrieveResponse {
   createdByUser?: StudyRetrieveResponse.CreatedByUser | null;
 
   /**
+   * Reference to the Express customer this study belongs to
+   */
+  expressCustomer?: StudyRetrieveResponse.ExpressCustomer | null;
+
+  /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
    * values up to 1000 chars
    */
   metadata?: { [key: string]: string };
-
-  /**
-   * Reference to the organization this study belongs to
-   */
-  org?: StudyRetrieveResponse.Org | null;
 
   /**
    * Array of prior report texts to provide clinical context
@@ -608,18 +608,18 @@ export namespace StudyRetrieveResponse {
   }
 
   /**
-   * Reference to the organization this study belongs to
+   * Reference to the Express customer this study belongs to
    */
-  export interface Org {
+  export interface ExpressCustomer {
     /**
-     * Unique organization identifier. Format: org\_{32-hex-chars}
+     * Unique Express customer identifier. Format: cus\_{32-hex-chars}
      */
-    orgId: string;
+    expressCustomerId: string;
 
     /**
-     * Name of the organization
+     * Name of the Express customer
      */
-    orgName: string;
+    expressCustomerName: string;
   }
 }
 
@@ -697,15 +697,15 @@ export interface StudyUpdateResponse {
   createdByUser?: StudyUpdateResponse.CreatedByUser | null;
 
   /**
+   * Reference to the Express customer this study belongs to
+   */
+  expressCustomer?: StudyUpdateResponse.ExpressCustomer | null;
+
+  /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
    * values up to 1000 chars
    */
   metadata?: { [key: string]: string };
-
-  /**
-   * Reference to the organization this study belongs to
-   */
-  org?: StudyUpdateResponse.Org | null;
 
   /**
    * Array of prior report texts to provide clinical context
@@ -825,18 +825,18 @@ export namespace StudyUpdateResponse {
   }
 
   /**
-   * Reference to the organization this study belongs to
+   * Reference to the Express customer this study belongs to
    */
-  export interface Org {
+  export interface ExpressCustomer {
     /**
-     * Unique organization identifier. Format: org\_{32-hex-chars}
+     * Unique Express customer identifier. Format: cus\_{32-hex-chars}
      */
-    orgId: string;
+    expressCustomerId: string;
 
     /**
-     * Name of the organization
+     * Name of the Express customer
      */
-    orgName: string;
+    expressCustomerName: string;
   }
 }
 
@@ -914,15 +914,15 @@ export interface StudyListResponse {
   createdByUser?: StudyListResponse.CreatedByUser | null;
 
   /**
+   * Reference to the Express customer this study belongs to
+   */
+  expressCustomer?: StudyListResponse.ExpressCustomer | null;
+
+  /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
    * values up to 1000 chars
    */
   metadata?: { [key: string]: string };
-
-  /**
-   * Reference to the organization this study belongs to
-   */
-  org?: StudyListResponse.Org | null;
 
   /**
    * Array of prior report texts to provide clinical context
@@ -1042,18 +1042,18 @@ export namespace StudyListResponse {
   }
 
   /**
-   * Reference to the organization this study belongs to
+   * Reference to the Express customer this study belongs to
    */
-  export interface Org {
+  export interface ExpressCustomer {
     /**
-     * Unique organization identifier. Format: org\_{32-hex-chars}
+     * Unique Express customer identifier. Format: cus\_{32-hex-chars}
      */
-    orgId: string;
+    expressCustomerId: string;
 
     /**
-     * Name of the organization
+     * Name of the Express customer
      */
-    orgName: string;
+    expressCustomerName: string;
   }
 }
 
@@ -1148,15 +1148,15 @@ export interface StudyRetrieveByUidResponse {
   createdByUser?: StudyRetrieveByUidResponse.CreatedByUser | null;
 
   /**
+   * Reference to the Express customer this study belongs to
+   */
+  expressCustomer?: StudyRetrieveByUidResponse.ExpressCustomer | null;
+
+  /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
    * values up to 1000 chars
    */
   metadata?: { [key: string]: string };
-
-  /**
-   * Reference to the organization this study belongs to
-   */
-  org?: StudyRetrieveByUidResponse.Org | null;
 
   /**
    * Array of prior report texts to provide clinical context
@@ -1276,18 +1276,18 @@ export namespace StudyRetrieveByUidResponse {
   }
 
   /**
-   * Reference to the organization this study belongs to
+   * Reference to the Express customer this study belongs to
    */
-  export interface Org {
+  export interface ExpressCustomer {
     /**
-     * Unique organization identifier. Format: org\_{32-hex-chars}
+     * Unique Express customer identifier. Format: cus\_{32-hex-chars}
      */
-    orgId: string;
+    expressCustomerId: string;
 
     /**
-     * Name of the organization
+     * Name of the Express customer
      */
-    orgName: string;
+    expressCustomerName: string;
   }
 }
 
@@ -1337,15 +1337,15 @@ export interface StudyCreateParams {
   assignedTo?: string;
 
   /**
+   * Express customer ID for the study. Format: cus\_{32-hex-chars}
+   */
+  expressCustomerId?: string;
+
+  /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
    * values up to 1000 chars
    */
   metadata?: { [key: string]: string };
-
-  /**
-   * Organization ID for the study. Format: org\_{32-hex-chars}
-   */
-  orgId?: string;
 
   priorReportTexts?: Array<string>;
 
@@ -1358,12 +1358,13 @@ export interface StudyUpdateParams {
    */
   assignedTo?: string;
 
-  metadata?: { [key: string]: string } | null;
-
   /**
-   * Organization ID for the study, or null to remove. Format: org\_{32-hex-chars}
+   * Express Customer ID for the study, or null to remove. Format:
+   * cus\_{32-hex-chars}
    */
-  orgId?: string;
+  expressCustomerId?: string;
+
+  metadata?: { [key: string]: string } | null;
 
   priorReportTexts?: Array<string> | null;
 

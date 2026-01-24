@@ -21,21 +21,6 @@ export interface APIKeyReference {
 }
 
 /**
- * A reference to an organization with basic identifying information
- */
-export interface OrgReference {
-  /**
-   * Unique organization identifier. Format: org\_{32-hex-chars}
-   */
-  orgId: string;
-
-  /**
-   * Name of the organization
-   */
-  orgName: string;
-}
-
-/**
  * A reference to a user with basic identifying information
  */
 export interface UserReference {
