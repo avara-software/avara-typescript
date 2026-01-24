@@ -217,30 +217,13 @@ export interface StudyCreateResponse {
   /**
    * A reference to an Express customer with basic identifying information
    */
-  expressCustomer?: StudyCreateResponse.ExpressCustomer | null;
+  expressCustomer?: Shared.ExpressCustomerReference | null;
 
   /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
    * values up to 1000 chars
    */
   metadata?: { [key: string]: string };
-}
-
-export namespace StudyCreateResponse {
-  /**
-   * A reference to an Express customer with basic identifying information
-   */
-  export interface ExpressCustomer {
-    /**
-     * Unique Express customer identifier. Format: cus\_{32-hex-chars}
-     */
-    expressCustomerId: string;
-
-    /**
-     * Name of the Express customer
-     */
-    expressCustomerName: string;
-  }
 }
 
 /**
@@ -309,30 +292,13 @@ export interface StudyRetrieveResponse {
   /**
    * A reference to an Express customer with basic identifying information
    */
-  expressCustomer?: StudyRetrieveResponse.ExpressCustomer | null;
+  expressCustomer?: Shared.ExpressCustomerReference | null;
 
   /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
    * values up to 1000 chars
    */
   metadata?: { [key: string]: string };
-}
-
-export namespace StudyRetrieveResponse {
-  /**
-   * A reference to an Express customer with basic identifying information
-   */
-  export interface ExpressCustomer {
-    /**
-     * Unique Express customer identifier. Format: cus\_{32-hex-chars}
-     */
-    expressCustomerId: string;
-
-    /**
-     * Name of the Express customer
-     */
-    expressCustomerName: string;
-  }
 }
 
 /**
@@ -401,30 +367,13 @@ export interface StudyUpdateResponse {
   /**
    * A reference to an Express customer with basic identifying information
    */
-  expressCustomer?: StudyUpdateResponse.ExpressCustomer | null;
+  expressCustomer?: Shared.ExpressCustomerReference | null;
 
   /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
    * values up to 1000 chars
    */
   metadata?: { [key: string]: string };
-}
-
-export namespace StudyUpdateResponse {
-  /**
-   * A reference to an Express customer with basic identifying information
-   */
-  export interface ExpressCustomer {
-    /**
-     * Unique Express customer identifier. Format: cus\_{32-hex-chars}
-     */
-    expressCustomerId: string;
-
-    /**
-     * Name of the Express customer
-     */
-    expressCustomerName: string;
-  }
 }
 
 /**
@@ -493,30 +442,13 @@ export interface StudyListResponse {
   /**
    * A reference to an Express customer with basic identifying information
    */
-  expressCustomer?: StudyListResponse.ExpressCustomer | null;
+  expressCustomer?: Shared.ExpressCustomerReference | null;
 
   /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
    * values up to 1000 chars
    */
   metadata?: { [key: string]: string };
-}
-
-export namespace StudyListResponse {
-  /**
-   * A reference to an Express customer with basic identifying information
-   */
-  export interface ExpressCustomer {
-    /**
-     * Unique Express customer identifier. Format: cus\_{32-hex-chars}
-     */
-    expressCustomerId: string;
-
-    /**
-     * Name of the Express customer
-     */
-    expressCustomerName: string;
-  }
 }
 
 /**
@@ -601,30 +533,13 @@ export interface StudyRetrieveByUidResponse {
   /**
    * A reference to an Express customer with basic identifying information
    */
-  expressCustomer?: StudyRetrieveByUidResponse.ExpressCustomer | null;
+  expressCustomer?: Shared.ExpressCustomerReference | null;
 
   /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
    * values up to 1000 chars
    */
   metadata?: { [key: string]: string };
-}
-
-export namespace StudyRetrieveByUidResponse {
-  /**
-   * A reference to an Express customer with basic identifying information
-   */
-  export interface ExpressCustomer {
-    /**
-     * Unique Express customer identifier. Format: cus\_{32-hex-chars}
-     */
-    expressCustomerId: string;
-
-    /**
-     * Name of the Express customer
-     */
-    expressCustomerName: string;
-  }
 }
 
 /**

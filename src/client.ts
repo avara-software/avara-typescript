@@ -17,10 +17,10 @@ import * as Errors from './core/error';
 import * as Pagination from './core/pagination';
 import {
   AbstractPage,
+  type CursorExpressCustomersParams,
+  CursorExpressCustomersResponse,
   type CursorInvitationsParams,
   CursorInvitationsResponse,
-  type CursorOrganizationsParams,
-  CursorOrganizationsResponse,
   type CursorStudiesParams,
   CursorStudiesResponse,
   type CursorUsersParams,
@@ -39,7 +39,19 @@ import {
   Webhooks,
 } from './resources/webhooks';
 import { AutoScribe, StudyReportMetadata } from './resources/auto-scribe/auto-scribe';
-import { Orgs } from './resources/orgs/orgs';
+import {
+  Express,
+  ExpressCreateParams,
+  ExpressCreateResponse,
+  ExpressDeactivateResponse,
+  ExpressListParams,
+  ExpressListResponse,
+  ExpressListResponsesCursorExpressCustomers,
+  ExpressReactivateResponse,
+  ExpressRetrieveResponse,
+  ExpressUpdateParams,
+  ExpressUpdateResponse,
+} from './resources/express/express';
 import { Viewer } from './resources/viewer/viewer';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
@@ -754,13 +766,13 @@ export class Avara {
 
   autoScribe: API.AutoScribe = new API.AutoScribe(this);
   viewer: API.Viewer = new API.Viewer(this);
-  orgs: API.Orgs = new API.Orgs(this);
+  express: API.Express = new API.Express(this);
   webhooks: API.Webhooks = new API.Webhooks(this);
 }
 
 Avara.AutoScribe = AutoScribe;
 Avara.Viewer = Viewer;
-Avara.Orgs = Orgs;
+Avara.Express = Express;
 Avara.Webhooks = Webhooks;
 
 export declare namespace Avara {
@@ -781,17 +793,29 @@ export declare namespace Avara {
     type CursorInvitationsResponse as CursorInvitationsResponse,
   };
 
-  export import CursorOrganizations = Pagination.CursorOrganizations;
+  export import CursorExpressCustomers = Pagination.CursorExpressCustomers;
   export {
-    type CursorOrganizationsParams as CursorOrganizationsParams,
-    type CursorOrganizationsResponse as CursorOrganizationsResponse,
+    type CursorExpressCustomersParams as CursorExpressCustomersParams,
+    type CursorExpressCustomersResponse as CursorExpressCustomersResponse,
   };
 
   export { AutoScribe as AutoScribe, type StudyReportMetadata as StudyReportMetadata };
 
   export { Viewer as Viewer };
 
-  export { Orgs as Orgs };
+  export {
+    Express as Express,
+    type ExpressCreateResponse as ExpressCreateResponse,
+    type ExpressRetrieveResponse as ExpressRetrieveResponse,
+    type ExpressUpdateResponse as ExpressUpdateResponse,
+    type ExpressListResponse as ExpressListResponse,
+    type ExpressDeactivateResponse as ExpressDeactivateResponse,
+    type ExpressReactivateResponse as ExpressReactivateResponse,
+    type ExpressListResponsesCursorExpressCustomers as ExpressListResponsesCursorExpressCustomers,
+    type ExpressCreateParams as ExpressCreateParams,
+    type ExpressUpdateParams as ExpressUpdateParams,
+    type ExpressListParams as ExpressListParams,
+  };
 
   export {
     Webhooks as Webhooks,
@@ -804,5 +828,6 @@ export declare namespace Avara {
   };
 
   export type APIKeyReference = API.APIKeyReference;
+  export type ExpressCustomerReference = API.ExpressCustomerReference;
   export type UserReference = API.UserReference;
 }

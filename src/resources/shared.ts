@@ -21,6 +21,21 @@ export interface APIKeyReference {
 }
 
 /**
+ * A reference to an Express customer with basic identifying information
+ */
+export interface ExpressCustomerReference {
+  /**
+   * Unique Express customer identifier. Format: cus\_{32-hex-chars}
+   */
+  expressCustomerId: string;
+
+  /**
+   * Name of the Express customer
+   */
+  expressCustomerName: string;
+}
+
+/**
  * A reference to a user with basic identifying information
  */
 export interface UserReference {

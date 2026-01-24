@@ -365,11 +365,11 @@ export class CursorInvitations<Item> extends AbstractPage<Item> implements Curso
   }
 }
 
-export interface CursorOrganizationsResponse<Item> {
+export interface CursorExpressCustomersResponse<Item> {
   /**
-   * Array of organization objects
+   * Array of Express customer objects
    */
-  organizations: Array<Item>;
+  expressCustomers: Array<Item>;
 
   /**
    * Next page cursor. Pass this to the next request to get the next page of results
@@ -382,7 +382,7 @@ export interface CursorOrganizationsResponse<Item> {
   hasMore: boolean;
 }
 
-export interface CursorOrganizationsParams {
+export interface CursorExpressCustomersParams {
   /**
    * Base64 encoded cursor from previous response for pagination
    */
@@ -394,14 +394,14 @@ export interface CursorOrganizationsParams {
   limit?: number;
 }
 
-export class CursorOrganizations<Item>
+export class CursorExpressCustomers<Item>
   extends AbstractPage<Item>
-  implements CursorOrganizationsResponse<Item>
+  implements CursorExpressCustomersResponse<Item>
 {
   /**
-   * Array of organization objects
+   * Array of Express customer objects
    */
-  organizations: Array<Item>;
+  expressCustomers: Array<Item>;
 
   /**
    * Next page cursor. Pass this to the next request to get the next page of results
@@ -416,18 +416,18 @@ export class CursorOrganizations<Item>
   constructor(
     client: Avara,
     response: Response,
-    body: CursorOrganizationsResponse<Item>,
+    body: CursorExpressCustomersResponse<Item>,
     options: FinalRequestOptions,
   ) {
     super(client, response, body, options);
 
-    this.organizations = body.organizations || [];
+    this.expressCustomers = body.expressCustomers || [];
     this.cursor = body.cursor || '';
     this.hasMore = body.hasMore || false;
   }
 
   getPaginatedItems(): Item[] {
-    return this.organizations ?? [];
+    return this.expressCustomers ?? [];
   }
 
   override hasNextPage(): boolean {
