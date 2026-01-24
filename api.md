@@ -3,6 +3,7 @@
 Types:
 
 - <code><a href="./src/resources/shared.ts">APIKeyReference</a></code>
+- <code><a href="./src/resources/shared.ts">ExpressCustomerReference</a></code>
 - <code><a href="./src/resources/shared.ts">UserReference</a></code>
 
 # AutoScribe
@@ -154,9 +155,37 @@ Methods:
 - <code title="get /v1/viewer/users/invitations">client.viewer.users.invitations.<a href="./src/resources/viewer/users/invitations.ts">list</a>({ ...params }) -> InvitationListResponsesCursorInvitations</code>
 - <code title="post /v1/viewer/users/invitations/revoke">client.viewer.users.invitations.<a href="./src/resources/viewer/users/invitations.ts">revoke</a>({ ...params }) -> InvitationRevokeResponse</code>
 
-# Orgs
+# Express
+
+Types:
+
+- <code><a href="./src/resources/express/express.ts">ExpressCreateResponse</a></code>
+- <code><a href="./src/resources/express/express.ts">ExpressRetrieveResponse</a></code>
+- <code><a href="./src/resources/express/express.ts">ExpressUpdateResponse</a></code>
+- <code><a href="./src/resources/express/express.ts">ExpressListResponse</a></code>
+- <code><a href="./src/resources/express/express.ts">ExpressDeactivateResponse</a></code>
+- <code><a href="./src/resources/express/express.ts">ExpressReactivateResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/express">client.express.<a href="./src/resources/express/express.ts">create</a>({ ...params }) -> ExpressCreateResponse</code>
+- <code title="get /v1/express/{expressCustomerId}">client.express.<a href="./src/resources/express/express.ts">retrieve</a>(expressCustomerID) -> ExpressRetrieveResponse</code>
+- <code title="patch /v1/express/{expressCustomerId}">client.express.<a href="./src/resources/express/express.ts">update</a>(expressCustomerID, { ...params }) -> ExpressUpdateResponse</code>
+- <code title="get /v1/express">client.express.<a href="./src/resources/express/express.ts">list</a>({ ...params }) -> ExpressListResponsesCursorExpressCustomers</code>
+- <code title="post /v1/express/{expressCustomerId}/deactivate">client.express.<a href="./src/resources/express/express.ts">deactivate</a>(expressCustomerID) -> ExpressDeactivateResponse</code>
+- <code title="post /v1/express/{expressCustomerId}/reactivate">client.express.<a href="./src/resources/express/express.ts">reactivate</a>(expressCustomerID) -> ExpressReactivateResponse</code>
 
 ## Users
+
+Types:
+
+- <code><a href="./src/resources/express/users.ts">UserAddResponse</a></code>
+- <code><a href="./src/resources/express/users.ts">UserRemoveResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/express/{expressCustomerId}/users">client.express.users.<a href="./src/resources/express/users.ts">add</a>(expressCustomerID, { ...params }) -> UserAddResponse</code>
+- <code title="delete /v1/express/{expressCustomerId}/users">client.express.users.<a href="./src/resources/express/users.ts">remove</a>(expressCustomerID, { ...params }) -> UserRemoveResponse</code>
 
 # Webhooks
 
