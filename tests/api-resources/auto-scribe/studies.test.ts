@@ -131,6 +131,7 @@ describe('resource studies', () => {
         {
           assignedTo: 'usr_1234567890abcdef1234567890abcdef',
           cursor: 'eyJvZmZzZXQiOjIwfQ==',
+          expressCustomerId: 'cus_1234567890abcdef1234567890abcdef',
           isCancelled: false,
           limit: 20,
           severity: 'normal',
