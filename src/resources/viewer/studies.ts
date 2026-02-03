@@ -616,6 +616,12 @@ export interface StudyListParams extends CursorStudiesParams {
   assignedTo?: string | null;
 
   /**
+   * Filter by Express customer ID (null = studies with no customer). Format:
+   * cus\_{32-hex-chars}
+   */
+  expressCustomerId?: string | null;
+
+  /**
    * Filter by cancellation status
    */
   isCancelled?: boolean | null;
