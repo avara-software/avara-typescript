@@ -143,7 +143,7 @@ export namespace ReportListResponse {
     snapshotMetadata: AutoScribeAPI.StudyReportMetadata;
 
     /**
-     * Report status
+     * Report status: 'in_progress' or 'completed'
      */
     status: 'in_progress' | 'completed';
 
