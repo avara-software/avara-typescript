@@ -23,5 +23,6 @@ export {
   type StudyAccessRequestedEvent,
   type StudyAccessRequestedResponse,
   type WebhookEvent,
+  type UnsafeUnwrapWebhookEvent,
   type UnwrapWebhookEvent,
 } from './webhooks';

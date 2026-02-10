@@ -4,6 +4,10 @@ import { APIResource } from '../core/resource';
 import { Webhook } from 'standardwebhooks';
 
 export class Webhooks extends APIResource {
+  unsafeUnwrap(body: string): UnsafeUnwrapWebhookEvent {
+    return JSON.parse(body) as UnsafeUnwrapWebhookEvent;
+  }
+
   unwrap(
     body: string,
     { headers, key }: { headers: Record<string, string>; key?: string },
@@ -148,6 +152,12 @@ export type WebhookEvent = StudyAccessRequestedEvent | ReportDeliveredEvent;
  * Webhook event sent when Avara needs presigned URLs for DICOM images. This is a
  * synchronous webhook - you must respond with the URLs within the request timeout.
  */
+export type UnsafeUnwrapWebhookEvent = StudyAccessRequestedEvent | ReportDeliveredEvent;
+
+/**
+ * Webhook event sent when Avara needs presigned URLs for DICOM images. This is a
+ * synchronous webhook - you must respond with the URLs within the request timeout.
+ */
 export type UnwrapWebhookEvent = StudyAccessRequestedEvent | ReportDeliveredEvent;
 
 export declare namespace Webhooks {
@@ -157,6 +167,7 @@ export declare namespace Webhooks {
     type StudyAccessRequestedEvent as StudyAccessRequestedEvent,
     type StudyAccessRequestedResponse as StudyAccessRequestedResponse,
     type WebhookEvent as WebhookEvent,
+    type UnsafeUnwrapWebhookEvent as UnsafeUnwrapWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
   };
 }
