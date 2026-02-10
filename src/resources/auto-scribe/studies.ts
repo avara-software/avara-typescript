@@ -184,7 +184,7 @@ export interface ReportIDWithStatus {
   reportId: string;
 
   /**
-   * Current status of the report
+   * Report status
    */
   status: 'in_progress' | 'completed';
 }
@@ -236,9 +236,7 @@ export interface StudyCreateResponse {
   studyInstanceUid: string;
 
   /**
-   * Report workflow status. 'unassigned' = no radiologist assigned, 'assigned' =
-   * assigned but not started, 'in_progress' = actively being dictated, 'completed' =
-   * report signed, 'addendum_active' = addendum in progress
+   * Report workflow status
    */
   studyReportStatus: 'unassigned' | 'assigned' | 'in_progress' | 'completed' | 'addendum_active';
 
@@ -453,9 +451,7 @@ export interface StudyRetrieveResponse {
   studyInstanceUid: string;
 
   /**
-   * Report workflow status. 'unassigned' = no radiologist assigned, 'assigned' =
-   * assigned but not started, 'in_progress' = actively being dictated, 'completed' =
-   * report signed, 'addendum_active' = addendum in progress
+   * Report workflow status
    */
   studyReportStatus: 'unassigned' | 'assigned' | 'in_progress' | 'completed' | 'addendum_active';
 
@@ -670,9 +666,7 @@ export interface StudyUpdateResponse {
   studyInstanceUid: string;
 
   /**
-   * Report workflow status. 'unassigned' = no radiologist assigned, 'assigned' =
-   * assigned but not started, 'in_progress' = actively being dictated, 'completed' =
-   * report signed, 'addendum_active' = addendum in progress
+   * Report workflow status
    */
   studyReportStatus: 'unassigned' | 'assigned' | 'in_progress' | 'completed' | 'addendum_active';
 
@@ -887,9 +881,7 @@ export interface StudyListResponse {
   studyInstanceUid: string;
 
   /**
-   * Report workflow status. 'unassigned' = no radiologist assigned, 'assigned' =
-   * assigned but not started, 'in_progress' = actively being dictated, 'completed' =
-   * report signed, 'addendum_active' = addendum in progress
+   * Report workflow status
    */
   studyReportStatus: 'unassigned' | 'assigned' | 'in_progress' | 'completed' | 'addendum_active';
 
@@ -1121,9 +1113,7 @@ export interface StudyRetrieveByUidResponse {
   studyInstanceUid: string;
 
   /**
-   * Report workflow status. 'unassigned' = no radiologist assigned, 'assigned' =
-   * assigned but not started, 'in_progress' = actively being dictated, 'completed' =
-   * report signed, 'addendum_active' = addendum in progress
+   * Report workflow status
    */
   studyReportStatus: 'unassigned' | 'assigned' | 'in_progress' | 'completed' | 'addendum_active';
 
@@ -1406,6 +1396,9 @@ export namespace StudyUpdateParams {
 
     scanType?: string | null;
 
+    /**
+     * Patient's biological sex
+     */
     sex?: 'male' | 'female' | 'other' | null;
 
     weight?: ReportMetadata.Weight | null;
@@ -1413,12 +1406,18 @@ export namespace StudyUpdateParams {
 
   export namespace ReportMetadata {
     export interface Height {
+      /**
+       * Height unit
+       */
       unit: 'in' | 'cm';
 
       value: number;
     }
 
     export interface Weight {
+      /**
+       * Weight unit
+       */
       unit: 'lbs' | 'kg';
 
       value: number;

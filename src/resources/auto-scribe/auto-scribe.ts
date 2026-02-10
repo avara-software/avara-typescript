@@ -114,7 +114,7 @@ export interface StudyReportMetadata {
   scanType?: string;
 
   /**
-   * Patient's biological sex. Options: 'male', 'female', 'other'
+   * Patient's biological sex
    */
   sex?: 'male' | 'female' | 'other';
 
@@ -131,6 +131,9 @@ export namespace StudyReportMetadata {
    * unit: 'cm'})
    */
   export interface Height {
+    /**
+     * Height unit
+     */
     unit: 'in' | 'cm';
 
     value: number;
@@ -141,6 +144,9 @@ export namespace StudyReportMetadata {
    * 'kg'})
    */
   export interface Weight {
+    /**
+     * Weight unit
+     */
     unit: 'lbs' | 'kg';
 
     value: number;
