@@ -196,8 +196,10 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">StudyAccessRequestedEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">StudyAccessRequestedResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">WebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">UnsafeUnwrapWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">UnwrapWebhookEvent</a></code>
 
 Methods:
 
+- <code>client.webhooks.<a href="./src/resources/webhooks.ts">unsafeUnwrap</a>(body) -> void</code>
 - <code>client.webhooks.<a href="./src/resources/webhooks.ts">unwrap</a>(body) -> void</code>

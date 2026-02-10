@@ -34,6 +34,7 @@ import {
   ReportDeliveredResponse,
   StudyAccessRequestedEvent,
   StudyAccessRequestedResponse,
+  UnsafeUnwrapWebhookEvent,
   UnwrapWebhookEvent,
   WebhookEvent,
   Webhooks,
@@ -836,6 +837,7 @@ export declare namespace Avara {
     type StudyAccessRequestedEvent as StudyAccessRequestedEvent,
     type StudyAccessRequestedResponse as StudyAccessRequestedResponse,
     type WebhookEvent as WebhookEvent,
+    type UnsafeUnwrapWebhookEvent as UnsafeUnwrapWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
   };
 
