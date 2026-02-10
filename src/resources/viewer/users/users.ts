@@ -201,8 +201,7 @@ export interface UserRetrieveResponse {
   lastName: string;
 
   /**
-   * User access level. 'owner' has full control, 'admin' can manage users/settings,
-   * 'member' has standard access
+   * User access level
    */
   level: 'owner' | 'admin' | 'member';
 
@@ -303,8 +302,7 @@ export interface UserUpdateResponse {
   lastName: string;
 
   /**
-   * User access level. 'owner' has full control, 'admin' can manage users/settings,
-   * 'member' has standard access
+   * User access level
    */
   level: 'owner' | 'admin' | 'member';
 
@@ -405,8 +403,7 @@ export interface UserListResponse {
   lastName: string;
 
   /**
-   * User access level. 'owner' has full control, 'admin' can manage users/settings,
-   * 'member' has standard access
+   * User access level
    */
   level: 'owner' | 'admin' | 'member';
 
@@ -508,8 +505,7 @@ export interface UserInviteResponse {
   lastName: string;
 
   /**
-   * User access level. 'admin' can manage users/settings, 'member' has standard
-   * access
+   * User access level for invite/update (owner cannot be set via API)
    */
   level: 'admin' | 'member';
 
@@ -560,6 +556,9 @@ export interface UserRevokeAccessResponse {
 export interface UserUpdateParams {
   canManageStudies?: boolean;
 
+  /**
+   * User's clinical or organizational role
+   */
   clinicRole?:
     | 'Radiologist'
     | 'Cardiologist'
@@ -599,6 +598,9 @@ export interface UserUpdateParams {
    */
   lastName?: string;
 
+  /**
+   * User access level for invite/update (owner cannot be set via API)
+   */
   level?: 'admin' | 'member';
 
   middleName?: string | null;
@@ -683,6 +685,9 @@ export interface UserInviteParams {
    */
   lastName: string;
 
+  /**
+   * User access level for invite/update (owner cannot be set via API)
+   */
   level: 'admin' | 'member';
 
   /**

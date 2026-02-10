@@ -192,6 +192,9 @@ export interface StudyCreateResponse {
    */
   studyInstanceUid: string;
 
+  /**
+   * Study viewer completion status
+   */
   studyViewerStatus: 'incomplete' | 'complete';
 
   /**
@@ -267,6 +270,9 @@ export interface StudyRetrieveResponse {
    */
   studyInstanceUid: string;
 
+  /**
+   * Study viewer completion status
+   */
   studyViewerStatus: 'incomplete' | 'complete';
 
   /**
@@ -342,6 +348,9 @@ export interface StudyUpdateResponse {
    */
   studyInstanceUid: string;
 
+  /**
+   * Study viewer completion status
+   */
   studyViewerStatus: 'incomplete' | 'complete';
 
   /**
@@ -417,6 +426,9 @@ export interface StudyListResponse {
    */
   studyInstanceUid: string;
 
+  /**
+   * Study viewer completion status
+   */
   studyViewerStatus: 'incomplete' | 'complete';
 
   /**
@@ -508,6 +520,9 @@ export interface StudyRetrieveByUidResponse {
    */
   studyInstanceUid: string;
 
+  /**
+   * Study viewer completion status
+   */
   studyViewerStatus: 'incomplete' | 'complete';
 
   /**
@@ -605,6 +620,9 @@ export interface StudyUpdateParams {
    */
   studyDescription?: string;
 
+  /**
+   * Study viewer completion status
+   */
   studyViewerStatus?: 'incomplete' | 'complete';
 }
 

@@ -113,7 +113,7 @@ export interface InvitationRetrieveResponse {
   clinicId: string;
 
   /**
-   * Clinical or organizational role for the invited user
+   * User's clinical or organizational role
    */
   clinicRole:
     | 'Radiologist'
@@ -169,7 +169,7 @@ export interface InvitationRetrieveResponse {
   invitationId: string;
 
   /**
-   * How the invitation was created - 'dashboard' or 'api'
+   * How the user was invited - via dashboard UI or API
    */
   invitedSource: 'dashboard' | 'api';
 
@@ -185,12 +185,12 @@ export interface InvitationRetrieveResponse {
   lastName: string;
 
   /**
-   * Access level for the invited user. 'admin' or 'member' when created via API
+   * User access level
    */
   level: 'owner' | 'admin' | 'member';
 
   /**
-   * Invitation status: 'sent', 'accepted', 'rejected', or 'revoked'
+   * Invitation status
    */
   status: 'sent' | 'accepted' | 'rejected' | 'revoked';
 
@@ -260,7 +260,7 @@ export interface InvitationUpdateResponse {
   clinicId: string;
 
   /**
-   * Clinical or organizational role for the invited user
+   * User's clinical or organizational role
    */
   clinicRole:
     | 'Radiologist'
@@ -316,7 +316,7 @@ export interface InvitationUpdateResponse {
   invitationId: string;
 
   /**
-   * How the invitation was created - 'dashboard' or 'api'
+   * How the user was invited - via dashboard UI or API
    */
   invitedSource: 'dashboard' | 'api';
 
@@ -332,12 +332,12 @@ export interface InvitationUpdateResponse {
   lastName: string;
 
   /**
-   * Access level for the invited user. 'admin' or 'member' when created via API
+   * User access level
    */
   level: 'owner' | 'admin' | 'member';
 
   /**
-   * Invitation status: 'sent', 'accepted', 'rejected', or 'revoked'
+   * Invitation status
    */
   status: 'sent' | 'accepted' | 'rejected' | 'revoked';
 
@@ -407,7 +407,7 @@ export interface InvitationListResponse {
   clinicId: string;
 
   /**
-   * Clinical or organizational role for the invited user
+   * User's clinical or organizational role
    */
   clinicRole:
     | 'Radiologist'
@@ -463,7 +463,7 @@ export interface InvitationListResponse {
   invitationId: string;
 
   /**
-   * How the invitation was created - 'dashboard' or 'api'
+   * How the user was invited - via dashboard UI or API
    */
   invitedSource: 'dashboard' | 'api';
 
@@ -479,12 +479,12 @@ export interface InvitationListResponse {
   lastName: string;
 
   /**
-   * Access level for the invited user. 'admin' or 'member' when created via API
+   * User access level
    */
   level: 'owner' | 'admin' | 'member';
 
   /**
-   * Invitation status: 'sent', 'accepted', 'rejected', or 'revoked'
+   * Invitation status
    */
   status: 'sent' | 'accepted' | 'rejected' | 'revoked';
 
@@ -554,6 +554,9 @@ export interface InvitationUpdateParams {
    */
   canManageStudies?: boolean;
 
+  /**
+   * User's clinical or organizational role
+   */
   clinicRole?:
     | 'Radiologist'
     | 'Cardiologist'
@@ -593,6 +596,9 @@ export interface InvitationUpdateParams {
    */
   lastName?: string;
 
+  /**
+   * User access level for invite/update (owner cannot be set via API)
+   */
   level?: 'admin' | 'member';
 
   middleName?: string | null;
