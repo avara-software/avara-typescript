@@ -8,7 +8,7 @@ const client = new Avara({
 });
 
 describe('resource invitations', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.viewer.users.invitations.retrieve('inv_1234567890abcdef1234567890abcdef');
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource invitations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update', async () => {
     const responsePromise = client.viewer.users.invitations.update('inv_1234567890abcdef1234567890abcdef');
     const rawResponse = await responsePromise.asResponse();
@@ -32,7 +32,7 @@ describe('resource invitations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -55,7 +55,7 @@ describe('resource invitations', () => {
     ).rejects.toThrow(Avara.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.viewer.users.invitations.list();
     const rawResponse = await responsePromise.asResponse();
@@ -67,7 +67,7 @@ describe('resource invitations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -86,7 +86,7 @@ describe('resource invitations', () => {
     ).rejects.toThrow(Avara.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('revoke', async () => {
     const responsePromise = client.viewer.users.invitations.revoke();
     const rawResponse = await responsePromise.asResponse();
@@ -98,7 +98,7 @@ describe('resource invitations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('revoke: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(

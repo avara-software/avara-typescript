@@ -8,7 +8,7 @@ const client = new Avara({
 });
 
 describe('resource users', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('add: only required params', async () => {
     const responsePromise = client.express.users.add('cus_1234567890abcdef1234567890abcdef', {
       userId: 'usr_1234567890abcdef1234567890abcdef',
@@ -22,14 +22,14 @@ describe('resource users', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('add: required and optional params', async () => {
     const response = await client.express.users.add('cus_1234567890abcdef1234567890abcdef', {
       userId: 'usr_1234567890abcdef1234567890abcdef',
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('remove: only required params', async () => {
     const responsePromise = client.express.users.remove('cus_1234567890abcdef1234567890abcdef', {
       userId: 'usr_1234567890abcdef1234567890abcdef',
@@ -43,7 +43,7 @@ describe('resource users', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('remove: required and optional params', async () => {
     const response = await client.express.users.remove('cus_1234567890abcdef1234567890abcdef', {
       userId: 'usr_1234567890abcdef1234567890abcdef',

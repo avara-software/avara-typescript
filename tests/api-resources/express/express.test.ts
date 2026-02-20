@@ -8,7 +8,7 @@ const client = new Avara({
 });
 
 describe('resource express', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.express.create({
       expressCustomerName: 'City Medical Center - Radiology Department',
@@ -22,7 +22,7 @@ describe('resource express', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.express.create({
       expressCustomerName: 'City Medical Center - Radiology Department',
@@ -30,7 +30,7 @@ describe('resource express', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.express.retrieve('cus_1234567890abcdef1234567890abcdef');
     const rawResponse = await responsePromise.asResponse();
@@ -42,7 +42,7 @@ describe('resource express', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update', async () => {
     const responsePromise = client.express.update('cus_1234567890abcdef1234567890abcdef');
     const rawResponse = await responsePromise.asResponse();
@@ -54,7 +54,7 @@ describe('resource express', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -73,7 +73,7 @@ describe('resource express', () => {
     ).rejects.toThrow(Avara.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.express.list();
     const rawResponse = await responsePromise.asResponse();
@@ -85,7 +85,7 @@ describe('resource express', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -96,7 +96,7 @@ describe('resource express', () => {
     ).rejects.toThrow(Avara.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('deactivate', async () => {
     const responsePromise = client.express.deactivate('cus_1234567890abcdef1234567890abcdef');
     const rawResponse = await responsePromise.asResponse();
@@ -108,7 +108,7 @@ describe('resource express', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('reactivate', async () => {
     const responsePromise = client.express.reactivate('cus_1234567890abcdef1234567890abcdef');
     const rawResponse = await responsePromise.asResponse();
