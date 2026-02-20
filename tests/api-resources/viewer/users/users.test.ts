@@ -8,7 +8,7 @@ const client = new Avara({
 });
 
 describe('resource users', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.viewer.users.retrieve('usr_1234567890abcdef1234567890abcdef');
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource users', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update', async () => {
     const responsePromise = client.viewer.users.update('usr_1234567890abcdef1234567890abcdef');
     const rawResponse = await responsePromise.asResponse();
@@ -32,7 +32,7 @@ describe('resource users', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -55,7 +55,7 @@ describe('resource users', () => {
     ).rejects.toThrow(Avara.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.viewer.users.list();
     const rawResponse = await responsePromise.asResponse();
@@ -67,7 +67,7 @@ describe('resource users', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -86,7 +86,7 @@ describe('resource users', () => {
     ).rejects.toThrow(Avara.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('invite: only required params', async () => {
     const responsePromise = client.viewer.users.invite({
       canManageStudies: true,
@@ -106,7 +106,7 @@ describe('resource users', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('invite: required and optional params', async () => {
     const response = await client.viewer.users.invite({
       canManageStudies: true,
@@ -123,7 +123,7 @@ describe('resource users', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('reactivate: only required params', async () => {
     const responsePromise = client.viewer.users.reactivate({
       userId: 'usr_1234567890abcdef1234567890abcdef',
@@ -137,12 +137,12 @@ describe('resource users', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('reactivate: required and optional params', async () => {
     const response = await client.viewer.users.reactivate({ userId: 'usr_1234567890abcdef1234567890abcdef' });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('revokeAccess: only required params', async () => {
     const responsePromise = client.viewer.users.revokeAccess({
       userId: 'usr_1234567890abcdef1234567890abcdef',
@@ -156,7 +156,7 @@ describe('resource users', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('revokeAccess: required and optional params', async () => {
     const response = await client.viewer.users.revokeAccess({
       userId: 'usr_1234567890abcdef1234567890abcdef',

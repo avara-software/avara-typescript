@@ -8,7 +8,7 @@ const client = new Avara({
 });
 
 describe('resource studies', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.autoScribe.studies.create({
       reportMetadata: {},
@@ -25,7 +25,7 @@ describe('resource studies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.autoScribe.studies.create({
       reportMetadata: {
@@ -53,7 +53,7 @@ describe('resource studies', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.autoScribe.studies.retrieve('stu_1234567890abcdef1234567890abcdef');
     const rawResponse = await responsePromise.asResponse();
@@ -65,7 +65,7 @@ describe('resource studies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update', async () => {
     const responsePromise = client.autoScribe.studies.update('stu_1234567890abcdef1234567890abcdef');
     const rawResponse = await responsePromise.asResponse();
@@ -77,7 +77,7 @@ describe('resource studies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -111,7 +111,7 @@ describe('resource studies', () => {
     ).rejects.toThrow(Avara.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.autoScribe.studies.list();
     const rawResponse = await responsePromise.asResponse();
@@ -123,7 +123,7 @@ describe('resource studies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -143,7 +143,7 @@ describe('resource studies', () => {
     ).rejects.toThrow(Avara.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('cancel', async () => {
     const responsePromise = client.autoScribe.studies.cancel();
     const rawResponse = await responsePromise.asResponse();
@@ -155,7 +155,7 @@ describe('resource studies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('cancel: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -169,7 +169,7 @@ describe('resource studies', () => {
     ).rejects.toThrow(Avara.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('rerouteURL: only required params', async () => {
     const responsePromise = client.autoScribe.studies.rerouteURL({
       assignedToUserId: 'usr_1234567890abcdef1234567890abcdef',
@@ -183,7 +183,7 @@ describe('resource studies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('rerouteURL: required and optional params', async () => {
     const response = await client.autoScribe.studies.rerouteURL({
       assignedToUserId: 'usr_1234567890abcdef1234567890abcdef',
@@ -192,7 +192,7 @@ describe('resource studies', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieveByUid', async () => {
     const responsePromise = client.autoScribe.studies.retrieveByUid('1.2.840.10008.5.1.4.1.1.2');
     const rawResponse = await responsePromise.asResponse();
@@ -204,7 +204,7 @@ describe('resource studies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('uncancel', async () => {
     const responsePromise = client.autoScribe.studies.uncancel();
     const rawResponse = await responsePromise.asResponse();
@@ -216,7 +216,7 @@ describe('resource studies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('uncancel: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -230,7 +230,7 @@ describe('resource studies', () => {
     ).rejects.toThrow(Avara.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('viewerOnlyRerouteURL', async () => {
     const responsePromise = client.autoScribe.studies.viewerOnlyRerouteURL();
     const rawResponse = await responsePromise.asResponse();
@@ -242,7 +242,7 @@ describe('resource studies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('viewerOnlyRerouteURL: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
