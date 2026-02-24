@@ -60,7 +60,7 @@ $ yarn link avara
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global avara
+$ pnpm link --global avara
 ```
 
 ## Running tests
