@@ -1,7 +1,6 @@
 import fs from 'fs';
 import type { ResponseLike } from 'avara/internal/to-file';
 import { toFile } from 'avara/core/uploads';
-import { File } from 'node:buffer';
 
 class MyClass {
   name: string = 'foo';
