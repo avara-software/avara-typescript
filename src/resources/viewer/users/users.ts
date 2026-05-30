@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as Shared from '../../shared';
 import * as InvitationsAPI from './invitations';
 import {
   InvitationListParams,
@@ -140,30 +141,9 @@ export interface UserRetrieveResponse {
   canManageStudies: boolean;
 
   /**
-   * User's clinical or organizational role
+   * A user's clinical or organizational role within the clinic.
    */
-  clinicRole:
-    | 'Radiologist'
-    | 'Cardiologist'
-    | 'Neurologist'
-    | 'Urologist'
-    | 'Gynecologist'
-    | 'Endocrinologist'
-    | 'Doctor'
-    | 'Surgeon'
-    | 'Physician'
-    | 'Physician Assistant'
-    | 'Nurse Practitioner'
-    | 'Registered Nurse'
-    | 'Patient Care Coordinator'
-    | 'Front Desk Operator'
-    | 'Imaging Technologist'
-    | 'PACS Administrator'
-    | 'Software Engineer'
-    | 'Revenue Cycle Manager'
-    | 'Administrative Director'
-    | 'Administrative Assistant'
-    | 'Other';
+  clinicRole: Shared.ClinicRole;
 
   /**
    * Timestamp when the user was created
@@ -186,9 +166,10 @@ export interface UserRetrieveResponse {
   hasDashboardAccess: boolean;
 
   /**
-   * How the user was invited - via dashboard UI or API
+   * How a user/invitation was created - via the dashboard UI ('dashboard') or the
+   * API ('api').
    */
-  invitedSource: 'dashboard' | 'api';
+  invitedSource: Shared.InvitedSource;
 
   /**
    * Timestamp of user's last login, null if never logged in
@@ -201,10 +182,10 @@ export interface UserRetrieveResponse {
   lastName: string;
 
   /**
-   * User access level. 'owner' has full control, 'admin' can manage users/settings,
-   * 'member' has standard access
+   * User access level. 'owner' has full control (dashboard-only, not assignable via
+   * API), 'admin' can manage users/settings, 'member' has standard access.
    */
-  level: 'owner' | 'admin' | 'member';
+  level: Shared.UserLevel;
 
   /**
    * Unique user identifier. Format: usr\_{32-hex-chars}
@@ -242,30 +223,9 @@ export interface UserUpdateResponse {
   canManageStudies: boolean;
 
   /**
-   * User's clinical or organizational role
+   * A user's clinical or organizational role within the clinic.
    */
-  clinicRole:
-    | 'Radiologist'
-    | 'Cardiologist'
-    | 'Neurologist'
-    | 'Urologist'
-    | 'Gynecologist'
-    | 'Endocrinologist'
-    | 'Doctor'
-    | 'Surgeon'
-    | 'Physician'
-    | 'Physician Assistant'
-    | 'Nurse Practitioner'
-    | 'Registered Nurse'
-    | 'Patient Care Coordinator'
-    | 'Front Desk Operator'
-    | 'Imaging Technologist'
-    | 'PACS Administrator'
-    | 'Software Engineer'
-    | 'Revenue Cycle Manager'
-    | 'Administrative Director'
-    | 'Administrative Assistant'
-    | 'Other';
+  clinicRole: Shared.ClinicRole;
 
   /**
    * Timestamp when the user was created
@@ -288,9 +248,10 @@ export interface UserUpdateResponse {
   hasDashboardAccess: boolean;
 
   /**
-   * How the user was invited - via dashboard UI or API
+   * How a user/invitation was created - via the dashboard UI ('dashboard') or the
+   * API ('api').
    */
-  invitedSource: 'dashboard' | 'api';
+  invitedSource: Shared.InvitedSource;
 
   /**
    * Timestamp of user's last login, null if never logged in
@@ -303,10 +264,10 @@ export interface UserUpdateResponse {
   lastName: string;
 
   /**
-   * User access level. 'owner' has full control, 'admin' can manage users/settings,
-   * 'member' has standard access
+   * User access level. 'owner' has full control (dashboard-only, not assignable via
+   * API), 'admin' can manage users/settings, 'member' has standard access.
    */
-  level: 'owner' | 'admin' | 'member';
+  level: Shared.UserLevel;
 
   /**
    * Unique user identifier. Format: usr\_{32-hex-chars}
@@ -344,30 +305,9 @@ export interface UserListResponse {
   canManageStudies: boolean;
 
   /**
-   * User's clinical or organizational role
+   * A user's clinical or organizational role within the clinic.
    */
-  clinicRole:
-    | 'Radiologist'
-    | 'Cardiologist'
-    | 'Neurologist'
-    | 'Urologist'
-    | 'Gynecologist'
-    | 'Endocrinologist'
-    | 'Doctor'
-    | 'Surgeon'
-    | 'Physician'
-    | 'Physician Assistant'
-    | 'Nurse Practitioner'
-    | 'Registered Nurse'
-    | 'Patient Care Coordinator'
-    | 'Front Desk Operator'
-    | 'Imaging Technologist'
-    | 'PACS Administrator'
-    | 'Software Engineer'
-    | 'Revenue Cycle Manager'
-    | 'Administrative Director'
-    | 'Administrative Assistant'
-    | 'Other';
+  clinicRole: Shared.ClinicRole;
 
   /**
    * Timestamp when the user was created
@@ -390,9 +330,10 @@ export interface UserListResponse {
   hasDashboardAccess: boolean;
 
   /**
-   * How the user was invited - via dashboard UI or API
+   * How a user/invitation was created - via the dashboard UI ('dashboard') or the
+   * API ('api').
    */
-  invitedSource: 'dashboard' | 'api';
+  invitedSource: Shared.InvitedSource;
 
   /**
    * Timestamp of user's last login, null if never logged in
@@ -405,10 +346,10 @@ export interface UserListResponse {
   lastName: string;
 
   /**
-   * User access level. 'owner' has full control, 'admin' can manage users/settings,
-   * 'member' has standard access
+   * User access level. 'owner' has full control (dashboard-only, not assignable via
+   * API), 'admin' can manage users/settings, 'member' has standard access.
    */
-  level: 'owner' | 'admin' | 'member';
+  level: Shared.UserLevel;
 
   /**
    * Unique user identifier. Format: usr\_{32-hex-chars}
@@ -447,30 +388,9 @@ export interface UserInviteResponse {
   canManageStudies: boolean;
 
   /**
-   * User's clinical or organizational role
+   * A user's clinical or organizational role within the clinic.
    */
-  clinicRole:
-    | 'Radiologist'
-    | 'Cardiologist'
-    | 'Neurologist'
-    | 'Urologist'
-    | 'Gynecologist'
-    | 'Endocrinologist'
-    | 'Doctor'
-    | 'Surgeon'
-    | 'Physician'
-    | 'Physician Assistant'
-    | 'Nurse Practitioner'
-    | 'Registered Nurse'
-    | 'Patient Care Coordinator'
-    | 'Front Desk Operator'
-    | 'Imaging Technologist'
-    | 'PACS Administrator'
-    | 'Software Engineer'
-    | 'Revenue Cycle Manager'
-    | 'Administrative Director'
-    | 'Administrative Assistant'
-    | 'Other';
+  clinicRole: Shared.ClinicRole;
 
   /**
    * Timestamp when the user was created
@@ -493,9 +413,10 @@ export interface UserInviteResponse {
   hasDashboardAccess: boolean;
 
   /**
-   * How the user was invited - via dashboard UI or API
+   * How a user/invitation was created - via the dashboard UI ('dashboard') or the
+   * API ('api').
    */
-  invitedSource: 'dashboard' | 'api';
+  invitedSource: Shared.InvitedSource;
 
   /**
    * Timestamp of user's last login, null if never logged in
@@ -508,10 +429,11 @@ export interface UserInviteResponse {
   lastName: string;
 
   /**
-   * User access level. 'admin' can manage users/settings, 'member' has standard
-   * access
+   * User access level assignable via the API. 'admin' can manage users/settings,
+   * 'member' has standard access. 'owner' is dashboard-only and cannot be assigned
+   * via the API.
    */
-  level: 'admin' | 'member';
+  level: Shared.AssignableUserLevel;
 
   /**
    * Unique user identifier. Format: usr\_{32-hex-chars}
@@ -560,29 +482,10 @@ export interface UserRevokeAccessResponse {
 export interface UserUpdateParams {
   canManageStudies?: boolean;
 
-  clinicRole?:
-    | 'Radiologist'
-    | 'Cardiologist'
-    | 'Neurologist'
-    | 'Urologist'
-    | 'Gynecologist'
-    | 'Endocrinologist'
-    | 'Doctor'
-    | 'Surgeon'
-    | 'Physician'
-    | 'Physician Assistant'
-    | 'Nurse Practitioner'
-    | 'Registered Nurse'
-    | 'Patient Care Coordinator'
-    | 'Front Desk Operator'
-    | 'Imaging Technologist'
-    | 'PACS Administrator'
-    | 'Software Engineer'
-    | 'Revenue Cycle Manager'
-    | 'Administrative Director'
-    | 'Administrative Assistant'
-    | 'Other'
-    | null;
+  /**
+   * A user's clinical or organizational role within the clinic.
+   */
+  clinicRole?: Shared.ClinicRole | null;
 
   /**
    * User's first name
@@ -599,7 +502,12 @@ export interface UserUpdateParams {
    */
   lastName?: string;
 
-  level?: 'admin' | 'member';
+  /**
+   * User access level assignable via the API. 'admin' can manage users/settings,
+   * 'member' has standard access. 'owner' is dashboard-only and cannot be assigned
+   * via the API.
+   */
+  level?: Shared.AssignableUserLevel;
 
   middleName?: string | null;
 
@@ -624,7 +532,7 @@ export interface UserListParams extends CursorUsersParams {
   /**
    * Filter by invitation source
    */
-  invitedSource?: 'dashboard' | 'api';
+  invitedSource?: Shared.InvitedSource;
 
   /**
    * Filter by last name (contains match)
@@ -634,37 +542,16 @@ export interface UserListParams extends CursorUsersParams {
   /**
    * Filter by user level
    */
-  level?: 'owner' | 'admin' | 'member';
+  level?: Shared.UserLevel;
 }
 
 export interface UserInviteParams {
   canManageStudies: boolean;
 
   /**
-   * User's clinical or organizational role
+   * A user's clinical or organizational role within the clinic.
    */
-  clinicRole:
-    | 'Radiologist'
-    | 'Cardiologist'
-    | 'Neurologist'
-    | 'Urologist'
-    | 'Gynecologist'
-    | 'Endocrinologist'
-    | 'Doctor'
-    | 'Surgeon'
-    | 'Physician'
-    | 'Physician Assistant'
-    | 'Nurse Practitioner'
-    | 'Registered Nurse'
-    | 'Patient Care Coordinator'
-    | 'Front Desk Operator'
-    | 'Imaging Technologist'
-    | 'PACS Administrator'
-    | 'Software Engineer'
-    | 'Revenue Cycle Manager'
-    | 'Administrative Director'
-    | 'Administrative Assistant'
-    | 'Other';
+  clinicRole: Shared.ClinicRole;
 
   /**
    * User's email address for login and notifications
@@ -683,7 +570,12 @@ export interface UserInviteParams {
    */
   lastName: string;
 
-  level: 'admin' | 'member';
+  /**
+   * User access level assignable via the API. 'admin' can manage users/settings,
+   * 'member' has standard access. 'owner' is dashboard-only and cannot be assigned
+   * via the API.
+   */
+  level: Shared.AssignableUserLevel;
 
   /**
    * User's middle name (optional)

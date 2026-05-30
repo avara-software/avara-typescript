@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as Shared from '../../shared';
 import { APIPromise } from '../../../core/api-promise';
 import { CursorInvitations, type CursorInvitationsParams, PagePromise } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
@@ -104,30 +105,9 @@ export interface InvitationRetrieveResponse {
   clinicId: string;
 
   /**
-   * Clinical or organizational role for the invited user
+   * A user's clinical or organizational role within the clinic.
    */
-  clinicRole:
-    | 'Radiologist'
-    | 'Cardiologist'
-    | 'Neurologist'
-    | 'Urologist'
-    | 'Gynecologist'
-    | 'Endocrinologist'
-    | 'Doctor'
-    | 'Surgeon'
-    | 'Physician'
-    | 'Physician Assistant'
-    | 'Nurse Practitioner'
-    | 'Registered Nurse'
-    | 'Patient Care Coordinator'
-    | 'Front Desk Operator'
-    | 'Imaging Technologist'
-    | 'PACS Administrator'
-    | 'Software Engineer'
-    | 'Revenue Cycle Manager'
-    | 'Administrative Director'
-    | 'Administrative Assistant'
-    | 'Other';
+  clinicRole: Shared.ClinicRole;
 
   /**
    * Timestamp when the invitation was created
@@ -160,9 +140,10 @@ export interface InvitationRetrieveResponse {
   invitationId: string;
 
   /**
-   * How the invitation was created - 'dashboard' or 'api'
+   * How a user/invitation was created - via the dashboard UI ('dashboard') or the
+   * API ('api').
    */
-  invitedSource: 'dashboard' | 'api';
+  invitedSource: Shared.InvitedSource;
 
   /**
    * User ID of the person who sent the invitation. Format: usr\_{32-hex-chars}. Null
@@ -176,14 +157,15 @@ export interface InvitationRetrieveResponse {
   lastName: string;
 
   /**
-   * Access level for the invited user. 'admin' or 'member' when created via API
+   * User access level. 'owner' has full control (dashboard-only, not assignable via
+   * API), 'admin' can manage users/settings, 'member' has standard access.
    */
-  level: 'owner' | 'admin' | 'member';
+  level: Shared.UserLevel;
 
   /**
-   * Invitation status: 'sent', 'accepted', 'rejected', or 'revoked'
+   * Lifecycle status of an invitation: 'sent', 'accepted', 'rejected', or 'revoked'.
    */
-  status: 'sent' | 'accepted' | 'rejected' | 'revoked';
+  status: Shared.InvitationStatus;
 
   /**
    * Timestamp when the invitation was last updated
@@ -238,30 +220,9 @@ export interface InvitationUpdateResponse {
   clinicId: string;
 
   /**
-   * Clinical or organizational role for the invited user
+   * A user's clinical or organizational role within the clinic.
    */
-  clinicRole:
-    | 'Radiologist'
-    | 'Cardiologist'
-    | 'Neurologist'
-    | 'Urologist'
-    | 'Gynecologist'
-    | 'Endocrinologist'
-    | 'Doctor'
-    | 'Surgeon'
-    | 'Physician'
-    | 'Physician Assistant'
-    | 'Nurse Practitioner'
-    | 'Registered Nurse'
-    | 'Patient Care Coordinator'
-    | 'Front Desk Operator'
-    | 'Imaging Technologist'
-    | 'PACS Administrator'
-    | 'Software Engineer'
-    | 'Revenue Cycle Manager'
-    | 'Administrative Director'
-    | 'Administrative Assistant'
-    | 'Other';
+  clinicRole: Shared.ClinicRole;
 
   /**
    * Timestamp when the invitation was created
@@ -294,9 +255,10 @@ export interface InvitationUpdateResponse {
   invitationId: string;
 
   /**
-   * How the invitation was created - 'dashboard' or 'api'
+   * How a user/invitation was created - via the dashboard UI ('dashboard') or the
+   * API ('api').
    */
-  invitedSource: 'dashboard' | 'api';
+  invitedSource: Shared.InvitedSource;
 
   /**
    * User ID of the person who sent the invitation. Format: usr\_{32-hex-chars}. Null
@@ -310,14 +272,15 @@ export interface InvitationUpdateResponse {
   lastName: string;
 
   /**
-   * Access level for the invited user. 'admin' or 'member' when created via API
+   * User access level. 'owner' has full control (dashboard-only, not assignable via
+   * API), 'admin' can manage users/settings, 'member' has standard access.
    */
-  level: 'owner' | 'admin' | 'member';
+  level: Shared.UserLevel;
 
   /**
-   * Invitation status: 'sent', 'accepted', 'rejected', or 'revoked'
+   * Lifecycle status of an invitation: 'sent', 'accepted', 'rejected', or 'revoked'.
    */
-  status: 'sent' | 'accepted' | 'rejected' | 'revoked';
+  status: Shared.InvitationStatus;
 
   /**
    * Timestamp when the invitation was last updated
@@ -372,30 +335,9 @@ export interface InvitationListResponse {
   clinicId: string;
 
   /**
-   * Clinical or organizational role for the invited user
+   * A user's clinical or organizational role within the clinic.
    */
-  clinicRole:
-    | 'Radiologist'
-    | 'Cardiologist'
-    | 'Neurologist'
-    | 'Urologist'
-    | 'Gynecologist'
-    | 'Endocrinologist'
-    | 'Doctor'
-    | 'Surgeon'
-    | 'Physician'
-    | 'Physician Assistant'
-    | 'Nurse Practitioner'
-    | 'Registered Nurse'
-    | 'Patient Care Coordinator'
-    | 'Front Desk Operator'
-    | 'Imaging Technologist'
-    | 'PACS Administrator'
-    | 'Software Engineer'
-    | 'Revenue Cycle Manager'
-    | 'Administrative Director'
-    | 'Administrative Assistant'
-    | 'Other';
+  clinicRole: Shared.ClinicRole;
 
   /**
    * Timestamp when the invitation was created
@@ -428,9 +370,10 @@ export interface InvitationListResponse {
   invitationId: string;
 
   /**
-   * How the invitation was created - 'dashboard' or 'api'
+   * How a user/invitation was created - via the dashboard UI ('dashboard') or the
+   * API ('api').
    */
-  invitedSource: 'dashboard' | 'api';
+  invitedSource: Shared.InvitedSource;
 
   /**
    * User ID of the person who sent the invitation. Format: usr\_{32-hex-chars}. Null
@@ -444,14 +387,15 @@ export interface InvitationListResponse {
   lastName: string;
 
   /**
-   * Access level for the invited user. 'admin' or 'member' when created via API
+   * User access level. 'owner' has full control (dashboard-only, not assignable via
+   * API), 'admin' can manage users/settings, 'member' has standard access.
    */
-  level: 'owner' | 'admin' | 'member';
+  level: Shared.UserLevel;
 
   /**
-   * Invitation status: 'sent', 'accepted', 'rejected', or 'revoked'
+   * Lifecycle status of an invitation: 'sent', 'accepted', 'rejected', or 'revoked'.
    */
-  status: 'sent' | 'accepted' | 'rejected' | 'revoked';
+  status: Shared.InvitationStatus;
 
   /**
    * Timestamp when the invitation was last updated
@@ -503,29 +447,10 @@ export interface InvitationRevokeResponse {
 export interface InvitationUpdateParams {
   canManageStudies?: boolean;
 
-  clinicRole?:
-    | 'Radiologist'
-    | 'Cardiologist'
-    | 'Neurologist'
-    | 'Urologist'
-    | 'Gynecologist'
-    | 'Endocrinologist'
-    | 'Doctor'
-    | 'Surgeon'
-    | 'Physician'
-    | 'Physician Assistant'
-    | 'Nurse Practitioner'
-    | 'Registered Nurse'
-    | 'Patient Care Coordinator'
-    | 'Front Desk Operator'
-    | 'Imaging Technologist'
-    | 'PACS Administrator'
-    | 'Software Engineer'
-    | 'Revenue Cycle Manager'
-    | 'Administrative Director'
-    | 'Administrative Assistant'
-    | 'Other'
-    | null;
+  /**
+   * A user's clinical or organizational role within the clinic.
+   */
+  clinicRole?: Shared.ClinicRole | null;
 
   /**
    * Invited user's first name
@@ -542,7 +467,12 @@ export interface InvitationUpdateParams {
    */
   lastName?: string;
 
-  level?: 'admin' | 'member';
+  /**
+   * User access level assignable via the API. 'admin' can manage users/settings,
+   * 'member' has standard access. 'owner' is dashboard-only and cannot be assigned
+   * via the API.
+   */
+  level?: Shared.AssignableUserLevel;
 
   middleName?: string | null;
 
@@ -562,7 +492,7 @@ export interface InvitationListParams extends CursorInvitationsParams {
   /**
    * Filter by expiration status
    */
-  expired?: 'all' | 'expired' | 'not-expired';
+  expired?: Shared.InvitationExpiredFilter;
 
   /**
    * Filter invitations created on or after this date (YYYY-MM-DD)
@@ -572,7 +502,7 @@ export interface InvitationListParams extends CursorInvitationsParams {
   /**
    * Filter by invitation status(es)
    */
-  status?: Array<'sent' | 'accepted' | 'rejected' | 'revoked'>;
+  status?: Array<Shared.InvitationStatus>;
 
   /**
    * Filter by user ID. Format: usr\_{32-hex-chars}

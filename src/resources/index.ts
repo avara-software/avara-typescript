@@ -1,7 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export * from './shared';
-export { AutoScribe, type StudyReportMetadata } from './auto-scribe/auto-scribe';
+export {
+  AutoScribe,
+  type HeightUnit,
+  type ReportStatus,
+  type Sex,
+  type StudyReportMetadata,
+  type StudyReportStatus,
+  type WeightUnit,
+} from './auto-scribe/auto-scribe';
 export {
   Express,
   type ExpressCreateResponse,
@@ -15,7 +23,7 @@ export {
   type ExpressListParams,
   type ExpressListResponsesCursorExpressCustomers,
 } from './express/express';
-export { Viewer } from './viewer/viewer';
+export { Viewer, type StudyViewerStatus } from './viewer/viewer';
 export {
   Webhooks,
   type ReportDeliveredEvent,

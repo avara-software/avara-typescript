@@ -3,19 +3,32 @@
 Types:
 
 - <code><a href="./src/resources/shared.ts">APIKeyReference</a></code>
+- <code><a href="./src/resources/shared.ts">AssignableUserLevel</a></code>
+- <code><a href="./src/resources/shared.ts">ClinicRole</a></code>
 - <code><a href="./src/resources/shared.ts">ExpressCustomerReference</a></code>
+- <code><a href="./src/resources/shared.ts">InvitationExpiredFilter</a></code>
+- <code><a href="./src/resources/shared.ts">InvitationStatus</a></code>
+- <code><a href="./src/resources/shared.ts">InvitedSource</a></code>
+- <code><a href="./src/resources/shared.ts">Severity</a></code>
+- <code><a href="./src/resources/shared.ts">UserLevel</a></code>
 - <code><a href="./src/resources/shared.ts">UserReference</a></code>
 
 # AutoScribe
 
 Types:
 
+- <code><a href="./src/resources/auto-scribe/auto-scribe.ts">HeightUnit</a></code>
+- <code><a href="./src/resources/auto-scribe/auto-scribe.ts">ReportStatus</a></code>
+- <code><a href="./src/resources/auto-scribe/auto-scribe.ts">Sex</a></code>
 - <code><a href="./src/resources/auto-scribe/auto-scribe.ts">StudyReportMetadata</a></code>
+- <code><a href="./src/resources/auto-scribe/auto-scribe.ts">StudyReportStatus</a></code>
+- <code><a href="./src/resources/auto-scribe/auto-scribe.ts">WeightUnit</a></code>
 
 ## Studies
 
 Types:
 
+- <code><a href="./src/resources/auto-scribe/studies.ts">PriorReport</a></code>
 - <code><a href="./src/resources/auto-scribe/studies.ts">ReportIDWithStatus</a></code>
 - <code><a href="./src/resources/auto-scribe/studies.ts">StudyCreateResponse</a></code>
 - <code><a href="./src/resources/auto-scribe/studies.ts">StudyRetrieveResponse</a></code>
@@ -94,6 +107,10 @@ Methods:
 - <code title="get /v1/autoScribe/reports/text">client.autoScribe.reports.<a href="./src/resources/auto-scribe/reports.ts">text</a>({ ...params }) -> ReportTextResponse</code>
 
 # Viewer
+
+Types:
+
+- <code><a href="./src/resources/viewer/viewer.ts">StudyViewerStatus</a></code>
 
 ## Studies
 
