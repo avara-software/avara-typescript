@@ -11,6 +11,7 @@ export {
 } from './auto-scribe';
 export {
   Reports,
+  type Report,
   type ReportPdfItem,
   type ReportTextItem,
   type ReportListResponse,

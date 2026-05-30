@@ -92,6 +92,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/auto-scribe/reports.ts">Report</a></code>
 - <code><a href="./src/resources/auto-scribe/reports.ts">ReportPdfItem</a></code>
 - <code><a href="./src/resources/auto-scribe/reports.ts">ReportTextItem</a></code>
 - <code><a href="./src/resources/auto-scribe/reports.ts">ReportListResponse</a></code>
