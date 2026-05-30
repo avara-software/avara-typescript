@@ -282,9 +282,9 @@ export interface StudyCreateResponse {
   updatedAt: string | null;
 
   /**
-   * Reference to the assigned radiologist, null if unassigned
+   * A reference to a user with basic identifying information
    */
-  assignedTo?: StudyCreateResponse.AssignedTo | null;
+  assignedTo?: Shared.UserReference | null;
 
   /**
    * Relevant clinical history for the study
@@ -297,19 +297,19 @@ export interface StudyCreateResponse {
   clinicalIndication?: string | null;
 
   /**
-   * Reference to the API key used to create this study
+   * A reference to an API key with basic identifying information
    */
-  createdByApiKey?: StudyCreateResponse.CreatedByAPIKey | null;
+  createdByApiKey?: Shared.APIKeyReference | null;
 
   /**
-   * Reference to the user who created this study via dashboard
+   * A reference to a user with basic identifying information
    */
-  createdByUser?: StudyCreateResponse.CreatedByUser | null;
+  createdByUser?: Shared.UserReference | null;
 
   /**
-   * Reference to the Express customer this study belongs to
+   * A reference to an Express customer with basic identifying information
    */
-  expressCustomer?: StudyCreateResponse.ExpressCustomer | null;
+  expressCustomer?: Shared.ExpressCustomerReference | null;
 
   /**
    * Integrator-provided stable patient identifier for linking studies
@@ -346,123 +346,6 @@ export interface StudyCreateResponse {
    * Imaging technique description
    */
   technologistTechnique?: string | null;
-}
-
-export namespace StudyCreateResponse {
-  /**
-   * Reference to the assigned radiologist, null if unassigned
-   */
-  export interface AssignedTo {
-    /**
-     * User's email address
-     */
-    email: string;
-
-    /**
-     * Unique user identifier. Format: usr\_{32-hex-chars}
-     */
-    userId: string;
-
-    /**
-     * User's first name
-     */
-    firstName?: string;
-
-    /**
-     * User's last name
-     */
-    lastName?: string;
-
-    /**
-     * User's middle name
-     */
-    middleName?: string;
-
-    /**
-     * Name suffix (e.g., 'MD', 'Jr.')
-     */
-    suffix1?: string;
-
-    /**
-     * Additional name suffix
-     */
-    suffix2?: string;
-  }
-
-  /**
-   * Reference to the API key used to create this study
-   */
-  export interface CreatedByAPIKey {
-    /**
-     * Unique API key identifier (UUIDv4 format)
-     */
-    apiKeyId: string;
-
-    /**
-     * Human-readable description of the API key
-     */
-    description: string;
-
-    /**
-     * Whether this API key has access to the Viewer product
-     */
-    isViewerEnabled?: boolean;
-  }
-
-  /**
-   * Reference to the user who created this study via dashboard
-   */
-  export interface CreatedByUser {
-    /**
-     * User's email address
-     */
-    email: string;
-
-    /**
-     * Unique user identifier. Format: usr\_{32-hex-chars}
-     */
-    userId: string;
-
-    /**
-     * User's first name
-     */
-    firstName?: string;
-
-    /**
-     * User's last name
-     */
-    lastName?: string;
-
-    /**
-     * User's middle name
-     */
-    middleName?: string;
-
-    /**
-     * Name suffix (e.g., 'MD', 'Jr.')
-     */
-    suffix1?: string;
-
-    /**
-     * Additional name suffix
-     */
-    suffix2?: string;
-  }
-
-  /**
-   * Reference to the Express customer this study belongs to
-   */
-  export interface ExpressCustomer {
-    /**
-     * Unique Express customer identifier. Format: cus\_{32-hex-chars}
-     */
-    expressCustomerId: string;
-
-    /**
-     * Name of the Express customer
-     */
-    expressCustomerName: string;
-  }
 }
 
 /**
@@ -524,9 +407,9 @@ export interface StudyRetrieveResponse {
   updatedAt: string | null;
 
   /**
-   * Reference to the assigned radiologist, null if unassigned
+   * A reference to a user with basic identifying information
    */
-  assignedTo?: StudyRetrieveResponse.AssignedTo | null;
+  assignedTo?: Shared.UserReference | null;
 
   /**
    * Relevant clinical history for the study
@@ -539,19 +422,19 @@ export interface StudyRetrieveResponse {
   clinicalIndication?: string | null;
 
   /**
-   * Reference to the API key used to create this study
+   * A reference to an API key with basic identifying information
    */
-  createdByApiKey?: StudyRetrieveResponse.CreatedByAPIKey | null;
+  createdByApiKey?: Shared.APIKeyReference | null;
 
   /**
-   * Reference to the user who created this study via dashboard
+   * A reference to a user with basic identifying information
    */
-  createdByUser?: StudyRetrieveResponse.CreatedByUser | null;
+  createdByUser?: Shared.UserReference | null;
 
   /**
-   * Reference to the Express customer this study belongs to
+   * A reference to an Express customer with basic identifying information
    */
-  expressCustomer?: StudyRetrieveResponse.ExpressCustomer | null;
+  expressCustomer?: Shared.ExpressCustomerReference | null;
 
   /**
    * Integrator-provided stable patient identifier for linking studies
@@ -588,123 +471,6 @@ export interface StudyRetrieveResponse {
    * Imaging technique description
    */
   technologistTechnique?: string | null;
-}
-
-export namespace StudyRetrieveResponse {
-  /**
-   * Reference to the assigned radiologist, null if unassigned
-   */
-  export interface AssignedTo {
-    /**
-     * User's email address
-     */
-    email: string;
-
-    /**
-     * Unique user identifier. Format: usr\_{32-hex-chars}
-     */
-    userId: string;
-
-    /**
-     * User's first name
-     */
-    firstName?: string;
-
-    /**
-     * User's last name
-     */
-    lastName?: string;
-
-    /**
-     * User's middle name
-     */
-    middleName?: string;
-
-    /**
-     * Name suffix (e.g., 'MD', 'Jr.')
-     */
-    suffix1?: string;
-
-    /**
-     * Additional name suffix
-     */
-    suffix2?: string;
-  }
-
-  /**
-   * Reference to the API key used to create this study
-   */
-  export interface CreatedByAPIKey {
-    /**
-     * Unique API key identifier (UUIDv4 format)
-     */
-    apiKeyId: string;
-
-    /**
-     * Human-readable description of the API key
-     */
-    description: string;
-
-    /**
-     * Whether this API key has access to the Viewer product
-     */
-    isViewerEnabled?: boolean;
-  }
-
-  /**
-   * Reference to the user who created this study via dashboard
-   */
-  export interface CreatedByUser {
-    /**
-     * User's email address
-     */
-    email: string;
-
-    /**
-     * Unique user identifier. Format: usr\_{32-hex-chars}
-     */
-    userId: string;
-
-    /**
-     * User's first name
-     */
-    firstName?: string;
-
-    /**
-     * User's last name
-     */
-    lastName?: string;
-
-    /**
-     * User's middle name
-     */
-    middleName?: string;
-
-    /**
-     * Name suffix (e.g., 'MD', 'Jr.')
-     */
-    suffix1?: string;
-
-    /**
-     * Additional name suffix
-     */
-    suffix2?: string;
-  }
-
-  /**
-   * Reference to the Express customer this study belongs to
-   */
-  export interface ExpressCustomer {
-    /**
-     * Unique Express customer identifier. Format: cus\_{32-hex-chars}
-     */
-    expressCustomerId: string;
-
-    /**
-     * Name of the Express customer
-     */
-    expressCustomerName: string;
-  }
 }
 
 /**
@@ -766,9 +532,9 @@ export interface StudyUpdateResponse {
   updatedAt: string | null;
 
   /**
-   * Reference to the assigned radiologist, null if unassigned
+   * A reference to a user with basic identifying information
    */
-  assignedTo?: StudyUpdateResponse.AssignedTo | null;
+  assignedTo?: Shared.UserReference | null;
 
   /**
    * Relevant clinical history for the study
@@ -781,19 +547,19 @@ export interface StudyUpdateResponse {
   clinicalIndication?: string | null;
 
   /**
-   * Reference to the API key used to create this study
+   * A reference to an API key with basic identifying information
    */
-  createdByApiKey?: StudyUpdateResponse.CreatedByAPIKey | null;
+  createdByApiKey?: Shared.APIKeyReference | null;
 
   /**
-   * Reference to the user who created this study via dashboard
+   * A reference to a user with basic identifying information
    */
-  createdByUser?: StudyUpdateResponse.CreatedByUser | null;
+  createdByUser?: Shared.UserReference | null;
 
   /**
-   * Reference to the Express customer this study belongs to
+   * A reference to an Express customer with basic identifying information
    */
-  expressCustomer?: StudyUpdateResponse.ExpressCustomer | null;
+  expressCustomer?: Shared.ExpressCustomerReference | null;
 
   /**
    * Integrator-provided stable patient identifier for linking studies
@@ -830,123 +596,6 @@ export interface StudyUpdateResponse {
    * Imaging technique description
    */
   technologistTechnique?: string | null;
-}
-
-export namespace StudyUpdateResponse {
-  /**
-   * Reference to the assigned radiologist, null if unassigned
-   */
-  export interface AssignedTo {
-    /**
-     * User's email address
-     */
-    email: string;
-
-    /**
-     * Unique user identifier. Format: usr\_{32-hex-chars}
-     */
-    userId: string;
-
-    /**
-     * User's first name
-     */
-    firstName?: string;
-
-    /**
-     * User's last name
-     */
-    lastName?: string;
-
-    /**
-     * User's middle name
-     */
-    middleName?: string;
-
-    /**
-     * Name suffix (e.g., 'MD', 'Jr.')
-     */
-    suffix1?: string;
-
-    /**
-     * Additional name suffix
-     */
-    suffix2?: string;
-  }
-
-  /**
-   * Reference to the API key used to create this study
-   */
-  export interface CreatedByAPIKey {
-    /**
-     * Unique API key identifier (UUIDv4 format)
-     */
-    apiKeyId: string;
-
-    /**
-     * Human-readable description of the API key
-     */
-    description: string;
-
-    /**
-     * Whether this API key has access to the Viewer product
-     */
-    isViewerEnabled?: boolean;
-  }
-
-  /**
-   * Reference to the user who created this study via dashboard
-   */
-  export interface CreatedByUser {
-    /**
-     * User's email address
-     */
-    email: string;
-
-    /**
-     * Unique user identifier. Format: usr\_{32-hex-chars}
-     */
-    userId: string;
-
-    /**
-     * User's first name
-     */
-    firstName?: string;
-
-    /**
-     * User's last name
-     */
-    lastName?: string;
-
-    /**
-     * User's middle name
-     */
-    middleName?: string;
-
-    /**
-     * Name suffix (e.g., 'MD', 'Jr.')
-     */
-    suffix1?: string;
-
-    /**
-     * Additional name suffix
-     */
-    suffix2?: string;
-  }
-
-  /**
-   * Reference to the Express customer this study belongs to
-   */
-  export interface ExpressCustomer {
-    /**
-     * Unique Express customer identifier. Format: cus\_{32-hex-chars}
-     */
-    expressCustomerId: string;
-
-    /**
-     * Name of the Express customer
-     */
-    expressCustomerName: string;
-  }
 }
 
 /**
@@ -1008,9 +657,9 @@ export interface StudyListResponse {
   updatedAt: string | null;
 
   /**
-   * Reference to the assigned radiologist, null if unassigned
+   * A reference to a user with basic identifying information
    */
-  assignedTo?: StudyListResponse.AssignedTo | null;
+  assignedTo?: Shared.UserReference | null;
 
   /**
    * Relevant clinical history for the study
@@ -1023,19 +672,19 @@ export interface StudyListResponse {
   clinicalIndication?: string | null;
 
   /**
-   * Reference to the API key used to create this study
+   * A reference to an API key with basic identifying information
    */
-  createdByApiKey?: StudyListResponse.CreatedByAPIKey | null;
+  createdByApiKey?: Shared.APIKeyReference | null;
 
   /**
-   * Reference to the user who created this study via dashboard
+   * A reference to a user with basic identifying information
    */
-  createdByUser?: StudyListResponse.CreatedByUser | null;
+  createdByUser?: Shared.UserReference | null;
 
   /**
-   * Reference to the Express customer this study belongs to
+   * A reference to an Express customer with basic identifying information
    */
-  expressCustomer?: StudyListResponse.ExpressCustomer | null;
+  expressCustomer?: Shared.ExpressCustomerReference | null;
 
   /**
    * Integrator-provided stable patient identifier for linking studies
@@ -1072,123 +721,6 @@ export interface StudyListResponse {
    * Imaging technique description
    */
   technologistTechnique?: string | null;
-}
-
-export namespace StudyListResponse {
-  /**
-   * Reference to the assigned radiologist, null if unassigned
-   */
-  export interface AssignedTo {
-    /**
-     * User's email address
-     */
-    email: string;
-
-    /**
-     * Unique user identifier. Format: usr\_{32-hex-chars}
-     */
-    userId: string;
-
-    /**
-     * User's first name
-     */
-    firstName?: string;
-
-    /**
-     * User's last name
-     */
-    lastName?: string;
-
-    /**
-     * User's middle name
-     */
-    middleName?: string;
-
-    /**
-     * Name suffix (e.g., 'MD', 'Jr.')
-     */
-    suffix1?: string;
-
-    /**
-     * Additional name suffix
-     */
-    suffix2?: string;
-  }
-
-  /**
-   * Reference to the API key used to create this study
-   */
-  export interface CreatedByAPIKey {
-    /**
-     * Unique API key identifier (UUIDv4 format)
-     */
-    apiKeyId: string;
-
-    /**
-     * Human-readable description of the API key
-     */
-    description: string;
-
-    /**
-     * Whether this API key has access to the Viewer product
-     */
-    isViewerEnabled?: boolean;
-  }
-
-  /**
-   * Reference to the user who created this study via dashboard
-   */
-  export interface CreatedByUser {
-    /**
-     * User's email address
-     */
-    email: string;
-
-    /**
-     * Unique user identifier. Format: usr\_{32-hex-chars}
-     */
-    userId: string;
-
-    /**
-     * User's first name
-     */
-    firstName?: string;
-
-    /**
-     * User's last name
-     */
-    lastName?: string;
-
-    /**
-     * User's middle name
-     */
-    middleName?: string;
-
-    /**
-     * Name suffix (e.g., 'MD', 'Jr.')
-     */
-    suffix1?: string;
-
-    /**
-     * Additional name suffix
-     */
-    suffix2?: string;
-  }
-
-  /**
-   * Reference to the Express customer this study belongs to
-   */
-  export interface ExpressCustomer {
-    /**
-     * Unique Express customer identifier. Format: cus\_{32-hex-chars}
-     */
-    expressCustomerId: string;
-
-    /**
-     * Name of the Express customer
-     */
-    expressCustomerName: string;
-  }
 }
 
 /**
@@ -1267,9 +799,9 @@ export interface StudyRetrieveByUidResponse {
   updatedAt: string | null;
 
   /**
-   * Reference to the assigned radiologist, null if unassigned
+   * A reference to a user with basic identifying information
    */
-  assignedTo?: StudyRetrieveByUidResponse.AssignedTo | null;
+  assignedTo?: Shared.UserReference | null;
 
   /**
    * Relevant clinical history for the study
@@ -1282,19 +814,19 @@ export interface StudyRetrieveByUidResponse {
   clinicalIndication?: string | null;
 
   /**
-   * Reference to the API key used to create this study
+   * A reference to an API key with basic identifying information
    */
-  createdByApiKey?: StudyRetrieveByUidResponse.CreatedByAPIKey | null;
+  createdByApiKey?: Shared.APIKeyReference | null;
 
   /**
-   * Reference to the user who created this study via dashboard
+   * A reference to a user with basic identifying information
    */
-  createdByUser?: StudyRetrieveByUidResponse.CreatedByUser | null;
+  createdByUser?: Shared.UserReference | null;
 
   /**
-   * Reference to the Express customer this study belongs to
+   * A reference to an Express customer with basic identifying information
    */
-  expressCustomer?: StudyRetrieveByUidResponse.ExpressCustomer | null;
+  expressCustomer?: Shared.ExpressCustomerReference | null;
 
   /**
    * Integrator-provided stable patient identifier for linking studies
@@ -1331,123 +863,6 @@ export interface StudyRetrieveByUidResponse {
    * Imaging technique description
    */
   technologistTechnique?: string | null;
-}
-
-export namespace StudyRetrieveByUidResponse {
-  /**
-   * Reference to the assigned radiologist, null if unassigned
-   */
-  export interface AssignedTo {
-    /**
-     * User's email address
-     */
-    email: string;
-
-    /**
-     * Unique user identifier. Format: usr\_{32-hex-chars}
-     */
-    userId: string;
-
-    /**
-     * User's first name
-     */
-    firstName?: string;
-
-    /**
-     * User's last name
-     */
-    lastName?: string;
-
-    /**
-     * User's middle name
-     */
-    middleName?: string;
-
-    /**
-     * Name suffix (e.g., 'MD', 'Jr.')
-     */
-    suffix1?: string;
-
-    /**
-     * Additional name suffix
-     */
-    suffix2?: string;
-  }
-
-  /**
-   * Reference to the API key used to create this study
-   */
-  export interface CreatedByAPIKey {
-    /**
-     * Unique API key identifier (UUIDv4 format)
-     */
-    apiKeyId: string;
-
-    /**
-     * Human-readable description of the API key
-     */
-    description: string;
-
-    /**
-     * Whether this API key has access to the Viewer product
-     */
-    isViewerEnabled?: boolean;
-  }
-
-  /**
-   * Reference to the user who created this study via dashboard
-   */
-  export interface CreatedByUser {
-    /**
-     * User's email address
-     */
-    email: string;
-
-    /**
-     * Unique user identifier. Format: usr\_{32-hex-chars}
-     */
-    userId: string;
-
-    /**
-     * User's first name
-     */
-    firstName?: string;
-
-    /**
-     * User's last name
-     */
-    lastName?: string;
-
-    /**
-     * User's middle name
-     */
-    middleName?: string;
-
-    /**
-     * Name suffix (e.g., 'MD', 'Jr.')
-     */
-    suffix1?: string;
-
-    /**
-     * Additional name suffix
-     */
-    suffix2?: string;
-  }
-
-  /**
-   * Reference to the Express customer this study belongs to
-   */
-  export interface ExpressCustomer {
-    /**
-     * Unique Express customer identifier. Format: cus\_{32-hex-chars}
-     */
-    expressCustomerId: string;
-
-    /**
-     * Name of the Express customer
-     */
-    expressCustomerName: string;
-  }
 }
 
 /**

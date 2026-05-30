@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as ReportsAPI from './reports';
 import * as AutoScribeAPI from './auto-scribe';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
@@ -89,6 +90,68 @@ export class Reports extends APIResource {
   ): APIPromise<ReportTextResponse> {
     return this._client.get('/v1/autoScribe/reports/text', { query, ...options });
   }
+}
+
+/**
+ * A report with its PDF download URL
+ */
+export interface ReportPdfItem {
+  /**
+   * Time-limited presigned URL to download the PDF (expires after 1 hour)
+   */
+  presignedUrl: string;
+
+  /**
+   * Unique report identifier. Format: rep\_{32-hex-chars}
+   */
+  reportId: string;
+
+  /**
+   * Patient demographics and scan information for report generation
+   */
+  snapshotMetadata: AutoScribeAPI.StudyReportMetadata;
+
+  /**
+   * Study ID this report belongs to. Format: stu\_{32-hex-chars}
+   */
+  studyId: string;
+
+  /**
+   * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+   * '1.2.840.10008.5.1.4.1.1.2')
+   */
+  studyInstanceUid: string;
+}
+
+/**
+ * A report with its plain text content
+ */
+export interface ReportTextItem {
+  /**
+   * Unique report identifier. Format: rep\_{32-hex-chars}
+   */
+  reportId: string;
+
+  /**
+   * Patient demographics and scan information for report generation
+   */
+  snapshotMetadata: AutoScribeAPI.StudyReportMetadata;
+
+  /**
+   * Study ID this report belongs to. Format: stu\_{32-hex-chars}
+   */
+  studyId: string;
+
+  /**
+   * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+   * '1.2.840.10008.5.1.4.1.1.2')
+   */
+  studyInstanceUid: string;
+
+  /**
+   * Plain text content of the report
+   */
+  plainText?: string;
 }
 
 /**
@@ -235,7 +298,7 @@ export namespace ReportPdfResponse {
     /**
      * Array of report PDF items with download URLs
      */
-    reports: Array<ListReportsPdfResponse.Report>;
+    reports: Array<ReportsAPI.ReportPdfItem>;
 
     /**
      * Study ID the reports belong to. Format: stu\_{32-hex-chars}
@@ -247,39 +310,6 @@ export namespace ReportPdfResponse {
      * '1.2.840.10008.5.1.4.1.1.2')
      */
     studyInstanceUid: string;
-  }
-
-  export namespace ListReportsPdfResponse {
-    /**
-     * A report with its PDF download URL
-     */
-    export interface Report {
-      /**
-       * Time-limited presigned URL to download the PDF (expires after 1 hour)
-       */
-      presignedUrl: string;
-
-      /**
-       * Unique report identifier. Format: rep\_{32-hex-chars}
-       */
-      reportId: string;
-
-      /**
-       * Patient demographics and scan information for report generation
-       */
-      snapshotMetadata: AutoScribeAPI.StudyReportMetadata;
-
-      /**
-       * Study ID this report belongs to. Format: stu\_{32-hex-chars}
-       */
-      studyId: string;
-
-      /**
-       * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
-       * '1.2.840.10008.5.1.4.1.1.2')
-       */
-      studyInstanceUid: string;
-    }
   }
 }
 
@@ -329,7 +359,7 @@ export namespace ReportTextResponse {
     /**
      * Array of report text items
      */
-    reports: Array<ListReportsTextResponse.Report>;
+    reports: Array<ReportsAPI.ReportTextItem>;
 
     /**
      * Study ID the reports belong to. Format: stu\_{32-hex-chars}
@@ -341,39 +371,6 @@ export namespace ReportTextResponse {
      * '1.2.840.10008.5.1.4.1.1.2')
      */
     studyInstanceUid: string;
-  }
-
-  export namespace ListReportsTextResponse {
-    /**
-     * A report with its plain text content
-     */
-    export interface Report {
-      /**
-       * Unique report identifier. Format: rep\_{32-hex-chars}
-       */
-      reportId: string;
-
-      /**
-       * Patient demographics and scan information for report generation
-       */
-      snapshotMetadata: AutoScribeAPI.StudyReportMetadata;
-
-      /**
-       * Study ID this report belongs to. Format: stu\_{32-hex-chars}
-       */
-      studyId: string;
-
-      /**
-       * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
-       * '1.2.840.10008.5.1.4.1.1.2')
-       */
-      studyInstanceUid: string;
-
-      /**
-       * Plain text content of the report
-       */
-      plainText?: string;
-    }
   }
 }
 
@@ -428,6 +425,8 @@ export interface ReportTextParams {
 
 export declare namespace Reports {
   export {
+    type ReportPdfItem as ReportPdfItem,
+    type ReportTextItem as ReportTextItem,
     type ReportListResponse as ReportListResponse,
     type ReportAddendumResponse as ReportAddendumResponse,
     type ReportCancelAddendumResponse as ReportCancelAddendumResponse,

@@ -8,8 +8,10 @@ import {
   ReportCancelAddendumResponse,
   ReportListParams,
   ReportListResponse,
+  ReportPdfItem,
   ReportPdfParams,
   ReportPdfResponse,
+  ReportTextItem,
   ReportTextParams,
   ReportTextResponse,
   Reports,
@@ -241,6 +243,8 @@ export declare namespace AutoScribe {
 
   export {
     Reports as Reports,
+    type ReportPdfItem as ReportPdfItem,
+    type ReportTextItem as ReportTextItem,
     type ReportListResponse as ReportListResponse,
     type ReportAddendumResponse as ReportAddendumResponse,
     type ReportCancelAddendumResponse as ReportCancelAddendumResponse,
