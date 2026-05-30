@@ -35,7 +35,7 @@ export interface ReportDeliveredEvent {
   /**
    * Event payload containing report and study information
    */
-  data: ReportDeliveredEvent.Data;
+  data: ReportDeliveredEventData;
 
   /**
    * Event type identifier
@@ -43,31 +43,29 @@ export interface ReportDeliveredEvent {
   type: 'report.delivered';
 }
 
-export namespace ReportDeliveredEvent {
+/**
+ * Event payload containing report and study information
+ */
+export interface ReportDeliveredEventData {
   /**
-   * Event payload containing report and study information
+   * Presigned URL for PDF download. Time-limited, typically valid for 1 hour.
    */
-  export interface Data {
-    /**
-     * Presigned URL for PDF download. Time-limited, typically valid for 1 hour.
-     */
-    presignedUrl: string;
+  presignedUrl: string;
 
-    /**
-     * Avara report ID. Format: rep\_{32-hex-chars}
-     */
-    reportId: string;
+  /**
+   * Avara report ID. Format: rep\_{32-hex-chars}
+   */
+  reportId: string;
 
-    /**
-     * Avara study ID. Format: stu\_{32-hex-chars}
-     */
-    studyId: string;
+  /**
+   * Avara study ID. Format: stu\_{32-hex-chars}
+   */
+  studyId: string;
 
-    /**
-     * Report plain text content (optional). Contains the full report text.
-     */
-    plainText?: string;
-  }
+  /**
+   * Report plain text content (optional). Contains the full report text.
+   */
+  plainText?: string;
 }
 
 /**
@@ -93,7 +91,7 @@ export interface StudyAccessRequestedEvent {
   /**
    * Event payload containing study information
    */
-  data: StudyAccessRequestedEvent.Data;
+  data: StudyAccessRequestedEventData;
 
   /**
    * Event type identifier
@@ -101,22 +99,20 @@ export interface StudyAccessRequestedEvent {
   type: 'study.access_requested';
 }
 
-export namespace StudyAccessRequestedEvent {
+/**
+ * Event payload containing study information
+ */
+export interface StudyAccessRequestedEventData {
   /**
-   * Event payload containing study information
+   * Avara study ID. Format: stu\_{32-hex-chars}
    */
-  export interface Data {
-    /**
-     * Avara study ID. Format: stu\_{32-hex-chars}
-     */
-    studyId: string;
+  studyId: string;
 
-    /**
-     * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
-     * '1.2.840.10008.5.1.4.1.1.2')
-     */
-    studyInstanceUid: string;
-  }
+  /**
+   * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+   * '1.2.840.10008.5.1.4.1.1.2')
+   */
+  studyInstanceUid: string;
 }
 
 /**
@@ -163,8 +159,10 @@ export type UnwrapWebhookEvent = StudyAccessRequestedEvent | ReportDeliveredEven
 export declare namespace Webhooks {
   export {
     type ReportDeliveredEvent as ReportDeliveredEvent,
+    type ReportDeliveredEventData as ReportDeliveredEventData,
     type ReportDeliveredResponse as ReportDeliveredResponse,
     type StudyAccessRequestedEvent as StudyAccessRequestedEvent,
+    type StudyAccessRequestedEventData as StudyAccessRequestedEventData,
     type StudyAccessRequestedResponse as StudyAccessRequestedResponse,
     type WebhookEvent as WebhookEvent,
     type UnsafeUnwrapWebhookEvent as UnsafeUnwrapWebhookEvent,

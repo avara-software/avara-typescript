@@ -92,6 +92,8 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/auto-scribe/reports.ts">ReportPdfItem</a></code>
+- <code><a href="./src/resources/auto-scribe/reports.ts">ReportTextItem</a></code>
 - <code><a href="./src/resources/auto-scribe/reports.ts">ReportListResponse</a></code>
 - <code><a href="./src/resources/auto-scribe/reports.ts">ReportAddendumResponse</a></code>
 - <code><a href="./src/resources/auto-scribe/reports.ts">ReportCancelAddendumResponse</a></code>
@@ -209,8 +211,10 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/webhooks.ts">ReportDeliveredEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ReportDeliveredEventData</a></code>
 - <code><a href="./src/resources/webhooks.ts">ReportDeliveredResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">StudyAccessRequestedEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">StudyAccessRequestedEventData</a></code>
 - <code><a href="./src/resources/webhooks.ts">StudyAccessRequestedResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">WebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">UnsafeUnwrapWebhookEvent</a></code>

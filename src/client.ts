@@ -31,8 +31,10 @@ import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import {
   ReportDeliveredEvent,
+  ReportDeliveredEventData,
   ReportDeliveredResponse,
   StudyAccessRequestedEvent,
+  StudyAccessRequestedEventData,
   StudyAccessRequestedResponse,
   UnsafeUnwrapWebhookEvent,
   UnwrapWebhookEvent,
@@ -870,8 +872,10 @@ export declare namespace Avara {
   export {
     Webhooks as Webhooks,
     type ReportDeliveredEvent as ReportDeliveredEvent,
+    type ReportDeliveredEventData as ReportDeliveredEventData,
     type ReportDeliveredResponse as ReportDeliveredResponse,
     type StudyAccessRequestedEvent as StudyAccessRequestedEvent,
+    type StudyAccessRequestedEventData as StudyAccessRequestedEventData,
     type StudyAccessRequestedResponse as StudyAccessRequestedResponse,
     type WebhookEvent as WebhookEvent,
     type UnsafeUnwrapWebhookEvent as UnsafeUnwrapWebhookEvent,
