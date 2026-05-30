@@ -44,7 +44,7 @@ describe('resource invitations', () => {
           firstName: 'Michael',
           hasDashboardAccess: true,
           lastName: 'Chen',
-          level: 'admin',
+          level: 'member',
           middleName: 'x',
           phoneNumber: '5551234567',
           suffix1: 'x',

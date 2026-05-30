@@ -103,7 +103,7 @@ describe('resource studies', () => {
           limit: 20,
           severity: 'normal',
           studyDescription: 'CT Head',
-          studyViewerStatus: 'complete',
+          studyViewerStatus: 'incomplete',
         },
         { path: '/_stainless_unknown_path' },
       ),

@@ -42,10 +42,18 @@ export class Viewer extends APIResource {
   users: UsersAPI.Users = new UsersAPI.Users(this._client);
 }
 
+/**
+ * Viewer completion status for a study. 'incomplete' = not yet finished in the
+ * viewer, 'complete' = finished.
+ */
+export type StudyViewerStatus = 'incomplete' | 'complete';
+
 Viewer.Studies = Studies;
 Viewer.Users = Users;
 
 export declare namespace Viewer {
+  export { type StudyViewerStatus as StudyViewerStatus };
+
   export {
     Studies as Studies,
     type StudyCreateResponse as StudyCreateResponse,

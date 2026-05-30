@@ -33,4 +33,4 @@ export {
   type UserRevokeAccessParams,
   type UserListResponsesCursorUsers,
 } from './users/index';
-export { Viewer } from './viewer';
+export { Viewer, type StudyViewerStatus } from './viewer';

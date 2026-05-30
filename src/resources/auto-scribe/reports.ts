@@ -143,9 +143,10 @@ export namespace ReportListResponse {
     snapshotMetadata: AutoScribeAPI.StudyReportMetadata;
 
     /**
-     * Report status: 'in_progress' or 'completed'
+     * Status of an individual report. 'in_progress' = actively being dictated,
+     * 'completed' = signed.
      */
-    status: 'in_progress' | 'completed';
+    status: AutoScribeAPI.ReportStatus;
 
     /**
      * Study ID this report belongs to. Format: stu\_{32-hex-chars}

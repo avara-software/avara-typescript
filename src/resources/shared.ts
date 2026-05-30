@@ -21,6 +21,79 @@ export interface APIKeyReference {
 }
 
 /**
+ * User access level assignable via the API. 'admin' can manage users/settings,
+ * 'member' has standard access. 'owner' is dashboard-only and cannot be assigned
+ * via the API.
+ */
+export type AssignableUserLevel = 'admin' | 'member';
+
+/**
+ * A user's clinical or organizational role within the clinic.
+ */
+export type ClinicRole =
+  | 'Doctor'
+  | 'Physician'
+  | 'Surgeon'
+  | 'Radiologist'
+  | 'Cardiologist'
+  | 'Neurologist'
+  | 'Urologist'
+  | 'Gynecologist'
+  | 'Endocrinologist'
+  | 'Oncologist'
+  | 'Radiation Oncologist'
+  | 'Hematologist'
+  | 'Gastroenterologist'
+  | 'Pulmonologist'
+  | 'Nephrologist'
+  | 'Rheumatologist'
+  | 'Dermatologist'
+  | 'Ophthalmologist'
+  | 'Otolaryngologist'
+  | 'Pediatrician'
+  | 'Obstetrician'
+  | 'Psychiatrist'
+  | 'Anesthesiologist'
+  | 'Emergency Medicine Physician'
+  | 'Family Medicine Physician'
+  | 'Internal Medicine Physician'
+  | 'Pathologist'
+  | 'Nuclear Medicine Physician'
+  | 'Pain Management Specialist'
+  | 'Infectious Disease Specialist'
+  | 'Immunologist'
+  | 'Physician Assistant'
+  | 'Nurse Practitioner'
+  | 'Certified Registered Nurse Anesthetist'
+  | 'Psychologist'
+  | 'Medical Assistant'
+  | 'Scribe'
+  | 'Registered Nurse'
+  | 'Nurse Manager'
+  | 'Patient Care Coordinator'
+  | 'Imaging Technologist'
+  | 'Laboratory Technician'
+  | 'Medical Laboratory Scientist'
+  | "Pathologists' Assistant"
+  | 'Phlebotomist'
+  | 'Pharmacist'
+  | 'Pharmacy Technician'
+  | 'Physical Therapist'
+  | 'Occupational Therapist'
+  | 'Speech-Language Pathologist'
+  | 'Respiratory Therapist'
+  | 'Nutritionist'
+  | 'Front Desk Operator'
+  | 'Revenue Cycle Manager'
+  | 'Administrative Director'
+  | 'Administrative Assistant'
+  | 'Legal Administrator'
+  | 'IT Administrator'
+  | 'IT Support'
+  | 'Software Engineer'
+  | 'Other';
+
+/**
  * A reference to an Express customer with basic identifying information
  */
 export interface ExpressCustomerReference {
@@ -34,6 +107,34 @@ export interface ExpressCustomerReference {
    */
   expressCustomerName: string;
 }
+
+/**
+ * Filter by expiration status
+ */
+export type InvitationExpiredFilter = 'all' | 'expired' | 'not-expired';
+
+/**
+ * Lifecycle status of an invitation: 'sent', 'accepted', 'rejected', or 'revoked'.
+ */
+export type InvitationStatus = 'sent' | 'accepted' | 'rejected' | 'revoked';
+
+/**
+ * How a user/invitation was created - via the dashboard UI ('dashboard') or the
+ * API ('api').
+ */
+export type InvitedSource = 'dashboard' | 'api';
+
+/**
+ * Priority level of a study. 'normal' for routine, 'high' for urgent, 'stat' for
+ * immediate attention.
+ */
+export type Severity = 'normal' | 'high' | 'stat';
+
+/**
+ * User access level. 'owner' has full control (dashboard-only, not assignable via
+ * API), 'admin' can manage users/settings, 'member' has standard access.
+ */
+export type UserLevel = 'owner' | 'admin' | 'member';
 
 /**
  * A reference to a user with basic identifying information

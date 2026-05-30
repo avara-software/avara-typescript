@@ -39,7 +39,15 @@ import {
   WebhookEvent,
   Webhooks,
 } from './resources/webhooks';
-import { AutoScribe, StudyReportMetadata } from './resources/auto-scribe/auto-scribe';
+import {
+  AutoScribe,
+  HeightUnit,
+  ReportStatus,
+  Sex,
+  StudyReportMetadata,
+  StudyReportStatus,
+  WeightUnit,
+} from './resources/auto-scribe/auto-scribe';
 import {
   Express,
   ExpressCreateParams,
@@ -53,7 +61,7 @@ import {
   ExpressUpdateParams,
   ExpressUpdateResponse,
 } from './resources/express/express';
-import { Viewer } from './resources/viewer/viewer';
+import { StudyViewerStatus, Viewer } from './resources/viewer/viewer';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -833,9 +841,17 @@ export declare namespace Avara {
     type CursorExpressCustomersResponse as CursorExpressCustomersResponse,
   };
 
-  export { AutoScribe as AutoScribe, type StudyReportMetadata as StudyReportMetadata };
+  export {
+    AutoScribe as AutoScribe,
+    type HeightUnit as HeightUnit,
+    type ReportStatus as ReportStatus,
+    type Sex as Sex,
+    type StudyReportMetadata as StudyReportMetadata,
+    type StudyReportStatus as StudyReportStatus,
+    type WeightUnit as WeightUnit,
+  };
 
-  export { Viewer as Viewer };
+  export { Viewer as Viewer, type StudyViewerStatus as StudyViewerStatus };
 
   export {
     Express as Express,
@@ -863,6 +879,13 @@ export declare namespace Avara {
   };
 
   export type APIKeyReference = API.APIKeyReference;
+  export type AssignableUserLevel = API.AssignableUserLevel;
+  export type ClinicRole = API.ClinicRole;
   export type ExpressCustomerReference = API.ExpressCustomerReference;
+  export type InvitationExpiredFilter = API.InvitationExpiredFilter;
+  export type InvitationStatus = API.InvitationStatus;
+  export type InvitedSource = API.InvitedSource;
+  export type Severity = API.Severity;
+  export type UserLevel = API.UserLevel;
   export type UserReference = API.UserReference;
 }

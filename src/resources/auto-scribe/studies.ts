@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as Shared from '../shared';
 import * as AutoScribeAPI from './auto-scribe';
 import { APIPromise } from '../../core/api-promise';
 import { CursorStudies, type CursorStudiesParams, PagePromise } from '../../core/pagination';
@@ -177,6 +178,36 @@ export class Studies extends APIResource {
 export type StudyListResponsesCursorStudies = CursorStudies<StudyListResponse>;
 
 /**
+ * External prior report metadata and text stored on a study
+ */
+export interface PriorReport {
+  /**
+   * Full prior report text
+   */
+  reportText: string;
+
+  /**
+   * Integrator's external study identifier
+   */
+  externalStudyId?: string;
+
+  /**
+   * Imaging modality for the prior study
+   */
+  modality?: string;
+
+  /**
+   * Prior study date (YYYY-MM-DD)
+   */
+  studyDate?: string;
+
+  /**
+   * Description of the prior study
+   */
+  studyDescription?: string;
+}
+
+/**
  * A report ID paired with its current status
  */
 export interface ReportIDWithStatus {
@@ -186,9 +217,10 @@ export interface ReportIDWithStatus {
   reportId: string;
 
   /**
-   * Current status of the report
+   * Status of an individual report. 'in_progress' = actively being dictated,
+   * 'completed' = signed.
    */
-  status: 'in_progress' | 'completed';
+  status: AutoScribeAPI.ReportStatus;
 }
 
 /**
@@ -216,10 +248,10 @@ export interface StudyCreateResponse {
   reportMetadata: AutoScribeAPI.StudyReportMetadata;
 
   /**
-   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
-   * immediate attention
+   * Priority level of a study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention.
    */
-  severity: 'normal' | 'high' | 'stat';
+  severity: Shared.Severity;
 
   /**
    * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
@@ -238,11 +270,11 @@ export interface StudyCreateResponse {
   studyInstanceUid: string;
 
   /**
-   * Report workflow status. 'unassigned' = no radiologist assigned, 'assigned' =
-   * assigned but not started, 'in_progress' = actively being dictated, 'completed' =
-   * report signed, 'addendum_active' = addendum in progress
+   * AutoScribe report workflow status for a study. 'unassigned' = no radiologist
+   * assigned, 'assigned' = assigned but not started, 'in_progress' = actively being
+   * dictated, 'completed' = report signed, 'addendum_active' = addendum in progress.
    */
-  studyReportStatus: 'unassigned' | 'assigned' | 'in_progress' | 'completed' | 'addendum_active';
+  studyReportStatus: AutoScribeAPI.StudyReportStatus;
 
   /**
    * Timestamp when the study was last updated
@@ -298,7 +330,7 @@ export interface StudyCreateResponse {
   /**
    * External prior reports with metadata and text
    */
-  priorReports?: Array<StudyCreateResponse.PriorReport>;
+  priorReports?: Array<PriorReport>;
 
   /**
    * Array of report IDs associated with this study, including addendums
@@ -431,36 +463,6 @@ export namespace StudyCreateResponse {
      */
     expressCustomerName: string;
   }
-
-  /**
-   * External prior report metadata and text stored on a study
-   */
-  export interface PriorReport {
-    /**
-     * Full prior report text
-     */
-    reportText: string;
-
-    /**
-     * Integrator's external study identifier
-     */
-    externalStudyId?: string;
-
-    /**
-     * Imaging modality for the prior study
-     */
-    modality?: string;
-
-    /**
-     * Prior study date (YYYY-MM-DD)
-     */
-    studyDate?: string;
-
-    /**
-     * Description of the prior study
-     */
-    studyDescription?: string;
-  }
 }
 
 /**
@@ -488,10 +490,10 @@ export interface StudyRetrieveResponse {
   reportMetadata: AutoScribeAPI.StudyReportMetadata;
 
   /**
-   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
-   * immediate attention
+   * Priority level of a study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention.
    */
-  severity: 'normal' | 'high' | 'stat';
+  severity: Shared.Severity;
 
   /**
    * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
@@ -510,11 +512,11 @@ export interface StudyRetrieveResponse {
   studyInstanceUid: string;
 
   /**
-   * Report workflow status. 'unassigned' = no radiologist assigned, 'assigned' =
-   * assigned but not started, 'in_progress' = actively being dictated, 'completed' =
-   * report signed, 'addendum_active' = addendum in progress
+   * AutoScribe report workflow status for a study. 'unassigned' = no radiologist
+   * assigned, 'assigned' = assigned but not started, 'in_progress' = actively being
+   * dictated, 'completed' = report signed, 'addendum_active' = addendum in progress.
    */
-  studyReportStatus: 'unassigned' | 'assigned' | 'in_progress' | 'completed' | 'addendum_active';
+  studyReportStatus: AutoScribeAPI.StudyReportStatus;
 
   /**
    * Timestamp when the study was last updated
@@ -570,7 +572,7 @@ export interface StudyRetrieveResponse {
   /**
    * External prior reports with metadata and text
    */
-  priorReports?: Array<StudyRetrieveResponse.PriorReport>;
+  priorReports?: Array<PriorReport>;
 
   /**
    * Array of report IDs associated with this study, including addendums
@@ -703,36 +705,6 @@ export namespace StudyRetrieveResponse {
      */
     expressCustomerName: string;
   }
-
-  /**
-   * External prior report metadata and text stored on a study
-   */
-  export interface PriorReport {
-    /**
-     * Full prior report text
-     */
-    reportText: string;
-
-    /**
-     * Integrator's external study identifier
-     */
-    externalStudyId?: string;
-
-    /**
-     * Imaging modality for the prior study
-     */
-    modality?: string;
-
-    /**
-     * Prior study date (YYYY-MM-DD)
-     */
-    studyDate?: string;
-
-    /**
-     * Description of the prior study
-     */
-    studyDescription?: string;
-  }
 }
 
 /**
@@ -760,10 +732,10 @@ export interface StudyUpdateResponse {
   reportMetadata: AutoScribeAPI.StudyReportMetadata;
 
   /**
-   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
-   * immediate attention
+   * Priority level of a study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention.
    */
-  severity: 'normal' | 'high' | 'stat';
+  severity: Shared.Severity;
 
   /**
    * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
@@ -782,11 +754,11 @@ export interface StudyUpdateResponse {
   studyInstanceUid: string;
 
   /**
-   * Report workflow status. 'unassigned' = no radiologist assigned, 'assigned' =
-   * assigned but not started, 'in_progress' = actively being dictated, 'completed' =
-   * report signed, 'addendum_active' = addendum in progress
+   * AutoScribe report workflow status for a study. 'unassigned' = no radiologist
+   * assigned, 'assigned' = assigned but not started, 'in_progress' = actively being
+   * dictated, 'completed' = report signed, 'addendum_active' = addendum in progress.
    */
-  studyReportStatus: 'unassigned' | 'assigned' | 'in_progress' | 'completed' | 'addendum_active';
+  studyReportStatus: AutoScribeAPI.StudyReportStatus;
 
   /**
    * Timestamp when the study was last updated
@@ -842,7 +814,7 @@ export interface StudyUpdateResponse {
   /**
    * External prior reports with metadata and text
    */
-  priorReports?: Array<StudyUpdateResponse.PriorReport>;
+  priorReports?: Array<PriorReport>;
 
   /**
    * Array of report IDs associated with this study, including addendums
@@ -975,36 +947,6 @@ export namespace StudyUpdateResponse {
      */
     expressCustomerName: string;
   }
-
-  /**
-   * External prior report metadata and text stored on a study
-   */
-  export interface PriorReport {
-    /**
-     * Full prior report text
-     */
-    reportText: string;
-
-    /**
-     * Integrator's external study identifier
-     */
-    externalStudyId?: string;
-
-    /**
-     * Imaging modality for the prior study
-     */
-    modality?: string;
-
-    /**
-     * Prior study date (YYYY-MM-DD)
-     */
-    studyDate?: string;
-
-    /**
-     * Description of the prior study
-     */
-    studyDescription?: string;
-  }
 }
 
 /**
@@ -1032,10 +974,10 @@ export interface StudyListResponse {
   reportMetadata: AutoScribeAPI.StudyReportMetadata;
 
   /**
-   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
-   * immediate attention
+   * Priority level of a study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention.
    */
-  severity: 'normal' | 'high' | 'stat';
+  severity: Shared.Severity;
 
   /**
    * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
@@ -1054,11 +996,11 @@ export interface StudyListResponse {
   studyInstanceUid: string;
 
   /**
-   * Report workflow status. 'unassigned' = no radiologist assigned, 'assigned' =
-   * assigned but not started, 'in_progress' = actively being dictated, 'completed' =
-   * report signed, 'addendum_active' = addendum in progress
+   * AutoScribe report workflow status for a study. 'unassigned' = no radiologist
+   * assigned, 'assigned' = assigned but not started, 'in_progress' = actively being
+   * dictated, 'completed' = report signed, 'addendum_active' = addendum in progress.
    */
-  studyReportStatus: 'unassigned' | 'assigned' | 'in_progress' | 'completed' | 'addendum_active';
+  studyReportStatus: AutoScribeAPI.StudyReportStatus;
 
   /**
    * Timestamp when the study was last updated
@@ -1114,7 +1056,7 @@ export interface StudyListResponse {
   /**
    * External prior reports with metadata and text
    */
-  priorReports?: Array<StudyListResponse.PriorReport>;
+  priorReports?: Array<PriorReport>;
 
   /**
    * Array of report IDs associated with this study, including addendums
@@ -1247,36 +1189,6 @@ export namespace StudyListResponse {
      */
     expressCustomerName: string;
   }
-
-  /**
-   * External prior report metadata and text stored on a study
-   */
-  export interface PriorReport {
-    /**
-     * Full prior report text
-     */
-    reportText: string;
-
-    /**
-     * Integrator's external study identifier
-     */
-    externalStudyId?: string;
-
-    /**
-     * Imaging modality for the prior study
-     */
-    modality?: string;
-
-    /**
-     * Prior study date (YYYY-MM-DD)
-     */
-    studyDate?: string;
-
-    /**
-     * Description of the prior study
-     */
-    studyDescription?: string;
-  }
 }
 
 /**
@@ -1321,10 +1233,10 @@ export interface StudyRetrieveByUidResponse {
   reportMetadata: AutoScribeAPI.StudyReportMetadata;
 
   /**
-   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
-   * immediate attention
+   * Priority level of a study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention.
    */
-  severity: 'normal' | 'high' | 'stat';
+  severity: Shared.Severity;
 
   /**
    * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
@@ -1343,11 +1255,11 @@ export interface StudyRetrieveByUidResponse {
   studyInstanceUid: string;
 
   /**
-   * Report workflow status. 'unassigned' = no radiologist assigned, 'assigned' =
-   * assigned but not started, 'in_progress' = actively being dictated, 'completed' =
-   * report signed, 'addendum_active' = addendum in progress
+   * AutoScribe report workflow status for a study. 'unassigned' = no radiologist
+   * assigned, 'assigned' = assigned but not started, 'in_progress' = actively being
+   * dictated, 'completed' = report signed, 'addendum_active' = addendum in progress.
    */
-  studyReportStatus: 'unassigned' | 'assigned' | 'in_progress' | 'completed' | 'addendum_active';
+  studyReportStatus: AutoScribeAPI.StudyReportStatus;
 
   /**
    * Timestamp when the study was last updated
@@ -1403,7 +1315,7 @@ export interface StudyRetrieveByUidResponse {
   /**
    * External prior reports with metadata and text
    */
-  priorReports?: Array<StudyRetrieveByUidResponse.PriorReport>;
+  priorReports?: Array<PriorReport>;
 
   /**
    * Array of report IDs associated with this study, including addendums
@@ -1536,36 +1448,6 @@ export namespace StudyRetrieveByUidResponse {
      */
     expressCustomerName: string;
   }
-
-  /**
-   * External prior report metadata and text stored on a study
-   */
-  export interface PriorReport {
-    /**
-     * Full prior report text
-     */
-    reportText: string;
-
-    /**
-     * Integrator's external study identifier
-     */
-    externalStudyId?: string;
-
-    /**
-     * Imaging modality for the prior study
-     */
-    modality?: string;
-
-    /**
-     * Prior study date (YYYY-MM-DD)
-     */
-    studyDate?: string;
-
-    /**
-     * Description of the prior study
-     */
-    studyDescription?: string;
-  }
 }
 
 /**
@@ -1592,10 +1474,10 @@ export interface StudyCreateParams {
   reportMetadata: AutoScribeAPI.StudyReportMetadata;
 
   /**
-   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
-   * immediate attention
+   * Priority level of a study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention.
    */
-  severity: 'normal' | 'high' | 'stat';
+  severity: Shared.Severity;
 
   /**
    * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
@@ -1649,7 +1531,7 @@ export interface StudyCreateParams {
    * External prior reports (metadata + full report text) to provide
    * longitudinal/comparison context for this study. Maximum 50 items
    */
-  priorReports?: Array<StudyCreateParams.PriorReport>;
+  priorReports?: Array<PriorReport>;
 
   /**
    * Technologist notes for the study. Maximum 50 items, each up to 1000 characters
@@ -1660,38 +1542,6 @@ export interface StudyCreateParams {
    * Imaging technique description provided by the technologist
    */
   technologistTechnique?: string | null;
-}
-
-export namespace StudyCreateParams {
-  /**
-   * External prior report metadata and text stored on a study
-   */
-  export interface PriorReport {
-    /**
-     * Full prior report text
-     */
-    reportText: string;
-
-    /**
-     * Integrator's external study identifier
-     */
-    externalStudyId?: string;
-
-    /**
-     * Imaging modality for the prior study
-     */
-    modality?: string;
-
-    /**
-     * Prior study date (YYYY-MM-DD)
-     */
-    studyDate?: string;
-
-    /**
-     * Description of the prior study
-     */
-    studyDescription?: string;
-  }
 }
 
 export interface StudyUpdateParams {
@@ -1733,15 +1583,15 @@ export interface StudyUpdateParams {
    * External prior reports (metadata + full report text) for comparison context.
    * Null clears; an array replaces the existing set. Maximum 50 items
    */
-  priorReports?: Array<StudyUpdateParams.PriorReport> | null;
+  priorReports?: Array<PriorReport> | null;
 
   reportMetadata?: StudyUpdateParams.ReportMetadata;
 
   /**
-   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
-   * immediate attention
+   * Priority level of a study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention.
    */
-  severity?: 'normal' | 'high' | 'stat';
+  severity?: Shared.Severity;
 
   /**
    * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
@@ -1761,36 +1611,6 @@ export interface StudyUpdateParams {
 }
 
 export namespace StudyUpdateParams {
-  /**
-   * External prior report metadata and text stored on a study
-   */
-  export interface PriorReport {
-    /**
-     * Full prior report text
-     */
-    reportText: string;
-
-    /**
-     * Integrator's external study identifier
-     */
-    externalStudyId?: string;
-
-    /**
-     * Imaging modality for the prior study
-     */
-    modality?: string;
-
-    /**
-     * Prior study date (YYYY-MM-DD)
-     */
-    studyDate?: string;
-
-    /**
-     * Description of the prior study
-     */
-    studyDescription?: string;
-  }
-
   export interface ReportMetadata {
     age?: string | null;
 
@@ -1812,7 +1632,10 @@ export namespace StudyUpdateParams {
 
     referringPhysicianName?: string | null;
 
-    sex?: 'male' | 'female' | 'other' | null;
+    /**
+     * Patient's biological sex. Options: 'male', 'female', 'other'
+     */
+    sex?: AutoScribeAPI.Sex | null;
 
     /**
      * Study date (YYYY-MM-DD). Nullable on PATCH. Maps to DB scan_date and
@@ -1831,13 +1654,19 @@ export namespace StudyUpdateParams {
 
   export namespace ReportMetadata {
     export interface Height {
-      unit: 'in' | 'cm';
+      /**
+       * Unit of measure for a height value. 'in' = inches, 'cm' = centimeters.
+       */
+      unit: AutoScribeAPI.HeightUnit;
 
       value: number;
     }
 
     export interface Weight {
-      unit: 'lbs' | 'kg';
+      /**
+       * Unit of measure for a weight value. 'lbs' = pounds, 'kg' = kilograms.
+       */
+      unit: AutoScribeAPI.WeightUnit;
 
       value: number;
     }
@@ -1865,7 +1694,7 @@ export interface StudyListParams extends CursorStudiesParams {
   /**
    * Filter by study severity
    */
-  severity?: 'normal' | 'high' | 'stat';
+  severity?: Shared.Severity;
 
   /**
    * Filter by study description (contains match)
@@ -1875,7 +1704,7 @@ export interface StudyListParams extends CursorStudiesParams {
   /**
    * Filter by report status(es)
    */
-  studyReportStatus?: Array<'unassigned' | 'assigned' | 'in_progress' | 'completed' | 'addendum_active'>;
+  studyReportStatus?: Array<AutoScribeAPI.StudyReportStatus>;
 }
 
 export interface StudyCancelParams {
@@ -1942,6 +1771,7 @@ export interface StudyViewerOnlyRerouteURLParams {
 
 export declare namespace Studies {
   export {
+    type PriorReport as PriorReport,
     type ReportIDWithStatus as ReportIDWithStatus,
     type StudyCreateResponse as StudyCreateResponse,
     type StudyRetrieveResponse as StudyRetrieveResponse,

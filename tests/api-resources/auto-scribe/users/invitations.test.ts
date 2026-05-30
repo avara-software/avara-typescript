@@ -49,7 +49,7 @@ describe('resource invitations', () => {
           firstName: 'Michael',
           hasDashboardAccess: true,
           lastName: 'Chen',
-          level: 'admin',
+          level: 'member',
           middleName: 'x',
           npiNumber: '1234567893',
           phoneNumber: '5551234567',

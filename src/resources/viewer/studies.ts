@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
+import * as ViewerAPI from './viewer';
 import { APIPromise } from '../../core/api-promise';
 import { CursorStudies, type CursorStudiesParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
@@ -171,10 +172,10 @@ export interface StudyCreateResponse {
   isCancelled: boolean;
 
   /**
-   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
-   * immediate attention
+   * Priority level of a study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention.
    */
-  severity: 'normal' | 'high' | 'stat';
+  severity: Shared.Severity;
 
   /**
    * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
@@ -192,7 +193,11 @@ export interface StudyCreateResponse {
    */
   studyInstanceUid: string;
 
-  studyViewerStatus: 'incomplete' | 'complete';
+  /**
+   * Viewer completion status for a study. 'incomplete' = not yet finished in the
+   * viewer, 'complete' = finished.
+   */
+  studyViewerStatus: ViewerAPI.StudyViewerStatus;
 
   /**
    * Timestamp when the study was last updated
@@ -246,10 +251,10 @@ export interface StudyRetrieveResponse {
   isCancelled: boolean;
 
   /**
-   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
-   * immediate attention
+   * Priority level of a study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention.
    */
-  severity: 'normal' | 'high' | 'stat';
+  severity: Shared.Severity;
 
   /**
    * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
@@ -267,7 +272,11 @@ export interface StudyRetrieveResponse {
    */
   studyInstanceUid: string;
 
-  studyViewerStatus: 'incomplete' | 'complete';
+  /**
+   * Viewer completion status for a study. 'incomplete' = not yet finished in the
+   * viewer, 'complete' = finished.
+   */
+  studyViewerStatus: ViewerAPI.StudyViewerStatus;
 
   /**
    * Timestamp when the study was last updated
@@ -321,10 +330,10 @@ export interface StudyUpdateResponse {
   isCancelled: boolean;
 
   /**
-   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
-   * immediate attention
+   * Priority level of a study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention.
    */
-  severity: 'normal' | 'high' | 'stat';
+  severity: Shared.Severity;
 
   /**
    * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
@@ -342,7 +351,11 @@ export interface StudyUpdateResponse {
    */
   studyInstanceUid: string;
 
-  studyViewerStatus: 'incomplete' | 'complete';
+  /**
+   * Viewer completion status for a study. 'incomplete' = not yet finished in the
+   * viewer, 'complete' = finished.
+   */
+  studyViewerStatus: ViewerAPI.StudyViewerStatus;
 
   /**
    * Timestamp when the study was last updated
@@ -396,10 +409,10 @@ export interface StudyListResponse {
   isCancelled: boolean;
 
   /**
-   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
-   * immediate attention
+   * Priority level of a study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention.
    */
-  severity: 'normal' | 'high' | 'stat';
+  severity: Shared.Severity;
 
   /**
    * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
@@ -417,7 +430,11 @@ export interface StudyListResponse {
    */
   studyInstanceUid: string;
 
-  studyViewerStatus: 'incomplete' | 'complete';
+  /**
+   * Viewer completion status for a study. 'incomplete' = not yet finished in the
+   * viewer, 'complete' = finished.
+   */
+  studyViewerStatus: ViewerAPI.StudyViewerStatus;
 
   /**
    * Timestamp when the study was last updated
@@ -487,10 +504,10 @@ export interface StudyRetrieveByUidResponse {
   isCancelled: boolean;
 
   /**
-   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
-   * immediate attention
+   * Priority level of a study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention.
    */
-  severity: 'normal' | 'high' | 'stat';
+  severity: Shared.Severity;
 
   /**
    * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
@@ -508,7 +525,11 @@ export interface StudyRetrieveByUidResponse {
    */
   studyInstanceUid: string;
 
-  studyViewerStatus: 'incomplete' | 'complete';
+  /**
+   * Viewer completion status for a study. 'incomplete' = not yet finished in the
+   * viewer, 'complete' = finished.
+   */
+  studyViewerStatus: ViewerAPI.StudyViewerStatus;
 
   /**
    * Timestamp when the study was last updated
@@ -553,10 +574,10 @@ export interface StudyUncancelResponse {
 
 export interface StudyCreateParams {
   /**
-   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
-   * immediate attention
+   * Priority level of a study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention.
    */
-  severity: 'normal' | 'high' | 'stat';
+  severity: Shared.Severity;
 
   /**
    * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
@@ -595,17 +616,21 @@ export interface StudyUpdateParams {
   metadata?: { [key: string]: string } | null;
 
   /**
-   * Priority level of the study. 'normal' for routine, 'high' for urgent, 'stat' for
-   * immediate attention
+   * Priority level of a study. 'normal' for routine, 'high' for urgent, 'stat' for
+   * immediate attention.
    */
-  severity?: 'normal' | 'high' | 'stat';
+  severity?: Shared.Severity;
 
   /**
    * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
    */
   studyDescription?: string;
 
-  studyViewerStatus?: 'incomplete' | 'complete';
+  /**
+   * Viewer completion status for a study. 'incomplete' = not yet finished in the
+   * viewer, 'complete' = finished.
+   */
+  studyViewerStatus?: ViewerAPI.StudyViewerStatus;
 }
 
 export interface StudyListParams extends CursorStudiesParams {
@@ -629,7 +654,7 @@ export interface StudyListParams extends CursorStudiesParams {
   /**
    * Filter by study severity
    */
-  severity?: 'normal' | 'high' | 'stat';
+  severity?: Shared.Severity;
 
   /**
    * Filter by study description (contains match)
@@ -639,7 +664,7 @@ export interface StudyListParams extends CursorStudiesParams {
   /**
    * Filter by study viewer status
    */
-  studyViewerStatus?: 'incomplete' | 'complete';
+  studyViewerStatus?: ViewerAPI.StudyViewerStatus;
 }
 
 export interface StudyCancelParams {

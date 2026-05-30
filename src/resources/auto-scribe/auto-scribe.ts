@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as AutoScribeAPI from './auto-scribe';
 import * as ReportsAPI from './reports';
 import {
   ReportAddendumResponse,
@@ -15,6 +16,7 @@ import {
 } from './reports';
 import * as StudiesAPI from './studies';
 import {
+  PriorReport,
   ReportIDWithStatus,
   Studies,
   StudyCancelParams,
@@ -57,6 +59,22 @@ export class AutoScribe extends APIResource {
   users: UsersAPI.Users = new UsersAPI.Users(this._client);
   reports: ReportsAPI.Reports = new ReportsAPI.Reports(this._client);
 }
+
+/**
+ * Unit of measure for a height value. 'in' = inches, 'cm' = centimeters.
+ */
+export type HeightUnit = 'in' | 'cm';
+
+/**
+ * Status of an individual report. 'in_progress' = actively being dictated,
+ * 'completed' = signed.
+ */
+export type ReportStatus = 'in_progress' | 'completed';
+
+/**
+ * Patient's biological sex. Options: 'male', 'female', 'other'
+ */
+export type Sex = 'male' | 'female' | 'other';
 
 /**
  * Patient demographics and scan information for report generation
@@ -107,7 +125,7 @@ export interface StudyReportMetadata {
   /**
    * Patient's biological sex. Options: 'male', 'female', 'other'
    */
-  sex?: 'male' | 'female' | 'other';
+  sex?: Sex;
 
   /**
    * Study date (YYYY-MM-DD). Maps to database scan_date and dictation
@@ -134,7 +152,10 @@ export namespace StudyReportMetadata {
    * unit: 'cm'})
    */
   export interface Height {
-    unit: 'in' | 'cm';
+    /**
+     * Unit of measure for a height value. 'in' = inches, 'cm' = centimeters.
+     */
+    unit: AutoScribeAPI.HeightUnit;
 
     value: number;
   }
@@ -144,21 +165,44 @@ export namespace StudyReportMetadata {
    * 'kg'})
    */
   export interface Weight {
-    unit: 'lbs' | 'kg';
+    /**
+     * Unit of measure for a weight value. 'lbs' = pounds, 'kg' = kilograms.
+     */
+    unit: AutoScribeAPI.WeightUnit;
 
     value: number;
   }
 }
+
+/**
+ * AutoScribe report workflow status for a study. 'unassigned' = no radiologist
+ * assigned, 'assigned' = assigned but not started, 'in_progress' = actively being
+ * dictated, 'completed' = report signed, 'addendum_active' = addendum in progress.
+ */
+export type StudyReportStatus = 'unassigned' | 'assigned' | 'in_progress' | 'completed' | 'addendum_active';
+
+/**
+ * Unit of measure for a weight value. 'lbs' = pounds, 'kg' = kilograms.
+ */
+export type WeightUnit = 'lbs' | 'kg';
 
 AutoScribe.Studies = Studies;
 AutoScribe.Users = Users;
 AutoScribe.Reports = Reports;
 
 export declare namespace AutoScribe {
-  export { type StudyReportMetadata as StudyReportMetadata };
+  export {
+    type HeightUnit as HeightUnit,
+    type ReportStatus as ReportStatus,
+    type Sex as Sex,
+    type StudyReportMetadata as StudyReportMetadata,
+    type StudyReportStatus as StudyReportStatus,
+    type WeightUnit as WeightUnit,
+  };
 
   export {
     Studies as Studies,
+    type PriorReport as PriorReport,
     type ReportIDWithStatus as ReportIDWithStatus,
     type StudyCreateResponse as StudyCreateResponse,
     type StudyRetrieveResponse as StudyRetrieveResponse,
