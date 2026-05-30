@@ -63,7 +63,7 @@ export class AutoScribe extends APIResource {
  */
 export interface StudyReportMetadata {
   /**
-   * Patient's age at time of scan (e.g., '34.5 years', '2 months')
+   * Patient's age at study date (e.g., '34.5 years', '2 months')
    */
   age?: string;
 
@@ -94,29 +94,32 @@ export interface StudyReportMetadata {
   patientName?: string;
 
   /**
+   * Procedure or study type (e.g., 'MRI Brain with Contrast'). Maps to database
+   * scan_type and dictation report_header.scan_type.
+   */
+  procedure?: string;
+
+  /**
    * Name of the physician who referred the patient for this scan
    */
   referringPhysicianName?: string;
 
   /**
-   * Date the scan was performed. Format: YYYY-MM-DD (e.g., '2024-01-15')
-   */
-  scanDate?: string;
-
-  /**
-   * Time the scan was performed. Format: HH:MM (e.g., '14:30')
-   */
-  scanTime?: string;
-
-  /**
-   * Type of scan or imaging modality (e.g., 'MRI', 'CT', 'X-Ray', 'Ultrasound')
-   */
-  scanType?: string;
-
-  /**
    * Patient's biological sex. Options: 'male', 'female', 'other'
    */
   sex?: 'male' | 'female' | 'other';
+
+  /**
+   * Study date (YYYY-MM-DD). Maps to database scan_date and dictation
+   * report_header.scan_date.
+   */
+  studyDate?: string;
+
+  /**
+   * Study time (HH:MM). Maps to database scan_time and dictation
+   * report_header.scan_time.
+   */
+  studyTime?: string;
 
   /**
    * Patient's weight with unit (e.g., {value: 150, unit: 'lbs'} or {value: 68, unit:
