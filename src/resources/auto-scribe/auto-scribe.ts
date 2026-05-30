@@ -4,6 +4,7 @@ import { APIResource } from '../../core/resource';
 import * as AutoScribeAPI from './auto-scribe';
 import * as ReportsAPI from './reports';
 import {
+  Report,
   ReportAddendumResponse,
   ReportCancelAddendumResponse,
   ReportListParams,
@@ -243,6 +244,7 @@ export declare namespace AutoScribe {
 
   export {
     Reports as Reports,
+    type Report as Report,
     type ReportPdfItem as ReportPdfItem,
     type ReportTextItem as ReportTextItem,
     type ReportListResponse as ReportListResponse,

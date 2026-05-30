@@ -93,6 +93,63 @@ export class Reports extends APIResource {
 }
 
 /**
+ * A radiology report in the AutoScribe system
+ */
+export interface Report {
+  /**
+   * Timestamp when the report was created
+   */
+  createdAt: string | null;
+
+  /**
+   * Whether this report is an addendum to a previous report
+   */
+  isAddendum: boolean;
+
+  /**
+   * Unique report identifier. Format: rep\_{32-hex-chars}
+   */
+  reportId: string;
+
+  /**
+   * Timestamp when the report was signed, null if not yet signed
+   */
+  signedAt: string | null;
+
+  /**
+   * Patient demographics and scan information for report generation
+   */
+  snapshotMetadata: AutoScribeAPI.StudyReportMetadata;
+
+  /**
+   * Status of an individual report. 'in_progress' = actively being dictated,
+   * 'completed' = signed.
+   */
+  status: AutoScribeAPI.ReportStatus;
+
+  /**
+   * Study ID this report belongs to. Format: stu\_{32-hex-chars}
+   */
+  studyId: string;
+
+  /**
+   * Timestamp when the report was last updated
+   */
+  updatedAt: string | null;
+
+  /**
+   * User ID of the radiologist who created/signed this report. Format:
+   * usr\_{32-hex-chars}
+   */
+  userId: string;
+
+  /**
+   * Plain text content of the report
+   */
+  reportPlainText?: string;
+}
+
+/**
  * A report with its PDF download URL
  */
 export interface ReportPdfItem {
@@ -161,7 +218,7 @@ export interface ReportListResponse {
   /**
    * Array of report objects with full details
    */
-  reports: Array<ReportListResponse.Report>;
+  reports: Array<Report>;
 
   /**
    * Study ID the reports belong to. Format: stu\_{32-hex-chars}
@@ -173,65 +230,6 @@ export interface ReportListResponse {
    * '1.2.840.10008.5.1.4.1.1.2')
    */
   studyInstanceUid: string;
-}
-
-export namespace ReportListResponse {
-  /**
-   * A radiology report in the AutoScribe system
-   */
-  export interface Report {
-    /**
-     * Timestamp when the report was created
-     */
-    createdAt: string | null;
-
-    /**
-     * Whether this report is an addendum to a previous report
-     */
-    isAddendum: boolean;
-
-    /**
-     * Unique report identifier. Format: rep\_{32-hex-chars}
-     */
-    reportId: string;
-
-    /**
-     * Timestamp when the report was signed, null if not yet signed
-     */
-    signedAt: string | null;
-
-    /**
-     * Patient demographics and scan information for report generation
-     */
-    snapshotMetadata: AutoScribeAPI.StudyReportMetadata;
-
-    /**
-     * Status of an individual report. 'in_progress' = actively being dictated,
-     * 'completed' = signed.
-     */
-    status: AutoScribeAPI.ReportStatus;
-
-    /**
-     * Study ID this report belongs to. Format: stu\_{32-hex-chars}
-     */
-    studyId: string;
-
-    /**
-     * Timestamp when the report was last updated
-     */
-    updatedAt: string | null;
-
-    /**
-     * User ID of the radiologist who created/signed this report. Format:
-     * usr\_{32-hex-chars}
-     */
-    userId: string;
-
-    /**
-     * Plain text content of the report
-     */
-    reportPlainText?: string;
-  }
 }
 
 /**
@@ -425,6 +423,7 @@ export interface ReportTextParams {
 
 export declare namespace Reports {
   export {
+    type Report as Report,
     type ReportPdfItem as ReportPdfItem,
     type ReportTextItem as ReportTextItem,
     type ReportListResponse as ReportListResponse,
