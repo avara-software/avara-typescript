@@ -11,7 +11,9 @@ export class Studies extends APIResource {
   /**
    * Creates a new study in the AutoScribe system with DICOM metadata and report
    * generation information. The study can include patient demographics, scan
-   * details, and references to prior studies/reports for context.
+   * details, clinical context (indication, history, technologist technique/notes),
+   * an imaging modality, an external patient identifier for linking studies, and
+   * external prior reports for comparison context.
    *
    * @example
    * ```ts
@@ -253,6 +255,16 @@ export interface StudyCreateResponse {
   assignedTo?: StudyCreateResponse.AssignedTo | null;
 
   /**
+   * Relevant clinical history for the study
+   */
+  clinicalHistory?: string | null;
+
+  /**
+   * Clinical indication for the study
+   */
+  clinicalIndication?: string | null;
+
+  /**
    * Reference to the API key used to create this study
    */
   createdByApiKey?: StudyCreateResponse.CreatedByAPIKey | null;
@@ -268,25 +280,40 @@ export interface StudyCreateResponse {
   expressCustomer?: StudyCreateResponse.ExpressCustomer | null;
 
   /**
+   * Integrator-provided stable patient identifier for linking studies
+   */
+  externalPatientId?: string | null;
+
+  /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
    * values up to 1000 chars
    */
   metadata?: { [key: string]: string };
 
   /**
-   * Array of prior report texts to provide clinical context
+   * Imaging modality for the study (free text)
    */
-  priorReportTexts?: Array<string>;
+  modality?: string | null;
 
   /**
-   * Array of prior study IDs for comparison context (format: stu\_{32-hex-chars})
+   * External prior reports with metadata and text
    */
-  priorStudyIds?: Array<string>;
+  priorReports?: Array<StudyCreateResponse.PriorReport>;
 
   /**
    * Array of report IDs associated with this study, including addendums
    */
   reportIds?: Array<ReportIDWithStatus>;
+
+  /**
+   * Technologist notes for the study
+   */
+  technologistNotes?: Array<string>;
+
+  /**
+   * Imaging technique description
+   */
+  technologistTechnique?: string | null;
 }
 
 export namespace StudyCreateResponse {
@@ -404,6 +431,36 @@ export namespace StudyCreateResponse {
      */
     expressCustomerName: string;
   }
+
+  /**
+   * External prior report metadata and text stored on a study
+   */
+  export interface PriorReport {
+    /**
+     * Full prior report text
+     */
+    reportText: string;
+
+    /**
+     * Integrator's external study identifier
+     */
+    externalStudyId?: string;
+
+    /**
+     * Imaging modality for the prior study
+     */
+    modality?: string;
+
+    /**
+     * Prior study date (YYYY-MM-DD)
+     */
+    studyDate?: string;
+
+    /**
+     * Description of the prior study
+     */
+    studyDescription?: string;
+  }
 }
 
 /**
@@ -470,6 +527,16 @@ export interface StudyRetrieveResponse {
   assignedTo?: StudyRetrieveResponse.AssignedTo | null;
 
   /**
+   * Relevant clinical history for the study
+   */
+  clinicalHistory?: string | null;
+
+  /**
+   * Clinical indication for the study
+   */
+  clinicalIndication?: string | null;
+
+  /**
    * Reference to the API key used to create this study
    */
   createdByApiKey?: StudyRetrieveResponse.CreatedByAPIKey | null;
@@ -485,25 +552,40 @@ export interface StudyRetrieveResponse {
   expressCustomer?: StudyRetrieveResponse.ExpressCustomer | null;
 
   /**
+   * Integrator-provided stable patient identifier for linking studies
+   */
+  externalPatientId?: string | null;
+
+  /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
    * values up to 1000 chars
    */
   metadata?: { [key: string]: string };
 
   /**
-   * Array of prior report texts to provide clinical context
+   * Imaging modality for the study (free text)
    */
-  priorReportTexts?: Array<string>;
+  modality?: string | null;
 
   /**
-   * Array of prior study IDs for comparison context (format: stu\_{32-hex-chars})
+   * External prior reports with metadata and text
    */
-  priorStudyIds?: Array<string>;
+  priorReports?: Array<StudyRetrieveResponse.PriorReport>;
 
   /**
    * Array of report IDs associated with this study, including addendums
    */
   reportIds?: Array<ReportIDWithStatus>;
+
+  /**
+   * Technologist notes for the study
+   */
+  technologistNotes?: Array<string>;
+
+  /**
+   * Imaging technique description
+   */
+  technologistTechnique?: string | null;
 }
 
 export namespace StudyRetrieveResponse {
@@ -621,6 +703,36 @@ export namespace StudyRetrieveResponse {
      */
     expressCustomerName: string;
   }
+
+  /**
+   * External prior report metadata and text stored on a study
+   */
+  export interface PriorReport {
+    /**
+     * Full prior report text
+     */
+    reportText: string;
+
+    /**
+     * Integrator's external study identifier
+     */
+    externalStudyId?: string;
+
+    /**
+     * Imaging modality for the prior study
+     */
+    modality?: string;
+
+    /**
+     * Prior study date (YYYY-MM-DD)
+     */
+    studyDate?: string;
+
+    /**
+     * Description of the prior study
+     */
+    studyDescription?: string;
+  }
 }
 
 /**
@@ -687,6 +799,16 @@ export interface StudyUpdateResponse {
   assignedTo?: StudyUpdateResponse.AssignedTo | null;
 
   /**
+   * Relevant clinical history for the study
+   */
+  clinicalHistory?: string | null;
+
+  /**
+   * Clinical indication for the study
+   */
+  clinicalIndication?: string | null;
+
+  /**
    * Reference to the API key used to create this study
    */
   createdByApiKey?: StudyUpdateResponse.CreatedByAPIKey | null;
@@ -702,25 +824,40 @@ export interface StudyUpdateResponse {
   expressCustomer?: StudyUpdateResponse.ExpressCustomer | null;
 
   /**
+   * Integrator-provided stable patient identifier for linking studies
+   */
+  externalPatientId?: string | null;
+
+  /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
    * values up to 1000 chars
    */
   metadata?: { [key: string]: string };
 
   /**
-   * Array of prior report texts to provide clinical context
+   * Imaging modality for the study (free text)
    */
-  priorReportTexts?: Array<string>;
+  modality?: string | null;
 
   /**
-   * Array of prior study IDs for comparison context (format: stu\_{32-hex-chars})
+   * External prior reports with metadata and text
    */
-  priorStudyIds?: Array<string>;
+  priorReports?: Array<StudyUpdateResponse.PriorReport>;
 
   /**
    * Array of report IDs associated with this study, including addendums
    */
   reportIds?: Array<ReportIDWithStatus>;
+
+  /**
+   * Technologist notes for the study
+   */
+  technologistNotes?: Array<string>;
+
+  /**
+   * Imaging technique description
+   */
+  technologistTechnique?: string | null;
 }
 
 export namespace StudyUpdateResponse {
@@ -838,6 +975,36 @@ export namespace StudyUpdateResponse {
      */
     expressCustomerName: string;
   }
+
+  /**
+   * External prior report metadata and text stored on a study
+   */
+  export interface PriorReport {
+    /**
+     * Full prior report text
+     */
+    reportText: string;
+
+    /**
+     * Integrator's external study identifier
+     */
+    externalStudyId?: string;
+
+    /**
+     * Imaging modality for the prior study
+     */
+    modality?: string;
+
+    /**
+     * Prior study date (YYYY-MM-DD)
+     */
+    studyDate?: string;
+
+    /**
+     * Description of the prior study
+     */
+    studyDescription?: string;
+  }
 }
 
 /**
@@ -904,6 +1071,16 @@ export interface StudyListResponse {
   assignedTo?: StudyListResponse.AssignedTo | null;
 
   /**
+   * Relevant clinical history for the study
+   */
+  clinicalHistory?: string | null;
+
+  /**
+   * Clinical indication for the study
+   */
+  clinicalIndication?: string | null;
+
+  /**
    * Reference to the API key used to create this study
    */
   createdByApiKey?: StudyListResponse.CreatedByAPIKey | null;
@@ -919,25 +1096,40 @@ export interface StudyListResponse {
   expressCustomer?: StudyListResponse.ExpressCustomer | null;
 
   /**
+   * Integrator-provided stable patient identifier for linking studies
+   */
+  externalPatientId?: string | null;
+
+  /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
    * values up to 1000 chars
    */
   metadata?: { [key: string]: string };
 
   /**
-   * Array of prior report texts to provide clinical context
+   * Imaging modality for the study (free text)
    */
-  priorReportTexts?: Array<string>;
+  modality?: string | null;
 
   /**
-   * Array of prior study IDs for comparison context (format: stu\_{32-hex-chars})
+   * External prior reports with metadata and text
    */
-  priorStudyIds?: Array<string>;
+  priorReports?: Array<StudyListResponse.PriorReport>;
 
   /**
    * Array of report IDs associated with this study, including addendums
    */
   reportIds?: Array<ReportIDWithStatus>;
+
+  /**
+   * Technologist notes for the study
+   */
+  technologistNotes?: Array<string>;
+
+  /**
+   * Imaging technique description
+   */
+  technologistTechnique?: string | null;
 }
 
 export namespace StudyListResponse {
@@ -1055,6 +1247,36 @@ export namespace StudyListResponse {
      */
     expressCustomerName: string;
   }
+
+  /**
+   * External prior report metadata and text stored on a study
+   */
+  export interface PriorReport {
+    /**
+     * Full prior report text
+     */
+    reportText: string;
+
+    /**
+     * Integrator's external study identifier
+     */
+    externalStudyId?: string;
+
+    /**
+     * Imaging modality for the prior study
+     */
+    modality?: string;
+
+    /**
+     * Prior study date (YYYY-MM-DD)
+     */
+    studyDate?: string;
+
+    /**
+     * Description of the prior study
+     */
+    studyDescription?: string;
+  }
 }
 
 /**
@@ -1138,6 +1360,16 @@ export interface StudyRetrieveByUidResponse {
   assignedTo?: StudyRetrieveByUidResponse.AssignedTo | null;
 
   /**
+   * Relevant clinical history for the study
+   */
+  clinicalHistory?: string | null;
+
+  /**
+   * Clinical indication for the study
+   */
+  clinicalIndication?: string | null;
+
+  /**
    * Reference to the API key used to create this study
    */
   createdByApiKey?: StudyRetrieveByUidResponse.CreatedByAPIKey | null;
@@ -1153,25 +1385,40 @@ export interface StudyRetrieveByUidResponse {
   expressCustomer?: StudyRetrieveByUidResponse.ExpressCustomer | null;
 
   /**
+   * Integrator-provided stable patient identifier for linking studies
+   */
+  externalPatientId?: string | null;
+
+  /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
    * values up to 1000 chars
    */
   metadata?: { [key: string]: string };
 
   /**
-   * Array of prior report texts to provide clinical context
+   * Imaging modality for the study (free text)
    */
-  priorReportTexts?: Array<string>;
+  modality?: string | null;
 
   /**
-   * Array of prior study IDs for comparison context (format: stu\_{32-hex-chars})
+   * External prior reports with metadata and text
    */
-  priorStudyIds?: Array<string>;
+  priorReports?: Array<StudyRetrieveByUidResponse.PriorReport>;
 
   /**
    * Array of report IDs associated with this study, including addendums
    */
   reportIds?: Array<ReportIDWithStatus>;
+
+  /**
+   * Technologist notes for the study
+   */
+  technologistNotes?: Array<string>;
+
+  /**
+   * Imaging technique description
+   */
+  technologistTechnique?: string | null;
 }
 
 export namespace StudyRetrieveByUidResponse {
@@ -1289,6 +1536,36 @@ export namespace StudyRetrieveByUidResponse {
      */
     expressCustomerName: string;
   }
+
+  /**
+   * External prior report metadata and text stored on a study
+   */
+  export interface PriorReport {
+    /**
+     * Full prior report text
+     */
+    reportText: string;
+
+    /**
+     * Integrator's external study identifier
+     */
+    externalStudyId?: string;
+
+    /**
+     * Imaging modality for the prior study
+     */
+    modality?: string;
+
+    /**
+     * Prior study date (YYYY-MM-DD)
+     */
+    studyDate?: string;
+
+    /**
+     * Description of the prior study
+     */
+    studyDescription?: string;
+  }
 }
 
 /**
@@ -1337,9 +1614,25 @@ export interface StudyCreateParams {
   assignedTo?: string;
 
   /**
+   * Relevant clinical history for the patient/study
+   */
+  clinicalHistory?: string | null;
+
+  /**
+   * Clinical indication for the study (reason the study was ordered)
+   */
+  clinicalIndication?: string | null;
+
+  /**
    * Express customer ID for the study. Format: cus\_{32-hex-chars}
    */
   expressCustomerId?: string;
+
+  /**
+   * Integrator-provided stable patient identifier used to link studies for the same
+   * patient across the AutoScribe system
+   */
+  externalPatientId?: string | null;
 
   /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
@@ -1347,9 +1640,58 @@ export interface StudyCreateParams {
    */
   metadata?: { [key: string]: string };
 
-  priorReportTexts?: Array<string>;
+  /**
+   * Imaging modality for the study (free text, e.g., 'CT', 'MRI', 'X-Ray')
+   */
+  modality?: string | null;
 
-  priorStudyIds?: Array<string>;
+  /**
+   * External prior reports (metadata + full report text) to provide
+   * longitudinal/comparison context for this study. Maximum 50 items
+   */
+  priorReports?: Array<StudyCreateParams.PriorReport>;
+
+  /**
+   * Technologist notes for the study. Maximum 50 items, each up to 1000 characters
+   */
+  technologistNotes?: Array<string>;
+
+  /**
+   * Imaging technique description provided by the technologist
+   */
+  technologistTechnique?: string | null;
+}
+
+export namespace StudyCreateParams {
+  /**
+   * External prior report metadata and text stored on a study
+   */
+  export interface PriorReport {
+    /**
+     * Full prior report text
+     */
+    reportText: string;
+
+    /**
+     * Integrator's external study identifier
+     */
+    externalStudyId?: string;
+
+    /**
+     * Imaging modality for the prior study
+     */
+    modality?: string;
+
+    /**
+     * Prior study date (YYYY-MM-DD)
+     */
+    studyDate?: string;
+
+    /**
+     * Description of the prior study
+     */
+    studyDescription?: string;
+  }
 }
 
 export interface StudyUpdateParams {
@@ -1359,16 +1701,39 @@ export interface StudyUpdateParams {
   assignedTo?: string;
 
   /**
+   * Relevant clinical history for the patient/study. Null clears.
+   */
+  clinicalHistory?: string | null;
+
+  /**
+   * Clinical indication for the study. Null clears.
+   */
+  clinicalIndication?: string | null;
+
+  /**
    * Express Customer ID for the study, or null to remove. Format:
    * cus\_{32-hex-chars}
    */
   expressCustomerId?: string;
 
+  /**
+   * Integrator-provided stable patient identifier used to link studies for the same
+   * patient. Null clears.
+   */
+  externalPatientId?: string | null;
+
   metadata?: { [key: string]: string } | null;
 
-  priorReportTexts?: Array<string> | null;
+  /**
+   * Imaging modality for the study (free text). Null clears.
+   */
+  modality?: string | null;
 
-  priorStudyIds?: Array<string> | null;
+  /**
+   * External prior reports (metadata + full report text) for comparison context.
+   * Null clears; an array replaces the existing set. Maximum 50 items
+   */
+  priorReports?: Array<StudyUpdateParams.PriorReport> | null;
 
   reportMetadata?: StudyUpdateParams.ReportMetadata;
 
@@ -1382,9 +1747,50 @@ export interface StudyUpdateParams {
    * Description of the study/scan (e.g., 'Brain MRI with Contrast', 'Chest CT')
    */
   studyDescription?: string;
+
+  /**
+   * Technologist notes for the study. Null clears; an array replaces the existing
+   * set. Maximum 50 items, each up to 1000 characters
+   */
+  technologistNotes?: Array<string> | null;
+
+  /**
+   * Imaging technique description provided by the technologist. Null clears.
+   */
+  technologistTechnique?: string | null;
 }
 
 export namespace StudyUpdateParams {
+  /**
+   * External prior report metadata and text stored on a study
+   */
+  export interface PriorReport {
+    /**
+     * Full prior report text
+     */
+    reportText: string;
+
+    /**
+     * Integrator's external study identifier
+     */
+    externalStudyId?: string;
+
+    /**
+     * Imaging modality for the prior study
+     */
+    modality?: string;
+
+    /**
+     * Prior study date (YYYY-MM-DD)
+     */
+    studyDate?: string;
+
+    /**
+     * Description of the prior study
+     */
+    studyDescription?: string;
+  }
+
   export interface ReportMetadata {
     age?: string | null;
 
@@ -1398,15 +1804,27 @@ export namespace StudyUpdateParams {
 
     patientName?: string | null;
 
+    /**
+     * Procedure or study type. Nullable on PATCH. Maps to DB scan_type and
+     * report_header.scan_type.
+     */
+    procedure?: string | null;
+
     referringPhysicianName?: string | null;
 
-    scanDate?: string | null;
-
-    scanTime?: string | null;
-
-    scanType?: string | null;
-
     sex?: 'male' | 'female' | 'other' | null;
+
+    /**
+     * Study date (YYYY-MM-DD). Nullable on PATCH. Maps to DB scan_date and
+     * report_header.scan_date.
+     */
+    studyDate?: string | null;
+
+    /**
+     * Study time (HH:MM). Nullable on PATCH. Maps to DB scan_time and
+     * report_header.scan_time.
+     */
+    studyTime?: string | null;
 
     weight?: ReportMetadata.Weight | null;
   }
