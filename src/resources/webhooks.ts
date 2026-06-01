@@ -48,6 +48,11 @@ export interface ReportDeliveredEvent {
  */
 export interface ReportDeliveredEventData {
   /**
+   * Whether the report was marked critical at sign-out.
+   */
+  isCritical: boolean;
+
+  /**
    * Presigned URL for PDF download. Time-limited, typically valid for 1 hour.
    */
   presignedUrl: string;

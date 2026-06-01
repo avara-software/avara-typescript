@@ -107,6 +107,12 @@ export interface Report {
   isAddendum: boolean;
 
   /**
+   * Whether the report was marked critical at sign-out. null when the report is not
+   * yet completed; true/false once completed.
+   */
+  isCritical: boolean | null;
+
+  /**
    * Unique report identifier. Format: rep\_{32-hex-chars}
    */
   reportId: string;
@@ -154,6 +160,12 @@ export interface Report {
  */
 export interface ReportPdfItem {
   /**
+   * Whether the report was marked critical at sign-out. null when the report is not
+   * yet completed; true/false once completed.
+   */
+  isCritical: boolean | null;
+
+  /**
    * Time-limited presigned URL to download the PDF (expires after 1 hour)
    */
   presignedUrl: string;
@@ -184,6 +196,12 @@ export interface ReportPdfItem {
  * A report with its plain text content
  */
 export interface ReportTextItem {
+  /**
+   * Whether the report was marked critical at sign-out. null when the report is not
+   * yet completed; true/false once completed.
+   */
+  isCritical: boolean | null;
+
   /**
    * Unique report identifier. Format: rep\_{32-hex-chars}
    */
@@ -263,6 +281,12 @@ export namespace ReportPdfResponse {
    */
   export interface SingleReportPdfResponse {
     /**
+     * Whether the report was marked critical at sign-out. null when the report is not
+     * yet completed; true/false once completed.
+     */
+    isCritical: boolean | null;
+
+    /**
      * Time-limited presigned URL to download the PDF (expires after 1 hour)
      */
     presignedUrl: string;
@@ -323,6 +347,12 @@ export namespace ReportTextResponse {
    * Response containing a single report with its plain text
    */
   export interface SingleReportTextResponse {
+    /**
+     * Whether the report was marked critical at sign-out. null when the report is not
+     * yet completed; true/false once completed.
+     */
+    isCritical: boolean | null;
+
     /**
      * Unique report identifier. Format: rep\_{32-hex-chars}
      */
