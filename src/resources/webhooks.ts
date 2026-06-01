@@ -48,7 +48,7 @@ export interface ReportDeliveredEvent {
  */
 export interface ReportDeliveredEventData {
   /**
-   * Whether the report was marked critical at sign-out.
+   * Whether the report was marked critical at sign-off.
    */
   isCritical: boolean;
 
