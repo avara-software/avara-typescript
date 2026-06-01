@@ -323,7 +323,7 @@ export interface StudyCreateResponse {
   externalPatientId?: string | null;
 
   /**
-   * Whether the primary report was marked as critical at sign-out
+   * Whether the primary report was marked as critical at sign-off
    */
   isCritical?: boolean;
 
@@ -453,7 +453,7 @@ export interface StudyRetrieveResponse {
   externalPatientId?: string | null;
 
   /**
-   * Whether the primary report was marked as critical at sign-out
+   * Whether the primary report was marked as critical at sign-off
    */
   isCritical?: boolean;
 
@@ -583,7 +583,7 @@ export interface StudyUpdateResponse {
   externalPatientId?: string | null;
 
   /**
-   * Whether the primary report was marked as critical at sign-out
+   * Whether the primary report was marked as critical at sign-off
    */
   isCritical?: boolean;
 
@@ -713,7 +713,7 @@ export interface StudyListResponse {
   externalPatientId?: string | null;
 
   /**
-   * Whether the primary report was marked as critical at sign-out
+   * Whether the primary report was marked as critical at sign-off
    */
   isCritical?: boolean;
 
@@ -860,7 +860,7 @@ export interface StudyRetrieveByUidResponse {
   externalPatientId?: string | null;
 
   /**
-   * Whether the primary report was marked as critical at sign-out
+   * Whether the primary report was marked as critical at sign-off
    */
   isCritical?: boolean;
 

@@ -107,7 +107,7 @@ export interface Report {
   isAddendum: boolean;
 
   /**
-   * Whether the report was marked critical at sign-out. null when the report is not
+   * Whether the report was marked critical at sign-off. null when the report is not
    * yet completed; true/false once completed.
    */
   isCritical: boolean | null;
@@ -160,7 +160,7 @@ export interface Report {
  */
 export interface ReportPdfItem {
   /**
-   * Whether the report was marked critical at sign-out. null when the report is not
+   * Whether the report was marked critical at sign-off. null when the report is not
    * yet completed; true/false once completed.
    */
   isCritical: boolean | null;
@@ -197,7 +197,7 @@ export interface ReportPdfItem {
  */
 export interface ReportTextItem {
   /**
-   * Whether the report was marked critical at sign-out. null when the report is not
+   * Whether the report was marked critical at sign-off. null when the report is not
    * yet completed; true/false once completed.
    */
   isCritical: boolean | null;
@@ -281,7 +281,7 @@ export namespace ReportPdfResponse {
    */
   export interface SingleReportPdfResponse {
     /**
-     * Whether the report was marked critical at sign-out. null when the report is not
+     * Whether the report was marked critical at sign-off. null when the report is not
      * yet completed; true/false once completed.
      */
     isCritical: boolean | null;
@@ -348,7 +348,7 @@ export namespace ReportTextResponse {
    */
   export interface SingleReportTextResponse {
     /**
-     * Whether the report was marked critical at sign-out. null when the report is not
+     * Whether the report was marked critical at sign-off. null when the report is not
      * yet completed; true/false once completed.
      */
     isCritical: boolean | null;
