@@ -212,6 +212,12 @@ export interface PriorReport {
  */
 export interface ReportIDWithStatus {
   /**
+   * Whether the report was marked critical at sign-off. null when the report is not
+   * yet completed; true/false once completed.
+   */
+  isCritical: boolean | null;
+
+  /**
    * Unique report identifier. Format: rep\_{32-hex-chars}
    */
   reportId: string;
@@ -315,6 +321,11 @@ export interface StudyCreateResponse {
    * Integrator-provided stable patient identifier for linking studies
    */
   externalPatientId?: string | null;
+
+  /**
+   * Whether the primary report was marked as critical at sign-out
+   */
+  isCritical?: boolean;
 
   /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
@@ -442,6 +453,11 @@ export interface StudyRetrieveResponse {
   externalPatientId?: string | null;
 
   /**
+   * Whether the primary report was marked as critical at sign-out
+   */
+  isCritical?: boolean;
+
+  /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
    * values up to 1000 chars
    */
@@ -567,6 +583,11 @@ export interface StudyUpdateResponse {
   externalPatientId?: string | null;
 
   /**
+   * Whether the primary report was marked as critical at sign-out
+   */
+  isCritical?: boolean;
+
+  /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
    * values up to 1000 chars
    */
@@ -690,6 +711,11 @@ export interface StudyListResponse {
    * Integrator-provided stable patient identifier for linking studies
    */
   externalPatientId?: string | null;
+
+  /**
+   * Whether the primary report was marked as critical at sign-out
+   */
+  isCritical?: boolean;
 
   /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
@@ -832,6 +858,11 @@ export interface StudyRetrieveByUidResponse {
    * Integrator-provided stable patient identifier for linking studies
    */
   externalPatientId?: string | null;
+
+  /**
+   * Whether the primary report was marked as critical at sign-out
+   */
+  isCritical?: boolean;
 
   /**
    * Custom key-value metadata for the study. Maximum 50 pairs, keys up to 100 chars,
