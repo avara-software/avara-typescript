@@ -121,8 +121,28 @@ export interface StudyAccessRequestedEventData {
 }
 
 /**
+ * Presigned URL for non-DICOM media (images, PDFs, videos)
+ */
+export interface StudyAccessRequestedMediaURL {
+  /**
+   * MIME type of the media file (e.g., application/pdf, image/jpeg, video/mp4)
+   */
+  mimeType: string;
+
+  /**
+   * Presigned URL to download the media file
+   */
+  url: string;
+
+  /**
+   * Optional display name for the media file
+   */
+  fileName?: string;
+}
+
+/**
  * Response expected by Avara for study access webhook. Provide presigned URLs for
- * DICOM images.
+ * DICOM images and optionally for non-DICOM media.
  */
 export interface StudyAccessRequestedResponse {
   /**
@@ -140,6 +160,12 @@ export interface StudyAccessRequestedResponse {
    * Error message if authorization failed or URLs cannot be provided
    */
   error?: string;
+
+  /**
+   * Optional presigned URLs for non-DICOM media (images, PDFs, videos) associated
+   * with the study.
+   */
+  mediaUrls?: Array<StudyAccessRequestedMediaURL>;
 }
 
 /**
@@ -168,6 +194,7 @@ export declare namespace Webhooks {
     type ReportDeliveredResponse as ReportDeliveredResponse,
     type StudyAccessRequestedEvent as StudyAccessRequestedEvent,
     type StudyAccessRequestedEventData as StudyAccessRequestedEventData,
+    type StudyAccessRequestedMediaURL as StudyAccessRequestedMediaURL,
     type StudyAccessRequestedResponse as StudyAccessRequestedResponse,
     type WebhookEvent as WebhookEvent,
     type UnsafeUnwrapWebhookEvent as UnsafeUnwrapWebhookEvent,

@@ -216,6 +216,7 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">ReportDeliveredResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">StudyAccessRequestedEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">StudyAccessRequestedEventData</a></code>
+- <code><a href="./src/resources/webhooks.ts">StudyAccessRequestedMediaURL</a></code>
 - <code><a href="./src/resources/webhooks.ts">StudyAccessRequestedResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">WebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">UnsafeUnwrapWebhookEvent</a></code>
