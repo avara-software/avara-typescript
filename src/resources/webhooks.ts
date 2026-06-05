@@ -84,86 +84,6 @@ export interface ReportDeliveredResponse {
 }
 
 /**
- * Webhook event sent when Avara needs presigned UPLOAD URLs for a secondary
- * capture DICOM. This is a synchronous webhook - you must respond with the upload
- * URLs within the request timeout.
- */
-export interface SecondaryCaptureAccessRequestedEvent {
-  /**
-   * Unique webhook event ID. Format: whe\_{32-hex-chars}
-   */
-  id: string;
-
-  /**
-   * Event payload containing study + (optional) series/SOP information for a
-   * secondary capture upload
-   */
-  data: SecondaryCaptureAccessRequestedEventData;
-
-  /**
-   * Event type identifier
-   */
-  type: 'secondary_capture.access_requested';
-}
-
-/**
- * Event payload containing study + (optional) series/SOP information for a
- * secondary capture upload
- */
-export interface SecondaryCaptureAccessRequestedEventData {
-  /**
-   * Avara study ID. Format: stu\_{32-hex-chars}
-   */
-  studyId: string;
-
-  /**
-   * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
-   * '1.2.840.10008.5.1.4.1.1.2')
-   */
-  studyInstanceUid: string;
-
-  /**
-   * DICOM Series Instance UID generated for the new secondary capture series (when
-   * available).
-   */
-  seriesInstanceUid?: string;
-
-  /**
-   * DICOM SOP Instance UID generated for the new secondary capture object (when
-   * available).
-   */
-  sopInstanceUid?: string;
-}
-
-/**
- * Response expected by Avara for the secondary capture webhook. Provide presigned
- * PUT URLs the viewer will upload the DICOM to.
- */
-export interface SecondaryCaptureAccessRequestedResponse {
-  /**
-   * Whether the secondary capture upload is authorized for this study
-   */
-  authorized: boolean;
-
-  /**
-   * Presigned PUT URLs for uploading the secondary capture DICOM. The viewer uploads
-   * the same object to every URL.
-   */
-  uploadUrls: Array<string>;
-
-  /**
-   * Optional content creator name. Avara derives this server-side; this field is
-   * ignored if provided.
-   */
-  contentCreatorName?: string;
-
-  /**
-   * Error message if authorization failed or upload URLs cannot be provided
-   */
-  error?: string;
-}
-
-/**
  * Webhook event sent when Avara needs presigned URLs for DICOM images. This is a
  * synchronous webhook - you must respond with the URLs within the request timeout.
  */
@@ -257,7 +177,171 @@ export interface StudyAccessRequestedResponse {
 export type WebhookEvent =
   | StudyAccessRequestedEvent
   | ReportDeliveredEvent
-  | SecondaryCaptureAccessRequestedEvent;
+  | WebhookEvent.SecondaryCaptureAccessRequestedWebhookEvent;
+
+export namespace WebhookEvent {
+  /**
+   * Webhook event sent when Avara needs presigned UPLOAD URLs for a secondary
+   * capture DICOM. This is a synchronous webhook - you must respond with the upload
+   * URLs within the request timeout.
+   */
+  export interface SecondaryCaptureAccessRequestedWebhookEvent {
+    /**
+     * Unique webhook event ID. Format: whe\_{32-hex-chars}
+     */
+    id: string;
+
+    /**
+     * Event payload containing study + (optional) series/SOP information for a
+     * secondary capture upload
+     */
+    data: SecondaryCaptureAccessRequestedWebhookEvent.Data;
+
+    /**
+     * Event type identifier
+     */
+    type: 'secondary_capture.access_requested';
+  }
+
+  export namespace SecondaryCaptureAccessRequestedWebhookEvent {
+    /**
+     * Event payload containing study + (optional) series/SOP information for a
+     * secondary capture upload
+     */
+    export interface Data {
+      /**
+       * Avara study ID. Format: stu\_{32-hex-chars}
+       */
+      studyId: string;
+
+      /**
+       * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+       * '1.2.840.10008.5.1.4.1.1.2')
+       */
+      studyInstanceUid: string;
+
+      /**
+       * DICOM Series Instance UID generated for the new secondary capture series (when
+       * available).
+       */
+      seriesInstanceUid?: string;
+
+      /**
+       * DICOM SOP Instance UID generated for the new secondary capture object (when
+       * available).
+       */
+      sopInstanceUid?: string;
+    }
+  }
+}
+
+/**
+ * Webhook event sent when Avara needs presigned UPLOAD URLs for a secondary
+ * capture DICOM. This is a synchronous webhook - you must respond with the upload
+ * URLs within the request timeout.
+ */
+export interface SecondaryCaptureAccessRequestedWebhookEvent {
+  /**
+   * Unique webhook event ID. Format: whe\_{32-hex-chars}
+   */
+  id: string;
+
+  /**
+   * Event payload containing study + (optional) series/SOP information for a
+   * secondary capture upload
+   */
+  data: SecondaryCaptureAccessRequestedWebhookEvent.Data;
+
+  /**
+   * Event type identifier
+   */
+  type: 'secondary_capture.access_requested';
+}
+
+export namespace SecondaryCaptureAccessRequestedWebhookEvent {
+  /**
+   * Event payload containing study + (optional) series/SOP information for a
+   * secondary capture upload
+   */
+  export interface Data {
+    /**
+     * Avara study ID. Format: stu\_{32-hex-chars}
+     */
+    studyId: string;
+
+    /**
+     * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+     * '1.2.840.10008.5.1.4.1.1.2')
+     */
+    studyInstanceUid: string;
+
+    /**
+     * DICOM Series Instance UID generated for the new secondary capture series (when
+     * available).
+     */
+    seriesInstanceUid?: string;
+
+    /**
+     * DICOM SOP Instance UID generated for the new secondary capture object (when
+     * available).
+     */
+    sopInstanceUid?: string;
+  }
+}
+
+/**
+ * Webhook event sent when Avara needs presigned UPLOAD URLs for a secondary
+ * capture DICOM. This is a synchronous webhook - you must respond with the upload
+ * URLs within the request timeout.
+ */
+export interface SecondaryCaptureAccessRequestedWebhookEvent {
+  /**
+   * Unique webhook event ID. Format: whe\_{32-hex-chars}
+   */
+  id: string;
+
+  /**
+   * Event payload containing study + (optional) series/SOP information for a
+   * secondary capture upload
+   */
+  data: SecondaryCaptureAccessRequestedWebhookEvent.Data;
+
+  /**
+   * Event type identifier
+   */
+  type: 'secondary_capture.access_requested';
+}
+
+export namespace SecondaryCaptureAccessRequestedWebhookEvent {
+  /**
+   * Event payload containing study + (optional) series/SOP information for a
+   * secondary capture upload
+   */
+  export interface Data {
+    /**
+     * Avara study ID. Format: stu\_{32-hex-chars}
+     */
+    studyId: string;
+
+    /**
+     * DICOM Study Instance UID. Must be a valid DICOM UID format (e.g.,
+     * '1.2.840.10008.5.1.4.1.1.2')
+     */
+    studyInstanceUid: string;
+
+    /**
+     * DICOM Series Instance UID generated for the new secondary capture series (when
+     * available).
+     */
+    seriesInstanceUid?: string;
+
+    /**
+     * DICOM SOP Instance UID generated for the new secondary capture object (when
+     * available).
+     */
+    sopInstanceUid?: string;
+  }
+}
 
 /**
  * Webhook event sent when Avara needs presigned URLs for DICOM images. This is a
@@ -266,7 +350,7 @@ export type WebhookEvent =
 export type UnsafeUnwrapWebhookEvent =
   | StudyAccessRequestedEvent
   | ReportDeliveredEvent
-  | SecondaryCaptureAccessRequestedEvent;
+  | SecondaryCaptureAccessRequestedWebhookEvent;
 
 /**
  * Webhook event sent when Avara needs presigned URLs for DICOM images. This is a
@@ -275,21 +359,19 @@ export type UnsafeUnwrapWebhookEvent =
 export type UnwrapWebhookEvent =
   | StudyAccessRequestedEvent
   | ReportDeliveredEvent
-  | SecondaryCaptureAccessRequestedEvent;
+  | SecondaryCaptureAccessRequestedWebhookEvent;
 
 export declare namespace Webhooks {
   export {
     type ReportDeliveredEvent as ReportDeliveredEvent,
     type ReportDeliveredEventData as ReportDeliveredEventData,
     type ReportDeliveredResponse as ReportDeliveredResponse,
-    type SecondaryCaptureAccessRequestedEvent as SecondaryCaptureAccessRequestedEvent,
-    type SecondaryCaptureAccessRequestedEventData as SecondaryCaptureAccessRequestedEventData,
-    type SecondaryCaptureAccessRequestedResponse as SecondaryCaptureAccessRequestedResponse,
     type StudyAccessRequestedEvent as StudyAccessRequestedEvent,
     type StudyAccessRequestedEventData as StudyAccessRequestedEventData,
     type StudyAccessRequestedMediaURL as StudyAccessRequestedMediaURL,
     type StudyAccessRequestedResponse as StudyAccessRequestedResponse,
     type WebhookEvent as WebhookEvent,
+    type SecondaryCaptureAccessRequestedWebhookEvent as SecondaryCaptureAccessRequestedWebhookEvent,
     type UnsafeUnwrapWebhookEvent as UnsafeUnwrapWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
   };
