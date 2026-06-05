@@ -31,6 +31,7 @@ export {
   type ReportDeliveredResponse,
   type StudyAccessRequestedEvent,
   type StudyAccessRequestedEventData,
+  type StudyAccessRequestedMediaURL,
   type StudyAccessRequestedResponse,
   type WebhookEvent,
   type UnsafeUnwrapWebhookEvent,
