@@ -214,6 +214,9 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">ReportDeliveredEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ReportDeliveredEventData</a></code>
 - <code><a href="./src/resources/webhooks.ts">ReportDeliveredResponse</a></code>
+- <code><a href="./src/resources/webhooks.ts">SecondaryCaptureAccessRequestedEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">SecondaryCaptureAccessRequestedEventData</a></code>
+- <code><a href="./src/resources/webhooks.ts">SecondaryCaptureAccessRequestedResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">StudyAccessRequestedEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">StudyAccessRequestedEventData</a></code>
 - <code><a href="./src/resources/webhooks.ts">StudyAccessRequestedMediaURL</a></code>
