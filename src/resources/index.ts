@@ -3,6 +3,7 @@
 export * from './shared';
 export {
   AutoScribe,
+  type ClinicalReferenceType,
   type HeightUnit,
   type ReportStatus,
   type Sex,

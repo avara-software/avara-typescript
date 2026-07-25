@@ -2,6 +2,15 @@
 
 import { APIResource } from '../../core/resource';
 import * as AutoScribeAPI from './auto-scribe';
+import * as ClinicalReferencesAPI from './clinical-references';
+import {
+  ClinicalReference,
+  ClinicalReferenceCreateParams,
+  ClinicalReferenceListParams,
+  ClinicalReferenceUpdateParams,
+  ClinicalReferences,
+  ClinicalReferencesCursorClinicalReferences,
+} from './clinical-references';
 import * as ReportsAPI from './reports';
 import {
   Report,
@@ -58,10 +67,23 @@ import {
 } from './users/users';
 
 export class AutoScribe extends APIResource {
+  clinicalReferences: ClinicalReferencesAPI.ClinicalReferences = new ClinicalReferencesAPI.ClinicalReferences(
+    this._client,
+  );
   studies: StudiesAPI.Studies = new StudiesAPI.Studies(this._client);
   users: UsersAPI.Users = new UsersAPI.Users(this._client);
   reports: ReportsAPI.Reports = new ReportsAPI.Reports(this._client);
 }
+
+/**
+ * Category of canonical clinical reference value used for study workflow pickers
+ * and normalization.
+ */
+export type ClinicalReferenceType =
+  | 'facility'
+  | 'referring_provider'
+  | 'study_description'
+  | 'imaging_protocol';
 
 /**
  * Unit of measure for a height value. 'in' = inches, 'cm' = centimeters.
@@ -189,18 +211,29 @@ export type StudyReportStatus = 'unassigned' | 'assigned' | 'in_progress' | 'com
  */
 export type WeightUnit = 'lbs' | 'kg';
 
+AutoScribe.ClinicalReferences = ClinicalReferences;
 AutoScribe.Studies = Studies;
 AutoScribe.Users = Users;
 AutoScribe.Reports = Reports;
 
 export declare namespace AutoScribe {
   export {
+    type ClinicalReferenceType as ClinicalReferenceType,
     type HeightUnit as HeightUnit,
     type ReportStatus as ReportStatus,
     type Sex as Sex,
     type StudyReportMetadata as StudyReportMetadata,
     type StudyReportStatus as StudyReportStatus,
     type WeightUnit as WeightUnit,
+  };
+
+  export {
+    ClinicalReferences as ClinicalReferences,
+    type ClinicalReference as ClinicalReference,
+    type ClinicalReferencesCursorClinicalReferences as ClinicalReferencesCursorClinicalReferences,
+    type ClinicalReferenceCreateParams as ClinicalReferenceCreateParams,
+    type ClinicalReferenceUpdateParams as ClinicalReferenceUpdateParams,
+    type ClinicalReferenceListParams as ClinicalReferenceListParams,
   };
 
   export {
