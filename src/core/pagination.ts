@@ -453,3 +453,92 @@ export class CursorExpressCustomers<Item>
     };
   }
 }
+
+export interface CursorClinicalReferencesResponse<Item> {
+  /**
+   * Array of clinical reference objects
+   */
+  clinicalReferences: Array<Item>;
+
+  /**
+   * Next page cursor. Pass this to the next request to get the next page of results
+   */
+  cursor: string;
+
+  /**
+   * Whether there are more results available
+   */
+  hasMore: boolean;
+}
+
+export interface CursorClinicalReferencesParams {
+  /**
+   * Base64 encoded cursor from previous response for pagination
+   */
+  cursor?: string;
+
+  /**
+   * Number of results to return (1-100). Defaults to 20
+   */
+  limit?: number;
+}
+
+export class CursorClinicalReferences<Item>
+  extends AbstractPage<Item>
+  implements CursorClinicalReferencesResponse<Item>
+{
+  /**
+   * Array of clinical reference objects
+   */
+  clinicalReferences: Array<Item>;
+
+  /**
+   * Next page cursor. Pass this to the next request to get the next page of results
+   */
+  cursor: string;
+
+  /**
+   * Whether there are more results available
+   */
+  hasMore: boolean;
+
+  constructor(
+    client: Avara,
+    response: Response,
+    body: CursorClinicalReferencesResponse<Item>,
+    options: FinalRequestOptions,
+  ) {
+    super(client, response, body, options);
+
+    this.clinicalReferences = body.clinicalReferences || [];
+    this.cursor = body.cursor || '';
+    this.hasMore = body.hasMore || false;
+  }
+
+  getPaginatedItems(): Item[] {
+    return this.clinicalReferences ?? [];
+  }
+
+  override hasNextPage(): boolean {
+    if (this.hasMore === false) {
+      return false;
+    }
+
+    return super.hasNextPage();
+  }
+
+  nextPageRequestOptions(): PageRequestOptions | null {
+    const cursor = this.cursor;
+    if (!cursor) {
+      return null;
+    }
+
+    return {
+      ...this.options,
+      query: {
+        ...maybeObj(this.options.query),
+        cursor,
+      },
+    };
+  }
+}

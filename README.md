@@ -154,22 +154,22 @@ List methods in the Avara API are paginated.
 You can use the `for await … of` syntax to iterate through items across all pages:
 
 ```ts
-async function fetchAllStudyListResponses(params) {
-  const allStudyListResponses = [];
+async function fetchAllClinicalReferences(params) {
+  const allClinicalReferences = [];
   // Automatically fetches more pages as needed.
-  for await (const studyListResponse of client.autoScribe.studies.list()) {
-    allStudyListResponses.push(studyListResponse);
+  for await (const clinicalReference of client.autoScribe.clinicalReferences.list()) {
+    allClinicalReferences.push(clinicalReference);
   }
-  return allStudyListResponses;
+  return allClinicalReferences;
 }
 ```
 
 Alternatively, you can request a single page at a time:
 
 ```ts
-let page = await client.autoScribe.studies.list();
-for (const studyListResponse of page.studies) {
-  console.log(studyListResponse);
+let page = await client.autoScribe.clinicalReferences.list();
+for (const clinicalReference of page.clinicalReferences) {
+  console.log(clinicalReference);
 }
 
 // Convenience methods are provided for manually paginating:

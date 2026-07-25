@@ -2,6 +2,7 @@
 
 export {
   AutoScribe,
+  type ClinicalReferenceType,
   type HeightUnit,
   type ReportStatus,
   type Sex,
@@ -9,6 +10,14 @@ export {
   type StudyReportStatus,
   type WeightUnit,
 } from './auto-scribe';
+export {
+  ClinicalReferences,
+  type ClinicalReference,
+  type ClinicalReferenceCreateParams,
+  type ClinicalReferenceUpdateParams,
+  type ClinicalReferenceListParams,
+  type ClinicalReferencesCursorClinicalReferences,
+} from './clinical-references';
 export {
   Reports,
   type Report,

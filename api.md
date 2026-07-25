@@ -17,12 +17,28 @@ Types:
 
 Types:
 
+- <code><a href="./src/resources/auto-scribe/auto-scribe.ts">ClinicalReferenceType</a></code>
 - <code><a href="./src/resources/auto-scribe/auto-scribe.ts">HeightUnit</a></code>
 - <code><a href="./src/resources/auto-scribe/auto-scribe.ts">ReportStatus</a></code>
 - <code><a href="./src/resources/auto-scribe/auto-scribe.ts">Sex</a></code>
 - <code><a href="./src/resources/auto-scribe/auto-scribe.ts">StudyReportMetadata</a></code>
 - <code><a href="./src/resources/auto-scribe/auto-scribe.ts">StudyReportStatus</a></code>
 - <code><a href="./src/resources/auto-scribe/auto-scribe.ts">WeightUnit</a></code>
+
+## ClinicalReferences
+
+Types:
+
+- <code><a href="./src/resources/auto-scribe/clinical-references.ts">ClinicalReference</a></code>
+
+Methods:
+
+- <code title="post /v1/autoScribe/clinicalReferences">client.autoScribe.clinicalReferences.<a href="./src/resources/auto-scribe/clinical-references.ts">create</a>({ ...params }) -> ClinicalReference</code>
+- <code title="get /v1/autoScribe/clinicalReferences/{clinicalReferenceId}">client.autoScribe.clinicalReferences.<a href="./src/resources/auto-scribe/clinical-references.ts">retrieve</a>(clinicalReferenceID) -> ClinicalReference</code>
+- <code title="patch /v1/autoScribe/clinicalReferences/{clinicalReferenceId}">client.autoScribe.clinicalReferences.<a href="./src/resources/auto-scribe/clinical-references.ts">update</a>(clinicalReferenceID, { ...params }) -> ClinicalReference</code>
+- <code title="get /v1/autoScribe/clinicalReferences">client.autoScribe.clinicalReferences.<a href="./src/resources/auto-scribe/clinical-references.ts">list</a>({ ...params }) -> ClinicalReferencesCursorClinicalReferences</code>
+- <code title="post /v1/autoScribe/clinicalReferences/{clinicalReferenceId}/delete">client.autoScribe.clinicalReferences.<a href="./src/resources/auto-scribe/clinical-references.ts">delete</a>(clinicalReferenceID) -> ClinicalReference</code>
+- <code title="get /v1/autoScribe/clinicalReferences/byExternalReferenceId/{externalReferenceId}">client.autoScribe.clinicalReferences.<a href="./src/resources/auto-scribe/clinical-references.ts">retrieveByExternalReferenceID</a>(externalReferenceID) -> ClinicalReference</code>
 
 ## Studies
 

@@ -17,6 +17,8 @@ import * as Errors from './core/error';
 import * as Pagination from './core/pagination';
 import {
   AbstractPage,
+  type CursorClinicalReferencesParams,
+  CursorClinicalReferencesResponse,
   type CursorExpressCustomersParams,
   CursorExpressCustomersResponse,
   type CursorInvitationsParams,
@@ -47,6 +49,7 @@ import {
 } from './resources/webhooks';
 import {
   AutoScribe,
+  ClinicalReferenceType,
   HeightUnit,
   ReportStatus,
   Sex,
@@ -855,8 +858,15 @@ export declare namespace Avara {
     type CursorExpressCustomersResponse as CursorExpressCustomersResponse,
   };
 
+  export import CursorClinicalReferences = Pagination.CursorClinicalReferences;
+  export {
+    type CursorClinicalReferencesParams as CursorClinicalReferencesParams,
+    type CursorClinicalReferencesResponse as CursorClinicalReferencesResponse,
+  };
+
   export {
     AutoScribe as AutoScribe,
+    type ClinicalReferenceType as ClinicalReferenceType,
     type HeightUnit as HeightUnit,
     type ReportStatus as ReportStatus,
     type Sex as Sex,
