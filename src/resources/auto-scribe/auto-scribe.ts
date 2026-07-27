@@ -79,11 +79,7 @@ export class AutoScribe extends APIResource {
  * Category of canonical clinical reference value used for study workflow pickers
  * and normalization.
  */
-export type ClinicalReferenceType =
-  | 'facility'
-  | 'referring_provider'
-  | 'study_description'
-  | 'imaging_protocol';
+export type ClinicalReferenceType = 'facility' | 'referring_provider' | 'study_description' | 'procedure';
 
 /**
  * Unit of measure for a height value. 'in' = inches, 'cm' = centimeters.
