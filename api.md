@@ -227,6 +227,20 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/webhooks.ts">ClinicalContextEnrichmentDocument</a></code>
+- <code><a href="./src/resources/webhooks.ts">ClinicalContextEnrichmentDocumentURL</a></code>
+- <code><a href="./src/resources/webhooks.ts">ClinicalContextEnrichmentPriorReport</a></code>
+- <code><a href="./src/resources/webhooks.ts">ClinicalContextEnrichmentRequestedEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ClinicalContextEnrichmentRequestedEventData</a></code>
+- <code><a href="./src/resources/webhooks.ts">ClinicalContextEnrichmentRequestedResponse</a></code>
+- <code><a href="./src/resources/webhooks.ts">ModalityWorklistItem</a></code>
+- <code><a href="./src/resources/webhooks.ts">ModalityWorklistRequestedEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ModalityWorklistRequestedEventData</a></code>
+- <code><a href="./src/resources/webhooks.ts">ModalityWorklistRequestedResponse</a></code>
+- <code><a href="./src/resources/webhooks.ts">ModalityWorklistScheduledStep</a></code>
+- <code><a href="./src/resources/webhooks.ts">PatientStudyEnrichmentRequestedEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">PatientStudyEnrichmentRequestedEventData</a></code>
+- <code><a href="./src/resources/webhooks.ts">PatientStudyEnrichmentRequestedResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">ReportDeliveredEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ReportDeliveredEventData</a></code>
 - <code><a href="./src/resources/webhooks.ts">ReportDeliveredResponse</a></code>
