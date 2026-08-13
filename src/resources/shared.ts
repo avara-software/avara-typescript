@@ -15,6 +15,11 @@ export interface APIKeyReference {
   description: string;
 
   /**
+   * Whether this API key has a clinical-context enrichment webhook configured
+   */
+  isClinicalContextEnrichmentEnabled?: boolean;
+
+  /**
    * Whether this API key has access to the Viewer product
    */
   isViewerEnabled?: boolean;
