@@ -40,6 +40,16 @@ Methods:
 - <code title="post /v1/autoScribe/clinicalReferences/{clinicalReferenceId}/delete">client.autoScribe.clinicalReferences.<a href="./src/resources/auto-scribe/clinical-references.ts">delete</a>(clinicalReferenceID) -> ClinicalReference</code>
 - <code title="get /v1/autoScribe/clinicalReferences/byExternalReferenceId/{externalReferenceId}">client.autoScribe.clinicalReferences.<a href="./src/resources/auto-scribe/clinical-references.ts">retrieveByExternalReferenceID</a>(externalReferenceID) -> ClinicalReference</code>
 
+## EphemeralSessions
+
+Types:
+
+- <code><a href="./src/resources/auto-scribe/ephemeral-sessions.ts">EphemeralSessionCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/autoScribe/ephemeral-sessions">client.autoScribe.ephemeralSessions.<a href="./src/resources/auto-scribe/ephemeral-sessions.ts">create</a>({ ...params }) -> EphemeralSessionCreateResponse</code>
+
 ## Studies
 
 Types:
@@ -130,6 +140,16 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/viewer/viewer.ts">StudyViewerStatus</a></code>
+
+## EphemeralSessions
+
+Types:
+
+- <code><a href="./src/resources/viewer/ephemeral-sessions.ts">EphemeralSessionCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/viewer/ephemeral-sessions">client.viewer.ephemeralSessions.<a href="./src/resources/viewer/ephemeral-sessions.ts">create</a>({ ...params }) -> EphemeralSessionCreateResponse</code>
 
 ## Studies
 
@@ -233,6 +253,9 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">ClinicalContextEnrichmentRequestedEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ClinicalContextEnrichmentRequestedEventData</a></code>
 - <code><a href="./src/resources/webhooks.ts">ClinicalContextEnrichmentRequestedResponse</a></code>
+- <code><a href="./src/resources/webhooks.ts">EphemeralAccessRequestedEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">EphemeralAccessRequestedEventData</a></code>
+- <code><a href="./src/resources/webhooks.ts">EphemeralAccessRequestedResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">ModalityWorklistItem</a></code>
 - <code><a href="./src/resources/webhooks.ts">ModalityWorklistRequestedEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ModalityWorklistRequestedEventData</a></code>

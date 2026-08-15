@@ -140,6 +140,86 @@ export interface ClinicalContextEnrichmentRequestedResponse {
 }
 
 /**
+ * Webhook event sent when Avara needs presigned URLs for an ephemeral viewer
+ * session. This is a synchronous webhook — you must respond with the URLs within
+ * the request timeout. There is no Avara study; use retrievalId (and optional
+ * options) to resolve images.
+ */
+export interface EphemeralAccessRequestedEvent {
+  /**
+   * Unique webhook event ID. Format: whe\_{32-hex-chars}
+   */
+  id: string;
+
+  /**
+   * Event payload for an ephemeral viewer session. retrievalId is the customer
+   * handle from mint. options is echoed verbatim when present; Avara does not read
+   * or edit it.
+   */
+  data: EphemeralAccessRequestedEventData;
+
+  /**
+   * Event type identifier
+   */
+  type: 'ephemeral.access_requested';
+}
+
+/**
+ * Event payload for an ephemeral viewer session. retrievalId is the customer
+ * handle from mint. options is echoed verbatim when present; Avara does not read
+ * or edit it.
+ */
+export interface EphemeralAccessRequestedEventData {
+  /**
+   * Opaque customer handle for this view session. Not an Avara study ID.
+   */
+  retrievalId: string;
+
+  /**
+   * Optional JSON object echoed verbatim from mint. Avara does not read or edit it.
+   * Examples: studyInstanceUids or internal ids for multi-study reads. Not for URLs
+   * or manifests.
+   */
+  options?: { [key: string]: unknown };
+}
+
+/**
+ * Synchronous response with presigned DICOM URLs and optionally non-DICOM media.
+ * Optionally include a manifests array (one study per item) to improve progressive
+ * loading of legacy DICOM; it is not required.
+ */
+export interface EphemeralAccessRequestedResponse {
+  /**
+   * Whether access is authorized for this ephemeral session
+   */
+  authorized: boolean;
+
+  /**
+   * Flat list of presigned URLs for DICOM images across the session.
+   */
+  urls: Array<string>;
+
+  /**
+   * Error message if authorization failed or URLs cannot be provided
+   */
+  error?: string;
+
+  /**
+   * Optional sidecars, one study per item (an array, not a single object). Not
+   * required — omit if you do not have them. Recommended when you can provide them,
+   * especially for very large or multi-study legacy DICOM. Enables progressive
+   * loading so readers can scroll before every file is parsed. Invalid or incomplete
+   * values are ignored; URLs still load.
+   */
+  manifests?: Array<StudyAccessRequestedManifest>;
+
+  /**
+   * Optional presigned URLs for non-DICOM media (images, PDFs, videos).
+   */
+  mediaUrls?: Array<StudyAccessRequestedMediaURL>;
+}
+
+/**
  * One worklist item shaped for direct DICOM Dataset construction on the on-prem
  * box. Field names are PascalCase DICOM-style intentionally.
  */
@@ -170,6 +250,10 @@ export interface ModalityWorklistItem {
 
   RequestedProcedureDescription: string;
 
+  /**
+   * Scheduled procedure steps for this worklist item. Most appointments/studies have
+   * a single step; include additional steps only when the RIS schedules multiple.
+   */
   ScheduledProcedureStepSequence: Array<ModalityWorklistScheduledStep>;
 
   StudyDescription: string;
@@ -572,89 +656,155 @@ export interface StudyAccessRequestedEventData {
 }
 
 /**
- * Optional sidecar for this one study. Not required — omit if you do not have it.
- * Recommended when you can provide it, especially for very large studies. Enables
- * progressive loading of legacy multi-SOP DICOM so readers can scroll before every
- * file is parsed. Invalid or incomplete values are ignored; URLs still load.
+ * Optional sidecar for this one study (one object, not an array). Not required —
+ * omit if you do not have it. Recommended when you can provide it, especially for
+ * very large studies. Enables progressive loading of legacy multi-SOP DICOM so
+ * readers can scroll before every file is parsed. Include only this study. Series
+ * you cannot describe can be left out. Invalid or incomplete values are ignored;
+ * URLs still load.
  */
 export interface StudyAccessRequestedManifest {
+  /**
+   * Planable series in this study. At least one must survive validation.
+   */
   series: Array<StudyAccessRequestedManifestSeries>;
 
   /**
-   * DICOM Study Instance UID for this study
+   * DICOM Study Instance UID for this study. Non-empty string. Must match the study
+   * being requested.
    */
   studyInstanceUID: string;
 }
 
 /**
- * One series in the optional study manifest. Secondary capture should be omitted.
+ * One series in the optional study manifest. Series you cannot describe can be
+ * left out. Secondary capture is not necessary. Enhanced multi-frame series
+ * already load progressively without this sidecar. A series with no surviving SOPs
+ * is dropped.
  */
 export interface StudyAccessRequestedManifestSeries {
   /**
-   * DICOM modality (e.g. CT, MR)
+   * Non-empty DICOM modality. Common: CT, MR, CR, DX, US, XA, PT, NM, MG. Secondary
+   * capture (SC) is not necessary.
    */
   modality: string;
 
   /**
-   * Series description shown in the viewer sidebar
+   * Non-empty display string shown in the viewer sidebar.
    */
   seriesDescription: string;
 
   /**
-   * DICOM Series Instance UID
+   * DICOM Series Instance UID. Non-empty string.
    */
   seriesInstanceUID: string;
 
   /**
-   * Series number (string or number)
+   * Series number. String or number (1 or "1").
    */
   seriesNumber: string | number;
 
+  /**
+   * SOPs in this series. At least one must survive validation.
+   */
   sops: Array<StudyAccessRequestedManifestSop>;
 }
 
 /**
- * One SOP in the optional study manifest. Identity is required. Image geometry
- * (rows, columns, bitsAllocated, photometricInterpretation, samplesPerPixel) is
- * required to preallocate a volume; rescale and float flags are optional.
+ * One SOP in the optional study manifest. Identity (sopInstanceUID, sopClassUID)
+ * is always required. For image SOPs, also include rows, columns, bitsAllocated,
+ * photometricInterpretation, and samplesPerPixel or that SOP is dropped. SR / PR /
+ * KO do not need geometry. Wrong types or missing required fields drop that SOP
+ * only; sibling SOPs and URLs still load.
  */
 export interface StudyAccessRequestedManifestSop {
   /**
-   * DICOM SOP Class UID (e.g. Legacy CT Image Storage)
+   * DICOM SOP Class UID. Progressive load uses legacy single-frame image classes.
+   * Common: CT 1.2.840.10008.5.1.4.1.1.2, MR 1.2.840.10008.5.1.4.1.1.4, plus CR / DX
+   * / US / XA / PT. Enhanced multi-frame classes already load progressively from the
+   * single SOP — the sidecar is not used for them. SR / PR / KO do not need
+   * geometry.
    */
   sopClassUID: string;
 
   /**
-   * DICOM SOP Instance UID
+   * DICOM SOP Instance UID. Non-empty string.
    */
   sopInstanceUID: string;
 
+  /**
+   * Required on image SOPs. Planner uses 8, 16, or 32 (or the float flags). Typical
+   * CT/MR: 16.
+   */
   bitsAllocated?: number;
 
+  /**
+   * Optional. Typical CT/MR: 12 or 16.
+   */
   bitsStored?: number;
 
+  /**
+   * Image columns. Required on image SOPs. Positive integer. Common: 256, 512, 1024.
+   */
   columns?: number;
 
+  /**
+   * Optional. Typical 16-bit: 15.
+   */
   highBit?: number;
 
+  /**
+   * Slice order (DICOM Instance Number). Omit or 0 if unknown; UID is the tie-break.
+   */
   instanceNumber?: number;
 
+  /**
+   * Set true only if pixel data is 64-bit float.
+   */
   isDoubleFloatPixelData?: boolean;
 
+  /**
+   * Set true only if pixel data is 32-bit float.
+   */
   isFloatPixelData?: boolean;
 
+  /**
+   * 1 for single-frame files. Greater than 1 only if this SOP is multi-frame.
+   */
   numberOfFrames?: number;
 
+  /**
+   * Required non-empty string on image SOPs. Common: MONOCHROME2 (CT/MR),
+   * MONOCHROME1 (often MG, inverted), RGB, PALETTE COLOR, YBR_FULL, YBR_FULL_422.
+   * Unknown strings are kept and treated as mono unless samplesPerPixel is 3. Wrong
+   * type (number/null) drops that SOP from optimized path.
+   */
   photometricInterpretation?: string;
 
+  /**
+   * 0 unsigned, 1 signed. Typical CT: 0.
+   */
   pixelRepresentation?: number;
 
+  /**
+   * Optional. Typical CT: -1024. Safe to omit.
+   */
   rescaleIntercept?: number;
 
+  /**
+   * Optional. Typical CT: 1. Safe to omit.
+   */
   rescaleSlope?: number;
 
+  /**
+   * Image rows. Required on image SOPs. Positive integer. Common: 256, 512, 1024.
+   */
   rows?: number;
 
+  /**
+   * Required on image SOPs. 1 grayscale, 3 color. 3 is treated as color even if
+   * photometric is unusual.
+   */
   samplesPerPixel?: number;
 }
 
@@ -701,10 +851,11 @@ export interface StudyAccessRequestedResponse {
   error?: string;
 
   /**
-   * Optional sidecar for this study. Not required — omit if you do not have it.
-   * Recommended when you can provide it, especially for very large studies. Enables
-   * progressive loading of legacy multi-SOP DICOM so readers can scroll before every
-   * file is parsed. Invalid or incomplete values are ignored; URLs still load.
+   * Optional sidecar for this one study (one object, not an array). Not required —
+   * omit if you do not have it. Recommended when you can provide it, especially for
+   * very large studies. Enables progressive loading of legacy multi-SOP DICOM so
+   * readers can scroll before every file is parsed. Invalid or incomplete values are
+   * ignored; URLs still load.
    */
   manifest?: StudyAccessRequestedManifest;
 
@@ -718,13 +869,14 @@ export interface StudyAccessRequestedResponse {
 /**
  * Union of all Avara webhook event types. Use the 'type' field to discriminate
  * between event types. Events: study.access_requested (synchronous),
- * report.delivered (asynchronous), secondary_capture.access_requested
- * (synchronous), modality_worklist.requested (synchronous),
- * patient_study.enrichment_requested (synchronous soft),
+ * ephemeral.access_requested (synchronous), report.delivered (asynchronous),
+ * secondary_capture.access_requested (synchronous), modality_worklist.requested
+ * (synchronous), patient_study.enrichment_requested (synchronous soft),
  * clinical_context.enrichment_requested (synchronous soft).
  */
 export type WebhookEvent =
   | StudyAccessRequestedEvent
+  | EphemeralAccessRequestedEvent
   | ReportDeliveredEvent
   | SecondaryCaptureAccessRequestedEvent
   | ModalityWorklistRequestedEvent
@@ -732,10 +884,13 @@ export type WebhookEvent =
   | ClinicalContextEnrichmentRequestedEvent;
 
 /**
- * Webhook event sent when Avara needs presigned URLs for DICOM images. This is a
- * synchronous webhook - you must respond with the URLs within the request timeout.
+ * Webhook event sent when Avara needs presigned URLs for an ephemeral viewer
+ * session. This is a synchronous webhook — you must respond with the URLs within
+ * the request timeout. There is no Avara study; use retrievalId (and optional
+ * options) to resolve images.
  */
 export type UnsafeUnwrapWebhookEvent =
+  | EphemeralAccessRequestedEvent
   | StudyAccessRequestedEvent
   | ReportDeliveredEvent
   | SecondaryCaptureAccessRequestedEvent
@@ -744,10 +899,13 @@ export type UnsafeUnwrapWebhookEvent =
   | ClinicalContextEnrichmentRequestedEvent;
 
 /**
- * Webhook event sent when Avara needs presigned URLs for DICOM images. This is a
- * synchronous webhook - you must respond with the URLs within the request timeout.
+ * Webhook event sent when Avara needs presigned URLs for an ephemeral viewer
+ * session. This is a synchronous webhook — you must respond with the URLs within
+ * the request timeout. There is no Avara study; use retrievalId (and optional
+ * options) to resolve images.
  */
 export type UnwrapWebhookEvent =
+  | EphemeralAccessRequestedEvent
   | StudyAccessRequestedEvent
   | ReportDeliveredEvent
   | SecondaryCaptureAccessRequestedEvent
@@ -763,6 +921,9 @@ export declare namespace Webhooks {
     type ClinicalContextEnrichmentRequestedEvent as ClinicalContextEnrichmentRequestedEvent,
     type ClinicalContextEnrichmentRequestedEventData as ClinicalContextEnrichmentRequestedEventData,
     type ClinicalContextEnrichmentRequestedResponse as ClinicalContextEnrichmentRequestedResponse,
+    type EphemeralAccessRequestedEvent as EphemeralAccessRequestedEvent,
+    type EphemeralAccessRequestedEventData as EphemeralAccessRequestedEventData,
+    type EphemeralAccessRequestedResponse as EphemeralAccessRequestedResponse,
     type ModalityWorklistItem as ModalityWorklistItem,
     type ModalityWorklistRequestedEvent as ModalityWorklistRequestedEvent,
     type ModalityWorklistRequestedEventData as ModalityWorklistRequestedEventData,

@@ -13,7 +13,7 @@ describe('resource webhooks', () => {
   test.skip('unwrap', () => {
     const key = 'whsec_c2VjcmV0Cg==';
     const payload =
-      '{"id":"whe_1234567890abcdef1234567890abcdef","data":{"studyId":"stu_1234567890abcdef1234567890abcdef","studyInstanceUid":"1.2.840.113619.2.55.3.1234567890"},"type":"study.access_requested"}';
+      '{"id":"whe_1234567890abcdef1234567890abcdef","data":{"retrievalId":"order-12345","options":{"studyInstanceUids":"bar"}},"type":"ephemeral.access_requested"}';
     const msgID = '1';
     const timestamp = new Date();
     const wh = new Webhook('whsec_c2VjcmV0Cg==');
