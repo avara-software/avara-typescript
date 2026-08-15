@@ -170,10 +170,6 @@ export interface ModalityWorklistItem {
 
   RequestedProcedureDescription: string;
 
-  /**
-   * Scheduled procedure steps for this worklist item. Most appointments/studies have
-   * a single step; include additional steps only when the RIS schedules multiple.
-   */
   ScheduledProcedureStepSequence: Array<ModalityWorklistScheduledStep>;
 
   StudyDescription: string;
@@ -576,6 +572,93 @@ export interface StudyAccessRequestedEventData {
 }
 
 /**
+ * Optional sidecar for this one study. Not required — omit if you do not have it.
+ * Recommended when you can provide it, especially for very large studies. Enables
+ * progressive loading of legacy multi-SOP DICOM so readers can scroll before every
+ * file is parsed. Invalid or incomplete values are ignored; URLs still load.
+ */
+export interface StudyAccessRequestedManifest {
+  series: Array<StudyAccessRequestedManifestSeries>;
+
+  /**
+   * DICOM Study Instance UID for this study
+   */
+  studyInstanceUID: string;
+}
+
+/**
+ * One series in the optional study manifest. Secondary capture should be omitted.
+ */
+export interface StudyAccessRequestedManifestSeries {
+  /**
+   * DICOM modality (e.g. CT, MR)
+   */
+  modality: string;
+
+  /**
+   * Series description shown in the viewer sidebar
+   */
+  seriesDescription: string;
+
+  /**
+   * DICOM Series Instance UID
+   */
+  seriesInstanceUID: string;
+
+  /**
+   * Series number (string or number)
+   */
+  seriesNumber: string | number;
+
+  sops: Array<StudyAccessRequestedManifestSop>;
+}
+
+/**
+ * One SOP in the optional study manifest. Identity is required. Image geometry
+ * (rows, columns, bitsAllocated, photometricInterpretation, samplesPerPixel) is
+ * required to preallocate a volume; rescale and float flags are optional.
+ */
+export interface StudyAccessRequestedManifestSop {
+  /**
+   * DICOM SOP Class UID (e.g. Legacy CT Image Storage)
+   */
+  sopClassUID: string;
+
+  /**
+   * DICOM SOP Instance UID
+   */
+  sopInstanceUID: string;
+
+  bitsAllocated?: number;
+
+  bitsStored?: number;
+
+  columns?: number;
+
+  highBit?: number;
+
+  instanceNumber?: number;
+
+  isDoubleFloatPixelData?: boolean;
+
+  isFloatPixelData?: boolean;
+
+  numberOfFrames?: number;
+
+  photometricInterpretation?: string;
+
+  pixelRepresentation?: number;
+
+  rescaleIntercept?: number;
+
+  rescaleSlope?: number;
+
+  rows?: number;
+
+  samplesPerPixel?: number;
+}
+
+/**
  * Presigned URL for non-DICOM media (images, PDFs, videos)
  */
 export interface StudyAccessRequestedMediaURL {
@@ -597,7 +680,8 @@ export interface StudyAccessRequestedMediaURL {
 
 /**
  * Response expected by Avara for study access webhook. Provide presigned URLs for
- * DICOM images and optionally for non-DICOM media.
+ * DICOM images and optionally non-DICOM media. Optionally include a study manifest
+ * to improve progressive loading of legacy DICOM; it is not required.
  */
 export interface StudyAccessRequestedResponse {
   /**
@@ -615,6 +699,14 @@ export interface StudyAccessRequestedResponse {
    * Error message if authorization failed or URLs cannot be provided
    */
   error?: string;
+
+  /**
+   * Optional sidecar for this study. Not required — omit if you do not have it.
+   * Recommended when you can provide it, especially for very large studies. Enables
+   * progressive loading of legacy multi-SOP DICOM so readers can scroll before every
+   * file is parsed. Invalid or incomplete values are ignored; URLs still load.
+   */
+  manifest?: StudyAccessRequestedManifest;
 
   /**
    * Optional presigned URLs for non-DICOM media (images, PDFs, videos) associated
@@ -687,6 +779,9 @@ export declare namespace Webhooks {
     type SecondaryCaptureAccessRequestedResponse as SecondaryCaptureAccessRequestedResponse,
     type StudyAccessRequestedEvent as StudyAccessRequestedEvent,
     type StudyAccessRequestedEventData as StudyAccessRequestedEventData,
+    type StudyAccessRequestedManifest as StudyAccessRequestedManifest,
+    type StudyAccessRequestedManifestSeries as StudyAccessRequestedManifestSeries,
+    type StudyAccessRequestedManifestSop as StudyAccessRequestedManifestSop,
     type StudyAccessRequestedMediaURL as StudyAccessRequestedMediaURL,
     type StudyAccessRequestedResponse as StudyAccessRequestedResponse,
     type WebhookEvent as WebhookEvent,
