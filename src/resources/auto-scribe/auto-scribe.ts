@@ -11,6 +11,12 @@ import {
   ClinicalReferences,
   ClinicalReferencesCursorClinicalReferences,
 } from './clinical-references';
+import * as EphemeralSessionsAPI from './ephemeral-sessions';
+import {
+  EphemeralSessionCreateParams,
+  EphemeralSessionCreateResponse,
+  EphemeralSessions,
+} from './ephemeral-sessions';
 import * as ReportsAPI from './reports';
 import {
   Report,
@@ -68,6 +74,9 @@ import {
 
 export class AutoScribe extends APIResource {
   clinicalReferences: ClinicalReferencesAPI.ClinicalReferences = new ClinicalReferencesAPI.ClinicalReferences(
+    this._client,
+  );
+  ephemeralSessions: EphemeralSessionsAPI.EphemeralSessions = new EphemeralSessionsAPI.EphemeralSessions(
     this._client,
   );
   studies: StudiesAPI.Studies = new StudiesAPI.Studies(this._client);
@@ -208,6 +217,7 @@ export type StudyReportStatus = 'unassigned' | 'assigned' | 'in_progress' | 'com
 export type WeightUnit = 'lbs' | 'kg';
 
 AutoScribe.ClinicalReferences = ClinicalReferences;
+AutoScribe.EphemeralSessions = EphemeralSessions;
 AutoScribe.Studies = Studies;
 AutoScribe.Users = Users;
 AutoScribe.Reports = Reports;
@@ -230,6 +240,12 @@ export declare namespace AutoScribe {
     type ClinicalReferenceCreateParams as ClinicalReferenceCreateParams,
     type ClinicalReferenceUpdateParams as ClinicalReferenceUpdateParams,
     type ClinicalReferenceListParams as ClinicalReferenceListParams,
+  };
+
+  export {
+    EphemeralSessions as EphemeralSessions,
+    type EphemeralSessionCreateResponse as EphemeralSessionCreateResponse,
+    type EphemeralSessionCreateParams as EphemeralSessionCreateParams,
   };
 
   export {

@@ -1,6 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as EphemeralSessionsAPI from './ephemeral-sessions';
+import {
+  EphemeralSessionCreateParams,
+  EphemeralSessionCreateResponse,
+  EphemeralSessions,
+} from './ephemeral-sessions';
 import * as StudiesAPI from './studies';
 import {
   Studies,
@@ -38,6 +44,9 @@ import {
 } from './users/users';
 
 export class Viewer extends APIResource {
+  ephemeralSessions: EphemeralSessionsAPI.EphemeralSessions = new EphemeralSessionsAPI.EphemeralSessions(
+    this._client,
+  );
   studies: StudiesAPI.Studies = new StudiesAPI.Studies(this._client);
   users: UsersAPI.Users = new UsersAPI.Users(this._client);
 }
@@ -48,11 +57,18 @@ export class Viewer extends APIResource {
  */
 export type StudyViewerStatus = 'incomplete' | 'complete';
 
+Viewer.EphemeralSessions = EphemeralSessions;
 Viewer.Studies = Studies;
 Viewer.Users = Users;
 
 export declare namespace Viewer {
   export { type StudyViewerStatus as StudyViewerStatus };
+
+  export {
+    EphemeralSessions as EphemeralSessions,
+    type EphemeralSessionCreateResponse as EphemeralSessionCreateResponse,
+    type EphemeralSessionCreateParams as EphemeralSessionCreateParams,
+  };
 
   export {
     Studies as Studies,

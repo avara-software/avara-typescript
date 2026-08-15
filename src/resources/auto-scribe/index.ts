@@ -19,6 +19,11 @@ export {
   type ClinicalReferencesCursorClinicalReferences,
 } from './clinical-references';
 export {
+  EphemeralSessions,
+  type EphemeralSessionCreateResponse,
+  type EphemeralSessionCreateParams,
+} from './ephemeral-sessions';
+export {
   Reports,
   type Report,
   type ReportPdfItem,
