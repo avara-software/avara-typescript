@@ -249,6 +249,9 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">SecondaryCaptureAccessRequestedResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">StudyAccessRequestedEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">StudyAccessRequestedEventData</a></code>
+- <code><a href="./src/resources/webhooks.ts">StudyAccessRequestedManifest</a></code>
+- <code><a href="./src/resources/webhooks.ts">StudyAccessRequestedManifestSeries</a></code>
+- <code><a href="./src/resources/webhooks.ts">StudyAccessRequestedManifestSop</a></code>
 - <code><a href="./src/resources/webhooks.ts">StudyAccessRequestedMediaURL</a></code>
 - <code><a href="./src/resources/webhooks.ts">StudyAccessRequestedResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">WebhookEvent</a></code>
