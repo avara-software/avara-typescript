@@ -163,6 +163,7 @@ describe('resource studies', () => {
           severity: 'normal',
           studyDescription: 'CT Head',
           studyReportStatus: ['completed'],
+          studyType: 'standard',
         },
         { path: '/_stainless_unknown_path' },
       ),

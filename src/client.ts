@@ -21,6 +21,8 @@ import {
   CursorClinicalReferencesResponse,
   type CursorExpressCustomersParams,
   CursorExpressCustomersResponse,
+  type CursorExternalReportsParams,
+  CursorExternalReportsResponse,
   type CursorInvitationsParams,
   CursorInvitationsResponse,
   type CursorStudiesParams,
@@ -75,6 +77,7 @@ import {
   Sex,
   StudyReportMetadata,
   StudyReportStatus,
+  StudyType,
   WeightUnit,
 } from './resources/auto-scribe/auto-scribe';
 import {
@@ -884,6 +887,12 @@ export declare namespace Avara {
     type CursorClinicalReferencesResponse as CursorClinicalReferencesResponse,
   };
 
+  export import CursorExternalReports = Pagination.CursorExternalReports;
+  export {
+    type CursorExternalReportsParams as CursorExternalReportsParams,
+    type CursorExternalReportsResponse as CursorExternalReportsResponse,
+  };
+
   export {
     AutoScribe as AutoScribe,
     type ClinicalReferenceType as ClinicalReferenceType,
@@ -892,6 +901,7 @@ export declare namespace Avara {
     type Sex as Sex,
     type StudyReportMetadata as StudyReportMetadata,
     type StudyReportStatus as StudyReportStatus,
+    type StudyType as StudyType,
     type WeightUnit as WeightUnit,
   };
 

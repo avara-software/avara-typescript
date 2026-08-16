@@ -9,6 +9,7 @@ export {
   type Sex,
   type StudyReportMetadata,
   type StudyReportStatus,
+  type StudyType,
   type WeightUnit,
 } from './auto-scribe/auto-scribe';
 export {
