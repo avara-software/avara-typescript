@@ -25,6 +25,7 @@ Types:
 - <code><a href="./src/resources/auto-scribe/auto-scribe.ts">Sex</a></code>
 - <code><a href="./src/resources/auto-scribe/auto-scribe.ts">StudyReportMetadata</a></code>
 - <code><a href="./src/resources/auto-scribe/auto-scribe.ts">StudyReportStatus</a></code>
+- <code><a href="./src/resources/auto-scribe/auto-scribe.ts">StudyType</a></code>
 - <code><a href="./src/resources/auto-scribe/auto-scribe.ts">WeightUnit</a></code>
 
 ## ClinicalReferences
@@ -56,29 +57,55 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/auto-scribe/studies.ts">PriorReport</a></code>
-- <code><a href="./src/resources/auto-scribe/studies.ts">ReportIDWithStatus</a></code>
-- <code><a href="./src/resources/auto-scribe/studies.ts">StudyCreateResponse</a></code>
-- <code><a href="./src/resources/auto-scribe/studies.ts">StudyRetrieveResponse</a></code>
-- <code><a href="./src/resources/auto-scribe/studies.ts">StudyUpdateResponse</a></code>
-- <code><a href="./src/resources/auto-scribe/studies.ts">StudyListResponse</a></code>
-- <code><a href="./src/resources/auto-scribe/studies.ts">StudyCancelResponse</a></code>
-- <code><a href="./src/resources/auto-scribe/studies.ts">StudyRerouteURLResponse</a></code>
-- <code><a href="./src/resources/auto-scribe/studies.ts">StudyRetrieveByUidResponse</a></code>
-- <code><a href="./src/resources/auto-scribe/studies.ts">StudyUncancelResponse</a></code>
-- <code><a href="./src/resources/auto-scribe/studies.ts">StudyViewerOnlyRerouteURLResponse</a></code>
+- <code><a href="./src/resources/auto-scribe/studies/studies.ts">PriorReport</a></code>
+- <code><a href="./src/resources/auto-scribe/studies/studies.ts">ReportIDWithStatus</a></code>
+- <code><a href="./src/resources/auto-scribe/studies/studies.ts">StudyCreateResponse</a></code>
+- <code><a href="./src/resources/auto-scribe/studies/studies.ts">StudyRetrieveResponse</a></code>
+- <code><a href="./src/resources/auto-scribe/studies/studies.ts">StudyUpdateResponse</a></code>
+- <code><a href="./src/resources/auto-scribe/studies/studies.ts">StudyListResponse</a></code>
+- <code><a href="./src/resources/auto-scribe/studies/studies.ts">StudyCancelResponse</a></code>
+- <code><a href="./src/resources/auto-scribe/studies/studies.ts">StudyRerouteURLResponse</a></code>
+- <code><a href="./src/resources/auto-scribe/studies/studies.ts">StudyRetrieveByUidResponse</a></code>
+- <code><a href="./src/resources/auto-scribe/studies/studies.ts">StudyUncancelResponse</a></code>
+- <code><a href="./src/resources/auto-scribe/studies/studies.ts">StudyViewerOnlyRerouteURLResponse</a></code>
 
 Methods:
 
-- <code title="post /v1/autoScribe/studies">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies.ts">create</a>({ ...params }) -> StudyCreateResponse</code>
-- <code title="get /v1/autoScribe/studies/{studyId}">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies.ts">retrieve</a>(studyID) -> StudyRetrieveResponse</code>
-- <code title="patch /v1/autoScribe/studies/{studyId}">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies.ts">update</a>(studyID, { ...params }) -> StudyUpdateResponse</code>
-- <code title="get /v1/autoScribe/studies">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies.ts">list</a>({ ...params }) -> StudyListResponsesCursorStudies</code>
-- <code title="post /v1/autoScribe/studies/cancel">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies.ts">cancel</a>({ ...params }) -> StudyCancelResponse</code>
-- <code title="post /v1/autoScribe/studies/reroute-url">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies.ts">rerouteURL</a>({ ...params }) -> StudyRerouteURLResponse</code>
-- <code title="get /v1/autoScribe/studies/by-uid/{studyInstanceUid}">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies.ts">retrieveByUid</a>(studyInstanceUid) -> StudyRetrieveByUidResponse</code>
-- <code title="post /v1/autoScribe/studies/uncancel">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies.ts">uncancel</a>({ ...params }) -> StudyUncancelResponse</code>
-- <code title="post /v1/autoScribe/studies/viewer-only-reroute-url">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies.ts">viewerOnlyRerouteURL</a>({ ...params }) -> StudyViewerOnlyRerouteURLResponse</code>
+- <code title="post /v1/autoScribe/studies">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies/studies.ts">create</a>({ ...params }) -> StudyCreateResponse</code>
+- <code title="get /v1/autoScribe/studies/{studyId}">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies/studies.ts">retrieve</a>(studyID) -> StudyRetrieveResponse</code>
+- <code title="patch /v1/autoScribe/studies/{studyId}">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies/studies.ts">update</a>(studyID, { ...params }) -> StudyUpdateResponse</code>
+- <code title="get /v1/autoScribe/studies">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies/studies.ts">list</a>({ ...params }) -> StudyListResponsesCursorStudies</code>
+- <code title="post /v1/autoScribe/studies/cancel">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies/studies.ts">cancel</a>({ ...params }) -> StudyCancelResponse</code>
+- <code title="post /v1/autoScribe/studies/reroute-url">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies/studies.ts">rerouteURL</a>({ ...params }) -> StudyRerouteURLResponse</code>
+- <code title="get /v1/autoScribe/studies/by-uid/{studyInstanceUid}">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies/studies.ts">retrieveByUid</a>(studyInstanceUid) -> StudyRetrieveByUidResponse</code>
+- <code title="post /v1/autoScribe/studies/uncancel">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies/studies.ts">uncancel</a>({ ...params }) -> StudyUncancelResponse</code>
+- <code title="post /v1/autoScribe/studies/viewer-only-reroute-url">client.autoScribe.studies.<a href="./src/resources/auto-scribe/studies/studies.ts">viewerOnlyRerouteURL</a>({ ...params }) -> StudyViewerOnlyRerouteURLResponse</code>
+
+### External
+
+Types:
+
+- <code><a href="./src/resources/auto-scribe/studies/external/external.ts">ExternalCreateResponse</a></code>
+- <code><a href="./src/resources/auto-scribe/studies/external/external.ts">ExternalDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/autoScribe/studies/external">client.autoScribe.studies.external.<a href="./src/resources/auto-scribe/studies/external/external.ts">create</a>({ ...params }) -> ExternalCreateResponse</code>
+- <code title="post /v1/autoScribe/studies/external/delete">client.autoScribe.studies.external.<a href="./src/resources/auto-scribe/studies/external/external.ts">delete</a>({ ...params }) -> ExternalDeleteResponse</code>
+
+#### Reports
+
+Types:
+
+- <code><a href="./src/resources/auto-scribe/studies/external/reports.ts">ReportCreateResponse</a></code>
+- <code><a href="./src/resources/auto-scribe/studies/external/reports.ts">ReportRetrieveResponse</a></code>
+- <code><a href="./src/resources/auto-scribe/studies/external/reports.ts">ReportListResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/autoScribe/studies/external/reports">client.autoScribe.studies.external.reports.<a href="./src/resources/auto-scribe/studies/external/reports.ts">create</a>({ ...params }) -> ReportCreateResponse</code>
+- <code title="get /v1/autoScribe/studies/external/reports/{externalReportId}">client.autoScribe.studies.external.reports.<a href="./src/resources/auto-scribe/studies/external/reports.ts">retrieve</a>(externalReportID) -> ReportRetrieveResponse</code>
+- <code title="get /v1/autoScribe/studies/external/reports">client.autoScribe.studies.external.reports.<a href="./src/resources/auto-scribe/studies/external/reports.ts">list</a>({ ...params }) -> ReportListResponsesCursorExternalReports</code>
 
 ## Users
 

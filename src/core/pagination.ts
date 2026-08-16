@@ -542,3 +542,92 @@ export class CursorClinicalReferences<Item>
     };
   }
 }
+
+export interface CursorExternalReportsResponse<Item> {
+  /**
+   * Array of external report objects
+   */
+  reports: Array<Item>;
+
+  /**
+   * Next page cursor. Pass this to the next request to get the next page of results
+   */
+  cursor: string;
+
+  /**
+   * Whether there are more results available
+   */
+  hasMore: boolean;
+}
+
+export interface CursorExternalReportsParams {
+  /**
+   * Base64 encoded cursor from previous response for pagination
+   */
+  cursor?: string;
+
+  /**
+   * Number of results to return (1-100). Defaults to 20
+   */
+  limit?: number;
+}
+
+export class CursorExternalReports<Item>
+  extends AbstractPage<Item>
+  implements CursorExternalReportsResponse<Item>
+{
+  /**
+   * Array of external report objects
+   */
+  reports: Array<Item>;
+
+  /**
+   * Next page cursor. Pass this to the next request to get the next page of results
+   */
+  cursor: string;
+
+  /**
+   * Whether there are more results available
+   */
+  hasMore: boolean;
+
+  constructor(
+    client: Avara,
+    response: Response,
+    body: CursorExternalReportsResponse<Item>,
+    options: FinalRequestOptions,
+  ) {
+    super(client, response, body, options);
+
+    this.reports = body.reports || [];
+    this.cursor = body.cursor || '';
+    this.hasMore = body.hasMore || false;
+  }
+
+  getPaginatedItems(): Item[] {
+    return this.reports ?? [];
+  }
+
+  override hasNextPage(): boolean {
+    if (this.hasMore === false) {
+      return false;
+    }
+
+    return super.hasNextPage();
+  }
+
+  nextPageRequestOptions(): PageRequestOptions | null {
+    const cursor = this.cursor;
+    if (!cursor) {
+      return null;
+    }
+
+    return {
+      ...this.options,
+      query: {
+        ...maybeObj(this.options.query),
+        cursor,
+      },
+    };
+  }
+}

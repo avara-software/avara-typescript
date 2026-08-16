@@ -32,7 +32,7 @@ import {
   ReportTextResponse,
   Reports,
 } from './reports';
-import * as StudiesAPI from './studies';
+import * as StudiesAPI from './studies/studies';
 import {
   PriorReport,
   ReportIDWithStatus,
@@ -54,7 +54,7 @@ import {
   StudyUpdateResponse,
   StudyViewerOnlyRerouteURLParams,
   StudyViewerOnlyRerouteURLResponse,
-} from './studies';
+} from './studies/studies';
 import * as UsersAPI from './users/users';
 import {
   UserInviteParams,
@@ -212,6 +212,12 @@ export namespace StudyReportMetadata {
 export type StudyReportStatus = 'unassigned' | 'assigned' | 'in_progress' | 'completed' | 'addendum_active';
 
 /**
+ * Kind of study. 'standard' is a live AutoScribe reading-workflow study.
+ * 'external' is an imported archive study.
+ */
+export type StudyType = 'standard' | 'external';
+
+/**
  * Unit of measure for a weight value. 'lbs' = pounds, 'kg' = kilograms.
  */
 export type WeightUnit = 'lbs' | 'kg';
@@ -230,6 +236,7 @@ export declare namespace AutoScribe {
     type Sex as Sex,
     type StudyReportMetadata as StudyReportMetadata,
     type StudyReportStatus as StudyReportStatus,
+    type StudyType as StudyType,
     type WeightUnit as WeightUnit,
   };
 
