@@ -951,6 +951,7 @@ export declare namespace Avara {
   export type APIKeyReference = API.APIKeyReference;
   export type AssignableUserLevel = API.AssignableUserLevel;
   export type ClinicRole = API.ClinicRole;
+  export type EphemeralHangingProtocol = API.EphemeralHangingProtocol;
   export type ExpressCustomerReference = API.ExpressCustomerReference;
   export type InvitationExpiredFilter = API.InvitationExpiredFilter;
   export type InvitationStatus = API.InvitationStatus;
@@ -958,4 +959,5 @@ export declare namespace Avara {
   export type Severity = API.Severity;
   export type UserLevel = API.UserLevel;
   export type UserReference = API.UserReference;
+  export type ViewerLayout = API.ViewerLayout;
 }

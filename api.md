@@ -5,6 +5,7 @@ Types:
 - <code><a href="./src/resources/shared.ts">APIKeyReference</a></code>
 - <code><a href="./src/resources/shared.ts">AssignableUserLevel</a></code>
 - <code><a href="./src/resources/shared.ts">ClinicRole</a></code>
+- <code><a href="./src/resources/shared.ts">EphemeralHangingProtocol</a></code>
 - <code><a href="./src/resources/shared.ts">ExpressCustomerReference</a></code>
 - <code><a href="./src/resources/shared.ts">InvitationExpiredFilter</a></code>
 - <code><a href="./src/resources/shared.ts">InvitationStatus</a></code>
@@ -12,6 +13,7 @@ Types:
 - <code><a href="./src/resources/shared.ts">Severity</a></code>
 - <code><a href="./src/resources/shared.ts">UserLevel</a></code>
 - <code><a href="./src/resources/shared.ts">UserReference</a></code>
+- <code><a href="./src/resources/shared.ts">ViewerLayout</a></code>
 
 # AutoScribe
 
