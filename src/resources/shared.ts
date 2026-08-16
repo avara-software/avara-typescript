@@ -99,6 +99,20 @@ export type ClinicRole =
   | 'Other';
 
 /**
+ * Optional single-monitor hanging protocol applied when the ephemeral viewer
+ * loads. Omitted = no protocol. Invalid shape is rejected.
+ */
+export interface EphemeralHangingProtocol {
+  /**
+   * Viewport grid layout for an ephemeral hanging protocol. Wire values match
+   * first-party viewer layouts ('1x1' through '4x4').
+   */
+  layout: ViewerLayout;
+
+  viewportAssignments: Array<string | null>;
+}
+
+/**
  * A reference to an Express customer with basic identifying information
  */
 export interface ExpressCustomerReference {
@@ -180,3 +194,25 @@ export interface UserReference {
    */
   suffix2?: string;
 }
+
+/**
+ * Viewport grid layout for an ephemeral hanging protocol. Wire values match
+ * first-party viewer layouts ('1x1' through '4x4').
+ */
+export type ViewerLayout =
+  | '1x1'
+  | '1x2'
+  | '1x3'
+  | '1x4'
+  | '2x1'
+  | '2x2'
+  | '2x3'
+  | '2x4'
+  | '3x1'
+  | '3x2'
+  | '3x3'
+  | '3x4'
+  | '4x1'
+  | '4x2'
+  | '4x3'
+  | '4x4';

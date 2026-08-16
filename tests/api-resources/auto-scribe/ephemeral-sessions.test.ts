@@ -24,6 +24,7 @@ describe('resource ephemeralSessions', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.autoScribe.ephemeralSessions.create({
       retrievalId: 'order-12345',
+      hangingProtocol: { layout: '2x2', viewportAssignments: ['Axial T1', 'Axial T2', null, 'Sagittal T2'] },
       options: { studyInstanceUids: 'bar' },
     });
   });
