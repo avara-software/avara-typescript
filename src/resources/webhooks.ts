@@ -423,12 +423,23 @@ export interface PatientStudyEnrichmentRequestedEventData {
 /**
  * Soft enrichment response. No authorized field — return any subset of fields
  * (including {}). Avara merges per-field with DICOM light metadata then defaults.
+ * Optional expressCustomerId: if present and a valid cus\_ id for this clinic,
+ * Avara sets it on the created study. If present but not usable, Avara ignores it,
+ * applies other fields, and logs a warning.
  */
 export interface PatientStudyEnrichmentRequestedResponse {
   /**
    * YYYY-MM-DD
    */
   dateOfBirth?: string;
+
+  /**
+   * Optional Express customer to attach to the created study. Format: cus\_{32 hex
+   * chars}. Must belong to the clinic in the request. Omit to leave the study
+   * unscoped. If present but not usable, Avara ignores this field, applies any other
+   * enrichment fields, and logs a warning on the webhook event.
+   */
+  expressCustomerId?: string;
 
   externalPatientId?: string;
 
