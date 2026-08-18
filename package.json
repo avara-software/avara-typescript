@@ -1,6 +1,6 @@
 {
   "name": "avara",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "The official TypeScript library for the Avara API",
   "author": "Avara <richie@avarasoftware.com>",
   "types": "dist/index.d.ts",
