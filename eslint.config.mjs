@@ -22,7 +22,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              regex: '^avara(/.*)?',
+              regex: '^avara-software(/.*)?',
               message: 'Use a relative import, not a package import.',
             },
           ],

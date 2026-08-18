@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "avara/*": ["./dist/src/*"],
-      "avara": ["./dist/src/index.ts"]
+      "avara-software/*": ["./dist/src/*"],
+      "avara-software": ["./dist/src/index.ts"]
     },
     "noEmit": false,
     "declaration": true,

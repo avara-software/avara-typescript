@@ -1,6 +1,6 @@
 import fs from 'fs';
-import type { ResponseLike } from 'avara/internal/to-file';
-import { toFile } from 'avara/core/uploads';
+import type { ResponseLike } from 'avara-software/internal/to-file';
+import { toFile } from 'avara-software/core/uploads';
 
 class MyClass {
   name: string = 'foo';
@@ -96,7 +96,7 @@ describe('missing File error message', () => {
   });
 
   test('is thrown', async () => {
-    const uploads = await import('avara/core/uploads');
+    const uploads = await import('avara-software/core/uploads');
     await expect(
       uploads.toFile(mockResponse({ url: 'https://example.com/my/audio.mp3' })),
     ).rejects.toMatchInlineSnapshot(

@@ -1,5 +1,5 @@
-import { multipartFormRequestOptions, createForm } from 'avara/internal/uploads';
-import { toFile } from 'avara/core/uploads';
+import { multipartFormRequestOptions, createForm } from 'avara-software/internal/uploads';
+import { toFile } from 'avara-software/core/uploads';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {

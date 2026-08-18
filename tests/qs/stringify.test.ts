@@ -1,7 +1,7 @@
 import iconv from 'iconv-lite';
-import { stringify } from 'avara/internal/qs';
-import { encode } from 'avara/internal/qs/utils';
-import { StringifyOptions } from 'avara/internal/qs/types';
+import { stringify } from 'avara-software/internal/qs';
+import { encode } from 'avara-software/internal/qs/utils';
+import { StringifyOptions } from 'avara-software/internal/qs/types';
 import { empty_test_cases } from './empty-keys-cases';
 import assert from 'assert';
 

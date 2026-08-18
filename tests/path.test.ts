@@ -1,4 +1,4 @@
-import { createPathTagFunction, encodeURIPath } from 'avara/internal/utils/path';
+import { createPathTagFunction, encodeURIPath } from 'avara-software/internal/utils/path';
 import { inspect } from 'node:util';
 import { runInNewContext } from 'node:vm';
 

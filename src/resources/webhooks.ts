@@ -224,25 +224,39 @@ export interface EphemeralAccessRequestedResponse {
  * box. Field names are PascalCase DICOM-style intentionally.
  */
 export interface ModalityWorklistItem {
+  /**
+   * Accession number (DICOM SH, max 16)
+   */
   AccessionNumber: string;
 
   Modality: string;
 
+  /**
+   * Patient birth date (DICOM DA: YYYYMMDD)
+   */
   PatientBirthDate: string;
 
   PatientID: string;
 
+  /**
+   * DICOM PN / HL7 format: LAST^FIRST[^MIDDLE^PREFIX^SUFFIX]
+   */
   PatientName: string;
 
+  /**
+   * DICOM PatientSex: M, F, or O
+   */
   PatientSex: string;
 
   /**
-   * Patient size; empty string allowed
+   * Height in meters. Empty string allowed; if set must be numeric (typical range
+   * 0.4–2.5).
    */
   PatientSize: string;
 
   /**
-   * Patient weight; empty string allowed
+   * Weight in kilograms. Empty string allowed; if set must be numeric (typical range
+   * 1–400).
    */
   PatientWeight: string;
 
@@ -358,17 +372,17 @@ export interface ModalityWorklistScheduledStep {
   ScheduledProcedureStepDescription: string;
 
   /**
-   * Scheduled procedure step identifier
+   * Scheduled procedure step identifier (DICOM SH, max 16)
    */
   ScheduledProcedureStepID: string;
 
   /**
-   * Scheduled start date (DICOM DA-compatible string)
+   * Scheduled start date (DICOM DA: YYYYMMDD)
    */
   ScheduledProcedureStepStartDate: string;
 
   /**
-   * Scheduled start time (DICOM TM-compatible string)
+   * Scheduled start time (DICOM TM: HHMMSS)
    */
   ScheduledProcedureStepStartTime: string;
 }

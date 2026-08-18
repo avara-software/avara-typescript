@@ -8,8 +8,8 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "paths": {
-      "avara/*": ["./src/*"],
-      "avara": ["./src/index.ts"]
+      "avara-software/*": ["./src/*"],
+      "avara-software": ["./src/index.ts"]
     },
     "noEmit": true,
 

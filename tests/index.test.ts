@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIPromise } from 'avara/core/api-promise';
+import { APIPromise } from 'avara-software/core/api-promise';
 
 import util from 'node:util';
-import Avara from 'avara';
-import { APIUserAbortError } from 'avara';
+import Avara from 'avara-software';
+import { APIUserAbortError } from 'avara-software';
 const defaultFetch = fetch;
 
 describe('instantiate client', () => {

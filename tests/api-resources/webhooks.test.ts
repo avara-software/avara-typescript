@@ -2,7 +2,7 @@
 
 import { Webhook } from 'standardwebhooks';
 
-import Avara from 'avara';
+import Avara from 'avara-software';
 
 const client = new Avara({
   apiKey: 'My API Key',
