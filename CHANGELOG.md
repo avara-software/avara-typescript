@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/avara-software/avara-typescript/compare/v0.1.0...v0.2.0) (2026-08-19)
+
+
+### Features
+
+* enable release-please for npm and pypi ([eb609be](https://github.com/avara-software/avara-typescript/commit/eb609bee9ef3c404c7c4c813113042b9ed035b6a))
+
 ## 0.1.0 (2026-08-18)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/avara-software/avara-typescript/compare/v0.0.1...v0.1.0)
