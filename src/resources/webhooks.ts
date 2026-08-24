@@ -548,6 +548,16 @@ export interface ReportDeliveredEventData {
   studyId: string;
 
   /**
+   * DICOM Study Instance UID
+   */
+  studyInstanceUid: string;
+
+  /**
+   * External patient identifier when available
+   */
+  externalPatientId?: string;
+
+  /**
    * Report plain text content (optional). Contains the full report text.
    */
   plainText?: string;
