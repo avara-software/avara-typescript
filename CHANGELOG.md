@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/avara-software/avara-typescript/compare/v0.2.0...v0.3.0) (2026-08-24)
+
+
+### Features
+
+* extending the SDK and the API to support study uid and external patient id on webhook report delivery ([3141f36](https://github.com/avara-software/avara-typescript/commit/3141f36b8f8c4d80db54402fe810e61f783244d1))
+
 ## [0.2.0](https://github.com/avara-software/avara-typescript/compare/v0.1.0...v0.2.0) (2026-08-19)
 
 
